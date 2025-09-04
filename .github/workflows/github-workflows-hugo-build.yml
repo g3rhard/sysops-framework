@@ -39,7 +39,6 @@ jobs:
 
     - name: Initialize Hugo modules
       run: |
-        hugo mod get github.com/google/docsy@latest
         hugo mod get -u
 
     - name: Build Hugo site

@@ -1,4 +1,11 @@
-# Chapter 11: Challenges & Solutions - Limitations and Solutions
+---
+title: "Chapter 11: Challenges & Solutions"
+linkTitle: "Chapter 11: Challenges"
+weight: 11-challenges0
+description: >
+  "Every framework has limitations; wisdom lies in knowing what they are and how to work around them."
+---
+
 
 > *"Every framework has limitations; wisdom lies in knowing what they are and how to work around them."*
 

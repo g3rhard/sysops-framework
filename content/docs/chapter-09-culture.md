@@ -1,4 +1,11 @@
-# Chapter 9: Culture & Organization - Cultural Considerations
+---
+title: "Chapter 9: Culture & Organization"
+linkTitle: "Chapter 09: Culture"
+weight: 9-culture0
+description: >
+  "Culture eats strategy for breakfast, but process eats culture for lunch."
+---
+
 
 > *"Culture eats strategy for breakfast, but process eats culture for lunch."*
 

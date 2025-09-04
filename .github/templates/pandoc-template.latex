@@ -1,0 +1,49 @@
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=blue,
+}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\rightmark}
+\lfoot{SysOps Framework}
+\cfoot{\thepage}
+
+$if(title)$
+\title{$title$}
+$endif$
+$if(author)$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
+$if(date)$
+\date{$date$}
+$endif$
+
+\begin{document}
+$if(title)$
+\maketitle
+$endif$
+
+$if(toc)$
+{
+\setcounter{tocdepth}{$toc-depth$}
+\tableofcontents
+}
+$endif$
+
+$body$
+
+\end{document}

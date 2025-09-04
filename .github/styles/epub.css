@@ -1,0 +1,31 @@
+body {
+    font-family: "Liberation Serif", serif;
+    line-height: 1.6;
+    margin: 2em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #2E7D32;
+    margin-top: 1.5em;
+}
+
+.alert {
+    background-color: #E3F2FD;
+    border-left: 4px solid #1976D2;
+    padding: 1em;
+    margin: 1em 0;
+}
+
+code {
+    background-color: #F5F5F5;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-family: monospace;
+}
+
+pre {
+    background-color: #F5F5F5;
+    padding: 1em;
+    border-radius: 5px;
+    overflow-x: auto;
+}

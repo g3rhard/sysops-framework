@@ -1,4 +1,11 @@
-# Chapter 5: Implementation Strategy - Phased Approach and Roadmap
+---
+title: "Chapter 5: Implementation Strategy"
+linkTitle: "Chapter 05: Implementation"
+weight: 5-implementation0
+description: >
+  "A journey of a thousand miles begins with a single step, but you still need a map."
+---
+
 
 > *"A journey of a thousand miles begins with a single step, but you still need a map."*
 
@@ -144,9 +151,9 @@ Before implementing changes, establish baseline measurements:
 
 **Scenario**: Your team currently handles incidents reactively and struggles to find time for improvements. You're implementing the SysOps Framework.
 
-**Week 1 Challenge**: 
+**Week 1 Challenge**:
 - Monday: Database performance degradation (4 hours to resolve)
-- Wednesday: Security patch deployment (6 hours)  
+- Wednesday: Security patch deployment (6 hours)
 - Friday: Network equipment failure (8 hours)
 
 **Questions**:

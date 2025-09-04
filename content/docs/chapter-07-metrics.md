@@ -1,4 +1,11 @@
-# Chapter 7: Metrics & Measurement - Success Measurement and KPIs
+---
+title: "Chapter 7: Metrics & Measurement"
+linkTitle: "Chapter 07: Metrics"
+weight: 7-metrics0
+description: >
+  "What gets measured gets managed, but what gets measured wrong gets mismanaged."
+---
+
 
 > *"What gets measured gets managed, but what gets measured wrong gets mismanaged."*
 
@@ -113,7 +120,7 @@ Error Budget:
 
 **Scenario**: Your team currently handles 200 tasks per month. Analysis shows:
 - 80 tasks are fully manual (40%)
-- 60 tasks are partially automated (30%)  
+- 60 tasks are partially automated (30%)
 - 40 tasks are fully automated (20%)
 - 20 tasks are ad-hoc/undefined (10%)
 

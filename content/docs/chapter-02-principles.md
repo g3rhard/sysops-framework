@@ -1,4 +1,11 @@
-# Chapter 2: Core Principles - Values and Principles of the SysOps Framework
+---
+title: "Chapter 2: Core Principles"
+linkTitle: "Chapter 02: Principles"
+weight: 2-principles0
+description: >
+  "In operations, principles guide decisions when procedures don't exist yet."
+---
+
 
 > *"In operations, principles guide decisions when procedures don't exist yet."*
 

@@ -1,0 +1,356 @@
+name: Build and Deploy Hugo Site with PDF Generation
+
+on:
+  push:
+    branches: [ main, develop ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  # Build Hugo site
+  build-site:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 0
+
+    - name: Setup Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: 'latest'
+        extended: true
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y pandoc texlive-latex-base texlive-fonts-recommended texlive-extra-utils texlive-latex-extra
+        npm install -g markdown-pdf postcss-cli autoprefixer
+
+    - name: Initialize Hugo modules
+      run: |
+        hugo mod init github.com/username/sysops-framework
+        hugo mod get -u
+
+    - name: Build Hugo site
+      run: hugo --minify --environment production
+
+    - name: Upload Hugo build artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: hugo-site
+        path: public/
+
+  # Generate PDF files dynamically
+  generate-pdf:
+    runs-on: ubuntu-latest
+    needs: build-site
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup Pandoc and LaTeX
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y pandoc texlive-latex-base texlive-fonts-recommended texlive-extra-utils texlive-latex-extra texlive-science
+
+    - name: Create output directories
+      run: |
+        mkdir -p build/pdf
+        mkdir -p build/single-chapters
+        mkdir -p build/release
+
+    - name: Generate individual chapter PDFs
+      run: |
+        # Find all markdown files in content/docs/ directory
+        find content/docs -name "*.md" -type f | while read -r file; do
+          # Extract filename without path and extension
+          filename=$(basename "$file" .md)
+          
+          # Skip index files for PDF generation
+          if [[ "$filename" != "_index" ]]; then
+            echo "Processing: $file -> $filename.pdf"
+            
+            # Convert markdown to PDF with enhanced formatting
+            pandoc "$file" \
+              --from markdown+yaml_metadata_block \
+              --to pdf \
+              --output "build/single-chapters/${filename}.pdf" \
+              --pdf-engine=pdflatex \
+              --variable geometry:margin=1in \
+              --variable fontsize=11pt \
+              --variable documentclass=article \
+              --variable colorlinks=true \
+              --variable linkcolor=blue \
+              --variable filecolor=magenta \
+              --variable urlcolor=blue \
+              --toc \
+              --toc-depth=3 \
+              --number-sections \
+              --highlight-style=github \
+              --template=.github/templates/pandoc-template.latex 2>/dev/null || \
+            pandoc "$file" \
+              --from markdown+yaml_metadata_block \
+              --to pdf \
+              --output "build/single-chapters/${filename}.pdf" \
+              --pdf-engine=pdflatex \
+              --variable geometry:margin=1in \
+              --variable fontsize=11pt \
+              --variable documentclass=article \
+              --variable colorlinks=true \
+              --toc \
+              --number-sections \
+              --highlight-style=github
+          fi
+        done
+
+    - name: Create complete framework document
+      run: |
+        echo "# The SysOps Framework" > build/sysops-framework-complete.md
+        echo "" >> build/sysops-framework-complete.md
+        echo "**A Modern Methodology for System Administrators and Operations Teams**" >> build/sysops-framework-complete.md
+        echo "" >> build/sysops-framework-complete.md
+        echo "---" >> build/sysops-framework-complete.md
+        echo "" >> build/sysops-framework-complete.md
+        
+        # Add overview from main docs index
+        if [ -f "content/docs/_index.md" ]; then
+          # Extract content after the frontmatter
+          sed '1,/^---$/d' content/docs/_index.md >> build/sysops-framework-complete.md
+          echo "" >> build/sysops-framework-complete.md
+          echo "\\pagebreak" >> build/sysops-framework-complete.md
+          echo "" >> build/sysops-framework-complete.md
+        fi
+        
+        # Dynamically find and include all chapter files in order
+        find content/docs -name "chapter-*.md" -type f | sort | while read -r file; do
+          echo "Adding chapter: $file"
+          echo "" >> build/sysops-framework-complete.md
+          # Remove frontmatter and add content
+          sed '1,/^---$/d' "$file" >> build/sysops-framework-complete.md
+          echo "" >> build/sysops-framework-complete.md
+          echo "\\pagebreak" >> build/sysops-framework-complete.md
+          echo "" >> build/sysops-framework-complete.md
+        done
+
+    - name: Generate complete framework PDF
+      run: |
+        pandoc build/sysops-framework-complete.md \
+          --from markdown+yaml_metadata_block \
+          --to pdf \
+          --output build/pdf/sysops-framework-complete.pdf \
+          --pdf-engine=pdflatex \
+          --variable geometry:margin=1in \
+          --variable fontsize=11pt \
+          --variable documentclass=book \
+          --variable colorlinks=true \
+          --variable linkcolor=blue \
+          --variable book=true \
+          --toc \
+          --toc-depth=2 \
+          --number-sections \
+          --highlight-style=github \
+          --metadata title="The SysOps Framework" \
+          --metadata author="SysOps Framework Contributors" \
+          --metadata date="$(date +'%B %Y')"
+
+    - name: Generate EPUB version
+      run: |
+        pandoc build/sysops-framework-complete.md \
+          --from markdown \
+          --to epub \
+          --output build/pdf/sysops-framework.epub \
+          --toc \
+          --toc-depth=2 \
+          --metadata title="The SysOps Framework" \
+          --metadata author="SysOps Framework Contributors" \
+          --metadata date="$(date +'%Y-%m-%d')" \
+          --css=.github/styles/epub.css 2>/dev/null || \
+        pandoc build/sysops-framework-complete.md \
+          --from markdown \
+          --to epub \
+          --output build/pdf/sysops-framework.epub \
+          --toc \
+          --toc-depth=2 \
+          --metadata title="The SysOps Framework" \
+          --metadata author="SysOps Framework Contributors"
+
+    - name: Create release archive
+      run: |
+        # Copy Hugo site
+        cp -r public/* build/release/ 2>/dev/null || echo "Hugo public directory not found, skipping..."
+        
+        # Copy PDFs
+        cp -r build/pdf/* build/release/ 2>/dev/null || echo "No PDFs generated"
+        cp -r build/single-chapters build/release/chapters 2>/dev/null || echo "No individual chapters generated"
+        
+        # Copy documentation
+        cp README.md build/release/ 2>/dev/null || echo "README.md not found"
+        cp LICENSE build/release/ 2>/dev/null || echo "LICENSE not found"
+        cp CONTRIBUTING.md build/release/ 2>/dev/null || echo "CONTRIBUTING.md not found"
+        
+        # Create archive
+        cd build/release && zip -r ../sysops-framework-release.zip . && cd ../..
+
+    - name: Upload PDF artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: sysops-framework-pdfs
+        path: |
+          build/pdf/
+          build/single-chapters/
+          build/sysops-framework-release.zip
+
+  # Deploy to GitHub Pages
+  deploy-pages:
+    needs: [build-site, generate-pdf]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+      
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+      
+    steps:
+    - name: Download Hugo site
+      uses: actions/download-artifact@v4
+      with:
+        name: hugo-site
+        path: ./public
+
+    - name: Download PDFs
+      uses: actions/download-artifact@v4
+      with:
+        name: sysops-framework-pdfs
+        path: ./pdfs
+
+    - name: Combine artifacts for Pages
+      run: |
+        # Add PDFs to the Hugo site
+        mkdir -p public/downloads
+        cp -r pdfs/pdf/* public/downloads/ 2>/dev/null || echo "No complete PDFs to copy"
+        cp -r pdfs/single-chapters public/downloads/chapters 2>/dev/null || echo "No chapter PDFs to copy"
+        cp pdfs/sysops-framework-release.zip public/downloads/ 2>/dev/null || echo "No release archive to copy"
+
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+      
+    - name: Upload Pages artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: ./public
+        
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
+
+  # Create GitHub Release
+  create-release:
+    needs: [build-site, generate-pdf]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: sysops-framework-pdfs
+        path: ./artifacts
+        
+    - name: Extract version
+      id: version
+      run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+      
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.version.outputs.VERSION }}
+        name: SysOps Framework ${{ steps.version.outputs.VERSION }}
+        body: |
+          ## SysOps Framework Release ${{ steps.version.outputs.VERSION }}
+          
+          ### 📚 Documentation
+          - **Online**: [https://username.github.io/sysops-framework](https://username.github.io/sysops-framework)
+          - **Complete PDF**: `sysops-framework-complete.pdf` - Full framework documentation
+          - **Individual Chapters**: See `chapters/` directory for individual chapter PDFs
+          - **EPUB**: `sysops-framework.epub` - Mobile-friendly ebook format
+          - **Source Archive**: `sysops-framework-release.zip` - Complete source with generated files
+          
+          ### 🎯 What's New in This Release
+          - Complete framework documentation with all 12 chapters
+          - Interactive exercises and gamification elements
+          - Implementation roadmaps and practical templates
+          - Community contribution guidelines
+          
+          ### 🚀 Getting Started
+          1. Download the complete PDF or browse online documentation
+          2. Start with Chapter 1 to understand if your team faces the challenges this framework addresses
+          3. Follow the implementation guide in Chapter 5
+          4. Join the community discussions for support and sharing
+          
+          ### 📄 File Descriptions
+          - **sysops-framework-complete.pdf**: Complete framework (all chapters) in single PDF
+          - **sysops-framework.epub**: EPUB version for e-readers and mobile devices
+          - **chapters/**: Individual chapter PDFs for modular reading and training
+          - **sysops-framework-release.zip**: Complete archive including source files
+          
+        files: |
+          artifacts/pdf/sysops-framework-complete.pdf
+          artifacts/pdf/sysops-framework.epub
+          artifacts/sysops-framework-release.zip
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Quality checks
+  quality-check:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Markdown lint
+      uses: DavidAnson/markdownlint-cli2-action@v13
+      with:
+        globs: '**/*.md'
+        config: '.markdownlint.json'
+      continue-on-error: true
+        
+    - name: Spell check
+      uses: crate-ci/typos@master
+      with:
+        files: './content'
+      continue-on-error: true
+        
+    - name: Hugo build check
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: 'latest'
+        extended: true
+    
+    - name: Test Hugo build
+      run: |
+        hugo mod init github.com/username/sysops-framework || echo "Module already initialized"
+        hugo --minify --environment production --destination test-build
+      continue-on-error: true

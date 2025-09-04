@@ -1,4 +1,11 @@
-# Chapter 10: Risk & Compliance - Risk Management and Compliance
+---
+title: "Chapter 10: Risk & Compliance"
+linkTitle: "Chapter 10: Risk"
+weight: 10-risk0
+description: >
+  "In operations, every decision is a risk decision, whether you realize it or not."
+---
+
 
 > *"In operations, every decision is a risk decision, whether you realize it or not."*
 
@@ -68,13 +75,13 @@ Risk Assessment Results:
     Probability: 4 (aging hardware, no redundancy)
     Score: 20 (Critical)
     Mitigation: Implement hardware redundancy and refresh plan
-  
+
   Data Breach:
     Impact: 5 (regulatory fines, customer trust loss)
     Probability: 3 (external threats, internal access)
     Score: 15 (High)
     Mitigation: Enhanced access controls and monitoring
-  
+
   Backup Failure:
     Impact: 4 (data loss during hardware failure)
     Probability: 2 (tested backup processes)

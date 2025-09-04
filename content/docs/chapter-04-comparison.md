@@ -1,4 +1,11 @@
-# Chapter 4: Comparison - Traditional Agile vs SysOps Framework
+---
+title: "Chapter 4: Comparison"
+linkTitle: "Chapter 04: Comparison"
+weight: 4-comparison0
+description: >
+  "The right methodology is the one that matches how the work actually gets done."
+---
+
 
 > *"The right methodology is the one that matches how the work actually gets done."*
 
@@ -61,7 +68,7 @@ The comparison above illustrates fundamental differences between traditional agi
 
 **SysOps Alternative**: Service reliability metrics (uptime, MTTR, SLO compliance) combined with operational efficiency measures (automation coverage, toil reduction).
 
-### The Commitment Problem  
+### The Commitment Problem
 **Traditional Metric**: Sprint commitment achievement (percentage of committed work completed)
 **Why It Fails**: Operations teams can't commit to work when they don't control when emergencies occur. Failed commitments due to incidents create artificial failure metrics.
 
@@ -94,7 +101,7 @@ The comparison above illustrates fundamental differences between traditional agi
 
 **SysOps Response**:
 - Handle authentication failure in daily operations cycle
-- Continue database migration planning in weekly cycle  
+- Continue database migration planning in weekly cycle
 - Monitoring evaluation continues in monthly cycle
 - No "missed commitments" - each cycle handles appropriate work
 
@@ -146,7 +153,7 @@ Some teams successfully combine approaches:
 ## 🏆 Success Stories: Framework Transitions
 
 ### Case Study 1: E-commerce Infrastructure Team
-**Before (Scrum)**: 
+**Before (Scrum)**:
 - 40% of sprints "failed" due to production incidents
 - Team stress high due to constant sprint disruptions
 - Stakeholders frustrated with unpredictable delivery
@@ -159,7 +166,7 @@ Some teams successfully combine approaches:
 **Key Change**: Stopped treating operational work as "scope creep" and started treating it as the primary job function.
 
 ### Case Study 2: Financial Services Operations
-**Before (SAFe)**: 
+**Before (SAFe)**:
 - Quarterly planning consumed weeks of effort
 - Emergency changes required extensive approval processes
 - Innovation stalled due to coordination overhead
@@ -199,7 +206,7 @@ Create a simple analysis of your team's work:
 
 ### From Scrum to SysOps
 1. **Start with daily operations cycle** - most teams already do this informally
-2. **Add weekly improvement cycle** - formalize existing improvement efforts  
+2. **Add weekly improvement cycle** - formalize existing improvement efforts
 3. **Introduce monthly strategy cycle** - elevate strategic planning
 4. **Transition metrics gradually** - maintain some familiar measures during transition
 

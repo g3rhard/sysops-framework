@@ -1,4 +1,11 @@
-# Chapter 6: Management Practices - Essential Management Practices
+---
+title: "Chapter 6: Management Practices"
+linkTitle: "Chapter 06: Practices"
+weight: 6-practices0
+description: >
+  "Good practices are the difference between chaos and control in operations."
+---
+
 
 > *"Good practices are the difference between chaos and control in operations."*
 

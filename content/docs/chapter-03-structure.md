@@ -1,4 +1,11 @@
-# Chapter 3: Framework Structure - Multiple Operational Cycles
+---
+title: "Chapter 3: Framework Structure"
+linkTitle: "Chapter 03: Structure"
+weight: 3-structure0
+description: >
+  "Operations teams don't need sprints; they need cycles that match the rhythm of their work."
+---
+
 
 > *"Operations teams don't need sprints; they need cycles that match the rhythm of their work."*
 
@@ -35,7 +42,7 @@ Handle immediate operational needs: system monitoring, incident response, routin
 #### 1. Monitor (Ongoing)
 **Activities**:
 - Continuous system monitoring and alerting
-- Daily health checks and status reviews  
+- Daily health checks and status reviews
 - Early warning identification
 - Trend analysis and pattern recognition
 

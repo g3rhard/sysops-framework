@@ -1,7 +1,7 @@
 baseURL = "https://username.github.io/sysops-framework"
 languageCode = "en-us"
 title = "SysOps Framework"
-theme = "docsy"
+# theme = "docsy"
 
 # Content and build directories
 contentDir = "content"

@@ -40,6 +40,7 @@ jobs:
     - name: Initialize Hugo modules
       run: |
         hugo mod init github.com/g3rhard/sysops-framework
+        hugo mod get github.com/google/docsy@latest
         hugo mod get -u
 
     - name: Build Hugo site

@@ -30,7 +30,7 @@ enableGitInfo = true
   version = "1.0"
   url_latest_version = "https://username.github.io/sysops-framework"
 
-  github_repo = "https://github.com/username/sysops-framework"
+  github_repo = "https://github.com/g3rhard/sysops-framework"
   github_branch = "main"
 
   # Enable search
@@ -47,8 +47,8 @@ enableGitInfo = true
     # Feedback
     [params.ui.feedback]
       enable = true
-      yes = 'Glad to hear it! Please <a href="https://github.com/username/sysops-framework/issues/new">tell us how we can improve</a>.'
-      no = 'Sorry to hear that. Please <a href="https://github.com/username/sysops-framework/issues/new">tell us how we can improve</a>.'
+      yes = 'Glad to hear it! Please <a href="https://github.com/g3rhard/sysops-framework/issues/new">tell us how we can improve</a>.'
+      no = 'Sorry to hear that. Please <a href="https://github.com/g3rhard/sysops-framework/issues/new">tell us how we can improve</a>.'
 
     # Reading time
     [params.ui.readingtime]
@@ -58,7 +58,7 @@ enableGitInfo = true
   [params.links]
     [[params.links.developer]]
       name = "GitHub"
-      url = "https://github.com/username/sysops-framework"
+      url = "https://github.com/g3rhard/sysops-framework"
       icon = "fab fa-github"
       desc = "Development takes place here!"
     [[params.links.user]]

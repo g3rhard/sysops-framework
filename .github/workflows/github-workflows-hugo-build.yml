@@ -39,7 +39,7 @@ jobs:
 
     - name: Initialize Hugo modules
       run: |
-        hugo mod init github.com/username/sysops-framework
+        hugo mod init github.com/g3rhard/sysops-framework
         hugo mod get -u
 
     - name: Build Hugo site
@@ -78,11 +78,11 @@ jobs:
         find content/docs -name "*.md" -type f | while read -r file; do
           # Extract filename without path and extension
           filename=$(basename "$file" .md)
-          
+
           # Skip index files for PDF generation
           if [[ "$filename" != "_index" ]]; then
             echo "Processing: $file -> $filename.pdf"
-            
+
             # Convert markdown to PDF with enhanced formatting
             pandoc "$file" \
               --from markdown+yaml_metadata_block \
@@ -124,7 +124,7 @@ jobs:
         echo "" >> build/sysops-framework-complete.md
         echo "---" >> build/sysops-framework-complete.md
         echo "" >> build/sysops-framework-complete.md
-        
+
         # Add overview from main docs index
         if [ -f "content/docs/_index.md" ]; then
           # Extract content after the frontmatter
@@ -133,7 +133,7 @@ jobs:
           echo "\\pagebreak" >> build/sysops-framework-complete.md
           echo "" >> build/sysops-framework-complete.md
         fi
-        
+
         # Dynamically find and include all chapter files in order
         find content/docs -name "chapter-*.md" -type f | sort | while read -r file; do
           echo "Adding chapter: $file"
@@ -191,16 +191,16 @@ jobs:
       run: |
         # Copy Hugo site
         cp -r public/* build/release/ 2>/dev/null || echo "Hugo public directory not found, skipping..."
-        
+
         # Copy PDFs
         cp -r build/pdf/* build/release/ 2>/dev/null || echo "No PDFs generated"
         cp -r build/single-chapters build/release/chapters 2>/dev/null || echo "No individual chapters generated"
-        
+
         # Copy documentation
         cp README.md build/release/ 2>/dev/null || echo "README.md not found"
         cp LICENSE build/release/ 2>/dev/null || echo "LICENSE not found"
         cp CONTRIBUTING.md build/release/ 2>/dev/null || echo "CONTRIBUTING.md not found"
-        
+
         # Create archive
         cd build/release && zip -r ../sysops-framework-release.zip . && cd ../..
 
@@ -218,16 +218,16 @@ jobs:
     needs: [build-site, generate-pdf]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
-    
+
     permissions:
       contents: read
       pages: write
       id-token: write
-      
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-      
+
     steps:
     - name: Download Hugo site
       uses: actions/download-artifact@v4
@@ -251,12 +251,12 @@ jobs:
 
     - name: Setup Pages
       uses: actions/configure-pages@v4
-      
+
     - name: Upload Pages artifact
       uses: actions/upload-pages-artifact@v3
       with:
         path: ./public
-        
+
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v4
@@ -266,21 +266,21 @@ jobs:
     needs: [build-site, generate-pdf]
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
-    
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-    
+
     - name: Download artifacts
       uses: actions/download-artifact@v4
       with:
         name: sysops-framework-pdfs
         path: ./artifacts
-        
+
     - name: Extract version
       id: version
       run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
-      
+
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
@@ -288,32 +288,32 @@ jobs:
         name: SysOps Framework ${{ steps.version.outputs.VERSION }}
         body: |
           ## SysOps Framework Release ${{ steps.version.outputs.VERSION }}
-          
+
           ### 📚 Documentation
-          - **Online**: [https://username.github.io/sysops-framework](https://username.github.io/sysops-framework)
+          - **Online**: [https://g3rhard.github.io/sysops-framework](https://g3rhard.github.io/sysops-framework)
           - **Complete PDF**: `sysops-framework-complete.pdf` - Full framework documentation
           - **Individual Chapters**: See `chapters/` directory for individual chapter PDFs
           - **EPUB**: `sysops-framework.epub` - Mobile-friendly ebook format
           - **Source Archive**: `sysops-framework-release.zip` - Complete source with generated files
-          
+
           ### 🎯 What's New in This Release
           - Complete framework documentation with all 12 chapters
           - Interactive exercises and gamification elements
           - Implementation roadmaps and practical templates
           - Community contribution guidelines
-          
+
           ### 🚀 Getting Started
           1. Download the complete PDF or browse online documentation
           2. Start with Chapter 1 to understand if your team faces the challenges this framework addresses
           3. Follow the implementation guide in Chapter 5
           4. Join the community discussions for support and sharing
-          
+
           ### 📄 File Descriptions
           - **sysops-framework-complete.pdf**: Complete framework (all chapters) in single PDF
           - **sysops-framework.epub**: EPUB version for e-readers and mobile devices
           - **chapters/**: Individual chapter PDFs for modular reading and training
           - **sysops-framework-release.zip**: Complete archive including source files
-          
+
         files: |
           artifacts/pdf/sysops-framework-complete.pdf
           artifacts/pdf/sysops-framework.epub
@@ -329,28 +329,28 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-    
+
     - name: Markdown lint
       uses: DavidAnson/markdownlint-cli2-action@v13
       with:
         globs: '**/*.md'
         config: '.markdownlint.json'
       continue-on-error: true
-        
+
     - name: Spell check
       uses: crate-ci/typos@master
       with:
         files: './content'
       continue-on-error: true
-        
+
     - name: Hugo build check
       uses: peaceiris/actions-hugo@v2
       with:
         hugo-version: 'latest'
         extended: true
-    
+
     - name: Test Hugo build
       run: |
-        hugo mod init github.com/username/sysops-framework || echo "Module already initialized"
+        hugo mod init github.com/g3rhard/sysops-framework || echo "Module already initialized"
         hugo --minify --environment production --destination test-build
       continue-on-error: true

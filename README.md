@@ -15,30 +15,30 @@ Traditional agile methodologies like Scrum and SAFe have revolutionized software
 This framework is organized into comprehensive chapters for easy learning and implementation:
 
 ### Part I: Foundation
-- **Chapter 1**: [The Challenge](docs/chapter-01-challenge.md) - Why Traditional Agile Fails Operations Teams
-- **Chapter 2**: [Core Principles](docs/chapter-02-principles.md) - Values and Principles of the SysOps Framework
-- **Chapter 3**: [Framework Structure](docs/chapter-03-structure.md) - Multiple Operational Cycles
+- **Chapter 1**: [The Challenge](content/docs/chapter-01-challenge.md) - Why Traditional Agile Fails Operations Teams
+- **Chapter 2**: [Core Principles](content/docs/chapter-02-principles.md) - Values and Principles of the SysOps Framework
+- **Chapter 3**: [Framework Structure](content/docs/chapter-03-structure.md) - Multiple Operational Cycles
 
 ### Part II: Implementation
-- **Chapter 4**: [Comparison](docs/chapter-04-comparison.md) - Traditional Agile vs SysOps Framework
-- **Chapter 5**: [Implementation Strategy](docs/chapter-05-implementation.md) - Phased Approach and Roadmap
-- **Chapter 6**: [Management Practices](docs/chapter-06-practices.md) - Essential Management Practices
+- **Chapter 4**: [Comparison](content/docs/chapter-04-comparison.md) - Traditional Agile vs SysOps Framework
+- **Chapter 5**: [Implementation Strategy](content/docs/chapter-05-implementation.md) - Phased Approach and Roadmap
+- **Chapter 6**: [Management Practices](content/docs/chapter-06-practices.md) - Essential Management Practices
 
 ### Part III: Operations
-- **Chapter 7**: [Metrics & Measurement](docs/chapter-07-metrics.md) - Success Measurement and KPIs
-- **Chapter 8**: [Tools & Technology](docs/chapter-08-tools.md) - Supporting Technology Stack
-- **Chapter 9**: [Culture & Organization](docs/chapter-09-culture.md) - Cultural Considerations
+- **Chapter 7**: [Metrics & Measurement](content/docs/chapter-07-metrics.md) - Success Measurement and KPIs
+- **Chapter 8**: [Tools & Technology](content/docs/chapter-08-tools.md) - Supporting Technology Stack
+- **Chapter 9**: [Culture & Organization](content/docs/chapter-09-culture.md) - Cultural Considerations
 
 ### Part IV: Advanced Topics
-- **Chapter 10**: [Risk & Compliance](docs/chapter-10-risk.md) - Risk Management and Compliance
-- **Chapter 11**: [Challenges & Solutions](docs/chapter-11-challenges.md) - Limitations and Solutions
-- **Chapter 12**: [Future Evolution](docs/chapter-12-future.md) - Adaptation and Growth
+- **Chapter 10**: [Risk & Compliance](content/docs/chapter-10-risk.md) - Risk Management and Compliance
+- **Chapter 11**: [Challenges & Solutions](content/docs/chapter-11-challenges.md) - Limitations and Solutions
+- **Chapter 12**: [Future Evolution](content/docs/chapter-12-future.md) - Adaptation and Growth
 
 ## 🚀 Quick Start
 
-1. **Assessment**: Start with [Chapter 1](docs/chapter-01-challenge.md) to understand if your team faces the challenges addressed by this framework
-2. **Foundation**: Read [Chapter 2](docs/chapter-02-principles.md) and [Chapter 3](docs/chapter-03-structure.md) to understand core concepts
-3. **Planning**: Use [Chapter 5](docs/chapter-05-implementation.md) to plan your implementation approach
+1. **Assessment**: Start with [Chapter 1](content/docs/chapter-01-challenge.md) to understand if your team faces the challenges addressed by this framework
+2. **Foundation**: Read [Chapter 2](content/docs/chapter-02-principles.md) and [Chapter 3](content/docs/chapter-03-structure.md) to understand core concepts
+3. **Planning**: Use [Chapter 5](content/docs/chapter-05-implementation.md) to plan your implementation approach
 4. **Implementation**: Follow the 6-month roadmap with supporting chapters
 
 ## 📊 Visual Resources

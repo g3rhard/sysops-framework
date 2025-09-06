@@ -101,7 +101,7 @@ jobs:
               --toc \
               --toc-depth=3 \
               --number-sections \
-              --highlight-style=github \
+              --highlight-style=espresso \
               --template=.github/templates/pandoc-template.latex 2>/dev/null || \
             pandoc "$file" \
               --from markdown+yaml_metadata_block \
@@ -114,7 +114,7 @@ jobs:
               --variable colorlinks=true \
               --toc \
               --number-sections \
-              --highlight-style=github
+              --highlight-style=espresso
           fi
         done
 
@@ -163,7 +163,7 @@ jobs:
           --toc \
           --toc-depth=2 \
           --number-sections \
-          --highlight-style=github \
+          --highlight-style=espresso \
           --metadata title="The SysOps Framework" \
           --metadata author="SysOps Framework Contributors" \
           --metadata date="$(date +'%B %Y')"

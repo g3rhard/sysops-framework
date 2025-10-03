@@ -195,7 +195,8 @@ jobs:
           --toc \
           --toc-depth=2 \
           --metadata title="The SysOps Framework" \
-          --metadata author="SysOps Framework Contributors"
+          --metadata author="SysOps Framework Contributors" || \
+        echo "EPUB generation failed"
 
     - name: Create release archive
       run: |

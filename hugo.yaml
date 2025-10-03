@@ -55,7 +55,7 @@ params:
     taxonomyCloudTitle: ["Tag Cloud", "Categories"]
     taxonomyPageHeader: ["tags", "categories"]
     copyright:
-      authors: SysOps | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) |
+      authors: SysOps Framework Contributors | [MIT](https://mit-license.org/) |
       from_year: 2025
   print:
     disable_toc: false

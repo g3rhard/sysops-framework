@@ -48,7 +48,7 @@ jobs:
       run: hugo --minify --environment production
 
     - name: Upload Hugo build artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
       with:
         name: hugo-site
         path: public/
@@ -216,7 +216,7 @@ jobs:
         cd build/release && zip -r ../sysops-framework-release.zip . && cd ../..
 
     - name: Upload PDF artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
       with:
         name: sysops-framework-pdfs
         path: |
@@ -270,7 +270,7 @@ jobs:
 
     - name: Deploy to GitHub Pages
       id: deployment
-      uses: actions/deploy-pages@v4
+      uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
 
   # Create GitHub Release
   create-release:

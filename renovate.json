@@ -1,6 +1,28 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    ":pinDevDependencies",
+    "config:recommended",
+    "docker:pinDigests",
+    "helpers:pinGitHubActionDigests"
+  ],
+  "assignees": ["g3rhard"],
+  "packageRules": [
+    {
+      "groupName": "Docker dependencies",
+      "matchCategories": ["docker"]
+    },
+    {
+      "groupName": "Kubernetes dependencies",
+      "matchCategories": ["kubernetes"]
+    },
+    {
+      "groupName": "Continuous Integration dependencies",
+      "matchCategories": ["ci"]
+    },
+    {
+      "groupName": "Continuous Delivery dependencies",
+      "matchCategories": ["cd"]
+    }
   ]
 }

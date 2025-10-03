@@ -149,6 +149,7 @@ jobs:
 
     - name: Generate complete framework PDF
       run: |
+        head -n 20 build/sysops-framework-complete.md
         pandoc build/sysops-framework-complete.md \
           --from markdown+yaml_metadata_block \
           --to pdf \

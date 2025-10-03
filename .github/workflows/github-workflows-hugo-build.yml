@@ -14,21 +14,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
       with:
         submodules: recursive
         fetch-depth: 0
 
     - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v2
+      uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f # v3
       with:
         hugo-version: 'latest'
         extended: true
 
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
       with:
-        node-version: '20'
+        node-version: '22'
         cache: 'npm'
 
     - name: Install Node deps (PostCSS)
@@ -59,7 +59,7 @@ jobs:
     needs: build-site
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
       with:
         fetch-depth: 0
 
@@ -241,13 +241,13 @@ jobs:
 
     steps:
     - name: Download Hugo site
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
       with:
         name: hugo-site
         path: ./public
 
     - name: Download PDFs
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
       with:
         name: sysops-framework-pdfs
         path: ./pdfs
@@ -261,10 +261,10 @@ jobs:
         cp pdfs/sysops-framework-release.zip public/downloads/ 2>/dev/null || echo "No release archive to copy"
 
     - name: Setup Pages
-      uses: actions/configure-pages@v4
+      uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
 
     - name: Upload Pages artifact
-      uses: actions/upload-pages-artifact@v3
+      uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
       with:
         path: ./public
 
@@ -280,10 +280,10 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
     - name: Download artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
       with:
         name: sysops-framework-pdfs
         path: ./artifacts
@@ -293,7 +293,7 @@ jobs:
       run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
 
     - name: Create Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@6cbd405e2c4e67a21c47fa9e383d020e4e28b836 # v2
       with:
         tag_name: ${{ steps.version.outputs.VERSION }}
         name: SysOps Framework ${{ steps.version.outputs.VERSION }}
@@ -339,10 +339,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
     - name: Markdown lint
-      uses: DavidAnson/markdownlint-cli2-action@v13
+      uses: DavidAnson/markdownlint-cli2-action@992badcdf24e3b8eb7e87ff9287fe931bcb00c6e # v20
       with:
         globs: '**/*.md'
         config: '.markdownlint.json'
@@ -355,7 +355,7 @@ jobs:
       continue-on-error: true
 
     - name: Hugo build check
-      uses: peaceiris/actions-hugo@v2
+      uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f # v3
       with:
         hugo-version: 'latest'
         extended: true

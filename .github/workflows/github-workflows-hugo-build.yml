@@ -279,14 +279,7 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/v')
 
     permissions:
-      contents: read
-      packages: write
-      pull-requests: write
-      issues: write
-      discussions: write
-      actions: read
-      deployments: write
-      id-token: write
+      contents: write
 
     steps:
       - name: Checkout repository

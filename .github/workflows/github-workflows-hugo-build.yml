@@ -151,7 +151,7 @@ jobs:
       run: |
         head -n 20 build/sysops-framework-complete.md
         pandoc build/sysops-framework-complete.md \
-          --from markdown+yaml_metadata_block \
+          --from markdown \
           --to pdf \
           --output build/pdf/sysops-framework-complete.pdf \
           --pdf-engine=lualatex \

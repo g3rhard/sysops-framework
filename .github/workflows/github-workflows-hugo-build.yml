@@ -120,10 +120,17 @@ jobs:
 
     - name: Create complete framework document
       run: |
-        echo "# The SysOps Framework" > build/sysops-framework-complete.md
-        echo "" >> build/sysops-framework-complete.md
-        echo "**A Modern Methodology for System Administrators and Operations Teams**" >> build/sysops-framework-complete.md
-        echo "" >> build/sysops-framework-complete.md
+        echo "---" > build/sysops-framework-complete.md
+        echo "title: 'The SysOps Framework'" >> build/sysops-framework-complete.md
+        echo "author: 'SysOps Framework Contributors'" >> build/sysops-framework-complete.md
+        echo "date: '$(date +'%B %Y')'" >> build/sysops-framework-complete.md
+        echo "description: 'A Modern Methodology for System Administrators and Operations Teams'" >> build/sysops-framework-complete.md
+        echo "keywords: ['SysOps Framework', 'System Administration', 'IT Operations', 'DevOps', 'SRE']" >> build/sysops-framework-complete.md
+        echo "lang: 'en'" >> build/sysops-framework-complete.md
+        echo "toc: true" >> build/sysops-framework-complete.md
+        echo "toc-depth: 2" >> build/sysops-framework-complete.md
+        echo "number-sections: true" >> build/sysops-framework-complete.md
+        echo "highlight-style: 'espresso'" >> build/sysops-framework-complete.md
         echo "---" >> build/sysops-framework-complete.md
         echo "" >> build/sysops-framework-complete.md
 
@@ -151,7 +158,7 @@ jobs:
       run: |
         head -n 20 build/sysops-framework-complete.md
         pandoc build/sysops-framework-complete.md \
-          --from markdown \
+          --from markdown+yaml_metadata_block  \
           --to pdf \
           --output build/pdf/sysops-framework-complete.pdf \
           --pdf-engine=lualatex \

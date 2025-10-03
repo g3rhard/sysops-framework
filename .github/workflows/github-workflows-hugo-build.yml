@@ -84,7 +84,7 @@ jobs:
           # Skip index files for PDF generation
           if [[ "$filename" != "_index" ]]; then
             echo "Processing: $file -> $filename.pdf"
-
+            head -n 5 "$file"
             # Convert markdown to PDF with enhanced formatting
             pandoc "$file" \
               --from markdown+yaml_metadata_block \

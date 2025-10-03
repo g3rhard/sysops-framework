@@ -6,12 +6,12 @@ description: >
   "Good practices are the difference between chaos and control in operations."
 ---
 
-
-> *"Good practices are the difference between chaos and control in operations."*
+> _"Good practices are the difference between chaos and control in operations."_
 
 ## 🎯 Learning Objectives
 
 By the end of this chapter, you will understand:
+
 - The six core management practices that support the SysOps Framework
 - How to implement each practice effectively
 - Integration points between practices and operational cycles
@@ -28,18 +28,21 @@ The SysOps Framework incorporates six essential management practices tailored sp
 #### Key Components
 
 **Service Level Indicators (SLIs)**:
+
 - Availability: Percentage of time service is operational
 - Latency: Response time for user requests
 - Throughput: Volume of successful requests processed
 - Quality: Percentage of requests served without errors
 
 **Service Level Objectives (SLOs)**:
+
 - Target values for each SLI (e.g., 99.9% availability)
 - Time windows for measurement (e.g., monthly, quarterly)
 - Business justification for each target level
 - Clear consequences for missing objectives
 
 **Error Budgets**:
+
 - Allowable amount of unreliability (100% - SLO)
 - Tracking of budget consumption over time
 - Policies for when error budget is exhausted
@@ -56,6 +59,7 @@ The SysOps Framework incorporates six essential management practices tailored sp
 #### Example Service Level Management
 
 **Service**: Customer Authentication API
+
 - **Availability SLI**: Successful login attempts / Total login attempts
 - **Availability SLO**: 99.95% measured monthly
 - **Latency SLI**: 95th percentile response time
@@ -69,24 +73,28 @@ The SysOps Framework incorporates six essential management practices tailored sp
 #### Incident Management Process
 
 **1. Detection and Alert**:
+
 - Automated monitoring and alerting systems
 - Clear alert severity classification
 - On-call rotation and escalation procedures
 - Initial response time targets based on severity
 
 **2. Response and Triage**:
+
 - Immediate response protocols
 - Severity assessment and classification
 - Resource allocation and team coordination
 - Stakeholder communication procedures
 
 **3. Resolution and Recovery**:
+
 - Systematic troubleshooting approaches
 - Escalation procedures for complex issues
 - Service restoration verification
 - Communication of resolution to stakeholders
 
 **4. Post-Incident Review**:
+
 - Blameless timeline reconstruction
 - Root cause analysis techniques
 - Action item identification and assignment
@@ -95,16 +103,19 @@ The SysOps Framework incorporates six essential management practices tailored sp
 #### Problem Management Process
 
 **Distinction from Incident Management**:
+
 - **Incident Management**: Restore service quickly
 - **Problem Management**: Prevent incidents through root cause elimination
 
 **Problem Identification**:
+
 - Patterns in incident data
 - Proactive monitoring and trending
 - Stakeholder feedback and requests
 - Known error database maintenance
 
 **Problem Resolution**:
+
 - Root cause analysis methodologies
 - Change request generation for fixes
 - Workaround documentation and communication
@@ -123,6 +134,7 @@ The SysOps Framework incorporates six essential management practices tailored sp
 5. **Communication**: What should you tell stakeholders and when?
 
 **Framework Response**:
+
 1. **Detection**: Check database performance metrics, server resources, network connectivity
 2. **Response**: Page database specialist, notify team lead, prepare stakeholder communication
 3. **Triage**: Severity 2 (significant impact but service functional)
@@ -136,18 +148,21 @@ The SysOps Framework incorporates six essential management practices tailored sp
 #### Change Management Categories
 
 **Standard Changes**:
+
 - Pre-approved, low-risk changes
 - Automated or well-documented procedures
 - Regular security patches and updates
 - Routine maintenance activities
 
 **Normal Changes**:
+
 - Medium-risk changes requiring approval
 - New software deployments
 - Configuration modifications
 - Infrastructure upgrades
 
 **Emergency Changes**:
+
 - High-urgency changes to restore service
 - Security vulnerability fixes
 - Critical system repairs
@@ -156,12 +171,14 @@ The SysOps Framework incorporates six essential management practices tailored sp
 #### Configuration Management
 
 **Configuration Items (CIs)**:
+
 - Servers, network devices, software applications
 - Relationships and dependencies between CIs
 - Change history and version control
 - Baseline configurations and standards
 
 **CMDB Maintenance**:
+
 - Automated discovery and inventory tools
 - Regular audits and reconciliation
 - Change impact assessment capabilities
@@ -170,6 +187,7 @@ The SysOps Framework incorporates six essential management practices tailored sp
 #### Risk Assessment Framework
 
 **Change Risk Factors**:
+
 - **Complexity**: How many components are affected?
 - **Testing**: How thoroughly has the change been tested?
 - **Timing**: When will the change be implemented?
@@ -177,6 +195,7 @@ The SysOps Framework incorporates six essential management practices tailored sp
 - **Dependencies**: What other systems might be affected?
 
 **Risk Mitigation Strategies**:
+
 - Staged rollouts and blue-green deployments
 - Comprehensive testing in staging environments
 - Automated rollback procedures
@@ -189,18 +208,21 @@ The SysOps Framework incorporates six essential management practices tailored sp
 #### Capacity Planning Process
 
 **Current State Analysis**:
+
 - Resource utilization trends and patterns
 - Peak usage periods and seasonal variations
 - Performance bottlenecks and constraints
 - Growth projections based on business plans
 
 **Future State Modeling**:
+
 - Predictive analytics and forecasting models
 - Scenario planning for different growth rates
 - Technology refresh and upgrade planning
 - Cost optimization opportunities
 
 **Capacity Implementation**:
+
 - Procurement and deployment planning
 - Scaling procedures and automation
 - Performance testing and validation
@@ -209,12 +231,14 @@ The SysOps Framework incorporates six essential management practices tailored sp
 #### Performance Management
 
 **Performance Monitoring**:
+
 - Key performance indicators (KPIs) for all systems
 - Real-time dashboards and trending analysis
 - Automated alerting for performance degradation
 - User experience monitoring and feedback
 
 **Performance Optimization**:
+
 - Regular performance tuning activities
 - Database query optimization
 - Network and storage optimization
@@ -227,18 +251,21 @@ The SysOps Framework incorporates six essential management practices tailored sp
 #### Documentation Categories
 
 **Runbooks**:
+
 - Step-by-step procedures for routine operations
 - Emergency response procedures
 - System startup and shutdown procedures
 - Troubleshooting guides and decision trees
 
 **System Documentation**:
+
 - Architecture diagrams and system overviews
 - Configuration standards and baselines
 - Integration points and dependencies
 - Security and compliance requirements
 
 **Process Documentation**:
+
 - Standard operating procedures
 - Change management procedures
 - Incident response workflows
@@ -247,12 +274,14 @@ The SysOps Framework incorporates six essential management practices tailored sp
 #### Knowledge Management Practices
 
 **Documentation Standards**:
+
 - Consistent templates and formats
 - Version control and review processes
 - Regular updates and maintenance schedules
 - Searchability and accessibility requirements
 
 **Knowledge Sharing**:
+
 - Regular knowledge transfer sessions
 - Cross-training programs and job shadowing
 - Communities of practice and expert networks
@@ -265,18 +294,21 @@ The SysOps Framework incorporates six essential management practices tailored sp
 #### Skill Development Framework
 
 **Technical Skills**:
+
 - System administration and troubleshooting
 - Automation and scripting capabilities
 - Monitoring and performance analysis
 - Security and compliance knowledge
 
 **Operational Skills**:
+
 - Incident response and problem-solving
 - Communication and collaboration
 - Process improvement and optimization
 - Project management and planning
 
 **Leadership Skills**:
+
 - Team coordination and mentoring
 - Stakeholder communication and management
 - Strategic thinking and decision-making
@@ -285,18 +317,21 @@ The SysOps Framework incorporates six essential management practices tailored sp
 #### Cross-Training Program
 
 **Skill Matrix Development**:
+
 - Inventory of required skills and current capabilities
 - Identification of skill gaps and single points of failure
 - Training priorities based on business criticality
 - Individual development planning and tracking
 
 **Training Methods**:
+
 - Hands-on system training and job shadowing
 - Formal education and certification programs
 - Internal knowledge sharing and peer teaching
 - External training and conference attendance
 
 **Career Development Paths**:
+
 - Technical specialist tracks (deep expertise)
 - Technical generalist tracks (broad knowledge)
 - Team leadership and management tracks
@@ -305,6 +340,7 @@ The SysOps Framework incorporates six essential management practices tailored sp
 ## 🔗 Practice Integration with Operational Cycles
 
 ### Daily Operations Cycle Integration
+
 - **Service Level Management**: Daily SLO monitoring and error budget tracking
 - **Incident Management**: Real-time incident response and resolution
 - **Change Management**: Implementation of approved standard changes
@@ -313,6 +349,7 @@ The SysOps Framework incorporates six essential management practices tailored sp
 - **Team Development**: On-the-job learning and skill application
 
 ### Weekly Improvement Cycle Integration
+
 - **Service Level Management**: SLO review and adjustment recommendations
 - **Problem Management**: Root cause analysis and prevention planning
 - **Change Management**: Normal change planning and risk assessment
@@ -321,6 +358,7 @@ The SysOps Framework incorporates six essential management practices tailored sp
 - **Team Development**: Skill development planning and cross-training activities
 
 ### Monthly Strategy Cycle Integration
+
 - **Service Level Management**: Strategic SLO planning and business alignment
 - **Change Management**: Major change planning and coordination
 - **Capacity Management**: Long-term capacity planning and architecture decisions
@@ -341,6 +379,7 @@ The SysOps Framework incorporates six essential management practices tailored sp
 ### Assessment Questions by Practice
 
 #### Service Level Management Maturity
+
 - Level 1: Do you have any defined service levels?
 - Level 2: Are service levels documented and monitored?
 - Level 3: Are SLOs integrated with business objectives and error budgets used?
@@ -348,6 +387,7 @@ The SysOps Framework incorporates six essential management practices tailored sp
 - Level 5: Are SLOs driving innovation and strategic decision-making?
 
 #### Incident Management Maturity
+
 - Level 1: Are incidents handled when they occur?
 - Level 2: Are there defined incident response procedures?
 - Level 3: Are post-incident reviews conducted and lessons captured?
@@ -375,12 +415,14 @@ In the next chapter, we'll explore the metrics and measurement approaches that h
 ---
 
 **🎮 Gamification Element - Chapter 6 Badge**
-*Assess your team's maturity level for each practice and create an improvement plan to earn the "Practice Master" badge.*
+_Assess your team's maturity level for each practice and create an improvement plan to earn the "Practice Master" badge._
 
 **📚 Additional Resources**
+
 - Assessment: "Management Practice Maturity Evaluation"
 - Templates: "Runbook and Documentation Standards"
 - Workshop: "Implementing Blameless Post-Incident Reviews"
 
 ---
-*[← Previous: Chapter 5 - Implementation Strategy](chapter-05-implementation.md) | [Next: Chapter 7 - Metrics & Measurement →](chapter-07-metrics.md)*
+
+_[← Previous: Chapter 5 - Implementation Strategy](chapter-05-implementation.md) | [Next: Chapter 7 - Metrics & Measurement →](chapter-07-metrics.md)_

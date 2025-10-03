@@ -6,12 +6,12 @@ description: >
   "You can't schedule an emergency, but you can prepare for it."
 ---
 
-
-> *"You can't schedule an emergency, but you can prepare for it."*
+> _"You can't schedule an emergency, but you can prepare for it."_
 
 ## 🎯 Learning Objectives
 
 By the end of this chapter, you will understand:
+
 - The fundamental differences between development and operations work
 - Why traditional agile methodologies create friction for operations teams
 - The specific challenges that system administrators face with sprint-based approaches
@@ -49,6 +49,7 @@ Studies reveal significant obstacles when applying traditional agile methodologi
 ## 🎭 Real-World Scenarios: When Agile Goes Wrong
 
 ### Scenario 1: The Sprint-Breaking Incident
+
 **The Setup**: A 5-person infrastructure team has committed to migrating 20 services to new hardware during a 2-week sprint. They've estimated story points, created tasks, and everyone knows their role.
 
 **The Crisis**: Day 3 of the sprint - a major security vulnerability is discovered in the core authentication service. Immediate patching required across 150 servers.
@@ -58,6 +59,7 @@ Studies reveal significant obstacles when applying traditional agile methodologi
 **The Reality**: By the time the team finishes the emergency response, sprint planning, and re-estimation, they've lost 3 days. The migration work suffers, technical debt increases, and team morale drops.
 
 ### Scenario 2: The Estimation Nightmare
+
 **The Problem**: How do you estimate story points for "maintain 99.9% uptime"? Operations work doesn't fit neatly into development estimation models.
 
 **The Agile Solution**: Break it down into smaller tasks.
@@ -65,9 +67,11 @@ Studies reveal significant obstacles when applying traditional agile methodologi
 **The Reality**: You can't break down unpredictable work. How many story points is a network outage? What's the velocity of disaster recovery?
 
 ### Scenario 3: The Retrospective That Never Ends
+
 **The Question**: "What went wrong this sprint?"
 
 **The Answers**:
+
 - "Production outage on Tuesday"
 - "Emergency security patch on Thursday"
 - "Database corruption on Saturday"
@@ -78,6 +82,7 @@ Studies reveal significant obstacles when applying traditional agile methodologi
 ## 🧩 The Fundamental Mismatch
 
 ### Development Work Characteristics:
+
 - **Predictable scope** - Features can be defined and estimated
 - **Controlled timeline** - Work happens when developers choose
 - **Quality gates** - Testing can happen in dedicated phases
@@ -85,6 +90,7 @@ Studies reveal significant obstacles when applying traditional agile methodologi
 - **Planned releases** - Deployment timing is flexible
 
 ### Operations Work Characteristics:
+
 - **Unpredictable scope** - Incidents vary wildly in complexity
 - **Reactive timeline** - Work happens when systems demand it
 - **Continuous quality** - Monitoring and maintenance never stop
@@ -105,12 +111,14 @@ Development changes are typically **planned disruptions** to the workflow. Opera
 ## 🎮 Interactive Challenge: Sprint vs. Reality
 
 **Try This Exercise**: Plan a perfect 2-week operations sprint for your team. Include:
+
 - Planned maintenance windows
 - Infrastructure improvements
 - Documentation updates
 - Tool automation projects
 
 Now simulate these realistic interruptions:
+
 - Day 2: Database performance issue (4-hour investigation)
 - Day 5: Security patch deployment (8-hour rollout)
 - Day 8: Network equipment failure (12-hour replacement)
@@ -126,16 +134,19 @@ Now simulate these realistic interruptions:
 When operations teams try to force-fit into agile methodologies, several hidden costs emerge:
 
 ### Psychological Costs
+
 - **Chronic stress** from constant sprint disruptions
 - **Impostor syndrome** when teams can't meet development-style commitments
 - **Burnout** from trying to maintain both reactive availability and proactive planning
 
 ### Operational Costs
+
 - **Technical debt accumulation** as planned improvements get repeatedly deferred
 - **Decreased system reliability** as focus shifts to sprint commitments over service quality
 - **Knowledge silos** as team members specialize to meet sprint velocity requirements
 
 ### Organizational Costs
+
 - **Misaligned metrics** that don't reflect operational value
 - **Resource conflicts** between planned work and operational needs
 - **Cultural friction** between development and operations teams
@@ -170,12 +181,14 @@ In the next chapter, we'll explore the core principles and values that form the 
 ---
 
 **🎮 Gamification Element - Chapter 1 Badge**
-*Complete the "Sprint vs. Reality" exercise and identify 3 specific ways traditional agile has impacted your operations team to earn the "Challenge Identifier" badge.*
+_Complete the "Sprint vs. Reality" exercise and identify 3 specific ways traditional agile has impacted your operations team to earn the "Challenge Identifier" badge._
 
 **📚 Additional Resources**
+
 - Research paper: "Agile Methodology Challenges in Operations Teams"
 - Case study: "When Scrum Breaks: A Fortune 500 Operations Team's Journey"
 - Video: "The Hidden Costs of Forcing Agile on Operations Teams"
 
 ---
-*[← Previous: Introduction](../README.md) | [Next: Chapter 2 - Core Principles →](chapter-02-principles.md)*
+
+_[← Previous: Introduction](../README.md) | [Next: Chapter 2 - Core Principles →](chapter-02-principles.md)_

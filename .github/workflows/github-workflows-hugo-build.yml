@@ -179,7 +179,7 @@ jobs:
     - name: Generate EPUB version
       run: |
         pandoc build/sysops-framework-complete.md \
-          --from markdown \
+          --from markdown-yaml_metadata_block
           --to epub \
           --output build/pdf/sysops-framework.epub \
           --toc \
@@ -189,7 +189,7 @@ jobs:
           --metadata date="$(date +'%Y-%m-%d')" \
           --css=.github/styles/epub.css 2>/dev/null || \
         pandoc build/sysops-framework-complete.md \
-          --from markdown \
+          --from markdown-yaml_metadata_block
           --to epub \
           --output build/pdf/sysops-framework.epub \
           --toc \

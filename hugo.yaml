@@ -1,7 +1,6 @@
 baseURL: "https://g3rhard.github.io/sysops-framework"
 languageCode: "en-us"
 title: "SysOps Framework"
-# theme: "docsy"
 
 # Content and build directories
 contentDir: "content"
@@ -15,13 +14,12 @@ enableGitInfo: true
 
 # Hugo Modules
 module:
-  proxy: "direct"
+  hugoVersion:
+    extended: true
+    min: 0.146.0
   imports:
     - path: "github.com/google/docsy"
       disable: false
-    - path: "github.com/google/docsy/dependencies"
-      disable: false
-    - path: "github.com/gohugoio/hugo-mod-bootstrap-scss/v5"
 
 # Site Configuration
 params:
@@ -37,7 +35,7 @@ params:
     breadcrumb_disable: false
     sidebar_search_disable: false
     navbar_logo: true
-    footer_about_disable: false
+    footer_about_enable: true
     feedback:
       enable: true
       yes: 'Glad to hear it! Please <a href="https://github.com/g3rhard/sysops-framework/issues/new">tell us how we can improve</a>.'
@@ -68,6 +66,14 @@ params:
     enable: true
     theme: "default"
 
+taxonomies:
+  tag: tags
+  category: categories
+
+services:
+  googleAnalytics:
+    id: G-T7YZP233SJ
+
 # Navigation
 menu:
   main:
@@ -95,3 +101,5 @@ outputs:
   home: ["HTML", "RSS", "JSON"]
   page: ["HTML"]
   section: ["HTML", "RSS"]
+
+# theme: "docsy"

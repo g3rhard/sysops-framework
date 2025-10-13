@@ -7,5 +7,8 @@
     "hugo-extended": "0.121.2",
     "postcss-cli": "^11.0.1",
     "rtlcss": "^4.1.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.8"
   }
 }

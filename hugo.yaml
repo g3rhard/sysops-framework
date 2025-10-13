@@ -102,6 +102,6 @@ markup:
 
 # Content structure - Fixed outputs section
 outputs:
-  home: ["HTML", "RSS", "JSON"]
-  page: ["HTML"]
-  section: ["HTML", "RSS"]
+  home: [HTML, RSS]
+  page: [HTML]
+  section: [HTML, RSS]

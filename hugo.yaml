@@ -1,13 +1,14 @@
-baseURL: "https://g3rhard.github.io/sysops-framework"
-languageCode: "en-us"
-title: "SysOps Framework"
+baseURL: https://g3rhard.github.io/sysops-framework
+languageCode: en-us
+title: SysOps Framework
+theme: docsy
 
 # Content and build directories
-contentDir: "content"
-dataDir: "data"
-layoutDir: "layouts"
-staticDir: "static"
-publishDir: "public"
+contentDir: content
+dataDir: data
+layoutDir: layouts
+staticDir: static
+publishDir: public
 
 # Enable Git info
 enableGitInfo: true
@@ -18,16 +19,19 @@ module:
     extended: true
     min: 0.146.0
   imports:
-    - path: "github.com/google/docsy"
-      disable: false
+    - path: github.com/gohugoio/hugo-mod-bootstrap-scss/v5
+
+minify:
+  disableXML: true
+  minifyOutput: true
 
 # Site Configuration
 params:
-  version_menu: "Releases"
+  version_menu: Releases
   archived_version: false
   version: "1.0"
-  url_latest_version: "https://g3rhard.github.io/sysops-framework"
-  github_repo: "https://github.com/g3rhard/sysops-framework"
+  url_latest_version: https://g3rhard.github.io/sysops-framework
+  github_repo: https://github.com/g3rhard/sysops-framework
   github_branch: "main"
   # gcs_engine_id: "your-search-engine-id"
   ui:
@@ -61,10 +65,10 @@ params:
     enable: true
   plantuml:
     enable: true
-    theme: "default"
+    theme: default
   mermaid:
     enable: true
-    theme: "default"
+    theme: default
 
 taxonomies:
   tag: tags
@@ -101,5 +105,3 @@ outputs:
   home: ["HTML", "RSS", "JSON"]
   page: ["HTML"]
   section: ["HTML", "RSS"]
-
-# theme: "docsy"

@@ -29,7 +29,7 @@ jobs:
         uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: "22"
-          cache: "npm"
+          cache: npm
 
       - name: Install Node deps (PostCSS)
         run: npm ci
@@ -39,6 +39,10 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -yqq pandoc texlive-latex-base texlive-fonts-recommended texlive-extra-utils texlive-latex-extra
           npm install -g markdown-pdf postcss-cli autoprefixer
+
+      - name: Initialize git submodules
+        run: |
+          git submodule update --init --recursive
 
       - name: Initialize Hugo modules
         run: |

@@ -2,11 +2,11 @@
   "name": "sysops-framework-site",
   "private": true,
   "devDependencies": {
-    "autoprefixer": "^10.4.21",
-    "cross-env": "^7.0.0",
+    "autoprefixer": "10.4.21",
+    "cross-env": "7.0.3",
     "hugo-extended": "0.121.2",
-    "postcss-cli": "^11.0.1",
-    "rtlcss": "^4.1.0"
+    "postcss-cli": "11.0.1",
+    "rtlcss": "4.3.0"
   },
   "dependencies": {
     "bootstrap": "^5.3.8"

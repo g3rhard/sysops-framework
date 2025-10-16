@@ -6,8 +6,6 @@ description: >
   "A journey of a thousand miles begins with a single step, but you still need a map."
 ---
 
-> _"A journey of a thousand miles begins with a single step, but you still need a map."_
-
 ## 🎯 Learning Objectives
 
 By the end of this chapter, you will understand:

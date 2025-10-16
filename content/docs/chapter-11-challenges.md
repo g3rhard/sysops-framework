@@ -6,8 +6,6 @@ description: >
   "Every framework has limitations; wisdom lies in knowing what they are and how to work around them."
 ---
 
-> _"Every framework has limitations; wisdom lies in knowing what they are and how to work around them."_
-
 ## 🎯 Learning Objectives
 
 By the end of this chapter, you will understand:

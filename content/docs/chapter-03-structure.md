@@ -6,8 +6,6 @@ description: >
   "Operations teams don't need sprints; they need cycles that match the rhythm of their work."
 ---
 
-> _"Operations teams don't need sprints; they need cycles that match the rhythm of their work."_
-
 ## 🎯 Learning Objectives
 
 By the end of this chapter, you will understand:

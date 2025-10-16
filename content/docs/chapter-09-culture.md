@@ -6,8 +6,6 @@ description: >
   "Culture eats strategy for breakfast, but process eats culture for lunch."
 ---
 
-> _"Culture eats strategy for breakfast, but process eats culture for lunch."_
-
 ## 🎯 Learning Objectives
 
 By the end of this chapter, you will understand:

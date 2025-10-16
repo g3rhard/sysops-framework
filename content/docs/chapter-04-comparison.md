@@ -6,8 +6,6 @@ description: >
   "The right methodology is the one that matches how the work actually gets done."
 ---
 
-> _"The right methodology is the one that matches how the work actually gets done."_
-
 ## 🎯 Learning Objectives
 
 By the end of this chapter, you will understand:

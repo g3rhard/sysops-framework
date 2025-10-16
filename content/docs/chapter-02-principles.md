@@ -6,8 +6,6 @@ description: >
   "In operations, principles guide decisions when procedures don't exist yet."
 ---
 
-> _"In operations, principles guide decisions when procedures don't exist yet."_
-
 ## 🎯 Learning Objectives
 
 By the end of this chapter, you will understand:

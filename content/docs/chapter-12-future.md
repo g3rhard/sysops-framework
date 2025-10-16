@@ -6,8 +6,6 @@ description: >
   "The best frameworks evolve with the teams that use them and the challenges they face."
 ---
 
-> _"The best frameworks evolve with the teams that use them and the challenges they face."_
-
 ## 🎯 Learning Objectives
 
 By the end of this chapter, you will understand:

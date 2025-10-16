@@ -6,8 +6,6 @@ description: >
   "You can't schedule an emergency, but you can prepare for it."
 ---
 
-> _"You can't schedule an emergency, but you can prepare for it."_
-
 ## 🎯 Learning Objectives
 
 By the end of this chapter, you will understand:

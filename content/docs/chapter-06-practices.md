@@ -6,8 +6,6 @@ description: >
   "Good practices are the difference between chaos and control in operations."
 ---
 
-> _"Good practices are the difference between chaos and control in operations."_
-
 ## 🎯 Learning Objectives
 
 By the end of this chapter, you will understand:

@@ -6,8 +6,6 @@ description: >
   "In operations, every decision is a risk decision, whether you realize it or not."
 ---
 
-> _"In operations, every decision is a risk decision, whether you realize it or not."_
-
 ## 🎯 Learning Objectives
 
 By the end of this chapter, you will understand:

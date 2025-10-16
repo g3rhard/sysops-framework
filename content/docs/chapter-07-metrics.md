@@ -6,8 +6,6 @@ description: >
   "What gets measured gets managed, but what gets measured wrong gets mismanaged."
 ---
 
-> _"What gets measured gets managed, but what gets measured wrong gets mismanaged."_
-
 ## 🎯 Learning Objectives
 
 By the end of this chapter, you will understand:

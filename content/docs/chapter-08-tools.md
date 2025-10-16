@@ -6,8 +6,6 @@ description: >
   "The right tools amplify human capability; the wrong tools amplify human frustration."
 ---
 
-> _"The right tools amplify human capability; the wrong tools amplify human frustration."_
-
 ## 🎯 Learning Objectives
 
 By the end of this chapter, you will understand:

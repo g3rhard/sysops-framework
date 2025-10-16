@@ -12,15 +12,32 @@
     linkcolor=blue,
     filecolor=magenta,
     urlcolor=blue,
+    pdftitle={$title$},
+    pdfauthor={$author$},
 }
 \usepackage{longtable,booktabs}
 \usepackage{graphicx,grffile}
 \usepackage{fancyhdr}
+
+% Configure page style
 \pagestyle{fancy}
 \fancyhf{}
-\rhead{\rightmark}
-\lfoot{SysOps Framework}
-\cfoot{\thepage}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\rightmark}
+\fancyhead[RE]{\leftmark}
+\fancyfoot[C]{SysOps Framework}
+
+% Custom formatting for chapters and sections
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{50pt}{40pt}
+
+\titleformat{\section}[hang]{\LARGE\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}[hang]{\Large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}[hang]{\large\bfseries}{\thesubsubsection}{1em}{}
 
 $if(title)$
 \title{$title$}
@@ -35,12 +52,14 @@ $endif$
 \begin{document}
 $if(title)$
 \maketitle
+\clearpage
 $endif$
 
 $if(toc)$
 {
 \setcounter{tocdepth}{$toc-depth$}
 \tableofcontents
+\clearpage
 }
 $endif$
 

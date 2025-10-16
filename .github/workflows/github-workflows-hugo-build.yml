@@ -140,8 +140,12 @@ jobs:
 
           # Add overview from main docs index
           if [ -f "content/docs/_index.md" ]; then
-            # Extract content after the frontmatter
-            sed '1,/^---$/d' content/docs/_index.md >> build/sysops-framework-complete.md
+            # Extract content after the frontmatter, remove Hugo shortcodes, and clean up
+            sed '1,/^---$/d' content/docs/_index.md | \
+            sed 's/{{% pageinfo %}}//' | \
+            sed 's/{{% \/pageinfo %}}//' | \
+            sed 's/{{%[^%]*%}}//g' | \
+            sed '/^$/N;/^\n$/d' >> build/sysops-framework-complete.md
             echo "" >> build/sysops-framework-complete.md
             echo "\\pagebreak" >> build/sysops-framework-complete.md
             echo "" >> build/sysops-framework-complete.md
@@ -150,11 +154,21 @@ jobs:
           # Dynamically find and include all chapter files in order
           find content/docs -name "chapter-*.md" -type f | sort | while read -r file; do
             echo "Adding chapter: $file"
+
+            # Extract chapter title from frontmatter
+            CHAPTER_TITLE=$(grep '^title:' "$file" | sed 's/title: *"//' | sed 's/"$//')
+
+            # Add chapter heading
             echo "" >> build/sysops-framework-complete.md
-            # Remove frontmatter and add content
-            sed '1,/^---$/d' "$file" >> build/sysops-framework-complete.md
+            echo "# $CHAPTER_TITLE" >> build/sysops-framework-complete.md
             echo "" >> build/sysops-framework-complete.md
-            echo "\\pagebreak" >> build/sysops-framework-complete.md
+
+            # Remove frontmatter, Hugo shortcodes, and add content
+            sed '1,/^---$/d' "$file" | \
+            sed 's/{{% pageinfo %}}//' | \
+            sed 's/{{% \/pageinfo %}}//' | \
+            sed 's/{{%[^%]*%}}//g' | \
+            sed '/^$/N;/^\n$/d' >> build/sysops-framework-complete.md
             echo "" >> build/sysops-framework-complete.md
           done
 
@@ -162,7 +176,7 @@ jobs:
         run: |
           head -n 20 build/sysops-framework-complete.md
           pandoc build/sysops-framework-complete.md \
-            --from markdown-yaml_metadata_block  \
+            --from markdown+yaml_metadata_block \
             --to pdf \
             --output build/pdf/sysops-framework-complete.pdf \
             --pdf-engine=lualatex \
@@ -172,20 +186,23 @@ jobs:
             --variable colorlinks=true \
             --variable linkcolor=blue \
             --variable book=true \
+            --top-level-division=chapter \
             --toc \
             --toc-depth=2 \
             --number-sections \
             --highlight-style=espresso \
             --metadata title="The SysOps Framework" \
             --metadata author="SysOps Framework Contributors" \
-            --metadata date="$(date +'%B %Y')"
+            --metadata date="$(date +'%B %Y')" \
+            --template=.github/templates/pandoc-template.latex
 
       - name: Generate EPUB version
         run: |
           pandoc build/sysops-framework-complete.md \
-            --from markdown-yaml_metadata_block
+            --from markdown+yaml_metadata_block \
             --to epub \
             --output build/pdf/sysops-framework.epub \
+            --top-level-division=chapter \
             --toc \
             --toc-depth=2 \
             --metadata title="The SysOps Framework" \
@@ -193,9 +210,10 @@ jobs:
             --metadata date="$(date +'%Y-%m-%d')" \
             --css=.github/styles/epub.css 2>/dev/null || \
           pandoc build/sysops-framework-complete.md \
-            --from markdown-yaml_metadata_block
+            --from markdown+yaml_metadata_block \
             --to epub \
             --output build/pdf/sysops-framework.epub \
+            --top-level-division=chapter \
             --toc \
             --toc-depth=2 \
             --metadata title="The SysOps Framework" \

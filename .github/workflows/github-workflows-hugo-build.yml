@@ -89,8 +89,13 @@ jobs:
             if [[ "$filename" != "_index" ]]; then
               echo "Processing: $file -> $filename.pdf"
               head -n 5 "$file"
+
+              # Preprocess file to escape dollar signs
+              temp_file="build/temp_${filename}.md"
+              sed 's/\$\([0-9]\)/\\textdollar\1/g' "$file" > "$temp_file"
+
               # Convert markdown to PDF with enhanced formatting
-              pandoc "$file" \
+              pandoc "$temp_file" \
                 --from markdown+yaml_metadata_block \
                 --to pdf \
                 --output "build/single-chapters/${filename}.pdf" \
@@ -107,7 +112,7 @@ jobs:
                 --number-sections \
                 --highlight-style=espresso \
                 --template=.github/templates/pandoc-template.latex 2>/dev/null || \
-              pandoc "$file" \
+              pandoc "$temp_file" \
                 --from markdown+yaml_metadata_block \
                 --to pdf \
                 --output "build/single-chapters/${filename}.pdf" \
@@ -119,6 +124,9 @@ jobs:
                 --toc \
                 --number-sections \
                 --highlight-style=espresso
+
+              # Clean up temp file
+              rm -f "$temp_file"
             fi
           done
 
@@ -163,11 +171,12 @@ jobs:
             echo "# $CHAPTER_TITLE" >> build/sysops-framework-complete.md
             echo "" >> build/sysops-framework-complete.md
 
-            # Remove frontmatter, Hugo shortcodes, and add content
+            # Remove frontmatter, Hugo shortcodes, escape dollar signs, and add content
             sed '1,/^---$/d' "$file" | \
             sed 's/{{% pageinfo %}}//' | \
             sed 's/{{% \/pageinfo %}}//' | \
             sed 's/{{%[^%]*%}}//g' | \
+            sed 's/\$\([0-9]\)/\\textdollar\1/g' | \
             sed '/^$/N;/^\n$/d' >> build/sysops-framework-complete.md
             echo "" >> build/sysops-framework-complete.md
           done

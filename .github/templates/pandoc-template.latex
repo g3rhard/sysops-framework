@@ -16,12 +16,17 @@
     pdfauthor={$author$},
 }
 \usepackage{longtable,booktabs}
+\usepackage{array} % Required for \arraybackslash
+\usepackage{calc} % Required for \real calculations
 \usepackage{graphicx,grffile}
 \usepackage{fancyhdr}
 
 % Define tightlist command for Pandoc compatibility
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Define arraybackslash command for table formatting
+\providecommand{\arraybackslash}{\let\\\tabularnewline}
 
 % Configure page style
 \pagestyle{fancy}

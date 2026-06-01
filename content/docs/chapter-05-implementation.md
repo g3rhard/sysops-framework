@@ -1,7 +1,7 @@
 ---
 title: "Chapter 5: Implementation Strategy"
 linkTitle: "Chapter 05: Implementation"
-weight: 5-implementation0
+weight: 500
 description: >
   "A journey of a thousand miles begins with a single step, but you still need a map."
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Chapter 8: Tools & Technology"
 linkTitle: "Chapter 08: Tools"
-weight: 8-tools0
+weight: 800
 description: >
   "The right tools amplify human capability; the wrong tools amplify human frustration."
 ---

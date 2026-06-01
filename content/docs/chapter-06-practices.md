@@ -1,7 +1,7 @@
 ---
 title: "Chapter 6: Management Practices"
 linkTitle: "Chapter 06: Practices"
-weight: 6-practices0
+weight: 600
 description: >
   "Good practices are the difference between chaos and control in operations."
 ---
@@ -10,14 +10,14 @@ description: >
 
 By the end of this chapter, you will understand:
 
-- The six core management practices that support the SysOps Framework
+- The seven core management practices that support the SysOps Framework
 - How to implement each practice effectively
 - Integration points between practices and operational cycles
 - Maturity models for continuous practice improvement
 
-## 🎯 The Six Core Management Practices
+## 🎯 The Seven Core Management Practices
 
-The SysOps Framework incorporates six essential management practices tailored specifically for operations teams. Unlike generic IT management approaches, these practices acknowledge the unique constraints and requirements of system administration work.
+The SysOps Framework incorporates seven essential management practices tailored specifically for operations teams. Unlike generic IT management approaches, these practices acknowledge the unique constraints and requirements of system administration work.
 
 ### 1. 📊 Service Level Management
 
@@ -97,6 +97,88 @@ The SysOps Framework incorporates six essential management practices tailored sp
 - Root cause analysis techniques
 - Action item identification and assignment
 - Knowledge base and runbook updates
+
+#### Blameless Post-Incident Review Process
+
+A core principle of modern incident management is conducting **blameless post-incident reviews** (sometimes called post-mortems). This removes the fear that drives people to hide errors and enables genuine learning.
+
+**The Five-Phase Blameless Post-Incident Process:**
+
+**Phase 1: Timeline Reconstruction (Day 1-2)**
+
+1. Gather all participants (on-call responder, escalation teams, management observer)
+2. Create a detailed incident timeline:
+   - When was the issue first detected?
+   - What actions were taken and by whom?
+   - What information was available at each decision point?
+   - When was the service restored?
+3. Document all communications and decisions made
+4. Avoid assigning blame - focus on understanding the sequence of events
+
+**Phase 2: Impact Analysis (Day 2-3)**
+
+- How long was the service unavailable?
+- How many users were affected?
+- What was the business impact (revenue lost, data affected, customer trust)?
+- How much error budget was consumed?
+- What escalations were triggered?
+
+**Phase 3: Root Cause Analysis (Day 3-5)**
+
+Use the "5 Whys" technique or Fishbone diagram:
+
+```text
+Why did customers experience an outage?
+→ The database server ran out of disk space
+
+Why did the server run out of disk space?
+→ Log files grew unexpectedly large
+
+Why did log files grow large?
+→ A new application deployed yesterday increased logging volume by 10x
+
+Why wasn't this caught?
+→ Load testing didn't include realistic logging configuration
+
+Why wasn't load testing updated?
+→ The application team wasn't aware of logging configuration requirements
+```
+
+**Phase 4: Action Item Generation (During review)**
+
+- **Process improvements**: How can we prevent this exact incident?
+  - Example: "Implement log rotation policy with size limits"
+- **Detection improvements**: How can we detect this earlier?
+  - Example: "Add monitoring for disk usage threshold at 80%"
+- **Response improvements**: How can we respond faster?
+  - Example: "Create runbook for disk space emergency procedure"
+- **One-time actions**: What immediate fixes are needed?
+  - Example: "Clean up old logs from this server"
+
+**Phase 5: Communication & Follow-up**
+
+- Share findings with broader team (not just responders)
+- Assign clear ownership for action items
+- Set target dates for resolution (usually 1-2 weeks for critical items)
+- Follow up on action items until completed
+- Celebrate what the team did well during response
+
+#### Incident Command System (ICS) Roles
+
+For significant incidents, establish clear role assignments:
+
+| Role                        | Responsibility                                                                                                               |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **Incident Commander (IC)** | Overall coordination, decision authority, stakeholder communication. Single point of coordination for all incident response. |
+| **Deputy IC**               | Supports IC, takes over if IC needs relief during long incidents. Maintains handoff log.                                     |
+| **Scribe**                  | Documents timeline, decisions, commands given. Maintains incident narrative for post-incident review.                        |
+| **Technical Lead**          | Coordinates technical troubleshooting, oversees system specialists, proposes solutions.                                      |
+| **Communications Lead**     | Manages stakeholder updates, customer communications, internal status channel. Prevents communication chaos.                 |
+| **System Specialists**      | Database, network, application, security experts investigating their domain. Report findings to Technical Lead.              |
+
+**Why ICS Matters**: Prevents confusion, ensures one voice to customers, captures information for post-incident review, scales well for complex incidents.
+
+---
 
 #### Problem Management Process
 
@@ -335,6 +417,64 @@ The SysOps Framework incorporates six essential management practices tailored sp
 - Team leadership and management tracks
 - Cross-functional collaboration opportunities
 
+### 7. 🤝 Vendor and Contract Management
+
+**Purpose**: Manage relationships with external vendors, ensure service level agreements (SLAs) are met, and optimize vendor partnerships to support operational objectives.
+
+#### Vendor Management Components
+
+**Vendor Inventory and Categorization**:
+
+- Critical vendors (infrastructure providers, security vendors, support services)
+- Strategic vendors (long-term partnerships, significant investment)
+- Tactical vendors (specific tools, point solutions)
+- Risk assessment for each vendor (concentration risk, viability, security posture)
+
+**Service Level Agreement (SLA) Management**:
+
+- Define clear SLAs aligned with your internal SLOs
+- SLA terms: availability, response time, resolution time by severity
+- Penalties for non-compliance and credit mechanisms
+- Escalation procedures and dispute resolution
+- Regular SLA review and adjustment
+
+**Contract Management**:
+
+- Documented terms, conditions, and renewal dates
+- Pricing structure and cost optimization opportunities
+- Licensing compliance and audit procedures
+- Security and compliance requirements (SOC 2, ISO certification)
+- Data handling and confidentiality agreements
+
+**Vendor Performance Monitoring**:
+
+- Track SLA compliance metrics month-over-month
+- Monitor incident response quality and timeliness
+- Assess support quality and ticket resolution rates
+- Regular business reviews with vendor contacts
+- Risk indicators (financial health, technical changes, staff turnover)
+
+**Vendor Risk Management**:
+
+- Identify single points of failure and concentration risk
+- Develop contingency plans for vendor failure
+- Ensure contracts include exit clauses and data return procedures
+- Monitor industry news and vendor viability
+- Conduct periodic security audits of vendor practices
+
+#### Example: Cloud Infrastructure Vendor SLA
+
+**Service**: Cloud Compute Instances
+
+- **Availability SLA**: 99.95% monthly availability
+- **Response Time**: Critical issues <15 minutes, Urgent <1 hour
+- **Resolution Time**: Critical within 4 hours, Urgent within 8 hours
+- **Credits**: 10% of monthly fees for each 0.1% below SLA (maximum 30%)
+- **Escalation**: Support Team → Account Manager → VP if unresolved within 24 hours
+- **Review Schedule**: Monthly SLA compliance review with account team
+
+---
+
 ## 🔗 Practice Integration with Operational Cycles
 
 ### Daily Operations Cycle Integration
@@ -345,6 +485,7 @@ The SysOps Framework incorporates six essential management practices tailored sp
 - **Performance Management**: Daily performance monitoring and alerts
 - **Knowledge Management**: Real-time documentation updates during incidents
 - **Team Development**: On-the-job learning and skill application
+- **Vendor Management**: Escalation of vendor-related incidents, SLA impact tracking
 
 ### Weekly Improvement Cycle Integration
 
@@ -354,6 +495,7 @@ The SysOps Framework incorporates six essential management practices tailored sp
 - **Capacity Management**: Weekly capacity trend analysis and planning
 - **Knowledge Management**: Documentation updates and knowledge sharing sessions
 - **Team Development**: Skill development planning and cross-training activities
+- **Vendor Management**: Weekly SLA compliance monitoring, vendor performance review
 
 ### Monthly Strategy Cycle Integration
 
@@ -363,6 +505,7 @@ The SysOps Framework incorporates six essential management practices tailored sp
 - **Performance Management**: Strategic performance optimization initiatives
 - **Knowledge Management**: Knowledge management strategy and tool improvements
 - **Team Development**: Career development planning and strategic skill building
+- **Vendor Management**: Vendor business reviews, contract renewals, strategic vendor assessments
 
 ## 📊 Practice Maturity Assessment
 
@@ -392,9 +535,49 @@ The SysOps Framework incorporates six essential management practices tailored sp
 - Level 4: Are incident metrics used to drive continuous improvement?
 - Level 5: Are incidents prevented through proactive management?
 
+#### Change Management Maturity
+
+- Level 1: Are changes tracked in any form?
+- Level 2: Are standard changes pre-approved and documented?
+- Level 3: Are all changes categorized (standard/normal/emergency) with appropriate approval processes?
+- Level 4: Are change success metrics tracked and used to refine processes?
+- Level 5: Are changes fully automated with self-healing rollback and zero-downtime deployment?
+
+#### Capacity and Performance Management Maturity
+
+- Level 1: Is capacity managed reactively (buying more storage when it runs out)?
+- Level 2: Are capacity trends monitored and basic forecasting performed?
+- Level 3: Is capacity planning integrated with business plans and formal requests submitted?
+- Level 4: Are predictive models used and capacity decisions tracked with actual outcomes?
+- Level 5: Is capacity optimization continuous with automated scaling and cost optimization?
+
+#### Knowledge and Documentation Management Maturity
+
+- Level 1: Documentation exists but is outdated and inconsistent.
+- Level 2: Documentation standards exist and most runbooks are documented.
+- Level 3: Documentation is version-controlled and regularly reviewed for accuracy.
+- Level 4: Documentation is integrated with incident response and automatically updated from configuration changes.
+- Level 5: Knowledge is continuously synthesized from operational data, with intelligent documentation generation and AI-assisted search.
+
+#### Team and Skill Development Maturity
+
+- Level 1: Training happens informally when someone has time.
+- Level 2: Are there documented skill requirements and a cross-training plan?
+- Level 3: Are cross-training activities scheduled and tracked with documented skill matrices?
+- Level 4: Are individual development plans in place aligned with team and organizational goals?
+- Level 5: Are career development paths clear with advancement opportunities and continuous learning programs?
+
+#### Vendor and Contract Management Maturity
+
+- Level 1: Vendors are managed ad hoc with minimal documentation or formal agreements.
+- Level 2: SLAs are documented and vendor inventory is maintained with basic contact information.
+- Level 3: SLAs are actively monitored, performance metrics tracked, and formal vendor reviews conducted quarterly.
+- Level 4: Vendor risk assessments are completed, contingency plans maintained, and contracts aligned with business requirements.
+- Level 5: Vendors are strategically managed as partners with continuous optimization, proactive risk management, and integrated into strategic planning.
+
 ## 🎯 Chapter Summary
 
-The six core management practices provide the operational foundation that makes the SysOps Framework effective. Unlike generic IT management approaches, these practices are specifically designed for the interrupt-driven, high-availability world of operations teams.
+The seven core management practices provide the operational foundation that makes the SysOps Framework effective. Unlike generic IT management approaches, these practices are specifically designed for the interrupt-driven, high-availability world of operations teams.
 
 Success with the SysOps Framework depends on implementing these practices consistently and improving them continuously. They work together to create a comprehensive operational capability that supports all three operational cycles while building team resilience and capability.
 

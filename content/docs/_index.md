@@ -23,12 +23,15 @@ Traditional agile methodologies like Scrum and SAFe have revolutionized software
 Start here to understand the core challenges and solutions:
 
 - **Chapter 1: The Challenge**
+
   Understand why traditional agile methodologies fail operations teams and what makes operations work fundamentally different.
 
 - **Chapter 2: Core Principles**
+
   Learn the six core values that drive the SysOps Framework and how they differ from traditional agile values.
 
 - **Chapter 3: Framework Structure**
+
   Discover the multi-cycle approach that replaces traditional sprints with operational reality.
 
 ### Implementation Guide
@@ -36,12 +39,15 @@ Start here to understand the core challenges and solutions:
 Ready to implement? Follow this structured approach:
 
 - **Chapter 4: Comparison**
+
   Compare SysOps with traditional methodologies to understand when and how to apply each approach.
 
 - **Chapter 5: Implementation**
+
   Follow the six-month implementation roadmap with parallel tracks for comprehensive adoption.
 
 - **Chapter 6: Management Practices**
+
   Master the essential management practices that support operational excellence.
 
 ### Operational Excellence
@@ -49,12 +55,15 @@ Ready to implement? Follow this structured approach:
 Achieve sustainable operations excellence:
 
 - **Chapter 7: Metrics & Measurement**
+
   Learn to measure success with operations-focused KPIs and demonstrate business value.
 
 - **Chapter 8: Tools & Technology**
+
   Build the technology stack that supports effective SysOps Framework implementation.
 
 - **Chapter 9: Culture & Organization**
+
   Transform organizational culture to support operations excellence and team growth.
 
 ### Advanced Topics
@@ -62,12 +71,15 @@ Achieve sustainable operations excellence:
 Master advanced concepts and future-proof your implementation:
 
 - **Chapter 10: Risk & Compliance**
+
   Integrate risk management and compliance into operational cycles without sacrificing agility.
 
 - **Chapter 11: Challenges & Solutions**
+
   Overcome common implementation challenges with practical solutions and workarounds.
 
 - **Chapter 12: Future Evolution**
+
   Prepare for the future of operations with emerging trends and continuous framework evolution.
 
 ## Getting Started
@@ -101,6 +113,12 @@ New to the SysOps Framework? Follow this learning path:
 - **Predictability**: Reliable service delivery and change management
 - **Value Demonstration**: Visible connection between IT investment and business outcomes
 - **Risk Reduction**: Proactive risk management and business continuity
+
+### Resources
+
+- **[Glossary](glossary/)**: Complete reference of SysOps Framework terminology and acronyms
+- **[Framework Data Relationships](data-relationships/)**: Understanding how cycles, practices, and metrics interconnect
+- **[Getting Started Guide](getting-started/)**: 30-day quick-start implementation plan
 
 ## Community and Support
 

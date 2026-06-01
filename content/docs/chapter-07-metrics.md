@@ -1,7 +1,7 @@
 ---
 title: "Chapter 7: Metrics & Measurement"
 linkTitle: "Chapter 07: Metrics"
-weight: 7-metrics0
+weight: 700
 description: >
   "What gets measured gets managed, but what gets measured wrong gets mismanaged."
 ---
@@ -221,6 +221,73 @@ Error Budget:
 - **Target Range**: Decreasing trend year-over-year
 - **Measurement**: Financial analysis with service volume correlation
 - **Business Value**: Demonstrates operational efficiency and cost optimization
+
+### FinOps (Financial Operations) Metrics
+
+**Cloud Cost Allocation**
+
+- **Definition**: Accurate attribution of cloud costs to services, teams, or departments
+- **Target Range**: 100% cost allocation with <5% unallocated "shared" costs
+- **Measurement**: Cloud billing analysis with tagging compliance tracking
+- **Business Value**: Enables cost accountability and chargeback models
+
+**Cloud Waste Ratio**
+
+- **Definition**: Percentage of cloud spending on idle or underutilized resources
+- **Target Range**: <15% waste (industry average is 30%)
+- **Measurement**: Instance utilization analysis, reserved instance coverage, storage audits
+- **Business Value**: Direct opportunity for cost reduction
+
+**Unit Economics**
+
+- **Definition**: Cost per key business metric (e.g., cost per transaction, per user, per GB processed)
+- **Target Range**: Decreasing trend month-over-month
+- **Measurement**: Cloud costs divided by application metrics
+- **Business Value**: Demonstrates how cost relates to business outcomes
+
+**Reserved Instance and Commitment Coverage**
+
+- **Definition**: Percentage of workloads using reserved capacity vs. on-demand pricing
+- **Target Range**: 60%+ for predictable workloads, 20%+ for variable workloads
+- **Measurement**: Commitment utilization tracking and forecast comparison
+- **Business Value**: Demonstrates cost optimization through commitment planning
+
+**Right-Sizing Efficiency**
+
+- **Definition**: Percentage of instances operating within optimal sizing parameters
+- **Target Range**: 85%+ of instances properly sized (not over or under-provisioned)
+- **Measurement**: CPU/memory utilization analysis with instance type cost efficiency
+- **Business Value**: Identifies quick wins for cost reduction
+
+**Cost Anomaly Detection**
+
+- **Definition**: Ability to identify unusual spending patterns quickly
+- **Target Range**: Detect anomalies within 24-48 hours of occurrence
+- **Measurement**: Automated cost trending and deviation analysis
+- **Business Value**: Prevents runaway costs and identifies infrastructure issues
+
+#### Example: Cloud Cost Management Dashboard
+
+```yaml
+Cloud Cost Metrics:
+  Monthly_Spend: $50,000 (↑ 2% from last month)
+  Projected_Annual: $600,000
+  Cost_per_Transaction: $0.0025 (↓ 0.0003 from last month)
+
+  FinOps_Metrics:
+    Waste_Ratio: 12% ($6,000 monthly opportunity)
+    Reserved_Instance_Coverage: 65%
+    Unallocated_Costs: 3.5%
+    Right_Sizing_Efficiency: 87%
+
+  Optimization_Opportunities:
+    Idle_Instances: $2,100/month
+    Oversized_Instances: $1,800/month
+    Unused_Storage: $950/month
+    Commitment_Gaps: $1,150/month
+```
+
+---
 
 **Innovation Time Percentage**
 

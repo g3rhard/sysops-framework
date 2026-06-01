@@ -1,7 +1,7 @@
 ---
 title: "Chapter 2: Core Principles"
 linkTitle: "Chapter 02: Principles"
-weight: 2-principles0
+weight: 200
 description: >
   "In operations, principles guide decisions when procedures don't exist yet."
 ---
@@ -18,6 +18,23 @@ By the end of this chapter, you will understand:
 ## 🌟 The SysOps Manifesto
 
 While the Agile Manifesto revolutionized software development, operations teams need their own guiding principles. The SysOps Framework is built on six core values specifically designed for the unique challenges of system administration and operations work:
+
+### Note on ITIL and Service Management
+
+The principles outlined in this chapter align closely with **ITIL (Information Technology Infrastructure Library)** and **IT Service Management (ITSM)** best practices. If you're familiar with ITIL, you'll recognize that SysOps Framework operationalizes many ITIL concepts:
+
+- **Service Reliability First** ↔ ITIL Service Strategy and Service Design
+- **Continuous Availability** ↔ ITIL Availability Management and Continuity Management
+- **Rapid Response** ↔ ITIL Incident Management and Problem Management
+- **Automation and Efficiency** ↔ ITIL Service Transition and operational efficiency principles
+- **Knowledge Sharing** ↔ ITIL Knowledge Management and change advisory processes
+- **Risk Management** ↔ ITIL Risk and Compliance Management
+
+The key difference is **structure and operationalization**: ITIL provides a comprehensive framework describing best practices; SysOps Framework combines ITIL principles with an operational structure (the daily/weekly/monthly cycles from Chapter 3) that makes these practices actionable and sustainable for teams of all sizes.
+
+**For ITIL practitioners**: SysOps Framework provides a practical, lightweight implementation pathway for ITIL service management without requiring a full ITIL compliance implementation or comprehensive ITSM tool suite.
+
+---
 
 ### 🛡️ 1. Service Reliability First
 

@@ -1,7 +1,7 @@
 ---
 title: "Chapter 9: Culture & Organization"
 linkTitle: "Chapter 09: Culture"
-weight: 9-culture0
+weight: 900
 description: >
   "Culture eats strategy for breakfast, but process eats culture for lunch."
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Chapter 4: Comparison"
 linkTitle: "Chapter 04: Comparison"
-weight: 4-comparison0
+weight: 400
 description: >
   "The right methodology is the one that matches how the work actually gets done."
 ---
@@ -62,6 +62,98 @@ The comparison above illustrates fundamental differences between traditional agi
 **SysOps**: Risk-assessed continuous deployment with immediate response capabilities. Changes are evaluated based on operational impact rather than program coordination.
 
 **When SAFe Makes Sense for Ops**: Large organizations with multiple operations teams supporting related services may benefit from SAFe's coordination mechanisms, but individual teams should still use SysOps practices for their daily work.
+
+## 🌊 Kanban vs SysOps Framework
+
+### Why Kanban Alone May Not Be Sufficient
+
+**Kanban**: Visualizes workflow with a continuous pull system (To Do → In Progress → Done). Handles interruptions natively by managing WIP (Work In Progress) limits and doesn't force scope boundaries.
+
+**SysOps**: Adds multi-horizon planning (daily, weekly, monthly) and structured strategic focus beyond reactive work management.
+
+### Comparison Details
+
+| Aspect                   | Kanban                                  | SysOps                                         |
+| ------------------------ | --------------------------------------- | ---------------------------------------------- |
+| **Work Type Handling**   | Single flow, priority-based             | Three parallel cycles (daily/weekly/monthly)   |
+| **Planning Horizon**     | Reactive, continuous pull               | Multi-level (immediate, short-term, strategic) |
+| **Strategic Work**       | Difficult to protect from interruptions | Monthly cycle dedicated to strategy            |
+| **Metrics Focus**        | Flow time, throughput, WIP              | Service reliability, efficiency, AND flow      |
+| **Maturity Guidance**    | Minimal                                 | Explicit five-level maturity model             |
+| **Management Practices** | Not addressed                           | Six core practices defined                     |
+| **When to Use**          | Stable, well-defined processes          | Mixed planned/unplanned work environments      |
+
+### Real-World Scenario
+
+A typical operations team using Kanban might have a board: [To Do] → [Building] → [Testing] → [Done]
+
+**Problem**: Urgent security patches, critical incident responses, and architectural decisions get stuck behind routine tasks. Higher-priority items require WIP adjustment, but strategic thinking still gets crowded out.
+
+**SysOps Approach**:
+
+- **Daily Cycle**: Security patches, incident response
+- **Weekly Cycle**: Build automation, testing improvements
+- **Monthly Cycle**: Architecture decisions, capacity planning
+
+This protects strategic work from being consumed by daily urgencies.
+
+### When Kanban Works Well for Ops
+
+- Team has stable service with predictable incident volume
+- Interruptions are manageable (<20% of time)
+- Strategic planning is minimal
+- Team is mature with strong discipline
+
+### When SysOps Adds Value Over Kanban
+
+- Significant unplanned incident load (>20% of time)
+- Need to protect strategic/architectural work
+- Managing multiple service tiers with different SLAs
+- Need explicit maturity progression framework
+
+---
+
+## 🔴 Site Reliability Engineering (SRE) vs SysOps Framework
+
+### Important Relationship Note
+
+SysOps Framework and SRE are **not competing approaches** — SRE practices should be embedded within SysOps operations. This section clarifies how they relate.
+
+### Core SRE Concepts
+
+**Error Budgets**: Maximum acceptable downtime per period (e.g., 99.9% SLO = 43 minutes/month budget)
+
+**Toil Measurement**: Manual, repetitive work that doesn't provide long-term value
+
+**Production Readiness Reviews**: Ensuring systems meet operational standards before deployment
+
+**Blameless Post-Mortems**: Learning-focused incident analysis
+
+### How SysOps Incorporates SRE
+
+| SRE Practice                    | SysOps Integration                                      |
+| ------------------------------- | ------------------------------------------------------- |
+| **Error budgets**               | Chapter 7: Service reliability metrics & SLO compliance |
+| **Toil measurement**            | Chapter 3: Automation targets in daily/weekly cycles    |
+| **Production readiness**        | Chapter 6: Service level management practice            |
+| **Blameless post-mortems**      | Chapter 6: Incident management practice process         |
+| **Automated incident response** | Chapter 3: Daily cycle automation                       |
+| **Service maturity levels**     | Chapter 6: Practice maturity model                      |
+
+### Key Difference
+
+**SRE** is a set of practices developed at Google for managing large-scale systems. **SysOps Framework** is a methodology that provides operational cycles, management practices, and organizational structure. SRE practices fit naturally into the SysOps framework:
+
+- Error budgets inform monthly strategy planning
+- Toil reduction is a weekly improvement cycle goal
+- Post-mortem learnings feed back into practice maturity assessment
+- Production readiness is built into the Service Level Management practice
+
+### Organizations Using Both
+
+Most organizations successful with SRE are actually practicing a hybrid: SRE's error budget and toil concepts applied within a multi-cycle operational structure similar to SysOps. Formalizing this with explicit cycles and practices increases adoption and sustainability.
+
+---
 
 ## 📈 Success Metrics: Why Traditional Metrics Fail Operations Teams
 

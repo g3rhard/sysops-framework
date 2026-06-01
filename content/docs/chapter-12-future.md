@@ -1,7 +1,7 @@
 ---
 title: "Chapter 12: Future Evolution"
 linkTitle: "Chapter 12: Future"
-weight: 12-future0
+weight: 1200
 description: >
   "The best frameworks evolve with the teams that use them and the challenges they face."
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Chapter 10: Risk & Compliance"
 linkTitle: "Chapter 10: Risk"
-weight: 10-risk0
+weight: 1000
 description: >
   "In operations, every decision is a risk decision, whether you realize it or not."
 ---

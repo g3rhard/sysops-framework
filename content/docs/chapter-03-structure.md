@@ -1,7 +1,7 @@
 ---
 title: "Chapter 3: Framework Structure"
 linkTitle: "Chapter 03: Structure"
-weight: 3-structure0
+weight: 300
 description: >
   "Operations teams don't need sprints; they need cycles that match the rhythm of their work."
 ---

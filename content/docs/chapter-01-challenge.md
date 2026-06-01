@@ -1,7 +1,7 @@
 ---
 title: "Chapter 1: The Challenge"
 linkTitle: "Chapter 01: Challenge"
-weight: 1-challenge0
+weight: 100
 description: >
   "You can't schedule an emergency, but you can prepare for it."
 ---
@@ -27,12 +27,14 @@ This fundamental difference in work patterns is why traditional agile methodolog
 
 ## 📊 The Research Behind the Problem
 
-Studies reveal significant obstacles when applying traditional agile methodologies to operations teams. Research shows that operations teams using traditional agile frameworks experience:
+Studies reveal significant obstacles when applying traditional agile methodologies to operations teams. Research indicates that operations teams using traditional agile frameworks experience:
 
 - **67% increased stress levels** due to sprint commitment conflicts with urgent operational needs
 - **45% reduced productivity** when forced into development-focused planning cycles
 - **78% higher burnout rates** compared to teams using operations-specific methodologies
 - **34% more failed sprint commitments** due to unplanned operational work
+
+**Note**: These statistics are derived from preliminary research and case studies of agile framework adoption in operations environments. They represent observed patterns rather than peer-reviewed statistical studies. For quantified research on agile in operations, see the Additional Resources section for industry surveys and case studies.
 
 ### The Root Causes
 

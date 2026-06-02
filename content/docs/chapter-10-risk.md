@@ -14,6 +14,9 @@ By the end of this chapter, you will understand:
 - Compliance requirements and their impact on operations frameworks
 - Risk assessment methodologies for operational decisions
 - Building security and compliance into the SysOps Framework
+- Supply chain security using SBOMs and the SLSA framework
+- Breach response timelines and regulatory notification obligations
+- Penetration testing frequency, scope, and integration into the risk lifecycle
 
 ## ⚖️ Risk Management in Operations
 
@@ -151,6 +154,77 @@ Risk Assessment Results:
 3. **Response**: Coordinated containment and recovery procedures
 4. **Recovery**: Secure restoration of services and data
 5. **Analysis**: Combined security and operational lessons learned
+
+### Supply Chain Security
+
+Modern software delivery depends on hundreds of open-source packages, container base images, and third-party services. A compromise anywhere in that chain can reach production. Two complementary standards address this risk:
+
+**Software Bill of Materials (SBOM)**:
+
+- An SBOM is a machine-readable inventory of every component in a software artifact (libraries, versions, licenses, checksums).
+- Formats: **SPDX** (ISO/IEC 5962:2021) and **CycloneDX** (OWASP standard) are the two dominant formats; prefer CycloneDX for container and application SBOMs.
+- **Generate SBOMs at build time** using tools like Syft, Trivy, or Microsoft SBOM Tool; attach them to container image attestations or release artefacts.
+- **Consume SBOMs** in CI with tools like Grype, OWASP Dependency-Check, or Snyk to detect CVEs before deployment.
+- **Regulatory context**: US Executive Order 14028 (2021) and EU Cyber Resilience Act (2024) mandate SBOM provision for software sold to government and critical infrastructure sectors.
+
+**SLSA (Supply-chain Levels for Software Artifacts)**:
+
+- A security framework by Google/OpenSSF that defines build integrity requirements across four levels.
+
+| SLSA Level | Requirements                                   | What it Prevents                                       |
+| ---------- | ---------------------------------------------- | ------------------------------------------------------ |
+| SLSA 1     | Build process documented; provenance generated | Accidental build errors                                |
+| SLSA 2     | Build service used; provenance signed          | Tampering with build outputs                           |
+| SLSA 3     | Source verified; build service isolated        | Compromise of the build service itself                 |
+| SLSA 4     | Two-party source review; hermetic builds       | Insider threats and sophisticated supply chain attacks |
+
+- **Implementation path**: Start at SLSA 2 using GitHub Actions or Tekton Chains (auto-provenance); target SLSA 3 for critical services within 12 months.
+- Use **Sigstore** (Cosign, Rekor) to sign and verify container images and build provenance; integrate verification into OPA/Kyverno admission policies so only signed, policy-compliant images can deploy.
+
+**SysOps Integration**: Embed SBOM generation into the CI/CD pipeline (Release Management, Practice 8); block deployment on critical CVEs via Policy-as-Code gates; store SBOMs in an artifact repository (e.g., OCI-attached attestation) for audit evidence in Compliance Management.
+
+### Breach Response Timelines
+
+A well-defined breach response timeline prevents ad-hoc decisions under pressure and ensures regulatory obligations are met. The following timelines should be documented in the incident response runbook:
+
+| Window          | Action                                                                                                                                                                        | Owner                  |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| 0–15 min        | Detect and classify: confirm breach vs. false positive; escalate to Incident Commander                                                                                        | On-call engineer       |
+| 0–1 hr          | Contain: isolate affected systems; revoke compromised credentials; block exfiltration paths                                                                                   | IC + Security lead     |
+| 1–4 hr          | Assess scope: identify affected data, systems, and users; preserve forensic evidence (memory dumps, logs)                                                                     | Security + Ops         |
+| 4–24 hr         | Notify internally: executive team, legal, DPO; begin regulatory clock assessment                                                                                              | CISO / DPO             |
+| 24–72 hr        | **Regulatory notification**: GDPR Art. 33 requires supervisory authority notification within 72 hours of becoming aware; US state breach laws vary (24–72 hr for some states) | Legal / DPO            |
+| 72 hr – 30 days | Notify affected individuals (GDPR Art. 34 if high risk); coordinate with law enforcement if required                                                                          | Legal / Communications |
+| Ongoing         | Root cause analysis; control remediation; post-breach audit; lessons learned                                                                                                  | All teams              |
+
+**Key principles**:
+
+- **Clock starts on awareness, not on discovery**: if an automated alert fires at 02:00 but is not reviewed until 08:00, the regulatory clock started at 02:00.
+- **Preserve evidence before containment actions change system state** where operationally safe to do so.
+- **Rehearse annually**: run a tabletop breach simulation to validate timeline adherence and update runbooks with findings.
+
+### Penetration Testing Frequency and Scope
+
+Penetration testing proactively identifies exploitable vulnerabilities before attackers do. Frequency depends on risk profile and regulatory requirements:
+
+| Environment / Change                  | Recommended Frequency                   | Test Type                                             |
+| ------------------------------------- | --------------------------------------- | ----------------------------------------------------- |
+| Internet-facing applications          | Annually (minimum); after major changes | External web application pentest (OWASP Top 10 scope) |
+| Internal network                      | Annually                                | Internal network / lateral movement                   |
+| Cloud infrastructure                  | Annually + after architectural changes  | Cloud configuration review + privilege escalation     |
+| APIs (public or partner)              | Every 6 months or after API changes     | API security test (OWASP API Top 10)                  |
+| After significant breach or near-miss | Immediately after remediation           | Targeted retest                                       |
+| Pre-production for critical services  | Before first production launch          | Pre-launch assessment                                 |
+
+**Pentest engagement process**:
+
+1. **Scoping**: Define in-scope systems, test types (black/grey/white box), rules of engagement, and emergency stop conditions.
+2. **Authorization**: Obtain written sign-off from system owner, legal, and cloud provider (AWS/GCP/Azure each have pentest policies; notify before testing cloud assets).
+3. **Execution**: Use certified testers (OSCP, CHECK, CREST); require daily finding briefs for critical issues found mid-test.
+4. **Remediation tracking**: All critical and high findings must have remediation due dates; retest critical findings within 30 days.
+5. **Evidence retention**: Retain pentest reports for 3 years minimum for compliance purposes.
+
+**SysOps Integration**: Pentest findings feed directly into the risk register; critical findings trigger an emergency change (Practice 3, emergency change category); remediated controls are validated through Policy-as-Code and SBOM scanning to confirm fix persistence.
 
 ## 📋 Compliance Management
 
@@ -392,6 +466,8 @@ Risk Assessment Results:
 ## 🎯 Chapter Summary
 
 Risk management and compliance are not separate activities from operations—they must be integrated into every aspect of the SysOps Framework. Success requires embedding risk considerations into all operational cycles, automating compliance evidence collection, and building a culture where risk awareness drives decision-making.
+
+Modern operations teams must also address the expanding attack surface of the software supply chain: generating SBOMs at build time, enforcing SLSA build integrity, and validating provenance before every production deployment. Breach response timelines must be pre-agreed and rehearsed — regulatory clocks start on awareness, not on planned action. Penetration testing must be frequent, scoped correctly, and its findings tracked to confirmed remediation rather than filed and forgotten.
 
 The key is to make risk management and compliance enablers of operational excellence rather than barriers to efficiency. This requires thoughtful integration of controls and processes, automation of routine compliance activities, and continuous improvement based on risk events and changing threat landscapes.
 

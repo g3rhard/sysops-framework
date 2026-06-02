@@ -106,7 +106,7 @@ The single point of authority during incident response, responsible for overall 
 The practice and process for responding to incidents quickly to restore service and minimize business impact.
 
 **ITIL (Information Technology Infrastructure Library)**
-A comprehensive framework describing IT service management best practices, covering service strategy, design, transition, operation, and improvement. The SysOps Framework operationalizes many ITIL concepts with specific cycles and practices.
+A comprehensive framework describing IT service management best practices. **ITIL 4** (released February 2019) is the current stable standard, introducing the Service Value System (SVS), 34 management practices, and 7 guiding principles. **ITIL 5** was announced by PeopleCert in January 2026; its Foundation certification is available but the full practice library is not yet widely published. The SysOps Framework operationalises many ITIL 4 concepts with specific cycles and practices, and will be updated to align with ITIL 5 once its content is stable.
 
 ---
 
@@ -287,6 +287,6 @@ A security principle that assumes no system is inherently trustworthy, requiring
 - **Kanban** - Continuous flow methodology, effective for interrupt-driven work
 - **Scrum** - Sprint-based development framework, not optimized for operations
 - **SAFe** - Large-scale agile framework for multi-team coordination
-- **ITIL** - Comprehensive IT service management framework, provides practices that SysOps operationalizes
+- **ITIL 4** - Current (2019–) IT service management standard with 34 practices and a Service Value System model; ITIL 5 announced January 2026 — monitor for updates
 - **SRE** - Site reliability engineering practices that integrate naturally with SysOps cycles
 - **Lean** - Management philosophy emphasizing waste elimination and continuous improvement

@@ -10,14 +10,14 @@ description: >
 
 By the end of this chapter, you will understand:
 
-- The seven core management practices that support the SysOps Framework
+- The eight core management practices that support the SysOps Framework
 - How to implement each practice effectively
 - Integration points between practices and operational cycles
 - Maturity models for continuous practice improvement
 
-## 🎯 The Seven Core Management Practices
+## 🎯 The Eight Core Management Practices
 
-The SysOps Framework incorporates seven essential management practices tailored specifically for operations teams. Unlike generic IT management approaches, these practices acknowledge the unique constraints and requirements of system administration work.
+The SysOps Framework incorporates eight essential management practices tailored specifically for operations teams. Unlike generic IT management approaches, these practices acknowledge the unique constraints and requirements of system administration work.
 
 ### 1. 📊 Service Level Management
 
@@ -475,6 +475,77 @@ For significant incidents, establish clear role assignments:
 
 ---
 
+### 8. 🚀 Release Management
+
+**Purpose**: Govern the end-to-end lifecycle of software and infrastructure releases — from build through deployment to production — using CI/CD pipelines, deployment gates, and well-defined rollback criteria to reduce release risk and increase delivery velocity.
+
+#### Release Management Components
+
+**CI/CD Pipeline Governance**:
+
+- Define pipeline stages: build → test → security scan → staging deploy → production deploy
+- Enforce mandatory quality gates (unit tests, integration tests, static analysis, SAST/DAST)
+- Require peer review and approval for all production deployments
+- Publish pipeline health dashboards; track build success rate, pipeline duration, and flaky-test rate
+- Store pipeline-as-code in version control alongside application source
+
+**Deployment Gates**:
+
+| Gate                   | Criteria                             | Action on Failure |
+| ---------------------- | ------------------------------------ | ----------------- |
+| Test coverage          | ≥ 80% line coverage                  | Block merge       |
+| Security scan          | Zero critical CVEs                   | Block deploy      |
+| Performance regression | p95 latency < baseline × 1.10        | Block deploy      |
+| Error rate baseline    | Error rate < SLO threshold for 5 min | Block promote     |
+| Smoke test             | All smoke tests green                | Block promote     |
+| Approval               | ≥ 1 designated approver sign-off     | Block promote     |
+
+**Rollback Criteria and Procedures**:
+
+- **Automatic rollback triggers**: error rate exceeds SLO threshold for > 2 minutes after deploy; health-check failures on ≥ 20% of instances
+- **Manual rollback triggers**: customer-impact report confirmed by on-call engineer; critical bug identified post-deploy
+- **Rollback runbook**: standardised steps documented in the knowledge base; target rollback completion < 10 minutes
+- **Blue/green and canary strategies**: route a small traffic percentage to the new version before full promotion; automate promotion or rollback based on SLO signals
+
+**Release Cadence and Planning**:
+
+- Define release trains (e.g., weekly, bi-weekly, on-demand for hotfixes)
+- Maintain a release calendar visible to all stakeholders
+- Coordinate freeze windows with the Change Management practice (Practice 3)
+- Track release frequency, change failure rate, and mean time to restore (MTTR) per the DORA four-key metrics
+
+**Environment Management**:
+
+- Maintain parity between development, staging, and production environments using infrastructure-as-code
+- Automate environment provisioning and teardown; avoid long-lived manual snowflake environments
+- Gate production access: changes must pass staging validation before promotion
+
+#### DORA Metrics Integration
+
+The four DORA (DevOps Research and Assessment) key metrics directly measure Release Management effectiveness:
+
+| Metric                | Definition                                    | Elite Threshold          |
+| --------------------- | --------------------------------------------- | ------------------------ |
+| Deployment frequency  | How often code is deployed to production      | On-demand (multiple/day) |
+| Lead time for changes | Time from commit to running in production     | < 1 hour                 |
+| Change failure rate   | % of deployments causing a production failure | < 5%                     |
+| Mean time to restore  | Time to recover from a production failure     | < 1 hour                 |
+
+Track these metrics per team and review during the Weekly Improvement Cycle.
+
+#### Example Release Gate Configuration
+
+**Service**: Payment Processing API — Release v2.4.1
+
+- **Gate 1 (Build)**: Compiled successfully, all 847 unit tests passed (98.6% coverage) ✅
+- **Gate 2 (Security)**: SAST scan — 0 critical, 2 medium (accepted with risk sign-off) ✅
+- **Gate 3 (Performance)**: Load test — p95 latency 142 ms vs. baseline 148 ms ✅
+- **Gate 4 (Staging smoke)**: 12/12 smoke tests passed ✅
+- **Gate 5 (Approval)**: Sign-off from Payment Platform lead ✅
+- **Deployment strategy**: 10% canary → 100% over 30 minutes, automatic rollback if error rate > 0.5%
+
+---
+
 ## 🔗 Practice Integration with Operational Cycles
 
 ### Daily Operations Cycle Integration
@@ -486,6 +557,7 @@ For significant incidents, establish clear role assignments:
 - **Knowledge Management**: Real-time documentation updates during incidents
 - **Team Development**: On-the-job learning and skill application
 - **Vendor Management**: Escalation of vendor-related incidents, SLA impact tracking
+- **Release Management**: Monitoring post-deployment health; triggering automatic rollbacks on SLO breach
 
 ### Weekly Improvement Cycle Integration
 
@@ -496,6 +568,7 @@ For significant incidents, establish clear role assignments:
 - **Knowledge Management**: Documentation updates and knowledge sharing sessions
 - **Team Development**: Skill development planning and cross-training activities
 - **Vendor Management**: Weekly SLA compliance monitoring, vendor performance review
+- **Release Management**: Weekly DORA metrics review; release retrospectives; pipeline health review
 
 ### Monthly Strategy Cycle Integration
 
@@ -506,6 +579,7 @@ For significant incidents, establish clear role assignments:
 - **Knowledge Management**: Knowledge management strategy and tool improvements
 - **Team Development**: Career development planning and strategic skill building
 - **Vendor Management**: Vendor business reviews, contract renewals, strategic vendor assessments
+- **Release Management**: Monthly trend analysis of DORA metrics; pipeline investment decisions; release strategy review
 
 ## 📊 Practice Maturity Assessment
 
@@ -575,9 +649,17 @@ For significant incidents, establish clear role assignments:
 - Level 4: Vendor risk assessments are completed, contingency plans maintained, and contracts aligned with business requirements.
 - Level 5: Vendors are strategically managed as partners with continuous optimization, proactive risk management, and integrated into strategic planning.
 
+#### Release Management Maturity
+
+- Level 1: Deployments are manual and undocumented; rollbacks require significant effort.
+- Level 2: A basic CI pipeline exists; deployments follow an informal checklist; rollback procedures are documented.
+- Level 3: All releases go through a defined CI/CD pipeline with automated test gates and documented rollback runbooks; DORA metrics are collected.
+- Level 4: Deployment gates are enforced automatically; canary/blue-green strategies are standard; DORA metrics drive continuous improvement.
+- Level 5: Deployments are fully automated with zero-touch production promotion; release frequency and lead time are continuously optimized; progressive delivery and feature flags enable safe experimentation.
+
 ## 🎯 Chapter Summary
 
-The seven core management practices provide the operational foundation that makes the SysOps Framework effective. Unlike generic IT management approaches, these practices are specifically designed for the interrupt-driven, high-availability world of operations teams.
+The eight core management practices provide the operational foundation that makes the SysOps Framework effective. Unlike generic IT management approaches, these practices are specifically designed for the interrupt-driven, high-availability world of operations teams.
 
 Success with the SysOps Framework depends on implementing these practices consistently and improving them continuously. They work together to create a comprehensive operational capability that supports all three operational cycles while building team resilience and capability.
 

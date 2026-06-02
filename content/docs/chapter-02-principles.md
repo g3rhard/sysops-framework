@@ -21,18 +21,20 @@ While the Agile Manifesto revolutionized software development, operations teams 
 
 ### Note on ITIL and Service Management
 
-The principles outlined in this chapter align closely with **ITIL (Information Technology Infrastructure Library)** and **IT Service Management (ITSM)** best practices. If you're familiar with ITIL, you'll recognize that SysOps Framework operationalizes many ITIL concepts:
+The principles outlined in this chapter align closely with **ITIL 4 (Information Technology Infrastructure Library, 4th edition)** and **IT Service Management (ITSM)** best practices. ITIL 4, released in February 2019, introduced the **Service Value System (SVS)** model, **34 management practices**, and **7 guiding principles** as its core structure, replacing the earlier lifecycle-stage model of ITIL v3. If you're familiar with ITIL 4, you'll recognise that SysOps Framework operationalises many ITIL 4 concepts:
 
-- **Service Reliability First** ↔ ITIL Service Strategy and Service Design
-- **Continuous Availability** ↔ ITIL Availability Management and Continuity Management
-- **Rapid Response** ↔ ITIL Incident Management and Problem Management
-- **Automation and Efficiency** ↔ ITIL Service Transition and operational efficiency principles
-- **Knowledge Sharing** ↔ ITIL Knowledge Management and change advisory processes
-- **Risk Management** ↔ ITIL Risk and Compliance Management
+- **Service Reliability First** ↔ ITIL 4 Service Design practice and Availability Management
+- **Continuous Availability** ↔ ITIL 4 Availability Management and IT Service Continuity Management
+- **Rapid Response** ↔ ITIL 4 Incident Management and Problem Management practices
+- **Automation and Efficiency** ↔ ITIL 4 Deployment Management practice and the guiding principle "Optimise and Automate"
+- **Knowledge Sharing** ↔ ITIL 4 Knowledge Management practice and the guiding principle "Collaborate and Promote Visibility"
+- **Risk Management** ↔ ITIL 4 Risk Management practice and Information Security Management
 
-The key difference is **structure and operationalization**: ITIL provides a comprehensive framework describing best practices; SysOps Framework combines ITIL principles with an operational structure (the daily/weekly/monthly cycles from Chapter 3) that makes these practices actionable and sustainable for teams of all sizes.
+The key difference is **structure and operationalisation**: ITIL 4 provides a comprehensive framework describing best practices via its Service Value Chain and 34 practices; SysOps Framework combines ITIL 4 principles with an operational structure (the daily/weekly/monthly cycles from Chapter 3) that makes these practices actionable and sustainable for teams of all sizes.
 
-**For ITIL practitioners**: SysOps Framework provides a practical, lightweight implementation pathway for ITIL service management without requiring a full ITIL compliance implementation or comprehensive ITSM tool suite.
+**For ITIL 4 practitioners**: SysOps Framework provides a practical, lightweight implementation pathway for ITIL 4 service management without requiring a full ITIL compliance programme or a comprehensive ITSM tool suite.
+
+> **Note on ITIL 5**: PeopleCert announced ITIL 5 in January 2026 and the Foundation certification became available. At the time of writing (mid-2026) the full ITIL 5 practice library is not yet widely published. The SysOps Framework will be updated to align with ITIL 5 once its content is stable. Monitor the [ITIL official site](https://www.axelos.com/certifications/itil-service-management) for updates.
 
 ---
 

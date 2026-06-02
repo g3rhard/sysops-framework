@@ -14,20 +14,20 @@ The SysOps Framework consists of interconnected components that work together to
 
 ## The Three Pillars: Cycles, Practices, and Metrics
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
-│                    SysOps Framework                          │
+│                    SysOps Framework                         │
 ├─────────────────────────────────────────────────────────────┤
-│                                                               │
+│                                                             │
 │  CYCLES ──────────────────────────────────────────────      │
 │  (Daily/Weekly/Monthly)                                     │
 │    ↓ Inform ↓                                               │
-│                                                               │
-│  PRACTICES                    METRICS ──────────────────→    │
+│                                                             │
+│  PRACTICES                    METRICS ──────────────────→   │
 │  (7 management practices) ──→ (4 metric categories)         │
-│                                                               │
-│  Feedback Loop  ←─────────────────────────────────────     │
-│                                                               │
+│                                                             │
+│  Feedback Loop  ←─────────────────────────────────────      │
+│                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -153,7 +153,7 @@ Each metric category is supported by specific management practices:
 
 ### Service Level Management Data Flow
 
-```
+```text
 Customer Requirements
        ↓
 Define SLIs/SLOs (Chapter 6)
@@ -173,7 +173,7 @@ Executive Reporting → Business Alignment
 
 ### Change Management Data Flow
 
-```
+```text
 Work Identification
        ↓
 Categorization: Standard/Normal/Emergency (Chapter 6)
@@ -193,7 +193,7 @@ Feedback → Process Improvement
 
 ### Incident Management Data Flow
 
-```
+```text
 Alert/Detection (Daily Cycle)
        ↓
 Response & Triage
@@ -298,7 +298,7 @@ The practice maturity model (Chapter 6) shows how practices evolve through five 
 
 ### The Continuous Improvement Cycle
 
-```
+```text
 Daily Incident
     ↓
 Incident Data Captured
@@ -322,7 +322,7 @@ Back to Daily Operations (Improved)
 
 ### The Metric-Driven Cycle
 
-```
+```text
 Define Metrics (Chapter 7)
     ↓
 Implement Measurement

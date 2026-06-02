@@ -10,14 +10,14 @@ description: >
 
 By the end of this chapter, you will understand:
 
-- The eight core management practices that support the SysOps Framework
+- The twelve core management practices that support the SysOps Framework
 - How to implement each practice effectively
 - Integration points between practices and operational cycles
 - Maturity models for continuous practice improvement
 
-## 🎯 The Eight Core Management Practices
+## 🎯 The Twelve Core Management Practices
 
-The SysOps Framework incorporates eight essential management practices tailored specifically for operations teams. Unlike generic IT management approaches, these practices acknowledge the unique constraints and requirements of system administration work.
+The SysOps Framework incorporates twelve essential management practices tailored specifically for operations teams. Unlike generic IT management approaches, these practices acknowledge the unique constraints and requirements of system administration work.
 
 ### 1. 📊 Service Level Management
 
@@ -546,6 +546,222 @@ Track these metrics per team and review during the Weekly Improvement Cycle.
 
 ---
 
+### 9. 🗄️ Asset Management
+
+**Purpose**: Maintain an accurate, up-to-date inventory of all infrastructure assets — hardware, software, and cloud resources — throughout their entire lifecycle, and ensure license compliance to control risk and cost.
+
+#### Asset Management Components
+
+**Configuration Management Database (CMDB)**:
+
+- Central authoritative record of all Configuration Items (CIs): servers, VMs, containers, network devices, storage, software, certificates, and their relationships
+- Populate automatically via discovery tools (Ansible inventory, AWS Config, Azure Resource Graph, Terraform state) to avoid manual drift
+- Link CIs to services, environments, and owners so that any Change or Incident record immediately shows the affected asset context
+- Audit the CMDB monthly: compare discovered assets against records and reconcile discrepancies
+
+**Asset Lifecycle Management**:
+
+| Stage | Key Activities |
+|-------|---------------|
+| **Procurement** | Record asset in CMDB on purchase order; assign owner, cost centre, and depreciation schedule |
+| **Deployment** | Tag with environment, team, and application; record in CMDB; link to service catalog |
+| **In-service** | Track change history, patch level, and capacity utilisation; review annually |
+| **End-of-life planning** | Identify assets approaching hardware/software EOL; plan replacement or migration |
+| **Decommission** | Revoke access, sanitise data (NIST 800-88), update CMDB; reclaim licenses; dispose via certified e-waste programme |
+
+**Software License Management**:
+
+- Maintain a license register: product, edition, quantity purchased, quantity deployed, expiry dates
+- Automate deployment discovery (Microsoft SCCM/Intune, Flexera, Snow Software, or cloud-native inventories)
+- Run a **license reconciliation** monthly: compare entitlements against deployed instances; remediate over-deployment before vendor audits
+- Track **SaaS subscriptions** separately: map seats to active users; deactivate leavers within 24 hours of offboarding
+- Flag software with upcoming EOL/EOS dates at least 6 months in advance to allow migration planning
+
+**Cloud Asset Management**:
+
+- Use cloud-native tagging policies (enforced via Policy-as-Code, Practice 8) to attribute every cloud resource to a team, cost centre, and environment
+- Schedule automated reports: untagged resources, unused Elastic IPs, idle instances, orphaned storage volumes
+- Set budget alerts per account/project to catch runaway provisioning early (connects to Financial Management, Practice 11)
+
+#### Example: CMDB Record — Production Web Server
+
+| Attribute | Value |
+|-----------|-------|
+| CI Name | prod-web-01 |
+| Type | Virtual Machine |
+| Environment | Production |
+| Owner | Platform Team |
+| Service | Customer Portal |
+| OS | Ubuntu 24.04 LTS (EOL: 2029) |
+| Last patched | 2026-05-28 |
+| Related CIs | prod-db-01, prod-lb-01, prod-web-02 |
+| Last change | CHG-2341 — kernel update 2026-05-28 |
+
+---
+
+### 10. 🎫 Service Request Management
+
+**Purpose**: Provide a standardised, user-friendly channel through which staff and customers can request pre-approved IT services — keeping request fulfillment separate from incident response and enabling consistent, measurable delivery.
+
+#### Service Request vs. Incident
+
+| Aspect | Service Request | Incident |
+|--------|----------------|----------|
+| Nature | Planned, expected, pre-approved | Unplanned, unexpected disruption |
+| Urgency | Normal (days) or expedited (same-day) | High — restore service ASAP |
+| Process | Fulfillment workflow | Incident response process |
+| Examples | New user access, hardware provision, SSL cert renewal | Database outage, network failure |
+
+#### Service Catalog Design
+
+A **service catalog** lists all requestable services with defined scope, fulfillment steps, SLA, and cost:
+
+- **Standard requests** (pre-approved, automated or near-automated): new user account, VPN access, software installation, password reset
+- **Normal requests** (require approval, manual fulfillment): new server/VM provisioning, firewall rule change, bulk license purchase
+- **Complex requests** (project-like, multi-team): new environment build, network segment creation, third-party integration
+
+For each catalog item document:
+1. Description and eligibility (who can request it)
+2. Required input information
+3. Approval chain
+4. Fulfillment SLA (e.g., standard: 2 business days; expedited: 4 hours)
+5. Cost to the requesting team (chargeback, if applicable)
+6. Automated fulfillment runbook or manual procedure link
+
+#### Self-Service Portal
+
+- Provide a self-service interface (ServiceNow, Jira Service Management, or an Internal Developer Platform portal like Backstage) so requesters can submit, track status, and receive fulfilment notifications without emailing the ops team
+- Aim for **> 70% of standard requests fulfilled with zero ops-team touch** through automation (e.g., Ansible/Terraform triggered by approved request)
+- Publish live queue metrics on a team dashboard to create accountability and visibility
+
+#### Request Fulfillment Metrics
+
+| Metric | Definition | Target |
+|--------|------------|--------|
+| Request fulfillment rate | % of requests completed within SLA | ≥ 95% |
+| Mean time to fulfillment (MTTF) | Avg time from submission to completion | ≤ SLA per tier |
+| Automation rate | % of requests fulfilled without manual intervention | ≥ 70% (standard requests) |
+| Request backlog age | Oldest unresolved request in queue | < 5 business days |
+| Abandon rate | % of requests withdrawn before fulfillment | < 5% |
+
+---
+
+### 11. 💰 Financial Management
+
+**Purpose**: Give the operations team full visibility of its costs, link every spending decision to business value, and provide stakeholders with transparent, accurate forecasts — moving ops from an opaque cost centre to an accountable business partner.
+
+#### Budget Planning and Forecasting
+
+**Annual budgeting cycle**:
+
+1. **Baseline**: Pull actuals for the past 12 months by category (people, infrastructure, software licenses, vendor services, training)
+2. **Growth model**: Adjust for expected workload growth, new projects, and contract renewals
+3. **Initiative funding**: Add budget for planned improvement projects (tool migrations, automation investments, resilience upgrades)
+4. **Contingency reserve**: Allocate 5–10% for unplanned incidents, emergency hardware, and urgent security patches
+5. **Stakeholder review**: Present to leadership with clear value narrative (cost per service, cost vs. downtime avoided)
+
+**In-year forecasting**:
+
+- Reforecast quarterly using actuals-to-date; flag variances > 10% of budget for management review
+- Maintain a rolling 3-month forecast for cloud and variable-cost items updated monthly
+
+#### Cost Accountability Models
+
+| Model | Description | When to Use |
+|-------|-------------|-------------|
+| **Cost centre** | Ops costs pooled centrally; no allocation to consumers | Small organisations, shared services |
+| **Showback** | Costs calculated per team/service and reported but not charged | Building cost awareness without billing friction |
+| **Chargeback** | Costs billed directly to consuming teams or cost centres | Mature orgs; drives efficient consumption behaviour |
+| **Unit pricing** | Internal rate card: fixed price per VM, per GB, per CI/CD minute | Platform teams with internal customers |
+
+**Chargeback implementation steps**:
+1. Define the cost allocation unit (per service, per environment, per business unit)
+2. Instrument cost attribution: cloud tags, CMDB ownership fields, FinOps tooling (Kubecost, Apptio)
+3. Publish monthly cost reports to consuming team leads
+4. Create an anomaly alert process: notify team lead when their allocated spend exceeds budget + 15% in a given month
+5. Review rate card annually; adjust for actual cost changes
+
+#### FinOps Integration
+
+Financial Management is the governance layer; FinOps (Chapter 12) provides the technical tooling and discipline:
+
+- **Inform phase**: CMDB + tagging → cost dashboards → showback reports
+- **Optimize phase**: Rightsizing recommendations → commitment purchases → idle resource removal
+- **Operate phase**: FinOps OKRs → chargeback accuracy → cost per unit economics
+
+#### Financial Metrics
+
+| Metric | Definition | Target |
+|--------|------------|--------|
+| Budget variance | Actual vs. budgeted spend | ≤ ±10% annually |
+| Cost per service | Monthly ops cost attributed to each service | Trending down YoY |
+| Unattributed spend | Cloud/SaaS cost without owner tag | < 2% of total |
+| License utilisation | Used seats / licensed seats | 80–95% (avoid waste and over-deployment) |
+| ROI on automation | Toil hours eliminated × fully-loaded engineer cost | Document annually |
+
+---
+
+### 12. 🔒 Backup & Recovery Operations
+
+**Purpose**: Ensure that every critical system and data asset can be restored within defined Recovery Time Objectives (RTO) and Recovery Point Objectives (RPO) through regular, tested backup procedures and documented recovery runbooks.
+
+#### RTO and RPO Definitions
+
+- **Recovery Point Objective (RPO)**: Maximum acceptable data loss, expressed as time (e.g., RPO = 1 hour means backups must be taken at least hourly; data loss since the last backup is acceptable)
+- **Recovery Time Objective (RTO)**: Maximum acceptable time to restore a service after a failure (e.g., RTO = 4 hours means the service must be back online within 4 hours of a declared disaster)
+
+**Tiering assets by criticality**:
+
+| Tier | Example Systems | RPO | RTO | Backup Frequency |
+|------|----------------|-----|-----|------------------|
+| Tier 1 — Mission Critical | Payment API, auth service, core DB | ≤ 15 min | ≤ 1 hr | Continuous replication |
+| Tier 2 — Business Critical | CRM, internal portals, monitoring stack | ≤ 1 hr | ≤ 4 hr | Hourly incremental |
+| Tier 3 — Important | Dev/staging environments, reporting DBs | ≤ 4 hr | ≤ 8 hr | Every 4 hours |
+| Tier 4 — Standard | Logs archive, internal wikis, low-traffic apps | ≤ 24 hr | ≤ 24 hr | Daily full |
+
+#### Backup Strategy — The 3-2-1-1 Rule
+
+- **3** copies of data
+- **2** different storage media/types (e.g., disk + object storage)
+- **1** copy offsite or in a different cloud region
+- **1** copy offline or immutable (protects against ransomware; use object-lock / WORM storage)
+
+#### Testing Cadence
+
+Backups that are never tested are not backups — they are hopes.
+
+| Test Type | Frequency | What It Validates |
+|-----------|-----------|-------------------|
+| **Automated restore verification** | Every backup cycle | Backup file is readable and not corrupt; checksum matches |
+| **Partial restore test** | Monthly (automated) | Specific files or tables can be recovered from backup |
+| **Full service restore test** | Quarterly (planned) | Full system can be rebuilt from backup within RTO |
+| **Disaster recovery simulation** | Annually (or post-major-incident) | Cross-team failover to secondary site/region end-to-end |
+
+Log all test outcomes; treat a failed restore test as a Severity 2 incident requiring immediate root cause analysis and remediation.
+
+#### Recovery Procedures
+
+Every Tier 1 and Tier 2 system must have a documented recovery runbook containing:
+
+1. **Prerequisites**: Access credentials, tool requirements, environment variables
+2. **Identify the failure scope**: What data or system is affected; determine the restore point to use
+3. **Initiate restore**: Step-by-step commands or automated runbook reference
+4. **Validate restore**: Functional smoke tests to confirm data integrity and service health
+5. **Notify stakeholders**: Update incident record; communicate restoration status
+6. **Post-recovery review**: Update runbook with any steps that differed from documented procedure
+
+**Recovery runbook review cadence**: Review and test runbooks annually, and immediately after any infrastructure change that affects the backup target (storage migration, database upgrade, credential rotation).
+
+#### Monitoring Backup Health
+
+- Alert on backup job failures within 15 minutes of the scheduled completion time
+- Track **backup success rate** (target: 100% for Tier 1/2; ≥ 99% for Tier 3/4)
+- Monitor **backup storage growth**: alert when projected full-capacity date is < 60 days away
+- Audit **offsite/immutable copy confirmation** daily for Tier 1 systems
+- Include backup health in the daily operations dashboard alongside service health metrics
+
+---
+
 ## 🔗 Practice Integration with Operational Cycles
 
 ### Daily Operations Cycle Integration
@@ -558,6 +774,10 @@ Track these metrics per team and review during the Weekly Improvement Cycle.
 - **Team Development**: On-the-job learning and skill application
 - **Vendor Management**: Escalation of vendor-related incidents, SLA impact tracking
 - **Release Management**: Monitoring post-deployment health; triggering automatic rollbacks on SLO breach
+- **Asset Management**: Verifying CI accuracy after incidents; updating CMDB when assets are modified
+- **Service Request Management**: Fulfilling standard requests; monitoring request queue for same-day SLA items
+- **Financial Management**: Monitoring daily cloud spend; flagging cost anomalies
+- **Backup & Recovery Operations**: Verifying overnight backup job success; responding to backup failure alerts
 
 ### Weekly Improvement Cycle Integration
 
@@ -569,6 +789,10 @@ Track these metrics per team and review during the Weekly Improvement Cycle.
 - **Team Development**: Skill development planning and cross-training activities
 - **Vendor Management**: Weekly SLA compliance monitoring, vendor performance review
 - **Release Management**: Weekly DORA metrics review; release retrospectives; pipeline health review
+- **Asset Management**: Weekly CMDB reconciliation; review of EOL asset alerts; license utilisation report
+- **Service Request Management**: Request queue review; SLA compliance check; automation opportunity identification
+- **Financial Management**: Weekly cloud spend vs. budget review; rightsizing recommendations actioning
+- **Backup & Recovery Operations**: Weekly review of backup success rates; partial restore test results; storage growth trend
 
 ### Monthly Strategy Cycle Integration
 
@@ -580,6 +804,10 @@ Track these metrics per team and review during the Weekly Improvement Cycle.
 - **Team Development**: Career development planning and strategic skill building
 - **Vendor Management**: Vendor business reviews, contract renewals, strategic vendor assessments
 - **Release Management**: Monthly trend analysis of DORA metrics; pipeline investment decisions; release strategy review
+- **Asset Management**: Full CMDB audit; EOL planning and procurement requests; software license reconciliation and compliance reporting
+- **Service Request Management**: Service catalog review; SLA target review; automation roadmap update; fulfillment metrics to stakeholders
+- **Financial Management**: Monthly cost report to stakeholders; budget vs. actuals variance analysis; quarterly reforecast; chargeback invoicing
+- **Backup & Recovery Operations**: Monthly full restore test review; quarterly DR simulation planning; RTO/RPO target review vs. actuals
 
 ## 📊 Practice Maturity Assessment
 
@@ -657,9 +885,41 @@ Track these metrics per team and review during the Weekly Improvement Cycle.
 - Level 4: Deployment gates are enforced automatically; canary/blue-green strategies are standard; DORA metrics drive continuous improvement.
 - Level 5: Deployments are fully automated with zero-touch production promotion; release frequency and lead time are continuously optimized; progressive delivery and feature flags enable safe experimentation.
 
+#### Asset Management Maturity
+
+- Level 1: No formal asset inventory; assets tracked in spreadsheets or not at all; license compliance unknown.
+- Level 2: A basic asset register exists and is updated manually; software licenses are documented.
+- Level 3: CMDB is populated via automated discovery; assets linked to services and owners; license reconciliation runs monthly.
+- Level 4: CMDB is the authoritative source used by Change and Incident processes; EOL tracking and chargeback attribution are automated.
+- Level 5: Asset intelligence drives proactive capacity and financial decisions; automated decommissioning workflows; continuous compliance posture visibility.
+
+#### Service Request Management Maturity
+
+- Level 1: Requests arrive via email or chat with no tracking, no SLA, and no consistent fulfillment process.
+- Level 2: A basic ticketing system captures requests; common requests have documented procedures; informal SLAs exist.
+- Level 3: A service catalog is published; requests are triaged to defined fulfillment workflows; SLAs are measured and reported.
+- Level 4: Self-service portal in place; majority of standard requests fulfilled automatically; fulfillment metrics reviewed weekly.
+- Level 5: Catalog is continuously optimized; near-zero-touch fulfillment for standard requests; request patterns feed into capacity and financial planning.
+
+#### Financial Management Maturity
+
+- Level 1: No formal IT budget tracking; costs are managed reactively; no cost attribution to services or teams.
+- Level 2: An annual IT budget exists; actual vs. budget reviewed quarterly; high-level cost categories tracked.
+- Level 3: Costs attributed to services and teams via showback; monthly financial reporting to stakeholders; budget variances investigated.
+- Level 4: Chargeback model in place; FinOps tooling provides per-resource cost visibility; ROI tracked for automation investments.
+- Level 5: Unit economics (cost per transaction, cost per user) drive continuous optimization; financial data integrated into capacity and release decisions; ops is seen as a value generator, not a cost centre.
+
+#### Backup & Recovery Operations Maturity
+
+- Level 1: Backups exist but are untested; no documented RTO/RPO; recovery is ad hoc and undocumented.
+- Level 2: Backup schedules are defined and monitored; RTO/RPO targets documented for critical systems; basic recovery runbooks exist.
+- Level 3: 3-2-1-1 backup strategy implemented for all tiers; monthly restore tests conducted; backup health reported in daily ops dashboard.
+- Level 4: Recovery runbooks are automated or semi-automated; quarterly DR simulations completed; actual RTO/RPO consistently meets targets.
+- Level 5: Continuous replication for Tier 1 assets; fully automated failover with zero-touch recovery tested and proven; RTO/RPO continuously improved through lessons learned.
+
 ## 🎯 Chapter Summary
 
-The eight core management practices provide the operational foundation that makes the SysOps Framework effective. Unlike generic IT management approaches, these practices are specifically designed for the interrupt-driven, high-availability world of operations teams.
+The twelve core management practices provide the operational foundation that makes the SysOps Framework effective. Unlike generic IT management approaches, these practices are specifically designed for the interrupt-driven, high-availability world of operations teams.
 
 Success with the SysOps Framework depends on implementing these practices consistently and improving them continuously. They work together to create a comprehensive operational capability that supports all three operational cycles while building team resilience and capability.
 

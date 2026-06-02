@@ -454,7 +454,115 @@ gitops-repo/
 
 All changes to any environment — including platform components — flow through Git pull requests with automated OPA validation in CI before ArgoCD reconciles them to the target cluster.
 
-## 🏗️ Tool Selection and Evaluation Framework
+## � Networking & Infrastructure Operations
+
+Networking is foundational to every service the operations team supports, yet operational guidance for it is often tribal knowledge. This section documents the key areas operations teams must manage and the tools and practices that make them reliable and auditable.
+
+### DNS Management
+
+DNS is one of the most impactful and most misunderstood operational surfaces. A misconfigured DNS change can silently route all traffic to the wrong destination or take a service offline for hours.
+
+**DNS Operations Principles**:
+
+- **DNS as code**: manage zone files and records in version control (e.g., OctoDNS, dnscontrol); every change is a PR with peer review
+- **Low TTLs before changes, high TTLs for stable records**: lower TTL to 60–300 seconds 24–48 hours before a planned cut-over so rollback is fast; raise back to 3600+ once stable
+- **Never delete records immediately after migration**: retain the old record for at least one full TTL cycle after traffic has moved, then tombstone for 30 days before permanent removal
+- **Monitor DNS propagation**: after a change use dig, dnschecker.org, or automated monitoring to confirm propagation across global resolvers before declaring success
+
+**Key DNS record types operations teams manage**:
+
+| Record Type | Purpose                                          | Operational Notes                                                          |
+| ----------- | ------------------------------------------------ | -------------------------------------------------------------------------- |
+| A / AAAA    | Maps hostname to IPv4/IPv6                       | Core service records; manage carefully with low TTL during migrations      |
+| CNAME       | Alias to another hostname                        | Do not use at zone apex; avoid CNAME chains > 2 hops                       |
+| MX          | Mail exchanger                                   | Changes require SPF/DKIM/DMARC re-validation; test before cutting          |
+| TXT         | Free-form (SPF, DKIM, domain verification)       | Multiple TXT records allowed; document each entry’s purpose                |
+| SRV         | Service location (used by Kubernetes, SIP, etc.) | Format: `_service._proto TTL IN SRV priority weight port target`           |
+| PTR         | Reverse DNS (IP → hostname)                      | Required for mail delivery reputation; co-ordinate with ISP/cloud provider |
+| CAA         | Limits which CAs can issue certs for the domain  | Set before cert issuance; reduces phishing risk                            |
+
+**DNS Monitoring**:
+
+- Alert on resolution failures for all critical service FQDNs from at least two geographic vantage points
+- Track DNS query volume anomalies (sudden spike may indicate DDoS amplification attack)
+- Audit zone transfer access: restrict AXFR to authorised secondary nameservers only
+
+**Popular DNS management tools**: AWS Route 53 (with Route 53 Resolver), Cloudflare DNS, Azure DNS, Google Cloud DNS; OctoDNS or dnscontrol for multi-provider DNS-as-code
+
+### Load Balancing Operations
+
+Load balancers sit in front of every critical service. Misunderstanding their configuration leads to uneven traffic distribution, missed health-check failures, and hard-to-diagnose performance problems.
+
+**Load Balancer Types**:
+
+| Type                     | Layer           | Use Case                                                                                            |
+| ------------------------ | --------------- | --------------------------------------------------------------------------------------------------- |
+| **DNS-based (GSLB)**     | L3/L4           | Global traffic routing between regions; failover between data centres                               |
+| **Network LB**           | L4 (TCP/UDP)    | High-throughput, low-latency; no TLS termination; used for non-HTTP workloads                       |
+| **Application LB**       | L7 (HTTP/HTTPS) | Path/header-based routing, TLS termination, WebSocket, gRPC; most common for web services           |
+| **Service mesh sidecar** | L7 (internal)   | Service-to-service routing within Kubernetes; mTLS, circuit breaking (see Chapter 8 — Service Mesh) |
+
+**Health Check Design**:
+
+- Use a **dedicated health endpoint** (e.g., `/health` or `/readiness`) that checks the application’s own dependencies (DB connectivity, cache reachability) — not just HTTP 200 from the web server
+- Set health check thresholds: mark unhealthy after 2–3 consecutive failures; mark healthy again after 3 consecutive successes (hysteresis prevents flapping)
+- **Separate readiness from liveness** (Kubernetes pattern): readiness gates traffic routing; liveness controls container restart
+- Test health checks monthly: deliberately fail an instance and confirm the LB removes it from the pool within the expected window
+
+**Operational Runbook Items**:
+
+- **Draining before maintenance**: gracefully remove a node from the LB pool (drain connections) before patching; verify zero active connections before proceeding
+- **Sticky sessions**: document which services use session affinity; sticky sessions mask scaling issues — prefer stateless services where possible
+- **TLS termination and certificate rotation**: automate cert renewal (Let’s Encrypt / ACME, AWS ACM auto-renewal); alert 30 days before expiry; test renewal in staging
+- **Connection timeout tuning**: align LB idle timeout with upstream service timeout + 10%; misaligned timeouts cause cryptic 504 errors
+
+**Popular tools**: AWS ALB/NLB, GCP Cloud Load Balancing, Azure Load Balancer, HAProxy, NGINX, Envoy
+
+### CDN Operations
+
+Content Delivery Networks accelerate content delivery and absorb traffic spikes, but they introduce an additional caching and routing layer that must be actively managed.
+
+**CDN Operational Responsibilities**:
+
+**Cache management**:
+
+- Define cache TTLs per content type in `Cache-Control` response headers (static assets: 1 year with cache-busting filenames; HTML pages: no-store or short TTL; API responses: varies by endpoint)
+- **Purge on deploy**: automate cache invalidation for changed assets as part of the CI/CD pipeline (Release Management, Practice 8); never rely on TTL expiry for critical correctness
+- Monitor **cache hit rate**: target ≥ 85% for static assets; a drop indicates cache misconfiguration or unusual request patterns
+- Test purge latency: confirm invalidation propagates globally within the CDN’s stated SLA (typically 1–60 seconds)
+
+**Origin shield and failover**:
+
+- Enable **origin shield** (a single CDN PoP that shields the origin from the full edge network) to reduce origin load during cache misses
+- Configure **origin failover**: if the primary origin returns 5xx, automatically retry against a secondary (cold standby or another region)
+- Set **custom error pages** at the CDN layer so users see a branded maintenance page rather than a raw 503 during outages
+
+**Security at the CDN layer**:
+
+- Enable **WAF rules** (OWASP Core Rule Set or provider-managed) to block common web attacks before they reach the origin
+- Configure **rate limiting** at the CDN edge to absorb volumetric DDoS and credential-stuffing attacks
+- Enable **Bot management** to distinguish legitimate crawlers from malicious automation
+- Audit CDN access logs for anomalous geographic traffic patterns
+
+**CDN Monitoring**:
+
+| Metric                  | Target            | Action if Breached                                                        |
+| ----------------------- | ----------------- | ------------------------------------------------------------------------- |
+| Cache hit rate (static) | ≥ 85%             | Review Cache-Control headers; check for query string variations           |
+| Origin error rate (5xx) | < 0.1%            | Investigate origin health; check LB pool                                  |
+| Edge latency (p95)      | Service-dependent | Check PoP selection; review routing policies                              |
+| Bandwidth cost          | Track trend       | Alert on > 20% week-over-week spike (may indicate hotlinking or scraping) |
+
+**Popular CDN platforms**: Cloudflare, AWS CloudFront, Fastly, Akamai, Azure Front Door
+
+### Infrastructure Network Monitoring
+
+- **Flow analysis**: collect NetFlow/IPFIX or VPC Flow Logs to understand traffic patterns, detect lateral movement, and support capacity planning
+- **BGP monitoring**: for organisations with their own ASN, monitor BGP route advertisements and alert on unexpected withdrawals or prefix hijacks (tools: RouteViews, RIPE RIS, BGPmon)
+- **Network topology documentation**: maintain a network diagram as code (NetBox, draw.io committed to git) updated as part of any Change Management (Practice 3) ticket that touches network configuration
+- **Firewall rule auditing**: review firewall/security group rules quarterly; remove stale rules; validate that the principle of least privilege is maintained
+
+## �🏗️ Tool Selection and Evaluation Framework
 
 ### Selection Criteria
 

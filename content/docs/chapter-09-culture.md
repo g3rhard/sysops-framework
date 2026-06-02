@@ -214,6 +214,72 @@ Middle managers often face the greatest pressure to balance operational needs wi
 - **Platform Engineering**: Building internal platforms and tools for other teams
 - **Product Management**: Managing infrastructure and operations capabilities as internal products
 
+### On-Call Rotation Design
+
+On-call is one of the most significant factors in operations team health and retention. A poorly designed rotation leads to burnout, knowledge silos, and high attrition. A well-designed one spreads load fairly, builds resilience, and respects engineers’ personal time.
+
+#### Rotation Principles
+
+- **Fair load distribution**: Every eligible team member participates; no individual should be on-call more than one week in four (aim for one in five or better)
+- **Follow-the-sun where possible**: Distribute primary on-call across time zones so overnight hours are covered by someone for whom it is daytime
+- **Shadowing before solo**: New team members shadow an experienced responder for at least two full on-call rotations before taking primary responsibility
+- **On-call should not interrupt sleep more than twice per week on average**: if it does, the alert volume is a bug, not an on-call problem
+- **Compensate fairly**: On-call allowances, time off in lieu, or explicit recognition — make the policy visible and consistent
+
+#### Rotation Structures
+
+| Structure                    | How it works                                                                                      | Best for                                       |
+| ---------------------------- | ------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| **Single primary**           | One engineer on-call; pages escalate to a secondary if unanswered for 5 min                       | Small teams (3–6 people)                       |
+| **Primary + secondary**      | Two engineers simultaneously; primary answers first; secondary backs up                           | Teams of 6–12                                  |
+| **Squad rotation**           | Entire squad rotates (primary + secondary within the squad); other squads on escalation           | Multi-team orgs with specialised squads        |
+| **Follow-the-sun**           | Primary rotates across regions by timezone; no overnight pages in anyone’s local time             | Geographically distributed teams               |
+| **You build it, you run it** | Each service team owns their own on-call for their services; platform team handles infrastructure | Platform-team model with mature DevOps culture |
+
+#### On-Call Runbook Checklist
+
+Every on-call rotation should have a **handoff document** updated at the start of each shift containing:
+
+1. **Active incidents or known issues** — anything the incoming responder needs to be aware of
+2. **Scheduled maintenance windows** during the shift period
+3. **Recent deployments** that may be unstable (link to relevant change records)
+4. **Known noisy alerts** to expect and how to handle them
+5. **Escalation contacts** for each service domain (database, network, vendor support)
+6. **Emergency access credentials location** (secrets manager path, not the credentials themselves)
+
+#### Alert Quality Standards
+
+On-call fatigue is driven by low-quality alerts. Apply these standards before routing anything to a pager:
+
+- **Every alert must be actionable**: if the engineer cannot do something meaningful in response, it is not an alert — it is a log entry
+- **Every alert must have a runbook link**: the alert message includes a URL to the relevant diagnostic steps
+- **Alert severity must match business impact**: use P1–P4 consistently; P1 wakes someone up, P4 goes to a ticket queue
+- **Review alert fatigue monthly**: track alerts-per-shift; more than 5 actionable pages per 12-hour shift indicates a tuning problem
+- **Automatically silence known-noisy alerts** during maintenance windows
+
+#### On-Call Health Metrics
+
+| Metric                          | Definition                                     | Target                               |
+| ------------------------------- | ---------------------------------------------- | ------------------------------------ |
+| Mean pages per shift            | Total pages ÷ shifts in period                 | ≤ 5 actionable pages / 12-hour shift |
+| After-hours page rate           | Pages outside 09:00–18:00 local ÷ total pages  | Track trend; drive down over time    |
+| On-call rotation fairness       | Std deviation of shifts per person             | < 1 shift variance across team       |
+| MTTA (Mean Time to Acknowledge) | Time from page to acknowledge                  | P1 ≤ 5 min; P2 ≤ 15 min              |
+| Responder burnout index         | % of responders who escalated or missed a page | 0%; any miss triggers review         |
+
+#### Escalation Path Design
+
+```text
+P1 Alert fires
+    ↓ (0 min) Page Primary on-call
+    ↓ (5 min, no ack) Page Secondary on-call
+    ↓ (15 min, no resolution) Escalate to Team Lead / Engineering Manager
+    ↓ (30 min, business-critical impact) Escalate to Director / VP of Engineering
+    ↓ (60 min, customer-facing outage) Engage Incident Commander; activate customer comms
+```
+
+Document this path in the incident management runbook (Chapter 6, Practice 2) and validate it during DR simulations.
+
 ## 🤝 Cross-Team Collaboration Models
 
 ### DevOps Integration

@@ -358,12 +358,71 @@ Penetration testing proactively identifies exploitable vulnerabilities before at
 - **Cold Site**: Basic facility requiring complete setup and restoration
 - **Cloud Recovery**: Cloud-based backup and recovery capabilities
 
-**Testing and Validation**:
+### Disaster Recovery Testing Methodology
 
-- **Tabletop Exercises**: Discussion-based review of disaster recovery procedures
-- **Walkthrough Tests**: Step-by-step review of recovery procedures
-- **Simulation Tests**: Simulated disaster scenarios with partial system activation
-- **Full Tests**: Complete disaster recovery with full system restoration
+A DR plan that has never been tested is a hypothesis, not a capability. Testing must be systematic, scheduled, and progressively more demanding as team maturity grows.
+
+#### Testing Tiers
+
+| Tier | Test Type                  | Description                                                                                                                   | Frequency                        | Disruption to Production         |
+| ---- | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | -------------------------------- |
+| 1    | **Document review**        | Walk through the DR plan with the team; identify gaps, outdated steps, or missing contacts                                    | Quarterly                        | None                             |
+| 2    | **Tabletop exercise**      | Facilitate a structured scenario discussion; responders describe what they would do step-by-step without executing            | Quarterly                        | None                             |
+| 3    | **Component restore test** | Restore individual system components (a single database, a specific service) from backup to an isolated environment           | Monthly                          | None (isolated env)              |
+| 4    | **Parallel failover test** | Activate the DR environment in parallel with production; validate that traffic _could_ be switched without actually switching | Semi-annually                    | Low                              |
+| 5    | **Partial cut-over test**  | Route a subset of traffic (e.g., 5–10% canary or a non-critical tenant) to the DR environment; validate end-to-end            | Annually                         | Low                              |
+| 6    | **Full failover test**     | Cut all traffic to the DR environment; run production from the DR site for a defined period; then fail back                   | Annually (or as maturity allows) | Medium — plan maintenance window |
+
+Start at Tier 1–2 and progress upward annually. Do not attempt a full failover test without first passing Tiers 3–5.
+
+#### DR Test Planning Process
+
+1. **Define scope**: which systems, regions, and failure scenarios are in scope for this test
+2. **Set success criteria before the test**: document expected RTO and RPO targets that must be met for the test to pass
+3. **Notify stakeholders**: schedule at least 4 weeks in advance; communicate impact window and rollback plan
+4. **Appoint a Test Director**: a named individual (typically the Incident Commander) who has authority to halt the test if real impact exceeds the agreed threshold
+5. **Execute with real conditions**: avoid shortcuts (e.g., using pre-warmed caches or pre-loaded data) that would not exist in a real disaster
+6. **Measure actual RTO and RPO**: record timestamps at each milestone; compare against targets
+7. **Document findings immediately**: capture every deviation, workaround, and failed step during the test, not after
+8. **Publish a DR test report** within 5 business days: findings, actual vs. target RTO/RPO, action items with owners and due dates
+
+#### Failure Scenario Library
+
+Rotate through different scenarios each test cycle to avoid building muscle memory for only one failure mode:
+
+- **Single availability zone failure**: all resources in one AZ become unavailable; validate automatic failover to another AZ
+- **Primary database failure**: primary DB becomes unresponsive; validate replica promotion and application reconnection
+- **Region-level outage**: entire cloud region is unavailable; validate failover to secondary region
+- **Ransomware / data corruption**: primary data is corrupted or encrypted; validate restore from immutable backup (3-2-1-1 rule, Practice 12)
+- **DNS provider outage**: DNS resolution fails for primary domains; validate fallback DNS configuration
+- **CI/CD pipeline failure**: deployment pipeline unavailable; validate ability to deploy manually from artefact repository
+- **Third-party dependency outage**: a critical SaaS service (authentication, payment processing) is unavailable; validate graceful degradation or bypass
+
+#### RTO / RPO Validation Recording
+
+For each test, record the following in the DR test log:
+
+```text
+Test Date:          2026-Q2 Full Failover Test
+Scenario:           Primary region (eu-west-1) total failure
+Test Director:      [Name]
+Test Start:         14:00 UTC
+Failure declared:   14:05 UTC
+First traffic on DR:14:22 UTC  → RTO so far: 17 min
+Full traffic on DR: 14:31 UTC  → Actual RTO: 26 min  (Target: 30 min) ✅
+Data validated:     14:38 UTC  → Actual RPO: 8 min   (Target: 15 min) ✅
+Fail-back complete: 16:15 UTC
+Issues found:       3 (see action log)
+Test result:        PASS
+```
+
+Store all DR test logs in the knowledge management system (Chapter 6, Practice 5); retain for 3 years minimum for audit and compliance evidence.
+
+#### DR Testing Integration with SysOps Cycles
+
+- **Monthly Strategy Cycle**: schedule upcoming DR tests; review action items from previous tests
+- **Weekly Improvement Cycle**: close DR test action items; update runbooks with findings
+- **After every major infrastructure change**: re-validate DR assumptions that may have been invalidated by the change (new database, region expansion, service mesh addition)
 
 ## 📊 Risk Metrics and Reporting
 

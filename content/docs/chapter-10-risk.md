@@ -162,12 +162,12 @@ Modern software delivery depends on hundreds of open-source packages, container 
 **Software Bill of Materials (SBOM)**:
 
 - An SBOM is a machine-readable inventory of every component in a software artifact (libraries, versions, licenses, checksums).
-- Formats: **SPDX** (ISO/IEC 5962:2021) and **CycloneDX** (OWASP standard) are the two dominant formats; prefer CycloneDX for container and application SBOMs.
+- Formats: **[SPDX](https://spdx.dev/specifications/)** (ISO/IEC 5962:2021) and **[CycloneDX](https://cyclonedx.org/specification/overview/)** (OWASP standard) are the two dominant formats; prefer CycloneDX for container and application SBOMs.
 - **Generate SBOMs at build time** using tools like Syft, Trivy, or Microsoft SBOM Tool; attach them to container image attestations or release artefacts.
 - **Consume SBOMs** in CI with tools like Grype, OWASP Dependency-Check, or Snyk to detect CVEs before deployment.
-- **Regulatory context**: US Executive Order 14028 (2021) and EU Cyber Resilience Act (2024) mandate SBOM provision for software sold to government and critical infrastructure sectors.
+- **Regulatory context**: [US Executive Order 14028 (2021)](https://www.whitehouse.gov/briefing-room/presidential-actions/2021/05/12/executive-order-on-improving-the-nations-cybersecurity/) and [EU Cyber Resilience Act (2024)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R2847) mandate SBOM provision for software sold to government and critical infrastructure sectors.
 
-**SLSA (Supply-chain Levels for Software Artifacts)**:
+**[SLSA](https://slsa.dev/spec/v1.0/) (Supply-chain Levels for Software Artifacts)**:
 
 - A security framework by Google/OpenSSF that defines build integrity requirements across four levels.
 
@@ -179,7 +179,7 @@ Modern software delivery depends on hundreds of open-source packages, container 
 | SLSA 4     | Two-party source review; hermetic builds       | Insider threats and sophisticated supply chain attacks |
 
 - **Implementation path**: Start at SLSA 2 using GitHub Actions or Tekton Chains (auto-provenance); target SLSA 3 for critical services within 12 months.
-- Use **Sigstore** (Cosign, Rekor) to sign and verify container images and build provenance; integrate verification into OPA/Kyverno admission policies so only signed, policy-compliant images can deploy.
+- Use **[Sigstore](https://docs.sigstore.dev/)** (Cosign, Rekor) to sign and verify container images and build provenance; integrate verification into OPA/Kyverno admission policies so only signed, policy-compliant images can deploy.
 
 **SysOps Integration**: Embed SBOM generation into the CI/CD pipeline (Release Management, Practice 8); block deployment on critical CVEs via Policy-as-Code gates; store SBOMs in an artifact repository (e.g., OCI-attached attestation) for audit evidence in Compliance Management.
 
@@ -187,15 +187,15 @@ Modern software delivery depends on hundreds of open-source packages, container 
 
 A well-defined breach response timeline prevents ad-hoc decisions under pressure and ensures regulatory obligations are met. The following timelines should be documented in the incident response runbook:
 
-| Window          | Action                                                                                                                                                                        | Owner                  |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
-| 0–15 min        | Detect and classify: confirm breach vs. false positive; escalate to Incident Commander                                                                                        | On-call engineer       |
-| 0–1 hr          | Contain: isolate affected systems; revoke compromised credentials; block exfiltration paths                                                                                   | IC + Security lead     |
-| 1–4 hr          | Assess scope: identify affected data, systems, and users; preserve forensic evidence (memory dumps, logs)                                                                     | Security + Ops         |
-| 4–24 hr         | Notify internally: executive team, legal, DPO; begin regulatory clock assessment                                                                                              | CISO / DPO             |
-| 24–72 hr        | **Regulatory notification**: GDPR Art. 33 requires supervisory authority notification within 72 hours of becoming aware; US state breach laws vary (24–72 hr for some states) | Legal / DPO            |
-| 72 hr – 30 days | Notify affected individuals (GDPR Art. 34 if high risk); coordinate with law enforcement if required                                                                          | Legal / Communications |
-| Ongoing         | Root cause analysis; control remediation; post-breach audit; lessons learned                                                                                                  | All teams              |
+| Window          | Action                                                                                                                                                                                                                                                  | Owner                  |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| 0–15 min        | Detect and classify: confirm breach vs. false positive; escalate to Incident Commander                                                                                                                                                                  | On-call engineer       |
+| 0–1 hr          | Contain: isolate affected systems; revoke compromised credentials; block exfiltration paths                                                                                                                                                             | IC + Security lead     |
+| 1–4 hr          | Assess scope: identify affected data, systems, and users; preserve forensic evidence (memory dumps, logs)                                                                                                                                               | Security + Ops         |
+| 4–24 hr         | Notify internally: executive team, legal, DPO; begin regulatory clock assessment                                                                                                                                                                        | CISO / DPO             |
+| 24–72 hr        | **Regulatory notification**: [GDPR Art. 33](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679) requires supervisory authority notification within 72 hours of becoming aware; US state breach laws vary (24–72 hr for some states) | Legal / DPO            |
+| 72 hr – 30 days | Notify affected individuals ([GDPR Art. 34](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679) if high risk); coordinate with law enforcement if required                                                                          | Legal / Communications |
+| Ongoing         | Root cause analysis; control remediation; post-breach audit; lessons learned                                                                                                                                                                            | All teams              |
 
 **Key principles**:
 
@@ -207,14 +207,14 @@ A well-defined breach response timeline prevents ad-hoc decisions under pressure
 
 Penetration testing proactively identifies exploitable vulnerabilities before attackers do. Frequency depends on risk profile and regulatory requirements:
 
-| Environment / Change                  | Recommended Frequency                   | Test Type                                             |
-| ------------------------------------- | --------------------------------------- | ----------------------------------------------------- |
-| Internet-facing applications          | Annually (minimum); after major changes | External web application pentest (OWASP Top 10 scope) |
-| Internal network                      | Annually                                | Internal network / lateral movement                   |
-| Cloud infrastructure                  | Annually + after architectural changes  | Cloud configuration review + privilege escalation     |
-| APIs (public or partner)              | Every 6 months or after API changes     | API security test (OWASP API Top 10)                  |
-| After significant breach or near-miss | Immediately after remediation           | Targeted retest                                       |
-| Pre-production for critical services  | Before first production launch          | Pre-launch assessment                                 |
+| Environment / Change                  | Recommended Frequency                   | Test Type                                                                                       |
+| ------------------------------------- | --------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Internet-facing applications          | Annually (minimum); after major changes | External web application pentest ([OWASP Top 10](https://owasp.org/www-project-top-ten/) scope) |
+| Internal network                      | Annually                                | Internal network / lateral movement                                                             |
+| Cloud infrastructure                  | Annually + after architectural changes  | Cloud configuration review + privilege escalation                                               |
+| APIs (public or partner)              | Every 6 months or after API changes     | API security test ([OWASP API Top 10](https://owasp.org/www-project-api-security/))             |
+| After significant breach or near-miss | Immediately after remediation           | Targeted retest                                                                                 |
+| Pre-production for critical services  | Before first production launch          | Pre-launch assessment                                                                           |
 
 **Pentest engagement process**:
 
@@ -544,12 +544,6 @@ In the next chapter, we'll explore common challenges and limitations of the SysO
 
 **🎮 Gamification Element - Chapter 10 Badge**
 _Complete a comprehensive risk assessment for your environment and earn the "Risk Guardian" badge._
-
-**📚 Additional Resources**
-
-- Template: "Operational Risk Assessment Framework"
-- Checklist: "Compliance Integration for Operations Teams"
-- Guide: "Building Business Continuity into Operations Processes"
 
 ---
 

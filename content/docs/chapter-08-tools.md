@@ -66,7 +66,7 @@ The SysOps Framework requires tools in nine essential categories:
 - **Popular Tools**: Pingdom, StatusCake, ThousandEyes, Catchpoint
 - **SysOps Integration**: Early warning system for service degradation
 
-**OpenTelemetry (OTel)**
+**[OpenTelemetry](https://opentelemetry.io/docs/) (OTel)**
 
 - **Purpose**: Vendor-neutral observability standard for collecting traces, metrics, and logs (the "three pillars") from any language or runtime
 - **Key Features**: Auto-instrumentation SDKs, Collector pipeline for routing telemetry, OTLP protocol supported by all major backends
@@ -100,6 +100,8 @@ The SysOps Framework requires tools in nine essential categories:
 
 ## 🤖 Automation and Orchestration Tools
 
+> This section is the canonical catalogue of automation _tooling_ — the _how_. The automation _principle_ (the why) is defined in [Chapter 2 — Automation and Efficiency](chapter-02-principles.md); the runbook _concept_ (the what) in [Chapter 6](chapter-06-practices.md); and automation _metrics_ in [Chapter 7](chapter-07-metrics.md).
+
 ### Infrastructure as Code (IaC)
 
 **Configuration Management**
@@ -130,14 +132,14 @@ The SysOps Framework requires tools in nine essential categories:
 - **Popular Tools**: ArgoCD, Flux CD, Rancher Fleet
 - **SysOps Integration**: Replaces manual `kubectl apply` and ad-hoc scripts; ties directly into the Release Management practice (Practice 8) — every production change has an auditable Git commit
 
-**ArgoCD specifics**:
+**[ArgoCD](https://argo-cd.readthedocs.io/en/stable/) specifics**:
 
 - Web UI and CLI for visualising application sync state across clusters
 - ApplicationSet controller for managing hundreds of apps at scale
 - RBAC integration and SSO support
 - Rollback by reverting a Git commit — no bespoke rollback runbook needed
 
-**Flux CD specifics**:
+**[Flux CD](https://fluxcd.io/flux/) specifics**:
 
 - Fully Kubernetes-native, GitOps Toolkit components (source-controller, kustomize-controller, helm-controller, notification-controller)
 - Multi-tenancy support via namespace isolation
@@ -172,7 +174,7 @@ The SysOps Framework requires tools in nine essential categories:
 - **Purpose**: Execute documented procedures automatically or semi-automatically
 - **Key Features**: Script execution, parameter passing, approval workflows
 - **Popular Tools**: PagerDuty Process Automation, Rundeck, StackStorm, Ansible Tower
-- **SysOps Integration**: Reduces manual effort in daily operations cycle
+- **SysOps Integration**: Reduces manual effort in the daily operations cycle; executes the runbooks defined under Knowledge Management ([Chapter 6](chapter-06-practices.md))
 
 ### Tool Integration Example
 
@@ -384,13 +386,13 @@ Platform Engineering has emerged as the discipline that applies product-thinking
 
 **Core components**:
 
-| Component                    | Purpose                                          | Example Tools                              |
-| ---------------------------- | ------------------------------------------------ | ------------------------------------------ |
-| Service catalog              | Discover, document, and own services             | Backstage (CNCF), OpsLevel, Cortex         |
-| Self-service scaffolding     | Generate new services from golden-path templates | Backstage Software Templates, Cookiecutter |
-| Unified deployment interface | Deploy to any environment via a single UI/CLI    | Backstage, Humanitec, Port                 |
-| Environment management       | On-demand ephemeral environments for dev/test    | Crossplane, Terraform + Atlantis           |
-| Cost visibility              | Per-team/per-service cloud spend                 | Kubecost, OpenCost, Infracost              |
+| Component                    | Purpose                                          | Example Tools                                                    |
+| ---------------------------- | ------------------------------------------------ | ---------------------------------------------------------------- |
+| Service catalog              | Discover, document, and own services             | [Backstage](https://backstage.io/docs/) (CNCF), OpsLevel, Cortex |
+| Self-service scaffolding     | Generate new services from golden-path templates | Backstage Software Templates, Cookiecutter                       |
+| Unified deployment interface | Deploy to any environment via a single UI/CLI    | Backstage, Humanitec, Port                                       |
+| Environment management       | On-demand ephemeral environments for dev/test    | Crossplane, Terraform + Atlantis                                 |
+| Cost visibility              | Per-team/per-service cloud spend                 | Kubecost, OpenCost, Infracost                                    |
 
 **SysOps Integration**: The IDP enforces the standards set by the Release Management (Practice 8) and Change Management (Practice 3) practices at the self-service level — teams can move fast within guardrails without requiring ops-team intervention.
 
@@ -400,14 +402,14 @@ Platform Engineering has emerged as the discipline that applies product-thinking
 
 **Key tools**:
 
-**Open Policy Agent (OPA)**:
+**[Open Policy Agent (OPA)](https://www.openpolicyagent.org/docs/latest/)**:
 
 - General-purpose policy engine using the Rego language
 - Integrations: Kubernetes admission controller (OPA Gatekeeper), API gateway, CI pipeline
 - Use cases: Block non-compliant container images; enforce resource limits; require approved image registries; mandate labels/annotations
 - CNCF graduated project — production-proven at scale
 
-**Kyverno**:
+**[Kyverno](https://kyverno.io/docs/)**:
 
 - Kubernetes-native policy engine (YAML-based, no new language required)
 - Validate, mutate, and generate resources declaratively
@@ -720,12 +722,6 @@ In the next chapter, we'll explore the cultural and organizational consideration
 
 **🎮 Gamification Element - Chapter 8 Badge**
 _Create a comprehensive tool evaluation matrix for your environment and earn the "Tool Architect" badge._
-
-**📚 Additional Resources**
-
-- Template: "Tool Selection and Evaluation Framework"
-- Checklist: "SysOps Tool Integration Requirements"
-- Guide: "Building a Business Case for Operations Tools"
 
 ---
 

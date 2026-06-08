@@ -156,7 +156,7 @@ By the end of this chapter, you will understand:
 
 **What is FinOps?**
 
-FinOps (Financial Operations) is an evolving cloud financial management discipline that brings engineering, finance, and business teams together to take joint ownership of cloud spend. The FinOps Foundation (CNCF) defines it as "a cultural practice that enables organizations to get maximum business value by helping engineering, finance, and technology teams to collaborate on data-driven spending decisions."
+FinOps (Financial Operations) is an evolving cloud financial management discipline that brings engineering, finance, and business teams together to take joint ownership of cloud spend. The [FinOps Foundation](https://www.finops.org/introduction/what-is-finops/) (CNCF) defines it as “a cultural practice that enables organizations to get maximum business value by helping engineering, finance, and technology teams to collaborate on data-driven spending decisions.”
 
 **Three FinOps Phases**:
 
@@ -215,11 +215,11 @@ Organizations increasingly operate across two or more public cloud providers, dr
 
 ### Carbon-Aware and Sustainable Infrastructure
 
-Carbon awareness is moving from aspiration to operational requirement as organisations face regulatory pressure (EU CSRD, SEC climate disclosure), customer expectations, and internal net-zero commitments.
+Carbon awareness is moving from aspiration to operational requirement as organisations face regulatory pressure ([EU CSRD](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2464), [SEC climate disclosure rule](https://www.sec.gov/rules-regulations/2024/03/the-enhancement-and-standardization-of-climate-related-disclosures-for-investors)), customer expectations, and internal net-zero commitments.
 
 **Carbon-aware computing** means scheduling or shifting workloads to times or regions where the electricity grid is running on lower-carbon sources:
 
-- **Temporal shifting**: Run batch workloads (ML training, analytics, backups) during hours of high renewable generation rather than at fixed schedule times. Tools: **Carbon Aware SDK** (Green Software Foundation), **WattTime API**, **Electricity Maps API**.
+- **Temporal shifting**: Run batch workloads (ML training, analytics, backups) during hours of high renewable generation rather than at fixed schedule times. Tools: **[Carbon Aware SDK](https://github.com/Green-Software-Foundation/carbon-aware-sdk)** (Green Software Foundation), **[WattTime API](https://www.watttime.org/api-documentation/)**, **[Electricity Maps API](https://www.electricitymaps.com/free-tier-api)**.
 - **Spatial shifting**: Route workloads to cloud regions with cleaner grids when latency constraints permit. Cloud providers publish regional carbon intensity data (AWS Customer Carbon Footprint Tool, GCP Carbon Footprint, Azure Emissions Impact Dashboard).
 - **Demand shaping**: Design applications to reduce compute intensity during high-carbon periods (e.g., lower video encoding quality, defer non-critical indexing).
 
@@ -227,7 +227,7 @@ Carbon awareness is moving from aspiration to operational requirement as organis
 
 - **Power Usage Effectiveness (PUE)**: Target PUE < 1.5 for on-premises data centres; hyperscale providers typically achieve 1.1–1.2.
 - **Right-sizing as a carbon lever**: Over-provisioned infrastructure wastes both money and energy; treating right-sizing as a carbon metric (not just a cost metric) increases organisational motivation.
-- **Software Carbon Intensity (SCI)**: The Green Software Foundation's SCI score measures carbon per unit of software functionality, creating a development-time sustainability signal. Integrate SCI reporting into monthly strategy cycle reviews.
+- **[Software Carbon Intensity (SCI)](https://greensoftware.foundation/articles/software-carbon-intensity)**: The Green Software Foundation’s SCI score measures carbon per unit of software functionality, creating a development-time sustainability signal. Integrate SCI reporting into monthly strategy cycle reviews.
 - **Hardware lifecycle**: Extend hardware refresh cycles where performance headroom permits; contribute decommissioned hardware to responsible e-waste programmes.
 
 **SysOps Framework Integration**:
@@ -420,12 +420,6 @@ The journey toward operational excellence is ongoing, and the framework provides
 
 **🎮 Gamification Element - Chapter 12 Badge**
 _Complete your framework implementation journey and commit to ongoing contribution to earn the "Framework Visionary" badge._
-
-**📚 Additional Resources**
-
-- Vision: "The Future of Operations Excellence Manifesto"
-- Community: "Join the SysOps Framework Practitioners Network"
-- Roadmap: "Framework Development and Enhancement Roadmap"
 
 ---
 

@@ -257,39 +257,29 @@ Some teams successfully combine approaches:
 
 **SysOps**: "We maintained 99.97% uptime this month, implemented automated failover for the payment system, and completed the security framework evaluation ahead of schedule."
 
-## 🏆 Success Stories: Framework Transitions
+## 🏆 Real-World Case Studies
 
-### Case Study 1: E-commerce Infrastructure Team
+> The following are documented, publicly verifiable industry cases. They are included to illustrate the principles discussed in this chapter — not as endorsements, and not as direct accounts of the SysOps Framework, which is a synthesised model. Each draws on the organisation's own primary-source material.
 
-**Before (Scrum)**:
+### Case Study 1: Google SRE and Error Budgets — Operations Needs Its Own Model
 
-- 40% of sprints "failed" due to production incidents
-- Team stress high due to constant sprint disruptions
-- Stakeholders frustrated with unpredictable delivery
+When Google scaled, it found that running large production services could not be managed as an extension of feature-sprint development: the incentives pulled in opposite directions. Product development is measured on velocity (ship features fast), while the team responsible for reliability is measured on stability (resist risky change). Rather than forcing operations into a development cadence, Google built Site Reliability Engineering (SRE), with the **error budget** as its central mechanism ([Google SRE Book, "Embracing Risk"](https://sre.google/sre-book/embracing-risk/)).
 
-**After (SysOps)**:
+**How it works**:
 
-- 99.5% uptime maintained while implementing improvements
-- Team satisfaction increased 60%
-- Stakeholders gained confidence in operational predictability
+- Product management defines a Service Level Objective (e.g., 99.99% availability), which implies a budget of acceptable unreliability for the quarter.
+- Actual reliability is measured by monitoring, not opinion.
+- While budget remains, new releases ship freely; when the budget is exhausted, releases slow or halt until reliability is restored.
 
-**Key Change**: Stopped treating operational work as "scope creep" and started treating it as the primary job function.
+**Why it matters for SysOps**: Google's experience validates the core argument of this chapter — operational reliability is _primary work_ with its own objective metrics, not "scope creep" against a feature backlog. The error budget removes the politics from the reliability-versus-velocity debate by making the trade-off explicit and shared, exactly the kind of operations-first framing the SysOps Framework's cycles are designed to support. (Error budgets and SLOs are covered further in [Chapter 7](chapter-07-metrics.md).)
 
-### Case Study 2: Financial Services Operations
+### Case Study 2: Knight Capital — The Cost of Treating Operations as an Afterthought
 
-**Before (SAFe)**:
+On 1 August 2012, the trading firm Knight Capital deployed new code to its automated equity order router in preparation for the NYSE's new Retail Liquidity Program. The deployment reactivated a defective, long-dead code path ("Power Peg") that had been left in the system since 2005. In the **first 45 minutes** after the market opened, the router sent **more than 4 million orders** while attempting to fill just **212 customer orders**, traded over 397 million shares, and produced a loss of **more than $460 million** — nearly destroying the firm, which was acquired shortly afterward ([SEC Press Release 2013-222](https://www.sec.gov/news/press-release/2013-222); [SEC Order 34-70694](https://www.sec.gov/litigation/admin/2013/34-70694.pdf)).
 
-- Quarterly planning consumed weeks of effort
-- Emergency changes required extensive approval processes
-- Innovation stalled due to coordination overhead
+Critically, the SEC found the firm "did not have adequate controls and procedures for code deployment and testing," and that **97 automated warning emails** generated before the market opened went unheeded.
 
-**After (SysOps with SAFe coordination)**:
-
-- Teams maintained SAFe coordination for strategic initiatives
-- Daily operations used SysOps practices for immediate response
-- Innovation accelerated through weekly improvement cycles
-
-**Key Change**: Applied the right framework at the right level - SAFe for strategic coordination, SysOps for operational execution.
+**Why it matters for SysOps**: Knight Capital is the cautionary inverse of the chapter's thesis. When deployment discipline, change management, and alert follow-through are treated as secondary to shipping, the operational risk does not disappear — it accumulates until it surfaces catastrophically. The SysOps Framework deliberately elevates these activities (release management, monitoring, and change control — see [Chapter 6](chapter-06-practices.md)) to first-class work precisely because the cost of doing otherwise can be existential.
 
 ## ⚖️ Framework Selection Criteria
 
@@ -362,12 +352,6 @@ In the next chapter, we'll dive into the practical aspects of implementing the S
 
 **🎮 Gamification Element - Chapter 4 Badge**
 _Complete the work type analysis for your team and create a framework selection recommendation to earn the "Framework Analyst" badge._
-
-**📚 Additional Resources**
-
-- Assessment: "Framework Fit Analysis Tool"
-- Template: "Stakeholder Communication Comparison"
-- Webinar: "Migrating from Agile to Operations-Focused Frameworks"
 
 ---
 

@@ -27,14 +27,13 @@ This fundamental difference in work patterns is why traditional agile methodolog
 
 ## 📊 The Research Behind the Problem
 
-Studies reveal significant obstacles when applying traditional agile methodologies to operations teams. Research indicates that operations teams using traditional agile frameworks experience:
+There is no single peer-reviewed study that isolates "traditional agile applied to operations" and assigns it a precise burnout or productivity figure. What the industry research _does_ establish is the underlying mechanism this chapter is concerned with: operational toil drives burnout and attrition, and team culture — not ceremony adherence — drives performance.
 
-- **67% increased stress levels** due to sprint commitment conflicts with urgent operational needs
-- **45% reduced productivity** when forced into development-focused planning cycles
-- **78% higher burnout rates** compared to teams using operations-specific methodologies
-- **34% more failed sprint commitments** due to unplanned operational work
+**Operational toil is a documented driver of burnout.** Google's Site Reliability Engineering practice defines _toil_ as work tied to running a service that is manual, repetitive, automatable, tactical, and devoid of enduring value. Google explicitly caps toil at **50% of an SRE's time** precisely because, in their words, "too much toil leads to burnout, boredom, and discontent," as well as career stagnation and attrition ([Google SRE Book, "Eliminating Toil"](https://sre.google/sre-book/eliminating-toil/)). Critically, toil is characterised as _interrupt-driven and reactive_ — the exact mode of work that sprint commitments assume will not happen.
 
-**Note**: These statistics are derived from preliminary research and case studies of agile framework adoption in operations environments. They represent observed patterns rather than peer-reviewed statistical studies. For quantified research on agile in operations, see the Additional Resources section for industry surveys and case studies.
+**Culture and work distribution measurably affect well-being and performance.** The 2023 DORA _Accelerate State of DevOps Report_ found that generative (high-trust, information-sharing) organisational cultures correlate with **30% higher organisational performance**, and that equitable distribution of work — particularly of repetitive tasks — reduces burnout ([DORA 2023 Report](https://dora.dev/research/2023/dora-report/)). A process that repeatedly forces unplanned operational work to "disrupt" planned commitments concentrates exactly this kind of repetitive, low-credit work.
+
+**Why this matters for the argument:** The friction operations teams feel under sprint-based agile is not anecdotal grumbling — it maps directly onto well-documented burnout drivers (uncapped reactive toil) and performance drivers (culture and fair work distribution). The rest of this chapter examines _why_ the mismatch occurs; the research above establishes _that_ the cost is real.
 
 ### The Root Causes
 
@@ -185,9 +184,9 @@ _Complete the "Sprint vs. Reality" exercise and identify 3 specific ways traditi
 
 **📚 Additional Resources**
 
-- Research paper: "Agile Methodology Challenges in Operations Teams"
-- Case study: "When Scrum Breaks: A Fortune 500 Operations Team's Journey"
-- Video: "The Hidden Costs of Forcing Agile on Operations Teams"
+- [Google SRE Book — "Eliminating Toil"](https://sre.google/sre-book/eliminating-toil/): the definition of toil, the 50% cap, and its link to burnout and attrition
+- [DORA 2023 Accelerate State of DevOps Report](https://dora.dev/research/2023/dora-report/): the role of culture and equitable work distribution in performance and well-being
+- [Google SRE Book — Table of Contents](https://sre.google/sre-book/table-of-contents/): the broader operations-specific practice this framework draws on
 
 ---
 

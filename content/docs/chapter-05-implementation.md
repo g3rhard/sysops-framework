@@ -228,6 +228,8 @@ Before implementing changes, establish baseline measurements:
 - Strategic technology evaluation and adoption
 - Team expertise development and specialization
 
+> These roadmap milestones describe _when_ automation maturity is reached. The concrete tooling to get there (IaC, orchestration, GitOps, runbook automation, self-service platforms) is catalogued in [Chapter 8](chapter-08-tools.md); automation _coverage_ targets are measured per [Chapter 7](chapter-07-metrics.md); self-healing and AI-driven automation are explored in [Chapter 12](chapter-12-future.md).
+
 **Key Milestones**:
 
 - 80% of routine tasks automated
@@ -417,12 +419,6 @@ In the next chapter, we'll explore the essential management practices that suppo
 
 **🎮 Gamification Element - Chapter 5 Badge**
 _Create a detailed implementation plan for your team, including timeline, resources, and success criteria, to earn the "Implementation Planner" badge._
-
-**📚 Additional Resources**
-
-- Template: "Implementation Planning Workbook"
-- Assessment: "Team and Organizational Readiness Evaluation"
-- Case Study: "Successful SysOps Framework Implementation in 6 Months"
 
 ---
 

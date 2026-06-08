@@ -46,7 +46,7 @@ Traditional agile metrics like velocity and story points don't capture the value
 - **Measurement**: Time tracking between incident occurrences
 - **Business Value**: Indicates system stability and reliability investment effectiveness
 
-**Service Level Objective (SLO) Compliance**
+**Service Level Objective (SLO) Compliance** ([Google SRE Book — Ch. 4](https://sre.google/sre-book/service-level-objectives/))
 
 - **Definition**: Percentage of time meeting defined service level targets
 - **Target Range**: 95%+ compliance across all defined SLOs
@@ -222,7 +222,7 @@ Error Budget:
 - **Measurement**: Financial analysis with service volume correlation
 - **Business Value**: Demonstrates operational efficiency and cost optimization
 
-### FinOps (Financial Operations) Metrics
+### FinOps (Financial Operations) Metrics ([FinOps Foundation](https://www.finops.org/introduction/what-is-finops/))
 
 **Cloud Cost Allocation**
 
@@ -507,12 +507,6 @@ In the next chapter, we'll explore the tools and technologies that support effec
 
 **🎮 Gamification Element - Chapter 7 Badge**
 _Design a comprehensive metrics dashboard for your team including all four categories and earn the "Metrics Master" badge._
-
-**📚 Additional Resources**
-
-- Template: "SysOps Metrics Dashboard Design Kit"
-- Calculator: "Business Value Impact Assessment Tool"
-- Workshop: "Building Effective Operational Dashboards"
 
 ---
 

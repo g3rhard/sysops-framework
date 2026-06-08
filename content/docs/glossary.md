@@ -106,7 +106,7 @@ The single point of authority during incident response, responsible for overall 
 The practice and process for responding to incidents quickly to restore service and minimize business impact.
 
 **ITIL (Information Technology Infrastructure Library)**
-A comprehensive framework describing IT service management best practices. **ITIL 4** (released February 2019) is the current stable standard, introducing the Service Value System (SVS), 34 management practices, and 7 guiding principles. **ITIL 5** was announced by PeopleCert in January 2026; its Foundation certification is available but the full practice library is not yet widely published. The SysOps Framework operationalises many ITIL 4 concepts with specific cycles and practices, and will be updated to align with ITIL 5 once its content is stable.
+A comprehensive framework describing IT service management best practices. **[ITIL 4](https://www.axelos.com/certifications/itil-service-management)** (released February 2019) is the current stable standard, introducing the Service Value System (SVS), 34 management practices, and 7 guiding principles. **[ITIL 5](https://www.peoplecert.org/itil-5)** was announced by PeopleCert in January 2026; its Foundation certification is available but the full practice library is not yet widely published. The SysOps Framework operationalises many ITIL 4 concepts with specific cycles and practices, and will be updated to align with ITIL 5 once its content is stable.
 
 ---
 
@@ -197,7 +197,7 @@ A documented, step-by-step procedure for performing routine operations tasks or 
 A formal agreement between operations and customers/stakeholders defining the expected level of service, including availability targets, response times, and remedies for non-compliance.
 
 **SLI (Service Level Indicator)**
-A measurable metric that reflects the service user's experience. Common SLIs include availability, latency, throughput, and error rate.
+A measurable metric that reflects the service user’s experience. Common SLIs include availability, latency, throughput, and error rate. See [Google SRE Book — Ch. 4](https://sre.google/sre-book/service-level-objectives/) for the canonical definitions of SLI, SLO, and error budget.
 
 **SLO (Service Level Objective)**
 A target value for an SLI, typically defined in business terms (e.g., 99.95% availability, <200ms latency for 95% of requests).
@@ -206,7 +206,7 @@ A target value for an SLI, typically defined in business terms (e.g., 99.95% ava
 One of the six core principles of the SysOps Framework, emphasizing that every decision must prioritize system reliability and availability above other considerations.
 
 **SRE (Site Reliability Engineering)**
-A discipline developed at Google for managing large-scale systems, emphasizing error budgets, toil reduction, and production readiness. SRE practices naturally integrate into the SysOps Framework.
+A discipline [developed at Google](https://sre.google/sre-book/table-of-contents/) for managing large-scale systems, emphasizing error budgets, toil reduction, and production readiness. SRE practices naturally integrate into the SysOps Framework.
 
 **Staged Rollout**
 A deployment strategy where changes are deployed to a subset of systems first (e.g., 10%, then 25%, then 100%) to identify issues at scale before full deployment.

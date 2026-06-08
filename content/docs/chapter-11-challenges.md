@@ -412,12 +412,6 @@ In the final chapter, we'll explore the future evolution of the SysOps Framework
 **🎮 Gamification Element - Chapter 11 Badge**
 _Identify potential implementation challenges for your environment and create mitigation strategies to earn the "Challenge Navigator" badge._
 
-**📚 Additional Resources**
-
-- Diagnostic: "Framework Implementation Health Check"
-- Template: "Challenge Mitigation Planning Worksheet"
-- Case Study: "Overcoming Major Implementation Obstacles"
-
 ---
 
 _[← Previous: Chapter 10 - Risk & Compliance](chapter-10-risk.md) | [Next: Chapter 12 - Future Evolution →](chapter-12-future.md)_

@@ -21,7 +21,7 @@ While the Agile Manifesto revolutionized software development, operations teams 
 
 ### Note on ITIL and Service Management
 
-The principles outlined in this chapter align closely with **ITIL 4 (Information Technology Infrastructure Library, 4th edition)** and **IT Service Management (ITSM)** best practices. ITIL 4, released in February 2019, introduced the **Service Value System (SVS)** model, **34 management practices**, and **7 guiding principles** as its core structure, replacing the earlier lifecycle-stage model of ITIL v3. If you're familiar with ITIL 4, you'll recognise that SysOps Framework operationalises many ITIL 4 concepts:
+The principles outlined in this chapter align closely with **ITIL 4 (Information Technology Infrastructure Library, 4th edition)** and **IT Service Management (ITSM)** best practices. ITIL 4, released in February 2019 ([Axelos ITIL 4](https://www.axelos.com/certifications/itil-service-management)), introduced the **Service Value System (SVS)** model, **34 management practices**, and **7 guiding principles** as its core structure, replacing the earlier lifecycle-stage model of ITIL v3. If you're familiar with ITIL 4, you'll recognise that SysOps Framework operationalises many ITIL 4 concepts:
 
 - **Service Reliability First** ↔ ITIL 4 Service Design practice and Availability Management
 - **Continuous Availability** ↔ ITIL 4 Availability Management and IT Service Continuity Management
@@ -34,7 +34,7 @@ The key difference is **structure and operationalisation**: ITIL 4 provides a co
 
 **For ITIL 4 practitioners**: SysOps Framework provides a practical, lightweight implementation pathway for ITIL 4 service management without requiring a full ITIL compliance programme or a comprehensive ITSM tool suite.
 
-> **Note on ITIL 5**: PeopleCert announced ITIL 5 in January 2026 and the Foundation certification became available. At the time of writing (mid-2026) the full ITIL 5 practice library is not yet widely published. The SysOps Framework will be updated to align with ITIL 5 once its content is stable. Monitor the [ITIL official site](https://www.axelos.com/certifications/itil-service-management) for updates.
+> **Note on ITIL 5**: [PeopleCert announced ITIL 5](https://www.peoplecert.org/itil-5) in January 2026 and the Foundation certification became available. At the time of writing (mid-2026) the full ITIL 5 practice library is not yet widely published. The SysOps Framework will be updated to align with ITIL 5 once its content is stable. Monitor the [ITIL official site](https://www.axelos.com/certifications/itil-service-management) for updates.
 
 ---
 
@@ -97,6 +97,8 @@ The key difference is **structure and operationalisation**: ITIL 4 provides a co
 - Measure and eliminate toil systematically
 
 **Real-World Example**: Instead of manually patching servers monthly, the team implements automated patch management with testing pipelines and rollback procedures, freeing time for capacity planning and architecture improvements.
+
+> **Where automation lives in this framework**: This principle is the conceptual home for automation, stated once here rather than re-argued in every chapter. It is operationalised elsewhere: automation _activities_ belong to the weekly improvement cycle ([Chapter 3](chapter-03-structure.md)); automation _milestones_ to the implementation roadmap ([Chapter 5](chapter-05-implementation.md)); the runbook _concept_ to Knowledge Management ([Chapter 6](chapter-06-practices.md)); automation _metrics_ such as automation coverage and toil reduction to [Chapter 7](chapter-07-metrics.md); the concrete _tooling_ — Infrastructure as Code, GitOps, CI/CD, runbook automation, and self-service platforms — to the tool catalogue ([Chapter 8](chapter-08-tools.md)); and _emerging_ AI-driven and self-healing automation to [Chapter 12](chapter-12-future.md).
 
 ### 📚 5. Knowledge Sharing
 
@@ -261,12 +263,6 @@ In the next chapter, we'll see how these principles translate into the practical
 
 **🎮 Gamification Element - Chapter 2 Badge**
 _Complete the principle application exercise and identify how each principle would apply in your own work environment to earn the "Principle Navigator" badge._
-
-**📚 Additional Resources**
-
-- Workshop: "Building Principle-Driven Operations Teams"
-- Template: "SysOps Decision-Making Framework"
-- Case Study: "How Principles Prevented a Major Outage"
 
 ---
 

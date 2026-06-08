@@ -153,6 +153,8 @@ Handle immediate operational needs: system monitoring, incident response, routin
 
 Focus on process improvements, automation initiatives, and addressing systemic issues identified during daily operations that require more than immediate fixes.
 
+> Automation is a primary driver of this cycle. For the underlying principle see [Chapter 2 — Automation and Efficiency](chapter-02-principles.md); for the tools deployed here (IaC, runbook automation, GitOps) see [Chapter 8](chapter-08-tools.md). This chapter focuses on _when_ automation work is planned and executed, not on re-explaining why or with which tools.
+
 ### The Cycle Flow: Plan → Execute → Measure → Improve
 
 #### 1. Plan (Mondays or cycle start)
@@ -456,12 +458,6 @@ In the next chapter, we'll compare how this multi-cycle approach differs from tr
 
 **🎮 Gamification Element - Chapter 3 Badge**
 _Plan a complete set of activities for each cycle for your team environment to earn the "Cycle Master" badge._
-
-**📚 Additional Resources**
-
-- Template: "Multi-Cycle Planning Worksheets"
-- Calculator: "Resource Allocation Planning Tool"
-- Case Study: "Implementing Multi-Cycle Operations at Scale"
 
 ---
 

@@ -328,6 +328,8 @@ For significant incidents, establish clear role assignments:
 
 **Purpose**: Systematic approach to capturing and sharing operational knowledge through runbooks, troubleshooting guides, and system documentation.
 
+> This practice is the canonical home for the **runbook** concept — what a runbook is and what it must contain. Tooling that stores and executes runbooks (Rundeck, StackStorm, Ansible Tower, wikis) is catalogued in [Chapter 8](chapter-08-tools.md); runbooks are _used_ in the daily cycle ([Chapter 3](chapter-03-structure.md)) and on-call handoffs ([Chapter 9](chapter-09-culture.md)).
+
 #### Documentation Categories
 
 **Runbooks**:
@@ -512,7 +514,7 @@ For significant incidents, establish clear role assignments:
 - Define release trains (e.g., weekly, bi-weekly, on-demand for hotfixes)
 - Maintain a release calendar visible to all stakeholders
 - Coordinate freeze windows with the Change Management practice (Practice 3)
-- Track release frequency, change failure rate, and mean time to restore (MTTR) per the DORA four-key metrics
+- Track release frequency, change failure rate, and mean time to restore (MTTR) per the [DORA four-key metrics](https://dora.dev/research/2023/dora-report/)
 
 **Environment Management**:
 
@@ -522,7 +524,7 @@ For significant incidents, establish clear role assignments:
 
 #### DORA Metrics Integration
 
-The four DORA (DevOps Research and Assessment) key metrics directly measure Release Management effectiveness:
+The four DORA (DevOps Research and Assessment) key metrics directly measure Release Management effectiveness ([DORA State of DevOps Report](https://dora.dev/research/2023/dora-report/)):
 
 | Metric                | Definition                                    | Elite Threshold          |
 | --------------------- | --------------------------------------------- | ------------------------ |
@@ -561,13 +563,13 @@ Track these metrics per team and review during the Weekly Improvement Cycle.
 
 **Asset Lifecycle Management**:
 
-| Stage | Key Activities |
-|-------|---------------|
-| **Procurement** | Record asset in CMDB on purchase order; assign owner, cost centre, and depreciation schedule |
-| **Deployment** | Tag with environment, team, and application; record in CMDB; link to service catalog |
-| **In-service** | Track change history, patch level, and capacity utilisation; review annually |
-| **End-of-life planning** | Identify assets approaching hardware/software EOL; plan replacement or migration |
-| **Decommission** | Revoke access, sanitise data (NIST 800-88), update CMDB; reclaim licenses; dispose via certified e-waste programme |
+| Stage                    | Key Activities                                                                                                                                                           |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Procurement**          | Record asset in CMDB on purchase order; assign owner, cost centre, and depreciation schedule                                                                             |
+| **Deployment**           | Tag with environment, team, and application; record in CMDB; link to service catalog                                                                                     |
+| **In-service**           | Track change history, patch level, and capacity utilisation; review annually                                                                                             |
+| **End-of-life planning** | Identify assets approaching hardware/software EOL; plan replacement or migration                                                                                         |
+| **Decommission**         | Revoke access, sanitise data ([NIST SP 800-88 Rev. 1](https://doi.org/10.6028/NIST.SP.800-88r1)), update CMDB; reclaim licenses; dispose via certified e-waste programme |
 
 **Software License Management**:
 
@@ -585,17 +587,17 @@ Track these metrics per team and review during the Weekly Improvement Cycle.
 
 #### Example: CMDB Record — Production Web Server
 
-| Attribute | Value |
-|-----------|-------|
-| CI Name | prod-web-01 |
-| Type | Virtual Machine |
-| Environment | Production |
-| Owner | Platform Team |
-| Service | Customer Portal |
-| OS | Ubuntu 24.04 LTS (EOL: 2029) |
-| Last patched | 2026-05-28 |
-| Related CIs | prod-db-01, prod-lb-01, prod-web-02 |
-| Last change | CHG-2341 — kernel update 2026-05-28 |
+| Attribute    | Value                               |
+| ------------ | ----------------------------------- |
+| CI Name      | prod-web-01                         |
+| Type         | Virtual Machine                     |
+| Environment  | Production                          |
+| Owner        | Platform Team                       |
+| Service      | Customer Portal                     |
+| OS           | Ubuntu 24.04 LTS (EOL: 2029)        |
+| Last patched | 2026-05-28                          |
+| Related CIs  | prod-db-01, prod-lb-01, prod-web-02 |
+| Last change  | CHG-2341 — kernel update 2026-05-28 |
 
 ---
 
@@ -605,11 +607,11 @@ Track these metrics per team and review during the Weekly Improvement Cycle.
 
 #### Service Request vs. Incident
 
-| Aspect | Service Request | Incident |
-|--------|----------------|----------|
-| Nature | Planned, expected, pre-approved | Unplanned, unexpected disruption |
-| Urgency | Normal (days) or expedited (same-day) | High — restore service ASAP |
-| Process | Fulfillment workflow | Incident response process |
+| Aspect   | Service Request                                       | Incident                         |
+| -------- | ----------------------------------------------------- | -------------------------------- |
+| Nature   | Planned, expected, pre-approved                       | Unplanned, unexpected disruption |
+| Urgency  | Normal (days) or expedited (same-day)                 | High — restore service ASAP      |
+| Process  | Fulfillment workflow                                  | Incident response process        |
 | Examples | New user access, hardware provision, SSL cert renewal | Database outage, network failure |
 
 #### Service Catalog Design
@@ -621,6 +623,7 @@ A **service catalog** lists all requestable services with defined scope, fulfill
 - **Complex requests** (project-like, multi-team): new environment build, network segment creation, third-party integration
 
 For each catalog item document:
+
 1. Description and eligibility (who can request it)
 2. Required input information
 3. Approval chain
@@ -636,13 +639,13 @@ For each catalog item document:
 
 #### Request Fulfillment Metrics
 
-| Metric | Definition | Target |
-|--------|------------|--------|
-| Request fulfillment rate | % of requests completed within SLA | ≥ 95% |
-| Mean time to fulfillment (MTTF) | Avg time from submission to completion | ≤ SLA per tier |
-| Automation rate | % of requests fulfilled without manual intervention | ≥ 70% (standard requests) |
-| Request backlog age | Oldest unresolved request in queue | < 5 business days |
-| Abandon rate | % of requests withdrawn before fulfillment | < 5% |
+| Metric                          | Definition                                          | Target                    |
+| ------------------------------- | --------------------------------------------------- | ------------------------- |
+| Request fulfillment rate        | % of requests completed within SLA                  | ≥ 95%                     |
+| Mean time to fulfillment (MTTF) | Avg time from submission to completion              | ≤ SLA per tier            |
+| Automation rate                 | % of requests fulfilled without manual intervention | ≥ 70% (standard requests) |
+| Request backlog age             | Oldest unresolved request in queue                  | < 5 business days         |
+| Abandon rate                    | % of requests withdrawn before fulfillment          | < 5%                      |
 
 ---
 
@@ -667,14 +670,15 @@ For each catalog item document:
 
 #### Cost Accountability Models
 
-| Model | Description | When to Use |
-|-------|-------------|-------------|
-| **Cost centre** | Ops costs pooled centrally; no allocation to consumers | Small organisations, shared services |
-| **Showback** | Costs calculated per team/service and reported but not charged | Building cost awareness without billing friction |
-| **Chargeback** | Costs billed directly to consuming teams or cost centres | Mature orgs; drives efficient consumption behaviour |
-| **Unit pricing** | Internal rate card: fixed price per VM, per GB, per CI/CD minute | Platform teams with internal customers |
+| Model            | Description                                                      | When to Use                                         |
+| ---------------- | ---------------------------------------------------------------- | --------------------------------------------------- |
+| **Cost centre**  | Ops costs pooled centrally; no allocation to consumers           | Small organisations, shared services                |
+| **Showback**     | Costs calculated per team/service and reported but not charged   | Building cost awareness without billing friction    |
+| **Chargeback**   | Costs billed directly to consuming teams or cost centres         | Mature orgs; drives efficient consumption behaviour |
+| **Unit pricing** | Internal rate card: fixed price per VM, per GB, per CI/CD minute | Platform teams with internal customers              |
 
 **Chargeback implementation steps**:
+
 1. Define the cost allocation unit (per service, per environment, per business unit)
 2. Instrument cost attribution: cloud tags, CMDB ownership fields, FinOps tooling (Kubecost, Apptio)
 3. Publish monthly cost reports to consuming team leads
@@ -691,13 +695,13 @@ Financial Management is the governance layer; FinOps (Chapter 12) provides the t
 
 #### Financial Metrics
 
-| Metric | Definition | Target |
-|--------|------------|--------|
-| Budget variance | Actual vs. budgeted spend | ≤ ±10% annually |
-| Cost per service | Monthly ops cost attributed to each service | Trending down YoY |
-| Unattributed spend | Cloud/SaaS cost without owner tag | < 2% of total |
-| License utilisation | Used seats / licensed seats | 80–95% (avoid waste and over-deployment) |
-| ROI on automation | Toil hours eliminated × fully-loaded engineer cost | Document annually |
+| Metric              | Definition                                         | Target                                   |
+| ------------------- | -------------------------------------------------- | ---------------------------------------- |
+| Budget variance     | Actual vs. budgeted spend                          | ≤ ±10% annually                          |
+| Cost per service    | Monthly ops cost attributed to each service        | Trending down YoY                        |
+| Unattributed spend  | Cloud/SaaS cost without owner tag                  | < 2% of total                            |
+| License utilisation | Used seats / licensed seats                        | 80–95% (avoid waste and over-deployment) |
+| ROI on automation   | Toil hours eliminated × fully-loaded engineer cost | Document annually                        |
 
 ---
 
@@ -712,14 +716,16 @@ Financial Management is the governance layer; FinOps (Chapter 12) provides the t
 
 **Tiering assets by criticality**:
 
-| Tier | Example Systems | RPO | RTO | Backup Frequency |
-|------|----------------|-----|-----|------------------|
-| Tier 1 — Mission Critical | Payment API, auth service, core DB | ≤ 15 min | ≤ 1 hr | Continuous replication |
-| Tier 2 — Business Critical | CRM, internal portals, monitoring stack | ≤ 1 hr | ≤ 4 hr | Hourly incremental |
-| Tier 3 — Important | Dev/staging environments, reporting DBs | ≤ 4 hr | ≤ 8 hr | Every 4 hours |
-| Tier 4 — Standard | Logs archive, internal wikis, low-traffic apps | ≤ 24 hr | ≤ 24 hr | Daily full |
+| Tier                       | Example Systems                                | RPO      | RTO     | Backup Frequency       |
+| -------------------------- | ---------------------------------------------- | -------- | ------- | ---------------------- |
+| Tier 1 — Mission Critical  | Payment API, auth service, core DB             | ≤ 15 min | ≤ 1 hr  | Continuous replication |
+| Tier 2 — Business Critical | CRM, internal portals, monitoring stack        | ≤ 1 hr   | ≤ 4 hr  | Hourly incremental     |
+| Tier 3 — Important         | Dev/staging environments, reporting DBs        | ≤ 4 hr   | ≤ 8 hr  | Every 4 hours          |
+| Tier 4 — Standard          | Logs archive, internal wikis, low-traffic apps | ≤ 24 hr  | ≤ 24 hr | Daily full             |
 
 #### Backup Strategy — The 3-2-1-1 Rule
+
+> The 3-2-1-1 rule extends the classic 3-2-1 strategy with an additional offline or immutable copy, a practice widely adopted to defend against ransomware. See [CISA Ransomware Guide](https://www.cisa.gov/topics/cyber-threats-and-advisories/ransomware) for backup guidance and the immutable-copy requirement.
 
 - **3** copies of data
 - **2** different storage media/types (e.g., disk + object storage)
@@ -730,12 +736,12 @@ Financial Management is the governance layer; FinOps (Chapter 12) provides the t
 
 Backups that are never tested are not backups — they are hopes.
 
-| Test Type | Frequency | What It Validates |
-|-----------|-----------|-------------------|
-| **Automated restore verification** | Every backup cycle | Backup file is readable and not corrupt; checksum matches |
-| **Partial restore test** | Monthly (automated) | Specific files or tables can be recovered from backup |
-| **Full service restore test** | Quarterly (planned) | Full system can be rebuilt from backup within RTO |
-| **Disaster recovery simulation** | Annually (or post-major-incident) | Cross-team failover to secondary site/region end-to-end |
+| Test Type                          | Frequency                         | What It Validates                                         |
+| ---------------------------------- | --------------------------------- | --------------------------------------------------------- |
+| **Automated restore verification** | Every backup cycle                | Backup file is readable and not corrupt; checksum matches |
+| **Partial restore test**           | Monthly (automated)               | Specific files or tables can be recovered from backup     |
+| **Full service restore test**      | Quarterly (planned)               | Full system can be rebuilt from backup within RTO         |
+| **Disaster recovery simulation**   | Annually (or post-major-incident) | Cross-team failover to secondary site/region end-to-end   |
 
 Log all test outcomes; treat a failed restore test as a Severity 2 incident requiring immediate root cause analysis and remediation.
 
@@ -939,12 +945,6 @@ In the next chapter, we'll explore the metrics and measurement approaches that h
 
 **🎮 Gamification Element - Chapter 6 Badge**
 _Assess your team's maturity level for each practice and create an improvement plan to earn the "Practice Master" badge._
-
-**📚 Additional Resources**
-
-- Assessment: "Management Practice Maturity Evaluation"
-- Templates: "Runbook and Documentation Standards"
-- Workshop: "Implementing Blameless Post-Incident Reviews"
 
 ---
 

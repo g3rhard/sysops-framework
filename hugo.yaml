@@ -3,6 +3,14 @@ languageCode: en-us
 title: SysOps Framework
 theme: docsy
 
+# Security configuration
+# Hugo v0.162.0+ blocks text/html content files by default via
+# security.allowContent. Allow HTML so content/_index.html builds.
+security:
+  allowContent:
+    - "^text/markdown$"
+    - "^text/html$"
+
 # Content and build directories
 contentDir: content
 dataDir: data

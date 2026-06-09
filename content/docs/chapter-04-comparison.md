@@ -160,6 +160,7 @@ Most organizations successful with SRE are actually practicing a hybrid: SRE's e
 ### The Velocity Problem
 
 **Traditional Metric**: Sprint velocity (story points completed per sprint)
+
 **Why It Fails**: Operations work varies wildly in complexity and urgency. A 30-minute password reset and a 30-hour datacenter migration can't be meaningfully compared using story points.
 
 **SysOps Alternative**: Service reliability metrics (uptime, MTTR, SLO compliance) combined with operational efficiency measures (automation coverage, toil reduction).
@@ -167,6 +168,7 @@ Most organizations successful with SRE are actually practicing a hybrid: SRE's e
 ### The Commitment Problem
 
 **Traditional Metric**: Sprint commitment achievement (percentage of committed work completed)
+
 **Why It Fails**: Operations teams can't commit to work when they don't control when emergencies occur. Failed commitments due to incidents create artificial failure metrics.
 
 **SysOps Alternative**: Response effectiveness metrics (incident response time, resolution rate) combined with continuous improvement measures (improvements implemented, process enhancements).
@@ -174,6 +176,7 @@ Most organizations successful with SRE are actually practicing a hybrid: SRE's e
 ### The Burndown Problem
 
 **Traditional Metric**: Sprint burndown charts showing work remaining over time
+
 **Why It Fails**: Operations work doesn't "burn down" - it's continuous. New issues arise constantly, making burndown charts meaningless.
 
 **SysOps Alternative**: Service health trends (availability over time, performance improvements) combined with capacity utilization metrics.

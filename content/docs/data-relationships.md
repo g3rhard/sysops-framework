@@ -14,22 +14,45 @@ The SysOps Framework consists of interconnected components that work together to
 
 ## The Three Pillars: Cycles, Practices, and Metrics
 
+The SysOps Framework rests on three pillars that continuously feed into one
+another: **Cycles** set the operating rhythm, **Practices** define the work done
+within that rhythm, and **Metrics** measure the outcomes. The metrics then feed
+back into the cycles, closing the loop.
+
 ```text
-┌─────────────────────────────────────────────────────────────┐
-│                    SysOps Framework                         │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  CYCLES ──────────────────────────────────────────────      │
-│  (Daily/Weekly/Monthly)                                     │
-│    ↓ Inform ↓                                               │
-│                                                             │
-│  PRACTICES                    METRICS ──────────────────→   │
-│  (7 management practices) ──→ (4 metric categories)         │
-│                                                             │
-│  Feedback Loop  ←─────────────────────────────────────      │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+            +-----------------------------------------------+
+            |               SysOps Framework                |
+            +-----------------------------------------------+
+
+   +-----------------------+
+   |   PILLAR 1: CYCLES    |   Set the operating rhythm
+   |  Daily / Weekly /     |
+   |  Monthly              |
+   +-----------------------+
+              |
+              |  drive
+              v
+   +-----------------------+
+   |  PILLAR 2: PRACTICES  |   Define the work performed
+   |  7 management         |
+   |  practices            |
+   +-----------------------+
+              |
+              |  produce
+              v
+   +-----------------------+
+   |   PILLAR 3: METRICS   |   Measure the outcomes
+   |  4 metric categories  |
+   +-----------------------+
+              |
+              |  feed back / inform
+              |
+              +---------------> back to PILLAR 1 (Cycles)
 ```
+
+**How to read it:** Cycles *drive* which Practices run and when; Practices
+*produce* the data captured as Metrics; Metrics *feed back* into the next round
+of Cycles, so the framework continuously improves.
 
 ---
 
@@ -357,7 +380,7 @@ A: Start with Service Level Management (defines success) and Knowledge Managemen
 A: Three ways:
 
 1. **Practice Maturity**: Complete maturity assessment questions (Chapter 6)
-2. **Metric Trends**: Track leading indicators (automation coverage, documentation %）and lagging indicators (MTTR, SLO compliance)
+2. **Metric Trends**: Track leading indicators (automation coverage, documentation %) and lagging indicators (MTTR, SLO compliance)
 3. **Cycle Alignment**: Verify practices are integrated into all three cycles with regular execution
 
 **Q: What happens if we implement cycles without practices?**

@@ -456,7 +456,7 @@ gitops-repo/
 
 All changes to any environment — including platform components — flow through Git pull requests with automated OPA validation in CI before ArgoCD reconciles them to the target cluster.
 
-## � Networking & Infrastructure Operations
+## Networking & Infrastructure Operations
 
 Networking is foundational to every service the operations team supports, yet operational guidance for it is often tribal knowledge. This section documents the key areas operations teams must manage and the tools and practices that make them reliable and auditable.
 
@@ -564,7 +564,7 @@ Content Delivery Networks accelerate content delivery and absorb traffic spikes,
 - **Network topology documentation**: maintain a network diagram as code (NetBox, draw.io committed to git) updated as part of any Change Management (Practice 3) ticket that touches network configuration
 - **Firewall rule auditing**: review firewall/security group rules quarterly; remove stale rules; validate that the principle of least privilege is maintained
 
-## �🏗️ Tool Selection and Evaluation Framework
+## 🏗️ Tool Selection and Evaluation Framework
 
 ### Selection Criteria
 
@@ -679,25 +679,33 @@ Content Delivery Networks accelerate content delivery and absorb traffic spikes,
 ### Maturity Level 1: Basic Tools
 
 **Characteristics**: Point solutions, manual processes, limited integration
+
 **Tools**: Basic monitoring, simple ticketing, spreadsheet tracking
+
 **Focus**: Getting essential visibility and process tracking
 
 ### Maturity Level 2: Integrated Platform
 
 **Characteristics**: Some automation, basic integration, standardized processes
+
 **Tools**: Integrated monitoring suite, workflow automation, collaboration platforms
+
 **Focus**: Reducing manual work and improving consistency
 
 ### Maturity Level 3: Intelligent Operations
 
 **Characteristics**: Predictive analytics, advanced automation, AI-assisted decision making
+
 **Tools**: ML-powered monitoring, intelligent automation, predictive analytics
+
 **Focus**: Proactive management and continuous optimization
 
 ### Maturity Level 4: Self-Healing Systems
 
 **Characteristics**: Autonomous operation, minimal human intervention, continuous learning
+
 **Tools**: AI/ML platforms, autonomous remediation, self-optimizing systems
+
 **Focus**: Minimal operational overhead with maximum reliability
 
 ## 🎯 Chapter Summary

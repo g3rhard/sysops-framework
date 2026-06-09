@@ -163,12 +163,12 @@ This isn't a rejection of agile values but an adaptation for operational realiti
 
 **Exercise**: Apply each SysOps principle to prioritize these requests:
 
-**Service Reliability First**: Which request most directly impacts system stability?
-**Continuous Availability**: Which can be done without risking downtime?
-**Rapid Response**: Which requires immediate action?
-**Automation and Efficiency**: Which can be addressed through better tooling?
-**Knowledge Sharing**: Which requires team knowledge to execute safely?
-**Risk Management**: Which poses the greatest operational risk?
+- **Service Reliability First**: Which request most directly impacts system stability?
+- **Continuous Availability**: Which can be done without risking downtime?
+- **Rapid Response**: Which requires immediate action?
+- **Automation and Efficiency**: Which can be addressed through better tooling?
+- **Knowledge Sharing**: Which requires team knowledge to execute safely?
+- **Risk Management**: Which poses the greatest operational risk?
 
 **Solution Approach**:
 
@@ -184,21 +184,25 @@ The SysOps principles provide a decision-making framework for common operational
 ### When to Say No
 
 **Question**: "Can you deploy this hotfix directly to production?"
+
 **Principle-Driven Response**: Service Reliability First suggests using staging environments and change control procedures, even for urgent fixes.
 
 ### When to Automate
 
 **Question**: "Should we automate this monthly task?"
+
 **Principle-Driven Response**: Automation and Efficiency suggests yes, if the task is repeated, error-prone, or consumes significant time.
 
 ### When to Document
 
 **Question**: "Do we need to document this one-off procedure?"
+
 **Principle-Driven Response**: Knowledge Sharing suggests yes, because "one-off" procedures often become recurring needs.
 
 ### When to Escalate
 
 **Question**: "Should we wake up the senior engineer for this issue?"
+
 **Principle-Driven Response**: Service Reliability and Rapid Response provide escalation criteria based on impact and complexity.
 
 ## 🏗️ Building a Principle-Driven Culture
@@ -220,16 +224,19 @@ The principles should influence hiring, performance evaluation, and reward syste
 ### Reliability vs. Speed
 
 **Conflict**: Stakeholders want rapid feature delivery, but Service Reliability First suggests thorough testing.
+
 **Resolution**: Educate stakeholders about the business cost of outages and implement testing automation that maintains both speed and reliability.
 
 ### Documentation vs. Efficiency
 
 **Conflict**: Documentation takes time away from "real work."
+
 **Resolution**: Treat documentation as operational insurance - the time invested prevents much larger time costs during incidents and knowledge transfer.
 
 ### Automation vs. Immediate Needs
 
 **Conflict**: Automation projects take time while urgent manual work piles up.
+
 **Resolution**: Use the "automation debt" concept - track manual work that should be automated and systematically address it during less busy periods.
 
 ## 📈 Measuring Principle Adherence

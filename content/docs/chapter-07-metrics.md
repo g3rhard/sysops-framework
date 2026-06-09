@@ -310,6 +310,7 @@ Cloud Cost Metrics:
 #### Executive Dashboard (Strategic View)
 
 **Update Frequency**: Monthly
+
 **Key Metrics**:
 
 - Overall service availability trends
@@ -332,6 +333,7 @@ Executive Dashboard:
 #### Management Dashboard (Tactical View)
 
 **Update Frequency**: Weekly
+
 **Key Metrics**:
 
 - Service level objective compliance
@@ -343,6 +345,7 @@ Executive Dashboard:
 #### Operational Dashboard (Real-Time View)
 
 **Update Frequency**: Real-time
+
 **Key Metrics**:
 
 - Current service status and alerts
@@ -470,21 +473,25 @@ Executive Dashboard:
 ### Pitfall 1: Vanity Metrics
 
 **Problem**: Tracking metrics that look impressive but don't drive decisions
+
 **Solution**: Focus on actionable metrics that directly influence behavior and outcomes
 
 ### Pitfall 2: Metric Overload
 
 **Problem**: Too many metrics creating noise and confusion
+
 **Solution**: Limit dashboards to 5-7 key metrics per audience level
 
 ### Pitfall 3: Gaming the System
 
 **Problem**: Teams optimizing for metrics rather than real outcomes
+
 **Solution**: Use balanced scorecards and focus on business value alignment
 
 ### Pitfall 4: Stale Baselines
 
 **Problem**: Comparing against outdated or irrelevant baseline measurements
+
 **Solution**: Regular baseline updates and contextual comparison periods
 
 ## 🎯 Chapter Summary

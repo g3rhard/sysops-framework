@@ -819,11 +819,11 @@ Every Tier 1 and Tier 2 system must have a documented recovery runbook containin
 
 ### Maturity Levels
 
-**Level 1 - Initial**: Practices are ad hoc and reactive
-**Level 2 - Repeatable**: Basic practices are defined and followed
-**Level 3 - Defined**: Practices are standardized and integrated
-**Level 4 - Managed**: Practices are measured and continuously improved
-**Level 5 - Optimizing**: Practices are continuously evolving and innovative
+- **Level 1 - Initial**: Practices are ad hoc and reactive
+- **Level 2 - Repeatable**: Basic practices are defined and followed
+- **Level 3 - Defined**: Practices are standardized and integrated
+- **Level 4 - Managed**: Practices are measured and continuously improved
+- **Level 5 - Optimizing**: Practices are continuously evolving and innovative
 
 ### Assessment Questions by Practice
 

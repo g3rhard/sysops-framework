@@ -1,10 +1,56 @@
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
 \usepackage{amssymb,amsmath}
-\usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
+\usepackage{iftex}
+\ifPDFTeX
+  % pdfLaTeX: legacy 8-bit font stack (fallback)
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\else
+  % LuaLaTeX/XeLaTeX: use fontspec for native Unicode support
+  % (correctly renders curly quotes, dashes and other typographic glyphs).
+  %
+  % Body text uses TeX Gyre Pagella (an open, Palatino-style book face that is
+  % comfortable to read at length), with TeX Gyre Heros (Helvetica-style) for
+  % sans/headings and Latin Modern Mono for code. All ship with the standard
+  % texlive-fonts-recommended package, so no extra fonts need installing.
+  \usepackage{fontspec}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \setmainfont{TeX Gyre Pagella}
+  \setsansfont{TeX Gyre Heros}
+  \setmonofont{Latin Modern Mono}
+\fi
+\providecommand{\textsubscript}[1]{\ensuremath{_{\text{#1}}}}
+
+% Map common technical/math Unicode symbols used in the prose to LaTeX
+% equivalents so they render instead of producing "missing character" warnings.
+\usepackage{newunicodechar}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{←}{\ensuremath{\leftarrow}}
+\newunicodechar{↑}{\ensuremath{\uparrow}}
+\newunicodechar{↓}{\ensuremath{\downarrow}}
+\newunicodechar{↔}{\ensuremath{\leftrightarrow}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{÷}{\ensuremath{\div}}
+\newunicodechar{™}{\textsuperscript{TM}}
+
+% Map box-drawing characters (used in ASCII-art trees/diagrams inside code
+% blocks) to plain ASCII so they render with the monospace font.
+\newunicodechar{─}{-}
+\newunicodechar{━}{-}
+\newunicodechar{│}{|}
+\newunicodechar{┃}{|}
+\newunicodechar{┌}{+}
+\newunicodechar{┐}{+}
+\newunicodechar{└}{+}
+\newunicodechar{┘}{+}
+\newunicodechar{├}{+}
+\newunicodechar{┤}{+}
+\newunicodechar{┬}{+}
+\newunicodechar{┴}{+}
+\newunicodechar{┼}{+}
 \usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \hypersetup{
@@ -26,6 +72,14 @@
 \usepackage{upquote} % Required for straight quotes in code
 \usepackage{fancyhdr}
 
+% Use consistent paragraph spacing instead of first-line indentation.
+% Standard LaTeX leaves the first paragraph after a heading unindented while
+% indenting subsequent ones, which makes block-style content (e.g. Q&A lists)
+% look inconsistent. Zero indent + vertical paragraph spacing keeps every
+% paragraph aligned to the left margin.
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6\baselineskip plus 2pt minus 1pt}
+
 % Define tightlist command for Pandoc compatibility
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -37,8 +91,10 @@
 \definecolor{shadecolor}{RGB}{248,248,248}
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 
-% Define Highlighting environment for syntax highlighting
-\newenvironment{Highlighting}{}{}
+% Define Highlighting as a real verbatim environment so code blocks and
+% ASCII-art diagrams keep their line breaks and monospaced alignment.
+% (An empty environment would reflow them as a justified paragraph.)
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
 
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}

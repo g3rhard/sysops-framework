@@ -1,12 +1,11 @@
 """
 Agile Frameworks Comparison Chart for Chapter 4
 
-Three-column card layout.  Each card has three sections:
-  1. Key Characteristics  (5 bullets)
-  2. Best Used For        (3 bullets)
-  3. Limitations          (2 bullets)
-
-Dividers are placed dynamically so content fills the card top-to-bottom.
+Portrait A4 layout: the three frameworks are stacked as full-width rows so the
+diagram reads well on a printed page.  Each framework row has a coloured header
+(name + cadence) and a two-column body:
+  • Left column  : Key Characteristics (5 bullets)
+  • Right column : Best Used For (3 bullets) + Limitations (2 bullets)
 """
 
 import os
@@ -15,30 +14,31 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 from _design_system import (
     COLORS, FONTS, setup_figure, set_lims,
-    draw_card, draw_section_label, draw_h_divider,
-    bullet_list, label_badge,
+    draw_card, draw_section_label, _rounded_rect,
+    bullet_list,
 )
 import matplotlib.patches as mpatches
 
-# ── Layout constants ──────────────────────────────────────────────────────────
+# ── Layout constants (A4 portrait) ────────────────────────────────────────────
 
-_FIG_W, _FIG_H  = 18.0, 11.5
-_XLIM           = (0.0, 18.0)
-_YLIM           = (0.0, 12.0)
+_FIG_W, _FIG_H  = 8.5, 11.0
+_XLIM           = (0.0, 8.5)
+_YLIM           = (0.0, 11.0)
 
-_CARD_W         = 5.20
-_CARD_H         = 9.40
-_CARD_BOTTOM    = 0.90
-_HEADER_H       = 0.58
+_CARD_X         = 0.35
+_CARD_W         = 7.80
+_CARD_TOP       = 10.05   # top edge of the first (Scrum) card
+_CARD_H         = 3.05
+_CARD_GAP       = 0.28
+_HEADER_H       = 0.50
 _RADIUS         = 0.16
 
-_CARD_X         = [0.50, 6.40, 12.30]   # left x of each card
+_COL_SPLIT      = _CARD_X + _CARD_W / 2 + 0.05   # x where right column begins
+_COL_W          = _CARD_W / 2 - 0.30             # usable width of each column
 
-_CHAR_DY        = 0.44   # bullet spacing — Key Characteristics
-_BF_DY          = 0.44   # bullet spacing — Best For
-_SECTION_GAP    = 0.30   # gap from last bullet to divider
-_AFTER_DIV      = 0.30   # gap from divider to next section label
-_BULLET_TOP_GAP = 0.38   # gap from bottom of label band to first bullet
+_BULLET_DY      = 0.32   # vertical spacing between bullets
+_LABEL_GAP      = 0.40   # gap from a section label down to its first bullet
+_SECTION_GAP    = 0.30   # gap between Best-For block and Limitations label
 
 # ── Framework data ────────────────────────────────────────────────────────────
 
@@ -119,82 +119,62 @@ def create_diagram():
     fig, ax = setup_figure(
         figsize=(_FIG_W, _FIG_H),
         title="Framework Comparison: Scrum vs SAFe vs SysOps",
-        title_y=0.97,
+        title_y=0.975,
     )
     set_lims(ax, _XLIM, _YLIM)
 
-    for fw, cx in zip(_FRAMEWORKS, _CARD_X):
-        color  = fw["color"]
-        cx_mid = cx + _CARD_W / 2
+    for i, fw in enumerate(_FRAMEWORKS):
+        color = fw["color"]
+        top    = _CARD_TOP - i * (_CARD_H + _CARD_GAP)
+        bottom = top - _CARD_H
 
-        # ── Card shell ────────────────────────────────────────────────────────
-        draw_card(ax, cx, _CARD_BOTTOM, _CARD_W, _CARD_H, color,
-                  title=fw["name"], header_h=_HEADER_H, radius=_RADIUS)
+        # ── Card body (no built-in header — we draw a custom one) ─────────────
+        draw_card(ax, _CARD_X, bottom, _CARD_W, _CARD_H, color,
+                  title=None, radius=_RADIUS)
 
-        # Top of interior (y coordinate just below the header band)
-        y_top = _CARD_BOTTOM + _CARD_H - _HEADER_H
-
-        # ── Cadence badge ─────────────────────────────────────────────────────
-        y_badge = y_top - 0.38
-        label_badge(ax, cx_mid, y_badge, fw["cadence"], color=color, fontsize=8.5)
-
-        # ── Section 1: Key Characteristics ───────────────────────────────────
-        y_s1 = y_badge - 0.52
-        draw_section_label(ax, cx + 0.12, y_s1, _CARD_W - 0.24,
-                           "Key Characteristics", color, fontsize=8.5)
-
-        y_b1_first = y_s1 - _BULLET_TOP_GAP
-        bullet_list(ax, cx, y_b1_first, fw["characteristics"],
-                    dy=_CHAR_DY, fontsize=9.5,
-                    color=COLORS["mid"], indent=0.28)
-
-        n_char    = len(fw["characteristics"])
-        y_b1_last = y_b1_first - (n_char - 1) * _CHAR_DY
-
-        # ── Divider 1 ─────────────────────────────────────────────────────────
-        y_div1 = y_b1_last - _SECTION_GAP
-        draw_h_divider(ax, cx + 0.18, y_div1, _CARD_W - 0.36,
-                       color=COLORS["border"])
-
-        # ── Section 2: Best Used For ──────────────────────────────────────────
-        y_s2 = y_div1 - _AFTER_DIV
-        draw_section_label(ax, cx + 0.12, y_s2, _CARD_W - 0.24,
-                           fw["best_for_label"], color, fontsize=8.5)
-
-        y_b2_first = y_s2 - _BULLET_TOP_GAP
-        bullet_list(ax, cx, y_b2_first, fw["best_for"],
-                    dy=_BF_DY, fontsize=9.5,
-                    color=COLORS["mid"], indent=0.28)
-
-        n_bf      = len(fw["best_for"])
-        y_b2_last = y_b2_first - (n_bf - 1) * _BF_DY
-
-        # ── Divider 2 ─────────────────────────────────────────────────────────
-        y_div2 = y_b2_last - _SECTION_GAP
-        draw_h_divider(ax, cx + 0.18, y_div2, _CARD_W - 0.36,
-                       color=COLORS["border"])
-
-        # ── Section 3: Limitations ────────────────────────────────────────────
-        y_s3 = y_div2 - _AFTER_DIV
-        draw_section_label(ax, cx + 0.12, y_s3, _CARD_W - 0.24,
-                           "Limitations", color, fontsize=8.5)
-
-        y_b3_first = y_s3 - _BULLET_TOP_GAP
-        bullet_list(ax, cx, y_b3_first, fw["limits"],
-                    dy=0.40, fontsize=9.0,
-                    color=COLORS["light"], indent=0.28)
-
-    # ── Bottom legend strip ───────────────────────────────────────────────────
-    legend_y = 0.45
-    for fw, cx in zip(_FRAMEWORKS, _CARD_X):
-        lx = cx + _CARD_W / 2
+        # ── Custom header band: name (left) + cadence (right) ─────────────────
+        hb_y = top - _HEADER_H
+        _rounded_rect(ax, _CARD_X, hb_y, _CARD_W, _HEADER_H, color,
+                      edge_color="none", lw=0, radius=_RADIUS, zorder=3)
         ax.add_patch(mpatches.Rectangle(
-            (lx - 0.55, legend_y - 0.18), 1.1, 0.28,
-            facecolor=fw["color"], edgecolor="none", alpha=0.18, zorder=1,
+            (_CARD_X, hb_y), _CARD_W, _HEADER_H / 2,
+            facecolor=color, edgecolor="none", zorder=3,
         ))
-        ax.text(lx, legend_y, fw["name"],
-                ha="center", va="center",
-                fontsize=8.5, fontweight="bold", color=fw["color"])
+        ax.text(_CARD_X + 0.32, hb_y + _HEADER_H / 2, fw["name"],
+                ha="left", va="center",
+                fontsize=13, fontweight="bold", color=COLORS["white"], zorder=4)
+        ax.text(_CARD_X + _CARD_W - 0.32, hb_y + _HEADER_H / 2, fw["cadence"],
+                ha="right", va="center",
+                fontsize=9.5, fontweight="bold", color=COLORS["white"],
+                alpha=0.95, zorder=4)
+
+        interior_top = hb_y - 0.22
+        col_l_x = _CARD_X + 0.12
+        col_r_x = _COL_SPLIT
+
+        # ── Left column: Key Characteristics ─────────────────────────────────
+        draw_section_label(ax, col_l_x + 0.04, interior_top, _COL_W,
+                            "Key Characteristics", color, fontsize=10)
+        bullet_list(ax, col_l_x, interior_top - _LABEL_GAP,
+                    fw["characteristics"], dy=_BULLET_DY, fontsize=9.5,
+                    color=COLORS["mid"], indent=0.28)
+
+        # ── Right column: Best Used For ───────────────────────────────────────
+        draw_section_label(ax, col_r_x + 0.04, interior_top, _COL_W,
+                            fw["best_for_label"], color, fontsize=10)
+        y_bf_first = interior_top - _LABEL_GAP
+        bullet_list(ax, col_r_x, y_bf_first,
+                    fw["best_for"], dy=_BULLET_DY, fontsize=9.5,
+                    color=COLORS["mid"], indent=0.28)
+
+        # ── Right column: Limitations (below Best For) ────────────────────────
+        y_bf_last  = y_bf_first - (len(fw["best_for"]) - 1) * _BULLET_DY
+        y_lim_lbl  = y_bf_last - _SECTION_GAP
+        draw_section_label(ax, col_r_x + 0.04, y_lim_lbl, _COL_W,
+                            "Limitations", color, fontsize=10)
+        bullet_list(ax, col_r_x, y_lim_lbl - _LABEL_GAP,
+                    fw["limits"], dy=_BULLET_DY, fontsize=9.0,
+                    color=COLORS["light"], indent=0.28)
 
     return fig
 

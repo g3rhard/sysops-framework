@@ -90,10 +90,11 @@ jobs:
               echo "Processing: $file -> $filename.pdf"
               head -n 5 "$file"
 
-              # Preprocess file to escape dollar signs and strip emoji
-              # (emoji glyphs are not present in any LaTeX text font)
+              # Preprocess file to escape dollar signs, fix image paths, and
+              # strip emoji (emoji glyphs are not present in any LaTeX text font)
               temp_file="build/temp_${filename}.md"
               sed 's/\$\([0-9]\)/\\textdollar\1/g' "$file" | \
+              sed -E "s@\]\((\.{1,2}/)*assets/@]($(pwd)/content/assets/@g" | \
               perl -CSD -pe 's/[\x{1F000}-\x{1FFFF}\x{2300}-\x{23FF}\x{2600}-\x{27BF}\x{2B00}-\x{2BFF}\x{FE00}-\x{FE0F}\x{200D}]//g' > "$temp_file"
 
               # Convert markdown to PDF with enhanced formatting
@@ -150,11 +151,17 @@ jobs:
 
           # Add overview from main docs index
           if [ -f "content/docs/_index.md" ]; then
-            # Extract content after the frontmatter, remove Hugo shortcodes, and clean up
+            # Extract content after the frontmatter, remove Hugo shortcodes,
+            # rewrite cross-references to internal anchors (the overview uses
+            # Hugo trailing-slash URLs such as chapter-01-challenge/), drop
+            # links to pages not in the book to plain text, and clean up.
             sed '1,/^---$/d' content/docs/_index.md | \
             sed 's/{{% pageinfo %}}//' | \
             sed 's/{{% \/pageinfo %}}//' | \
             sed 's/{{%[^%]*%}}//g' | \
+            sed -E 's@\]\((\.{1,2}/)*(chapter-[0-9]+-[a-z0-9-]+)(\.md|/)?(#[A-Za-z0-9_-]+)?\)@](#\2)@g' | \
+            sed -E 's@\[([^][]*)\]\((\.{1,2}/)*(README|glossary|data-relationships|getting-started)(\.md|/)?(#[A-Za-z0-9_-]+)?\)@\1@g' | \
+            sed -E "s@\]\((\.{1,2}/)*assets/@]($(pwd)/content/assets/@g" | \
             perl -CSD -pe 's/[\x{1F000}-\x{1FFFF}\x{2300}-\x{23FF}\x{2600}-\x{27BF}\x{2B00}-\x{2BFF}\x{FE00}-\x{FE0F}\x{200D}]//g' | \
             sed '/^$/N;/^\n$/d' >> build/sysops-framework-complete.md
             echo "" >> build/sysops-framework-complete.md
@@ -180,14 +187,17 @@ jobs:
             echo "" >> build/sysops-framework-complete.md
 
             # Remove frontmatter, Hugo shortcodes, escape dollar signs, rewrite
-            # cross-references to internal anchors, and add content.
+            # cross-references to internal anchors (both .md and trailing-slash
+            # styles), drop links to pages not in the book to plain text, and
+            # add content.
             sed '1,/^---$/d' "$file" | \
             sed 's/{{% pageinfo %}}//' | \
             sed 's/{{% \/pageinfo %}}//' | \
             sed 's/{{%[^%]*%}}//g' | \
             sed 's/\$\([0-9]\)/\\textdollar\1/g' | \
-            sed -E 's@\]\((\.{1,2}/)*(chapter-[0-9]+-[a-z0-9-]+)\.md(#[A-Za-z0-9_-]+)?\)@](#\2)@g' | \
-            sed -E 's@\[([^][]*)\]\((\.{1,2}/)+README\.md(#[A-Za-z0-9_-]+)?\)@\1@g' | \
+            sed -E 's@\]\((\.{1,2}/)*(chapter-[0-9]+-[a-z0-9-]+)(\.md|/)?(#[A-Za-z0-9_-]+)?\)@](#\2)@g' | \
+            sed -E 's@\[([^][]*)\]\((\.{1,2}/)*(README|glossary|data-relationships|getting-started)(\.md|/)?(#[A-Za-z0-9_-]+)?\)@\1@g' | \
+            sed -E "s@\]\((\.{1,2}/)*assets/@]($(pwd)/content/assets/@g" | \
             perl -CSD -pe 's/[\x{1F000}-\x{1FFFF}\x{2300}-\x{23FF}\x{2600}-\x{27BF}\x{2B00}-\x{2BFF}\x{FE00}-\x{FE0F}\x{200D}]//g' | \
             sed '/^$/N;/^\n$/d' >> build/sysops-framework-complete.md
             echo "" >> build/sysops-framework-complete.md

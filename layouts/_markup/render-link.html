@@ -1,0 +1,26 @@
+{{- /*
+  Link render hook.
+
+  Resolves relative Markdown links (e.g. [Chapter 7](chapter-07-metrics.md) or
+  ../README.md) to their real rendered URLs. Without this hook Hugo emits the
+  ".md" destination verbatim, producing 404s on the live site. The same source
+  links are rewritten for the PDF build in the GitHub Actions workflow.
+*/ -}}
+{{- $u := urls.Parse .Destination -}}
+{{- $isExternal := or $u.IsAbs (strings.HasPrefix .Destination "//") (strings.HasPrefix .Destination "mailto:") -}}
+{{- $dest := .Destination -}}
+{{- if and (not $isExternal) (strings.HasSuffix (lower $u.Path) ".md") -}}
+  {{- $ref := strings.TrimSuffix ".md" $u.Path -}}
+  {{- $page := .Page.GetPage $ref -}}
+  {{- if $page -}}
+    {{- $dest = $page.RelPermalink -}}
+    {{- with $u.Fragment }}{{ $dest = printf "%s#%s" $dest . }}{{ end -}}
+    <a href="{{ $dest }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
+  {{- else -}}
+    {{- /* Target is not part of the site content (e.g. ../README.md). Render
+        the link text only so we never emit a dead .md link. */ -}}
+    {{- .Text | safeHTML -}}
+  {{- end -}}
+{{- else -}}
+  <a href="{{ $dest | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $isExternal }} rel="noopener"{{ end }}>{{ .Text | safeHTML }}</a>
+{{- end -}}

@@ -65,6 +65,14 @@
 \usepackage{array} % Required for \arraybackslash
 \usepackage{calc} % Required for \real calculations
 \usepackage{graphicx,grffile}
+% Scale any figure that would otherwise exceed the text block down to fit,
+% preserving its aspect ratio. Images smaller than the text width are left at
+% their natural size. Prevents wide diagrams from overflowing the page margins.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>0.85\textheight 0.85\textheight\else\Gin@nat@height\fi}
+\makeatother
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 \usepackage{fancyvrb} % Required for code blocks
 \usepackage{framed} % Required for Shaded environment
 \usepackage{xcolor} % Required for colors in code blocks

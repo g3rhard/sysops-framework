@@ -169,17 +169,25 @@ jobs:
             # Extract chapter title from frontmatter
             CHAPTER_TITLE=$(grep '^title:' "$file" | sed 's/title: *"//' | sed 's/"$//')
 
-            # Add chapter heading
+            # Use the source filename (without extension) as a stable anchor id so
+            # that inter-chapter links such as [Chapter 7](chapter-07-metrics.md)
+            # can be rewritten to internal references that resolve inside the PDF.
+            CHAPTER_ID=$(basename "$file" .md)
+
+            # Add chapter heading with an explicit identifier matching the filename
             echo "" >> build/sysops-framework-complete.md
-            echo "# $CHAPTER_TITLE" >> build/sysops-framework-complete.md
+            echo "# $CHAPTER_TITLE {#$CHAPTER_ID}" >> build/sysops-framework-complete.md
             echo "" >> build/sysops-framework-complete.md
 
-            # Remove frontmatter, Hugo shortcodes, escape dollar signs, and add content
+            # Remove frontmatter, Hugo shortcodes, escape dollar signs, rewrite
+            # cross-references to internal anchors, and add content.
             sed '1,/^---$/d' "$file" | \
             sed 's/{{% pageinfo %}}//' | \
             sed 's/{{% \/pageinfo %}}//' | \
             sed 's/{{%[^%]*%}}//g' | \
             sed 's/\$\([0-9]\)/\\textdollar\1/g' | \
+            sed -E 's@\]\((\.{1,2}/)*(chapter-[0-9]+-[a-z0-9-]+)\.md(#[A-Za-z0-9_-]+)?\)@](#\2)@g' | \
+            sed -E 's@\[([^][]*)\]\((\.{1,2}/)+README\.md(#[A-Za-z0-9_-]+)?\)@\1@g' | \
             perl -CSD -pe 's/[\x{1F000}-\x{1FFFF}\x{2300}-\x{23FF}\x{2600}-\x{27BF}\x{2B00}-\x{2BFF}\x{FE00}-\x{FE0F}\x{200D}]//g' | \
             sed '/^$/N;/^\n$/d' >> build/sysops-framework-complete.md
             echo "" >> build/sysops-framework-complete.md

@@ -95,7 +95,7 @@ jobs:
               temp_file="build/temp_${filename}.md"
               sed 's/\$\([0-9]\)/\\textdollar\1/g' "$file" | \
               sed -E "s@\]\((\.{1,2}/)*assets/@]($(pwd)/content/assets/@g" | \
-              perl -CSD -pe 's/[\x{1F000}-\x{1FFFF}\x{2300}-\x{23FF}\x{2600}-\x{27BF}\x{2B00}-\x{2BFF}\x{FE00}-\x{FE0F}\x{200D}]//g' > "$temp_file"
+              perl -CSD -pe 's/[\x{1F000}-\x{1FFFF}\x{2300}-\x{23FF}\x{2600}-\x{27BF}\x{2B00}-\x{2BFF}\x{FE00}-\x{FE0F}\x{200D}]+[ \t]*//g' > "$temp_file"
 
               # Convert markdown to PDF with enhanced formatting
               pandoc "$temp_file" \
@@ -162,7 +162,7 @@ jobs:
             sed -E 's@\]\((\.{1,2}/)*(chapter-[0-9]+-[a-z0-9-]+)(\.md|/)?(#[A-Za-z0-9_-]+)?\)@](#\2)@g' | \
             sed -E 's@\[([^][]*)\]\((\.{1,2}/)*(README|glossary|data-relationships|getting-started)(\.md|/)?(#[A-Za-z0-9_-]+)?\)@\1@g' | \
             sed -E "s@\]\((\.{1,2}/)*assets/@]($(pwd)/content/assets/@g" | \
-            perl -CSD -pe 's/[\x{1F000}-\x{1FFFF}\x{2300}-\x{23FF}\x{2600}-\x{27BF}\x{2B00}-\x{2BFF}\x{FE00}-\x{FE0F}\x{200D}]//g' | \
+            perl -CSD -pe 's/[\x{1F000}-\x{1FFFF}\x{2300}-\x{23FF}\x{2600}-\x{27BF}\x{2B00}-\x{2BFF}\x{FE00}-\x{FE0F}\x{200D}]+[ \t]*//g' | \
             sed '/^$/N;/^\n$/d' >> build/sysops-framework-complete.md
             echo "" >> build/sysops-framework-complete.md
             echo "\\pagebreak" >> build/sysops-framework-complete.md
@@ -198,7 +198,7 @@ jobs:
             sed -E 's@\]\((\.{1,2}/)*(chapter-[0-9]+-[a-z0-9-]+)(\.md|/)?(#[A-Za-z0-9_-]+)?\)@](#\2)@g' | \
             sed -E 's@\[([^][]*)\]\((\.{1,2}/)*(README|glossary|data-relationships|getting-started)(\.md|/)?(#[A-Za-z0-9_-]+)?\)@\1@g' | \
             sed -E "s@\]\((\.{1,2}/)*assets/@]($(pwd)/content/assets/@g" | \
-            perl -CSD -pe 's/[\x{1F000}-\x{1FFFF}\x{2300}-\x{23FF}\x{2600}-\x{27BF}\x{2B00}-\x{2BFF}\x{FE00}-\x{FE0F}\x{200D}]//g' | \
+            perl -CSD -pe 's/[\x{1F000}-\x{1FFFF}\x{2300}-\x{23FF}\x{2600}-\x{27BF}\x{2B00}-\x{2BFF}\x{FE00}-\x{FE0F}\x{200D}]+[ \t]*//g' | \
             sed '/^$/N;/^\n$/d' >> build/sysops-framework-complete.md
             echo "" >> build/sysops-framework-complete.md
           done

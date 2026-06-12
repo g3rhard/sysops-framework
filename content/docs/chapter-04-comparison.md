@@ -127,13 +127,12 @@ SysOps Framework and SRE are **not competing approaches** — SRE practices shou
 
 ### Core SRE Concepts
 
-**Error Budgets**: Maximum acceptable downtime per period (e.g., 99.9% SLO = 43 minutes/month budget)
-
-**Toil Measurement**: Manual, repetitive work that doesn't provide long-term value
-
-**Production Readiness Reviews**: Ensuring systems meet operational standards before deployment
-
-**Blameless Post-Mortems**: Learning-focused incident analysis
+| SRE Concept                  | What It Means                                                                 |
+| ---------------------------- | ----------------------------------------------------------------------------- |
+| Error budgets                | Maximum acceptable downtime per period (e.g., 99.9% SLO = 43 minutes/month)   |
+| Toil measurement             | Manual, repetitive work that doesn't provide long-term value                  |
+| Production readiness reviews | Ensuring systems meet operational standards before deployment                 |
+| Blameless post-mortems       | Learning-focused incident analysis                                            |
 
 ### How SysOps Incorporates SRE
 
@@ -186,6 +185,8 @@ Most organizations successful with SRE are actually practicing a hybrid: SRE's e
 **Why It Fails**: Operations work doesn't "burn down" - it's continuous. New issues arise constantly, making burndown charts meaningless.
 
 **SysOps Alternative**: Service health trends (availability over time, performance improvements) combined with capacity utilization metrics.
+
+> **Warning.** Don't quietly keep reporting velocity "just for continuity" while you transition. Metrics are incentives in disguise — whatever you put on the executive slide is what the team will optimise for. Keep velocity alive and you'll keep getting velocity behaviour, no matter what the new framework says on the cover.
 
 ## 🎮 Interactive Comparison Exercise
 
@@ -325,6 +326,8 @@ Create a simple analysis of your team's work:
 2. **Add weekly improvement cycle** - formalize existing improvement efforts
 3. **Introduce monthly strategy cycle** - elevate strategic planning
 4. **Transition metrics gradually** - maintain some familiar measures during transition
+
+> **In practice.** Migrate one cycle at a time, not all three on a Monday. Teams that try to switch everything at once usually end up with three half-built cycles and a credibility problem. Get the daily cycle genuinely working — boring, reliable, trusted — before you ask anyone to take the weekly or monthly seriously.
 
 ### From Waterfall to SysOps
 

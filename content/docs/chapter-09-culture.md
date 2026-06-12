@@ -25,33 +25,12 @@ Traditional organizational cultures often prioritize speed of delivery over oper
 
 ### Core Cultural Values for Operations Excellence
 
-**Reliability Over Speed**
-
-- **Traditional View**: "Move fast and break things"
-- **Operations View**: "Move thoughtfully and fix things before they break"
-- **Balance**: Speed through automation and process optimization, not through shortcuts
-- **Implementation**: Reward teams for preventing problems, not just solving them quickly
-
-**Continuous Learning Over Blame**
-
-- **Traditional View**: Find who caused the problem and prevent it happening again
-- **Operations View**: Understand why the system allowed the problem and strengthen the system
-- **Balance**: Individual accountability within blameless system improvement
-- **Implementation**: Post-incident reviews focus on process and system improvements
-
-**Proactive Prevention Over Reactive Response**
-
-- **Traditional View**: React quickly when things go wrong
-- **Operations View**: Invest in preventing things from going wrong
-- **Balance**: Excellence in both prevention and response capabilities
-- **Implementation**: Allocate time and resources for preventive work
-
-**Team Resilience Over Individual Heroes**
-
-- **Traditional View**: Rely on expert individuals to solve critical problems
-- **Operations View**: Build team capabilities that don't depend on specific individuals
-- **Balance**: Value expertise while ensuring knowledge sharing and cross-training
-- **Implementation**: Reward knowledge sharing and mentoring alongside individual expertise
+| Value | Traditional View | Operations View | How to Balance | How to Implement |
+| ----- | ---------------- | --------------- | -------------- | ---------------- |
+| Reliability over speed | "Move fast and break things" | "Move thoughtfully and fix things before they break" | Speed through automation and process optimization, not through shortcuts | Reward teams for preventing problems, not just solving them quickly |
+| Continuous learning over blame | Find who caused the problem and prevent it happening again | Understand why the system allowed the problem and strengthen the system | Individual accountability within blameless system improvement | Post-incident reviews focus on process and system improvements |
+| Proactive prevention over reactive response | React quickly when things go wrong | Invest in preventing things from going wrong | Excellence in both prevention and response capabilities | Allocate time and resources for preventive work |
+| Team resilience over individual heroes | Rely on expert individuals to solve critical problems | Build team capabilities that don't depend on specific individuals | Value expertise while ensuring knowledge sharing and cross-training | Reward knowledge sharing and mentoring alongside individual expertise |
 
 > Every team has a Dave. Dave is brilliant, Dave knows where all the bodies are buried, and Dave is the only person who understands the billing batch job — which is fine right up until Dave goes on holiday to a place without signal and the batch job decides that's the week to misbehave. The hero culture feels great until the hero is unreachable. The goal isn't to get rid of Dave; it's to make sure the team survives Dave's well-deserved week off. (Dave, incidentally, also deserves to take a holiday without his phone.)
 
@@ -77,26 +56,20 @@ Middle managers often face the greatest pressure to balance operational needs wi
 
 ### Cross-Functional Relationships
 
-**Development Team Collaboration**
-
-- **Shared Responsibility**: Both teams share accountability for service reliability
-- **Early Involvement**: Operations teams involved in design and architecture decisions
-- **Feedback Loops**: Regular communication about operational impact of changes
-- **Joint Planning**: Coordinated approach to capacity, security, and reliability planning
-
-**Security Team Integration**
-
-- **Security as Code**: Security requirements built into operational processes
-- **Shared Tooling**: Common platforms for monitoring and incident response
-- **Risk Assessment**: Joint evaluation of security and operational risks
-- **Compliance Coordination**: Integrated approach to regulatory and audit requirements
-
-**Business Stakeholder Engagement**
-
-- **Service Level Agreements**: Clear, measurable commitments that balance business needs with operational reality
-- **Business Impact Communication**: Translate technical issues into business language
-- **Change Communication**: Proactive communication about planned changes and their impact
-- **Value Demonstration**: Regular reporting on operational contributions to business success
+| Relationship | Practice | What It Looks Like |
+| ------------ | -------- | ------------------ |
+| Development team collaboration | Shared responsibility | Both teams share accountability for service reliability |
+| Development team collaboration | Early involvement | Operations teams involved in design and architecture decisions |
+| Development team collaboration | Feedback loops | Regular communication about operational impact of changes |
+| Development team collaboration | Joint planning | Coordinated approach to capacity, security, and reliability planning |
+| Security team integration | Security as code | Security requirements built into operational processes |
+| Security team integration | Shared tooling | Common platforms for monitoring and incident response |
+| Security team integration | Risk assessment | Joint evaluation of security and operational risks |
+| Security team integration | Compliance coordination | Integrated approach to regulatory and audit requirements |
+| Business stakeholder engagement | Service level agreements | Clear, measurable commitments that balance business needs with operational reality |
+| Business stakeholder engagement | Business impact communication | Translate technical issues into business language |
+| Business stakeholder engagement | Change communication | Proactive communication about planned changes and their impact |
+| Business stakeholder engagement | Value demonstration | Regular reporting on operational contributions to business success |
 
 ## 🔄 Change Management Strategies
 
@@ -174,26 +147,20 @@ Middle managers often face the greatest pressure to balance operational needs wi
 
 ### Building Operational Expertise
 
-**Technical Skill Development**
-
-- **Systems Thinking**: Understanding complex system interactions and dependencies
-- **Troubleshooting Methodology**: Systematic approaches to problem diagnosis and resolution
-- **Automation Skills**: Scripting, infrastructure as code, and process automation capabilities
-- **Security Awareness**: Understanding security implications of operational decisions
-
-**Operational Skills Development**
-
-- **Incident Response**: Coordinated response to service disruptions and emergencies
-- **Communication**: Clear, concise communication during stressful situations
-- **Risk Assessment**: Evaluating and managing operational risks
-- **Process Improvement**: Identifying and implementing operational enhancements
-
-**Leadership Skills Development**
-
-- **Decision Making**: Making sound decisions under pressure with incomplete information
-- **Mentoring**: Developing and supporting team members
-- **Stakeholder Management**: Building relationships and managing expectations
-- **Strategic Thinking**: Connecting operational work to business objectives
+| Skill Area | Capability | Focus |
+| ---------- | ---------- | ----- |
+| Technical | Systems thinking | Understanding complex system interactions and dependencies |
+| Technical | Troubleshooting methodology | Systematic approaches to problem diagnosis and resolution |
+| Technical | Automation skills | Scripting, infrastructure as code, and process automation capabilities |
+| Technical | Security awareness | Understanding security implications of operational decisions |
+| Operational | Incident response | Coordinated response to service disruptions and emergencies |
+| Operational | Communication | Clear, concise communication during stressful situations |
+| Operational | Risk assessment | Evaluating and managing operational risks |
+| Operational | Process improvement | Identifying and implementing operational enhancements |
+| Leadership | Decision making | Making sound decisions under pressure with incomplete information |
+| Leadership | Mentoring | Developing and supporting team members |
+| Leadership | Stakeholder management | Building relationships and managing expectations |
+| Leadership | Strategic thinking | Connecting operational work to business objectives |
 
 ### Career Development Paths
 
@@ -379,6 +346,8 @@ Document this path in the incident management runbook (Chapter 6, Practice 2) an
 - Team becomes model for other operational groups
 - Continuous adaptation and refinement of practices
 - Cultural changes become self-sustaining
+
+> **Reality check.** Culture change doesn't happen because someone printed the values on a mug or added a slide to the onboarding deck. It happens when the first person who says "no, we're not shipping that on a Friday afternoon" gets backed up instead of overruled — and when the engineer who spent a sprint on prevention work nobody noticed still gets a good review. People watch what gets rewarded, not what gets laminated.
 
 ## 🎯 Leadership Strategies for Operations Teams
 

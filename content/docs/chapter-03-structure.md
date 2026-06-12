@@ -21,9 +21,11 @@ By the end of this chapter, you will understand:
 
 Traditional agile frameworks use a single cycle (sprint) to organize all work. This creates artificial constraints for operations teams who handle different types of work with different time horizons and urgency levels. The SysOps Framework uses three interconnected cycles that run simultaneously:
 
-1. **Daily Operations Cycle** (24-48 hours): Immediate operational needs
-2. **Weekly Improvement Cycle** (7 days): Process improvements and systematic issues
-3. **Monthly Strategy Cycle** (4 weeks): Strategic initiatives and major projects
+| Cycle                       | Cadence    | Focus                                          |
+| --------------------------- | ---------- | ---------------------------------------------- |
+| Daily Operations Cycle      | 24–48 hours | Immediate operational needs                    |
+| Weekly Improvement Cycle    | 7 days     | Process improvements and systematic issues     |
+| Monthly Strategy Cycle      | 4 weeks    | Strategic initiatives and major projects       |
 
 ![Framework Structure Diagram](../assets/sysops-framework-diagram.png)
 
@@ -383,9 +385,13 @@ The three cycles are designed to work together without conflict:
 
 ### Resource Allocation
 
-- **Daily Operations**: 60-70% of team capacity (varies by team and environment)
-- **Weekly Improvements**: 20-30% of team capacity
-- **Monthly Strategy**: 10-20% of team capacity (concentrated in implementation weeks)
+| Cycle               | Typical Capacity | Notes                                    |
+| ------------------- | ---------------- | ---------------------------------------- |
+| Daily Operations    | 60–70%           | Varies by team and environment           |
+| Weekly Improvements | 20–30%           | The cycle where toil goes to die         |
+| Monthly Strategy    | 10–20%           | Concentrated in implementation weeks     |
+
+> **Reality check.** These percentages are a starting hypothesis, not a budget handed down from on high. If your daily operations are eating 90%, that's not a planning failure to paper over — it's the single most important number in this book telling you the team is underwater. Fix the drowning before you fret about hitting a tidy 20% improvement target.
 
 ### Priority Resolution
 
@@ -396,6 +402,8 @@ When cycles conflict (which should be rare with proper planning):
 3. **Strategic projects**: Can be rescheduled if necessary
 
 ## 🎯 Adapting Cycles to Your Environment
+
+> **Note.** The cadences below are defaults, not commandments. The framework cares that you _have_ three distinct horizons of work, not that the daily cycle is exactly 24 hours. Adjust the numbers to your reality; keep the separation of concerns.
 
 ### High-Availability Environments
 

@@ -31,10 +31,12 @@ Twelve practices is a lot to swallow in one sitting, so don't try. Nobody implem
 
 **Service Level Indicators (SLIs)**:
 
-- Availability: Percentage of time service is operational
-- Latency: Response time for user requests
-- Throughput: Volume of successful requests processed
-- Quality: Percentage of requests served without errors
+| SLI          | What It Measures                              |
+| ------------ | --------------------------------------------- |
+| Availability | Percentage of time service is operational     |
+| Latency      | Response time for user requests               |
+| Throughput   | Volume of successful requests processed       |
+| Quality      | Percentage of requests served without errors  |
 
 **Service Level Objectives (SLOs)**:
 
@@ -282,11 +284,13 @@ For significant incidents, establish clear role assignments:
 
 **Change Risk Factors**:
 
-- **Complexity**: How many components are affected?
-- **Testing**: How thoroughly has the change been tested?
-- **Timing**: When will the change be implemented?
-- **Rollback**: How easily can the change be reversed?
-- **Dependencies**: What other systems might be affected?
+| Factor       | Question to Ask                              |
+| ------------ | -------------------------------------------- |
+| Complexity   | How many components are affected?            |
+| Testing      | How thoroughly has the change been tested?   |
+| Timing       | When will the change be implemented?         |
+| Rollback     | How easily can the change be reversed?       |
+| Dependencies | What other systems might be affected?        |
 
 **Risk Mitigation Strategies**:
 
@@ -411,6 +415,8 @@ For significant incidents, establish clear role assignments:
 - Change management and cultural development
 
 #### Cross-Training Program
+
+> **Reality check.** The real test of cross-training is brutally simple: can the person who knows the most about your scariest system take a two-week holiday with their phone off? If the honest answer is "no, we'd pray nothing breaks," you don't have a team — you have a single point of failure who occasionally sleeps. Cross-training isn't a nice-to-have; it's how you stop one resignation from becoming a crisis.
 
 **Skill Matrix Development**:
 
@@ -833,11 +839,15 @@ Every Tier 1 and Tier 2 system must have a documented recovery runbook containin
 
 ### Maturity Levels
 
-- **Level 1 - Initial**: Practices are ad hoc and reactive
-- **Level 2 - Repeatable**: Basic practices are defined and followed
-- **Level 3 - Defined**: Practices are standardized and integrated
-- **Level 4 - Managed**: Practices are measured and continuously improved
-- **Level 5 - Optimizing**: Practices are continuously evolving and innovative
+| Level | Name       | What It Looks Like                                     |
+| ----- | ---------- | ------------------------------------------------------ |
+| 1     | Initial    | Practices are ad hoc and reactive                      |
+| 2     | Repeatable | Basic practices are defined and followed               |
+| 3     | Defined    | Practices are standardized and integrated              |
+| 4     | Managed    | Practices are measured and continuously improved       |
+| 5     | Optimizing | Practices are continuously evolving and innovative     |
+
+> **Note.** Maturity is per-practice, not a single team-wide grade. It's completely normal — healthy, even — to be Level 4 at Incident Management and Level 1 at Financial Management. Resist the urge to average them into one flattering number; the whole point is to see clearly where the next bit of effort actually pays off.
 
 ### Assessment Questions by Practice
 

@@ -255,10 +255,12 @@ Difficulty in measuring framework success and communicating value to stakeholder
 
 **Context-Specific Modifications**:
 
-- **High-Availability Environments**: Shorter cycles with more frequent reviews
-- **Small Teams**: Combined cycles and simplified reporting
-- **Regulated Industries**: Enhanced documentation and audit trail requirements
-- **Cloud-Native Environments**: Emphasis on automation and self-healing capabilities
+| Environment | Recommended Adaptation |
+| ----------- | ---------------------- |
+| High-availability environments | Shorter cycles with more frequent reviews |
+| Small teams | Combined cycles and simplified reporting |
+| Regulated industries | Enhanced documentation and audit trail requirements |
+| Cloud-native environments | Emphasis on automation and self-healing capabilities |
 
 ## 🚨 Troubleshooting Framework Issues
 
@@ -287,29 +289,14 @@ Difficulty in measuring framework success and communicating value to stakeholder
 
 ### Common Anti-Patterns and Solutions
 
-**Anti-Pattern 1: Framework Theater**
+| Anti-Pattern | The Problem | Symptoms | Solution |
+| ------------ | ----------- | -------- | -------- |
+| Framework theater | Going through framework motions without real commitment | Perfect documentation but no operational improvements | Focus on outcomes rather than process compliance |
+| Tool obsession | Believing tools alone will solve operational problems | Extensive tool implementations with limited process improvements | Implement practices first, then support with appropriate tools |
+| Perfectionism paralysis | Waiting for perfect conditions before starting framework implementation | Endless planning without action or pilot implementations | Start with imperfect implementations and improve iteratively |
+| One-size-fits-all | Rigidly applying framework without considering context | Framework practices that don't fit team or organizational reality | Thoughtfully adapt framework while maintaining core principles |
 
-- **Problem**: Going through framework motions without real commitment
-- **Symptoms**: Perfect documentation but no operational improvements
-- **Solution**: Focus on outcomes rather than process compliance
-
-**Anti-Pattern 2: Tool Obsession**
-
-- **Problem**: Believing tools alone will solve operational problems
-- **Symptoms**: Extensive tool implementations with limited process improvements
-- **Solution**: Implement practices first, then support with appropriate tools
-
-**Anti-Pattern 3: Perfectionism Paralysis**
-
-- **Problem**: Waiting for perfect conditions before starting framework implementation
-- **Symptoms**: Endless planning without action or pilot implementations
-- **Solution**: Start with imperfect implementations and improve iteratively
-
-**Anti-Pattern 4: One-Size-Fits-All**
-
-- **Problem**: Rigidly applying framework without considering context
-- **Symptoms**: Framework practices that don't fit team or organizational reality
-- **Solution**: Thoughtfully adapt framework while maintaining core principles
+> **Reality check.** Framework theater is the most seductive of these, because it photographs so well. The dashboards are green, the runbooks are immaculate, the retro produced thirty action items — and the same outage happens again next month. If your process produces beautiful artifacts and no fewer incidents, you don't have a framework, you have a hobby. Measure outcomes, not paperwork.
 
 ## 📈 Success Recovery Strategies
 

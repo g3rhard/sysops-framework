@@ -28,12 +28,14 @@ Risk management has an image problem. Say the words out loud and half the room p
 
 **Types of Operational Risk**:
 
-1. **Availability Risks**: Service outages and performance degradation
-2. **Security Risks**: Data breaches, unauthorized access, and cyber attacks
-3. **Compliance Risks**: Regulatory violations and audit failures
-4. **Capacity Risks**: Resource exhaustion and performance bottlenecks
-5. **Process Risks**: Human error and procedural failures
-6. **Technology Risks**: Hardware failures, software bugs, and vendor dependencies
+| Risk Type         | What It Covers                                            |
+| ----------------- | --------------------------------------------------------- |
+| Availability risk | Service outages and performance degradation               |
+| Security risk     | Data breaches, unauthorized access, and cyber attacks     |
+| Compliance risk   | Regulatory violations and audit failures                  |
+| Capacity risk     | Resource exhaustion and performance bottlenecks           |
+| Process risk      | Human error and procedural failures                       |
+| Technology risk   | Hardware failures, software bugs, and vendor dependencies |
 
 **Risk Management Principles**:
 
@@ -60,6 +62,8 @@ Risk management has an image problem. Say the words out loud and half the room p
 - **Detection Capability**: Ability to identify and respond to risk events
 - **Recovery Complexity**: Difficulty and time required to recover from risk events
 - **Cascading Effects**: Potential for risks to trigger additional problems
+
+> **Note.** Impact × probability scoring is a _prioritisation_ tool, not a measurement. The numbers are deliberately coarse — their job is to force a conversation about which risks to fund first, not to pretend three-times-four is a scientifically precise 12. Treat a 20 and a 19 as "both urgent," not as a ranking.
 
 ### 🎮 Interactive Risk Assessment Exercise
 
@@ -119,6 +123,8 @@ Risk Assessment Results:
 - **Access Management**: Automated provisioning and deprovisioning
 - **Compliance Checking**: Continuous compliance monitoring and reporting
 
+> **In practice.** "Default deny" reads beautifully on a slide and ruins your week the first time you turn it on. Roll it out in audit-only mode first, watch what legitimate traffic it _would_ have blocked for a couple of weeks, then enforce. Flipping straight to enforce is how you discover which critical batch job nobody documented — at 3 a.m., during the run that matters.
+
 **Security Integration with Operational Cycles**:
 
 **Daily Operations Cycle**:
@@ -146,10 +152,12 @@ Risk Assessment Results:
 
 **Security Incident Classification**:
 
-- **Category 1**: Confirmed data breach or system compromise
-- **Category 2**: Suspected security incident requiring investigation
-- **Category 3**: Security policy violation or configuration drift
-- **Category 4**: Security monitoring alert requiring review
+| Category   | Definition                                          |
+| ---------- | --------------------------------------------------- |
+| Category 1 | Confirmed data breach or system compromise          |
+| Category 2 | Suspected security incident requiring investigation |
+| Category 3 | Security policy violation or configuration drift    |
+| Category 4 | Security monitoring alert requiring review          |
 
 **Integrated Response Process**:
 
@@ -185,6 +193,8 @@ Modern software delivery depends on hundreds of open-source packages, container 
 - **Implementation path**: Start at SLSA 2 using GitHub Actions or Tekton Chains (auto-provenance); target SLSA 3 for critical services within 12 months.
 - Use **[Sigstore](https://docs.sigstore.dev/)** (Cosign, Rekor) to sign and verify container images and build provenance; integrate verification into OPA/Kyverno admission policies so only signed, policy-compliant images can deploy.
 
+> **In practice.** Don't gate deployments on _every_ CVE the scanner reports — you'll train the team to click "override" on reflex within a week. Gate on critical/high severity with a known fix available, and route the rest to the backlog. A policy nobody can satisfy is a policy everybody learns to bypass.
+
 **SysOps Integration**: Embed SBOM generation into the CI/CD pipeline (Release Management, Practice 8); block deployment on critical CVEs via Policy-as-Code gates; store SBOMs in an artifact repository (e.g., OCI-attached attestation) for audit evidence in Compliance Management.
 
 ### Breach Response Timelines
@@ -201,9 +211,10 @@ A well-defined breach response timeline prevents ad-hoc decisions under pressure
 | 72 hr – 30 days | Notify affected individuals ([GDPR Art. 34](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679) if high risk); coordinate with law enforcement if required                                                                          | Legal / Communications |
 | Ongoing         | Root cause analysis; control remediation; post-breach audit; lessons learned                                                                                                                                                                            | All teams              |
 
+> **Warning.** The regulatory clock starts on _awareness_, not on discovery. If an automated alert fires at 02:00 but nobody reviews it until 08:00, you have already burned six hours of your 72-hour GDPR window — and "we hadn't looked yet" is not a defence a regulator accepts.
+
 **Key principles**:
 
-- **Clock starts on awareness, not on discovery**: if an automated alert fires at 02:00 but is not reviewed until 08:00, the regulatory clock started at 02:00.
 - **Preserve evidence before containment actions change system state** where operationally safe to do so.
 - **Rehearse annually**: run a tabletop breach simulation to validate timeline adherence and update runbooks with findings.
 
@@ -228,6 +239,8 @@ Penetration testing proactively identifies exploitable vulnerabilities before at
 4. **Remediation tracking**: All critical and high findings must have remediation due dates; retest critical findings within 30 days.
 5. **Evidence retention**: Retain pentest reports for 3 years minimum for compliance purposes.
 
+> **Warning.** Never point a pentest at cloud-hosted assets without checking your provider's rules of engagement first. AWS, GCP, and Azure each publish what's allowed and what needs prior notice; unauthorized testing can trip abuse detection, get your account suspended, and — depending on jurisdiction — cross the line into an actual offence.
+
 **SysOps Integration**: Pentest findings feed directly into the risk register; critical findings trigger an emergency change (Practice 3, emergency change category); remediated controls are validated through Policy-as-Code and SBOM scanning to confirm fix persistence.
 
 ## 📋 Compliance Management
@@ -236,11 +249,13 @@ Penetration testing proactively identifies exploitable vulnerabilities before at
 
 **Common Compliance Requirements**:
 
-- **SOX (Sarbanes-Oxley)**: Financial controls and audit trails
-- **HIPAA**: Healthcare information privacy and security
-- **PCI DSS**: Payment card industry data security standards
-- **GDPR**: General data protection regulation
-- **SOC 2**: Service organization controls for security and availability
+| Regulation           | Domain                                                      |
+| -------------------- | ----------------------------------------------------------- |
+| SOX (Sarbanes-Oxley) | Financial controls and audit trails                         |
+| HIPAA                | Healthcare information privacy and security                 |
+| PCI DSS              | Payment card industry data security standards               |
+| GDPR                 | General Data Protection Regulation                          |
+| SOC 2                | Service organization controls for security and availability |
 
 **Compliance Integration Strategies**:
 
@@ -248,6 +263,8 @@ Penetration testing proactively identifies exploitable vulnerabilities before at
 - **Automated Evidence**: Generate compliance artifacts through normal operations
 - **Continuous Monitoring**: Real-time compliance status tracking and alerting
 - **Audit Readiness**: Maintain audit trails and documentation continuously
+
+> **In practice.** The cheapest audit is the one you never prepared for — because the evidence collected itself all year. If you find the team doing a frantic "audit sprint" the month before the assessor arrives, that's a signal your controls produce paperwork on demand instead of as a by-product of normal work. Aim for the latter; the binder-stuffing season is a smell, not a tradition.
 
 ### Audit Trail and Documentation
 
@@ -295,10 +312,12 @@ Penetration testing proactively identifies exploitable vulnerabilities before at
 
 **Data Classification**:
 
-- **Public**: Information intended for public consumption
-- **Internal**: Information for internal business use only
-- **Confidential**: Sensitive business information requiring protection
-- **Restricted**: Highly sensitive information with strict access controls
+| Classification | Description                                              |
+| -------------- | -------------------------------------------------------- |
+| Public         | Information intended for public consumption              |
+| Internal       | Information for internal business use only               |
+| Confidential   | Sensitive business information requiring protection      |
+| Restricted     | Highly sensitive information with strict access controls |
 
 **Data Handling Requirements**:
 
@@ -347,20 +366,26 @@ Penetration testing proactively identifies exploitable vulnerabilities before at
 - **Weekly Improvements**: Regular testing and improvement of continuity procedures
 - **Monthly Strategy**: Business continuity planning and capability development
 
+> **Warning.** An untested backup is not a backup — it's a hope with a cron job. The only thing that proves you can recover is a restore you actually performed, end to end, into a usable state. Plenty of teams have discovered mid-incident that their backups were silently corrupt, missing a critical table, or encrypted with a key nobody still has. Test the restore, not the backup.
+
 ### Disaster Recovery Implementation
 
 **Recovery Objectives**:
 
-- **Recovery Time Objective (RTO)**: Maximum acceptable downtime
-- **Recovery Point Objective (RPO)**: Maximum acceptable data loss
-- **Recovery Level Objective (RLO)**: Minimum acceptable service level during recovery
+| Objective                      | Defines                                          |
+| ------------------------------ | ------------------------------------------------ |
+| Recovery Time Objective (RTO)  | Maximum acceptable downtime                      |
+| Recovery Point Objective (RPO) | Maximum acceptable data loss                     |
+| Recovery Level Objective (RLO) | Minimum acceptable service level during recovery |
 
 **Recovery Strategies**:
 
-- **Hot Site**: Fully equipped backup facility ready for immediate use
-- **Warm Site**: Partially equipped facility requiring setup time
-- **Cold Site**: Basic facility requiring complete setup and restoration
-- **Cloud Recovery**: Cloud-based backup and recovery capabilities
+| Strategy       | Description                                             | Trade-off                               |
+| -------------- | ------------------------------------------------------- | --------------------------------------- |
+| Hot site       | Fully equipped backup facility ready for immediate use  | Lowest RTO, highest cost                |
+| Warm site      | Partially equipped facility requiring setup time        | Moderate RTO and cost                   |
+| Cold site      | Basic facility requiring complete setup and restoration | Highest RTO, lowest cost                |
+| Cloud recovery | Cloud-based backup and recovery capabilities            | Elastic cost; RTO depends on automation |
 
 ### Disaster Recovery Testing Methodology
 
@@ -462,6 +487,8 @@ Store all DR test logs in the knowledge management system (Chapter 6, Practice 5
 - **Mitigation Status**: Progress on risk mitigation initiatives
 - **Compliance Status**: Current compliance posture and any deficiencies
 
+> **Reality check.** A heat map glowing reassuringly green is the easiest artifact in this entire chapter to fake — just be optimistic about every probability. Executives trust the colours, so the colours have to be honest. If nothing on the board has been amber in six months, the question isn't "why are we so safe?" — it's "who's grading their own homework?"
+
 **Reporting Frequency**:
 
 - **Real-time**: Critical risk events and security incidents
@@ -473,40 +500,15 @@ Store all DR test logs in the knowledge management system (Chapter 6, Practice 5
 
 ### Risk Management Maturity
 
-**Level 1: Reactive**
+| Level | Stage        | What It Looks Like                                                                                                                                      |
+| ----- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1     | Reactive     | Risk managed after incidents; limited documentation and tracking; manual assessment; inconsistent mitigation                                            |
+| 2     | Managed      | Regular assessments and reviews; documented processes; basic tracking and reporting; some automated controls                                            |
+| 3     | Defined      | Risk management integrated across operations; standardized methodologies; comprehensive monitoring and alerting; risk-based decisions                   |
+| 4     | Quantitative | Quantitative assessment and modeling; predictive analytics and forecasting; cost-benefit analysis of mitigations; risk metrics tied to business metrics |
+| 5     | Optimizing   | Continuous process optimization; ML-driven risk prediction; risk management drives strategy; industry leadership in practice                            |
 
-- Risk management occurs after incidents
-- Limited risk documentation and tracking
-- Manual risk assessment processes
-- Inconsistent risk mitigation approaches
-
-**Level 2: Managed**
-
-- Regular risk assessments and reviews
-- Documented risk management processes
-- Basic risk tracking and reporting
-- Some automated risk controls
-
-**Level 3: Defined**
-
-- Integrated risk management across all operations
-- Standardized risk assessment methodologies
-- Comprehensive risk monitoring and alerting
-- Risk-based decision making processes
-
-**Level 4: Quantitative**
-
-- Quantitative risk assessment and modeling
-- Predictive risk analytics and forecasting
-- Cost-benefit analysis of risk mitigation options
-- Risk metrics integrated with business metrics
-
-**Level 5: Optimizing**
-
-- Continuous optimization of risk management processes
-- Advanced analytics and machine learning for risk prediction
-- Risk management drives strategic planning and decision making
-- Industry leadership in risk management practices
+> **Reality check.** Most teams don't need Level 5, and several reach for the machine-learning bullet long before they can reliably do the Level 2 basics. Be honestly Level 2 before you cosplay Level 5 — a tidy risk register that people actually keep up to date beats a predictive model nobody trusts.
 
 ### Continuous Improvement
 

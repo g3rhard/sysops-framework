@@ -254,6 +254,8 @@ Each phase maps to the maturity levels in [Chapter 6](chapter-06-practices.md): 
 
 ## 🚧 Common Implementation Challenges
 
+> **Reality check.** Every one of the challenges below is really a people problem wearing a process costume. You can have a flawless roadmap and still stall because one influential skeptic decided this is "the latest thing management read about." Win the people and the process follows; win the process and ignore the people, and you'll be relaunching this in eighteen months.
+
 ### Challenge 1: Resistance to Change
 
 **Symptoms**: Team members preferring old processes, skepticism about framework benefits, reluctance to invest time in new approaches
@@ -322,29 +324,35 @@ Each phase maps to the maturity levels in [Chapter 6](chapter-06-practices.md): 
 
 ### Implementation Health Metrics
 
-- **Adoption Rate**: Percentage of framework practices being used consistently
-- **Process Maturity**: Assessment of how well each cycle is functioning
-- **Tool Integration**: Level of automation and tool integration achieved
-- **Team Capability**: Skills and expertise development progress
-- **Cultural Change**: Evidence of cultural transformation and continuous improvement mindset
+| Metric           | What It Tracks                                                          |
+| ---------------- | ----------------------------------------------------------------------- |
+| Adoption rate    | Percentage of framework practices being used consistently               |
+| Process maturity | Assessment of how well each cycle is functioning                        |
+| Tool integration | Level of automation and tool integration achieved                       |
+| Team capability  | Skills and expertise development progress                               |
+| Cultural change  | Evidence of cultural transformation and continuous improvement mindset  |
 
 ## 🔄 Adaptation and Customization
 
 ### Framework Customization Guidelines
 
-- **Maintain Core Principles**: Don't compromise the fundamental values and principles
-- **Adapt Cycle Timing**: Adjust cycle lengths based on your environment
-- **Customize Metrics**: Use metrics that matter to your stakeholders
-- **Scale Appropriately**: Adjust complexity based on team size and maturity
-- **Integrate Organizationally**: Align with existing organizational processes where beneficial
+| Guideline                 | What It Means                                                     |
+| ------------------------- | ---------------------------------------------------------------- |
+| Maintain core principles  | Don't compromise the fundamental values and principles           |
+| Adapt cycle timing        | Adjust cycle lengths based on your environment                   |
+| Customize metrics         | Use metrics that matter to your stakeholders                     |
+| Scale appropriately       | Adjust complexity based on team size and maturity                |
+| Integrate organizationally | Align with existing organizational processes where beneficial   |
 
 ### Industry-Specific Adaptations
 
-- **Financial Services**: Enhanced compliance and audit trail requirements
-- **Healthcare**: Patient safety and regulatory compliance integration
-- **Manufacturing**: Integration with production planning and quality systems
-- **Technology**: Alignment with development and product release cycles
-- **Government**: Compliance with procurement and security regulations
+| Industry           | Adaptation Emphasis                                       |
+| ------------------ | --------------------------------------------------------- |
+| Financial services | Enhanced compliance and audit trail requirements          |
+| Healthcare         | Patient safety and regulatory compliance integration      |
+| Manufacturing      | Integration with production planning and quality systems  |
+| Technology         | Alignment with development and product release cycles      |
+| Government         | Compliance with procurement and security regulations      |
 
 ## 🎯 Chapter Summary
 

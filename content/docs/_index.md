@@ -16,6 +16,24 @@ This is the comprehensive documentation for the SysOps Framework - a modern meth
 
 Traditional agile methodologies like Scrum and SAFe have revolutionized software development, but they fall short when applied to system administration and operations teams. The **SysOps Framework** is a purpose-built methodology designed specifically for system administrators, system engineers, and operations teams who cannot work within traditional sprint boundaries but still need structured, efficient, and continuously improving workflows.
 
+## Who This Book Is For
+
+Let's be honest about who we wrote this for, because it isn't everyone.
+
+This book is for **teams of highly skilled individuals who each run their own corner of the world** — separate projects, separate systems, separate on-call pagers — yet somehow share a single team name on the org chart. You are the people who can debug a kernel panic before coffee, design a migration over lunch, and still get pulled into a "quick question" that eats the afternoon. You don't need hand-holding. You need _order_.
+
+Your work is a genuine blend rather than one clean category:
+
+- **Operational work** — keeping things alive, on call, reactive, never sleeps.
+- **R&D** — evaluating, prototyping, and proving out the next thing before betting the platform on it.
+- **Development** — yes, some, but it's rarely the majority and rarely fits a tidy backlog.
+
+If you've ever tried to run a sprint over that mix, you already know the punchline: it doesn't work. Story points evaporate the moment production catches fire. Velocity charts measure how badly your week got interrupted. Retrospectives turn into a list of "things that disrupted us" — as if doing your actual job were a defect.
+
+This is also an **opinionated** book. The strong opinion at its heart is simple: a team of brilliant individualists, each excellent in isolation, becomes far more than the sum of its parts once you give the shared work a shared shape — _without_ forcing everyone into the same lockstep cadence. This framework is the author's attempt to bring all of that together: structure for the people who resist structure, for good reasons.
+
+**If you recognise your team in the description above, read on.** If you're a feature-factory squad shipping a single product on a clean two-week heartbeat, Scrum is probably serving you fine — and that's genuinely okay. Use the right tool for the job. For everyone living in the messy middle, welcome.
+
 ## Quick Navigation
 
 ### Foundation Concepts
@@ -119,6 +137,7 @@ New to the SysOps Framework? Follow this learning path:
 - **[Glossary](glossary/)**: Complete reference of SysOps Framework terminology and acronyms
 - **[Framework Data Relationships](data-relationships/)**: Understanding how cycles, practices, and metrics interconnect
 - **[Getting Started Guide](getting-started/)**: 30-day quick-start implementation plan
+- **[Appendices: Templates & Checklists](chapter-13-appendices/)**: Readiness checklists, the six-month milestone tracker, and copy-paste templates (post-mortem, incident commander, change control, SLA)
 
 ## Community and Support
 

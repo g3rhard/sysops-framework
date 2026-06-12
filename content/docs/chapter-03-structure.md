@@ -15,6 +15,8 @@ By the end of this chapter, you will understand:
 - The specific activities and outcomes of each cycle
 - How to adapt the cycles to your team's needs
 
+> **Principles in play.** The multi-cycle structure exists to honour three principles from [Chapter 2](chapter-02-principles.md) at once: _Continuous Availability_ (the daily cycle never stops), _Rapid Response_ (interrupts are designed in, not apologised for), and _Automation and Efficiency_ (the weekly cycle is where toil goes to die).
+
 ## 🔄 The Multi-Cycle Approach
 
 Traditional agile frameworks use a single cycle (sprint) to organize all work. This creates artificial constraints for operations teams who handle different types of work with different time horizons and urgency levels. The SysOps Framework uses three interconnected cycles that run simultaneously:
@@ -30,6 +32,8 @@ This multi-cycle approach acknowledges that operations teams simultaneously:
 - Respond to immediate issues (daily)
 - Improve systems and processes (weekly)
 - Plan and execute strategic changes (monthly)
+
+Think of it less like a sprint and more like a hospital. The emergency room (daily) never closes and can't schedule its patients. The ward rounds (weekly) review what keeps coming through the door and adjust treatment. And the board (monthly) decides whether to build a new wing. Nobody sane asks the ER to stop accepting patients because it's "mid-sprint" — yet that is precisely what we ask of operations teams every time we hand them a single cadence and wish them luck.
 
 ## ⚡ Daily Operations Cycle (24-48 hours)
 
@@ -61,6 +65,8 @@ Handle immediate operational needs: system monitoring, incident response, routin
 - Daily standalones (not standups) - brief status sharing
 - Proactive monitoring that identifies issues before they become critical
 - Clear escalation procedures for different alert types
+
+> Yes, "standalones," not "standups" — and the distinction is deadly serious. A standup asks "what did you commit to and are you on track?" A standalone asks "is anything on fire, and does anyone need help?" One of those questions is useful to a person who spent last night babysitting a failing RAID array. The other invites them to apologize for it.
 
 #### 2. Respond (As Needed)
 

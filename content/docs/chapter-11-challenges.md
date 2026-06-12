@@ -15,7 +15,11 @@ By the end of this chapter, you will understand:
 - When to adapt the framework vs. when to change the environment
 - How to troubleshoot framework adoption issues
 
+> **Principles in play.** When the framework misbehaves, the principles are your debugging guide. Most adoption failures trace back to a quietly abandoned principle — usually _Automation and Efficiency_ or _Knowledge Sharing_ ([Chapter 2](chapter-02-principles.md)).
+
 ## 🚧 Common Implementation Challenges
+
+Here's the part of the book where we admit the framework is not magic. Adopting it will, at various points, be awkward, politically inconvenient, and quietly resisted by at least one person who liked things the old way. That's normal. A methodology that promised a frictionless rollout would be lying to you, and you've met enough vendors to know the smell. What follows are the failure modes we see most often, and what actually helps — not "secure executive buy-in and synergize" platitudes, but the unglamorous moves that work.
 
 ### Challenge 1: Resource Constraints and Competing Priorities
 

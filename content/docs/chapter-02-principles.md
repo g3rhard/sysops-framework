@@ -38,6 +38,8 @@ The key difference is **structure and operationalisation**: ITIL 4 provides a co
 
 ---
 
+A word on why principles come before process. Every operations veteran has, at some point, found themselves at 3 a.m. holding a decision the runbook never anticipated: the failover worked, but now the _primary_ is back and disagreeing with the secondary about who owns the truth. There is no procedure for that. There is only judgement — and judgement, under pressure, is just your principles showing. The six values below are the ones we want showing when the runbook runs out.
+
 ### 🛡️ 1. Service Reliability First
 
 **The Principle**: Every decision and action prioritizes system reliability and service availability above all other considerations.
@@ -151,6 +153,8 @@ The six principles create a reinforcing system:
 | Responding to change over plans       | **Rapid response protocols within risk boundaries**          |
 
 This isn't a rejection of agile values but an adaptation for operational realities. Operations teams can't prioritize individuals over processes when those processes prevent outages. They can't minimize documentation when system complexity requires detailed runbooks.
+
+> The Agile Manifesto was written by seventeen people at a ski lodge in Utah. Wonderful document; genuinely changed the industry. But nobody in that room was carrying a pager, and it shows. The table above isn't a correction — it's what the same good instincts look like once someone _is_ carrying the pager.
 
 ## 🎮 Interactive Exercise: Principle Application
 

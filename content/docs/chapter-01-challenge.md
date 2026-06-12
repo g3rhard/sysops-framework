@@ -15,6 +15,8 @@ By the end of this chapter, you will understand:
 - The specific challenges that system administrators face with sprint-based approaches
 - Real-world scenarios where agile falls short in operations contexts
 
+> **A quick word on who this is for.** If your "team" is really a band of specialists each running their own projects, systems, and pagers — doing a heavy mix of operational work and R&D with only a sprinkle of development — and you've been quietly suspecting that Scrum was built for somebody else's job, this chapter is going to feel uncomfortably familiar. That discomfort is the point. Keep reading.
+
 ## 🚨 The Reality of Operations Work
 
 Imagine this scenario: It's Tuesday morning, you're in the middle of sprint planning for the next two weeks. Your team has carefully estimated story points, committed to deliverables, and blocked out time for focused development work. Suddenly, your monitoring system starts screaming - the main database server is showing signs of imminent failure, customer-facing services are experiencing intermittent timeouts, and the CEO is asking for updates every 15 minutes.

@@ -15,6 +15,8 @@ By the end of this chapter, you will understand:
 - Strategies for managing organizational resistance and change
 - Leadership approaches that support operations team transformation
 
+> **Principles in play.** Culture is where _Knowledge Sharing_ either lives or dies, and where _Continuous Availability_ ([Chapter 2](chapter-02-principles.md)) is kept humane — sustainable on-call instead of slow-motion burnout.
+
 ## 🌱 Building an Operations-Focused Culture
 
 ### The Cultural Challenge
@@ -50,6 +52,8 @@ Traditional organizational cultures often prioritize speed of delivery over oper
 - **Operations View**: Build team capabilities that don't depend on specific individuals
 - **Balance**: Value expertise while ensuring knowledge sharing and cross-training
 - **Implementation**: Reward knowledge sharing and mentoring alongside individual expertise
+
+> Every team has a Dave. Dave is brilliant, Dave knows where all the bodies are buried, and Dave is the only person who understands the billing batch job — which is fine right up until Dave goes on holiday to a place without signal and the batch job decides that's the week to misbehave. The hero culture feels great until the hero is unreachable. The goal isn't to get rid of Dave; it's to make sure the team survives Dave's well-deserved week off. (Dave, incidentally, also deserves to take a holiday without his phone.)
 
 ## 🏢 Organizational Structure and Support
 

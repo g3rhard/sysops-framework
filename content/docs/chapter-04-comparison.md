@@ -15,11 +15,15 @@ By the end of this chapter, you will understand:
 - How to communicate framework benefits to stakeholders
 - When to use which approach for different types of work
 
+> **Principles in play.** Every comparison in this chapter is judged against the same yardstick: does the methodology respect _Service Reliability First_ and _Continuous Availability_ ([Chapter 2](chapter-02-principles.md))? That's the lens here — not feature-counting.
+
 ## 📊 Framework Comparison Overview
 
 ![Framework Comparison Chart](../assets/agile-frameworks-comparison.png)
 
 The comparison above illustrates fundamental differences between traditional agile approaches and the SysOps Framework. While each methodology has its place, understanding when and how to apply them is crucial for team success.
+
+A quick disclaimer before the knives come out: this chapter is not a hit piece on Scrum. Scrum is superb at what it was built for — a team of developers turning a backlog into shipped features on a steady rhythm. The problem isn't Scrum; it's using a fishing rod to dig a trench. The tool is fine. We're just doing different work.
 
 ## 🏃‍♂️ Scrum vs SysOps Framework
 
@@ -46,6 +50,8 @@ The comparison above illustrates fundamental differences between traditional agi
 **SysOps**: Interruptions are expected and planned for. The framework includes built-in protocols for immediate response without disrupting ongoing work.
 
 **Example**: A database server starts showing signs of failure on Tuesday of a 2-week sprint. In Scrum, this becomes an emergency that "breaks" the sprint. In SysOps, this is handled in the daily operations cycle while weekly improvements and monthly strategic work continue normally.
+
+> There's a particular sound a Scrum team makes when production breaks mid-sprint. It's the sound of a burndown chart being quietly redrawn while everyone agrees not to mention velocity at the retro. SysOps simply removes the theatre: the incident was always going to happen, so we built a place for it to go.
 
 ## 🏢 SAFe vs SysOps Framework
 

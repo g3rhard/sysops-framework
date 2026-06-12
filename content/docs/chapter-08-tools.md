@@ -16,9 +16,13 @@ By the end of this chapter, you will understand:
 - Modern platform engineering patterns: GitOps, Service Mesh, Policy-as-Code, OpenTelemetry, ChatOps
 - Tool maturity progression from basic to advanced implementations
 
+> **Principles in play.** Tools serve principles, never the reverse. This chapter mostly advances _Automation and Efficiency_ and _Knowledge Sharing_ ([Chapter 2](chapter-02-principles.md)); a tool that serves neither is just a new thing to maintain.
+
 ## 🛠️ The SysOps Technology Stack
 
 Modern operations teams require integrated toolsets that support the SysOps Framework's multi-cycle approach. Unlike development-focused tools, operations tools must handle continuous monitoring, immediate response capabilities, and seamless integration across multiple systems and teams.
+
+One caution before the shopping spree. Every team eventually meets the colleague who is convinced the next outage would be prevented by just the right tool — and who has a browser with forty open tabs to prove it. Tools don't fix broken processes; they automate them, which means a bad process plus a great tool gives you a faster, more expensive bad process. Buy tools to remove toil from a practice you already understand, not to paper over one you've been avoiding.
 
 ### Tool Categories Overview
 
@@ -33,6 +37,25 @@ The SysOps Framework requires tools in nine essential categories:
 7. **GitOps and Continuous Delivery** - Declarative, git-driven deployment pipelines
 8. **Platform Engineering** - Self-service internal developer platforms and golden paths
 9. **Policy and Compliance Automation** - Code-based guardrails and audit evidence
+
+### Mapping Tools to Practices
+
+Tools exist to serve practices, not the other way around. Buying a tool before you understand which practice it supports is how teams end up with three overlapping monitoring stacks and nobody on call who trusts any of them. The table below maps each tool category back to the management practices it supports in [Chapter 6](chapter-06-practices.md), so you can shop for capability against a real need.
+
+| Tool category ([this chapter](chapter-08-tools.md))   | Primary practices served ([Chapter 6](chapter-06-practices.md))                                               |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Monitoring & Observability                            | Service Level Management (1), Incident & Problem Management (2), Capacity & Performance Management (4)         |
+| Automation & Orchestration                            | Change & Configuration Management (3), Release Management (8), Service Request Management (10)                 |
+| Incident Management                                   | Incident & Problem Management (2)                                                                             |
+| Knowledge Management                                  | Knowledge & Documentation Management (5), Team & Skill Development (6)                                         |
+| Collaboration & Communication                         | Incident & Problem Management (2), Knowledge & Documentation Management (5), Service Request Management (10)   |
+| Analytics & Intelligence                              | Capacity & Performance Management (4), Financial Management (11), Service Level Management (1)                 |
+| GitOps & Continuous Delivery                          | Change & Configuration Management (3), Release Management (8)                                                  |
+| Platform Engineering                                  | Service Request Management (10), Asset Management (9)                                                          |
+| Policy & Compliance Automation                        | Change & Configuration Management (3), Vendor & Contract Management (7); also Risk & Compliance ([Chapter 10](chapter-10-risk.md)) |
+| Networking & Infrastructure Operations                | Capacity & Performance Management (4), Asset Management (9), Backup & Recovery Operations (12)                 |
+
+> This catalogue is the canonical home for _all_ tooling in the framework. Other chapters name tools in passing for context, but the evaluation criteria and the practice mapping live here.
 
 ## 📊 Monitoring and Observability Platforms
 

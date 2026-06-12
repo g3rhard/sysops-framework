@@ -15,6 +15,8 @@ By the end of this chapter, you will understand:
 - Key milestones and success criteria for each phase
 - Common implementation challenges and how to overcome them
 
+> **Principles in play.** A rollout that burns out the team betrays the very principles it's meant to install. Watch especially for _Automation and Efficiency_ and _Knowledge Sharing_ ([Chapter 2](chapter-02-principles.md)) — they're the two that make adoption stick rather than snap back the moment you stop pushing.
+
 ## 🗺️ The Implementation Roadmap
 
 ![SysOps Implementation Roadmap](../assets/sysops-roadmap.png)
@@ -52,31 +54,13 @@ Implementing the SysOps Framework requires a systematic, phased approach that mi
 
 #### Team Readiness Assessment
 
-Use this checklist to evaluate your team's readiness:
+Before changing a single process, find out where you actually stand — across three dimensions:
 
-**Technical Readiness**:
+- **Technical readiness** — do you already have monitoring, documentation, automation, incident response, and change management, even if informal?
+- **Cultural readiness** — is the team open to change, and does leadership genuinely back it (rather than just nodding in a meeting)?
+- **Organizational readiness** — are services, ownership, and service-level expectations clear enough to build on?
 
-- [ ] Existing monitoring and alerting systems
-- [ ] Documentation and knowledge management practices
-- [ ] Automation tools and capabilities
-- [ ] Incident response procedures
-- [ ] Change management processes
-
-**Cultural Readiness**:
-
-- [ ] Team openness to new approaches
-- [ ] Leadership support for change
-- [ ] Stakeholder understanding of operational challenges
-- [ ] Current team collaboration and communication patterns
-- [ ] Willingness to invest time in improvement
-
-**Organizational Readiness**:
-
-- [ ] Clear service definitions and ownership
-- [ ] Defined service level expectations
-- [ ] Existing metrics and measurement practices
-- [ ] Resource availability for implementation
-- [ ] Integration with other teams and processes
+Be ruthlessly honest here. A readiness assessment that flatters you is worse than no assessment at all, because it sells you confidence you haven't earned. The full tick-box version of all three lists — the one you print out and work through as a team — lives in **[Appendix A](chapter-13-appendices.md)**. Rule of thumb: if more than a third of any single list is unchecked, fix those gaps _before_ starting the roadmap, not during it.
 
 #### Baseline Metrics Collection
 
@@ -255,53 +239,18 @@ Before implementing changes, establish baseline measurements:
 
 ## 🎯 Success Criteria and Milestones
 
-### Month 1 Milestones
+The roadmap boils down to a simple shape: **build the daily heartbeat first, layer improvement on top, then add strategy — and only then chase the advanced toys.** Teams that invert this order (buying the shiny self-healing automation platform in week one, before they can reliably handle a 3 a.m. page) tend to end up with an expensive dashboard nobody trusts.
 
-- [ ] Current state fully assessed and documented
-- [ ] Implementation plan approved by leadership
-- [ ] Team trained on framework basics
-- [ ] Baseline metrics established
-- [ ] Initial stakeholder communications completed
+At a glance, here's what "done" looks like for each phase:
 
-### Month 2 Milestones
+- **Month 1 — Foundation:** assessed, planned, trained, baselined, and leadership on board.
+- **Months 2–3 — Daily & weekly cadence:** the daily operations cycle runs, then the weekly improvement cycle joins it and starts paying off.
+- **Month 4 — Strategy:** the monthly strategy cycle appears and all three cycles run in parallel.
+- **Months 5–6 — Maturity:** advanced capabilities prove their value, culture shifts, and the framework becomes "just how we work" — ready to scale or replicate.
 
-- [ ] Daily operations cycle implemented
-- [ ] Basic monitoring and alerting operational
-- [ ] Incident response procedures defined
-- [ ] Knowledge management system deployed
-- [ ] Daily review meetings established
+Each phase maps to the maturity levels in [Chapter 6](chapter-06-practices.md): expect practices to sit around Level 1–2 in Month 1, reach Level 3 (Defined) by Month 4, and stabilise at Level 4 (Managed) by Month 6, with a credible path to Level 5 (Optimizing).
 
-### Month 3 Milestones
-
-- [ ] Weekly improvement cycle integrated
-- [ ] First improvement projects completed
-- [ ] Cross-training program initiated
-- [ ] Improvement effectiveness measurement active
-- [ ] Team showing adoption of new practices
-
-### Month 4 Milestones
-
-- [ ] Monthly strategy cycle introduced
-- [ ] All cycles running in parallel
-- [ ] Advanced automation capabilities deployed
-- [ ] Strategic planning processes established
-- [ ] Stakeholder satisfaction improving
-
-### Month 5 Milestones
-
-- [ ] Advanced capabilities operational
-- [ ] Predictive analytics providing value
-- [ ] Team expertise development visible
-- [ ] Process optimization showing results
-- [ ] Cultural transformation evident
-
-### Month 6 Milestones
-
-- [ ] Full framework adoption achieved
-- [ ] Business value clearly demonstrated
-- [ ] Team autonomy and expertise established
-- [ ] Continuous improvement culture embedded
-- [ ] Framework ready for scaling or replication
+> **The detailed, month-by-month milestone tracker** — the printable checklist with every box to tick — lives in **[Appendix B](chapter-13-appendices.md)**, alongside the maturity targets for each month. Keep the narrative here; keep the tick-boxes there.
 
 ## 🚧 Common Implementation Challenges
 

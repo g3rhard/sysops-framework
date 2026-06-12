@@ -2,16 +2,22 @@
 
 > **LLM/Agent Instructions**: Use `- [x]` = verified complete, `- [ ]` = not yet done, `- [~]` = partial/needs improvement. Check file content before marking anything complete — do not infer from headings alone. Priority tiers: **P1** = must-have, **P2** = important, **P3** = nice-to-have.
 
+> **Editorial conventions** (keep these in mind for every edit):
+>
+> - **Audience** is defined up front (README, `_index.md` "Who This Book Is For", and a Chapter 1 callout): teams of highly skilled individuals each running separate projects/systems/pagers under one team name, whose work is a mix of operational + R&D + only some development, where agile/scrum doesn't fit and they want _order_. The book is intentionally opinionated about bringing that shared work together without a lockstep cadence.
+> - **Readability**: chapters deliberately mix the necessary dense reference material with jokes, short stories, and wry asides so the book reads as human-written, not AI-generated. Preserve this voice when editing.
+> - **Appendix rule**: detailed tick-box checklists and milestone trackers live in `content/docs/chapter-13-appendices.md`. Chapters keep the narrative, key points, and general plan, then point to the appendix.
+
 ---
 
-## Status Summary (as of 2026-06-02)
+## Status Summary (as of 2026-06-12)
 
 | Area                    | Done | Partial | Remaining |
 | ----------------------- | ---- | ------- | --------- |
 | Chapter content gaps    | 14   | 0       | 0         |
 | Missing practices       | 5    | 0       | 0         |
-| Cross-references & data | 2    | 1       | 3         |
-| Appendices & glossary   | 1    | 0       | 1         |
+| Cross-references & data | 6    | 0       | 0         |
+| Appendices & glossary   | 2    | 0       | 0         |
 | Medium-priority content | 6    | 0       | 1         |
 | Diagrams                | 0    | 0       | 1         |
 | Gamification elements   | 0    | 0       | all       |
@@ -49,15 +55,15 @@
 
 - [x] **Create data relationships page** — `content/docs/data-relationships.md` created (365 lines) with practice-to-cycle mappings and metric linkages. _Verified._
 - [x] **Map Chapter 6 practices to Chapter 3 cycles** — Covered in `data-relationships.md`. _Verified._
-- [~] **Link Chapter 7 metrics to Chapter 6 practices** — Partially covered in `data-relationships.md`; explicit per-metric cross-references missing inside `chapter-07-metrics.md` itself. _Partial._
-- [ ] **Cross-reference Chapter 2 principles throughout chapters** — Explicit inline principle callouts not found in chapters 3–12. _Missing._
-- [ ] **Link Chapter 5 milestones to Chapter 6 maturity levels** — Mapping between implementation roadmap and maturity model not found. _Missing._
-- [ ] **Map Chapter 8 tools to Chapter 6 practices** — Systematic tool-to-practice mapping table not found in Chapter 8. _Missing._
+- [x] **Link Chapter 7 metrics to Chapter 6 practices** — Per-category cross-reference callouts added inline in `chapter-07-metrics.md` under all four metric categories (Service Reliability → practices 1/2/12; Operational Efficiency → 3/4/8/10; Team Performance → 5/6; Business Value → 7/9/11). _Verified._
+- [x] **Cross-reference Chapter 2 principles throughout chapters** — "Principles in play" callout added near the top of every chapter 3–12, each naming the specific Chapter 2 principle(s) the chapter operationalises and linking back to `chapter-02-principles.md`. _Verified._
+- [x] **Link Chapter 5 milestones to Chapter 6 maturity levels** — Phase-to-maturity mapping added in `chapter-05-implementation.md` (Month 1 → Level 1–2, Month 4 → Level 3, Month 6 → Level 4 with path to 5) and per-month maturity targets added in the milestone tracker (`chapter-13-appendices.md`, Appendix B). _Verified._
+- [x] **Map Chapter 8 tools to Chapter 6 practices** — "Mapping Tools to Practices" table added in `chapter-08-tools.md` linking all nine tool categories (plus Networking/Infra Ops) to their primary Chapter 6 practices. _Verified._
 
 ### P1 — Glossary & Appendices
 
 - [x] **Create comprehensive glossary** — `content/docs/glossary.md` created (292 lines) with SLI, SLO, MTTR, MTBF, error budget, toil, on-call, etc. _Verified._
-- [ ] **Add appendices with templates** — P1. Post-mortem template, incident commander checklist, change control form, SLA template. Not found anywhere. _Missing._
+- [x] **Add appendices with templates** — P1. New `content/docs/chapter-13-appendices.md` created with Appendix A (implementation readiness checklists, moved from ch5), Appendix B (six-month milestone tracker with maturity targets, moved from ch5), Appendix C (blameless post-incident review template), Appendix D (incident commander checklist), Appendix E (change control form), and Appendix F (SLA template). Cross-linked from chapters 5/6/7. _Verified._
 - [ ] **Per-chapter companion resources** — P3. The fabricated "📚 Additional Resources" bullet lists (dangling text pointing to non-existent workshops/templates/calculators/assessments/case studies/community pages) were **removed from all chapters** (2–12) because they linked to nothing and misled readers. If these companion artifacts are desired, create them as real, linkable assets and re-add the sections. Candidate artifacts referenced by the old lists: decision-making framework template, multi-cycle planning worksheets, resource allocation calculator, framework-fit assessment, implementation planning workbook, readiness evaluation, runbook/documentation standards template, metrics dashboard design kit, tool selection/evaluation framework, culture readiness assessment, operational risk assessment template, implementation health-check diagnostic, practitioners network/community page, enhancement roadmap. Overlaps with **Add appendices with templates** (above) and **Multi-Platform Considerations → Downloadable worksheets**. _Removed; not yet created._
 
 ---
@@ -315,4 +321,4 @@ Each item below lists the specific claims that need a source link added inline i
 
 ---
 
-_Last verified: 2026-06-02. Re-verify completion status by grepping file content — do not infer from filenames or headings alone._
+_Last verified: 2026-06-12. Re-verify completion status by grepping file content — do not infer from filenames or headings alone._

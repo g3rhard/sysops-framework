@@ -10,7 +10,13 @@
 
 Traditional agile methodologies like Scrum and SAFe have revolutionized software development, but they fall short when applied to system administration and operations teams. The **SysOps Framework** is a purpose-built methodology designed specifically for system administrators, system engineers, and operations teams who cannot work within traditional sprint boundaries but still need structured, efficient, and continuously improving workflows.
 
-## 📚 Documentation Structure
+## � Who This Is For
+
+This book is for **teams of highly skilled individuals who each run their own corner of the world** — separate projects, separate systems, separate pagers — but share one team name. Your work is a genuine mix of **operational work** (reactive, never sleeps), **R&D** (prototyping the next thing), and **only some development** (rarely the majority, rarely a tidy backlog). If you've tried to run a sprint over that mix, you know it doesn't fit.
+
+It's an opinionated book, and the opinion is this: a team of brilliant individualists becomes far more than the sum of its parts once you give the shared work a shared shape — _without_ forcing everyone into the same lockstep cadence. If you're a feature-factory squad shipping one product on a clean two-week heartbeat, Scrum is probably serving you fine. For everyone in the messy middle who just wants _order_, read on.
+
+## �📚 Documentation Structure
 
 This framework is organized into comprehensive chapters for easy learning and implementation:
 

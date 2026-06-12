@@ -15,13 +15,19 @@ By the end of this chapter, you will understand:
 - Key performance indicators that align with operational goals
 - How to measure framework implementation success
 
+> **Principles in play.** Metrics are how _Service Reliability First_ stops being a slogan and becomes a number, and how _Risk Management_ ([Chapter 2](chapter-02-principles.md)) turns into something you can see coming rather than explain afterward.
+
 ## 📊 The SysOps Metrics Framework
 
 ![SysOps Metrics Dashboard](../assets/sysops-dashboard.png)
 
 Traditional agile metrics like velocity and story points don't capture the value that operations teams provide. The SysOps Framework requires different metrics that reflect operational realities and demonstrate business value. Our metrics framework organizes measurements into four key categories, each serving different stakeholders and decision-making needs.
 
+A warning before you build a single dashboard: a metric is a streetlight, not the street. The moment a number becomes a target, people optimize the number — sometimes at the expense of the thing it was supposed to represent. Measure MTTR badly and you'll teach your team to close incidents fast and fix them never. Reward "tickets closed" and watch one real problem get split into nine tickets. Every metric in this chapter comes with the same unwritten footnote: _measure it because it helps you decide something, not because it looks good on a slide._
+
 ## 🛡️ Service Reliability Metrics
+
+> **Linked practices ([Chapter 6](chapter-06-practices.md)):** these metrics are the scoreboard for _Service Level Management_ (Practice 1), _Incident and Problem Management_ (Practice 2), and _Backup & Recovery Operations_ (Practice 12). If a number here is unhealthy, the corresponding practice is where you go to fix it.
 
 ### Primary Indicators
 
@@ -88,6 +94,8 @@ Error Budget:
 
 ## ⚡ Operational Efficiency Metrics
 
+> **Linked practices ([Chapter 6](chapter-06-practices.md)):** these track the health of _Change and Configuration Management_ (Practice 3), _Capacity and Performance Management_ (Practice 4), _Release Management_ (Practice 8), and _Service Request Management_ (Practice 10).
+
 ### Automation and Process Metrics
 
 **Automation Coverage**
@@ -150,6 +158,8 @@ Error Budget:
 
 ## 👥 Team Performance Metrics
 
+> **Linked practices ([Chapter 6](chapter-06-practices.md)):** these measure the payoff from _Knowledge and Documentation Management_ (Practice 5) and _Team and Skill Development_ (Practice 6) — the practices that decide whether your team is resilient or just a bus-factor of one.
+
 ### Knowledge and Capability Indicators
 
 **Knowledge Transfer Rate**
@@ -198,6 +208,8 @@ Error Budget:
 - Career development and growth opportunities
 
 ## 💰 Business Value Metrics
+
+> **Linked practices ([Chapter 6](chapter-06-practices.md)):** these connect operations to the balance sheet, drawing on _Vendor and Contract Management_ (Practice 7), _Asset Management_ (Practice 9), and _Financial Management_ (Practice 11). The FinOps metrics below are the operational expression of Practice 11.
 
 ### Strategic Impact Measurements
 

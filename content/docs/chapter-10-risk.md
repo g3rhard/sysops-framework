@@ -18,9 +18,13 @@ By the end of this chapter, you will understand:
 - Breach response timelines and regulatory notification obligations
 - Penetration testing frequency, scope, and integration into the risk lifecycle
 
+> **Principles in play.** This whole chapter is _Risk Management_ ([Chapter 2](chapter-02-principles.md)) given room to breathe, in constant tension with _Service Reliability First_ — because the riskiest control of all is the one so heavy that nobody actually follows it.
+
 ## ⚖️ Risk Management in Operations
 
 ### Understanding Operational Risk
+
+Risk management has an image problem. Say the words out loud and half the room pictures a binder nobody has opened since the audit, full of heat maps in three shades of traffic-light. Real operational risk management is the opposite of a binder: it's the quiet voice that asks "what happens if _this_ disappears at the worst possible moment?" — and then does something cheap about it today instead of something expensive about it during the outage. The goal of this chapter is the voice, not the binder.
 
 **Types of Operational Risk**:
 

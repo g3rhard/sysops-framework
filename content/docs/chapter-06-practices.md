@@ -15,9 +15,13 @@ By the end of this chapter, you will understand:
 - Integration points between practices and operational cycles
 - Maturity models for continuous practice improvement
 
+> **Principles in play.** If [Chapter 2](chapter-02-principles.md) is the constitution, this chapter is the case law. All six principles — _Service Reliability First_, _Continuous Availability_, _Rapid Response_, _Automation and Efficiency_, _Knowledge Sharing_, and _Risk Management_ — turn up here wearing work clothes.
+
 ## 🎯 The Twelve Core Management Practices
 
 The SysOps Framework incorporates twelve essential management practices tailored specifically for operations teams. Unlike generic IT management approaches, these practices acknowledge the unique constraints and requirements of system administration work.
+
+Twelve practices is a lot to swallow in one sitting, so don't try. Nobody implements all twelve on a Monday and emerges enlightened by Friday. Most teams already do half of these badly and the other half by accident — the goal here is to do them on purpose. Read for recognition first ("oh, _that's_ what we've been failing at"), then pick the one that's currently costing you the most sleep and start there.
 
 ### 1. 📊 Service Level Management
 
@@ -46,6 +50,8 @@ The SysOps Framework incorporates twelve essential management practices tailored
 - Policies for when error budget is exhausted
 - Balance between reliability and feature velocity
 
+> Beware the stakeholder who demands "100% uptime." That last fraction of a nine costs more than all the others combined, and the honest answer is that you can't deliver it anyway — not while DNS, certificates, upstream providers, and physics all get a vote. An error budget reframes the conversation from "never fail" (a promise) to "here's exactly how much we can afford to fail, and we'll spend it deliberately" (a plan). One of those you can keep.
+
 #### Implementation Steps
 
 1. **Service Inventory**: Catalog all services and their criticality levels
@@ -63,6 +69,8 @@ The SysOps Framework incorporates twelve essential management practices tailored
 - **Latency SLI**: 95th percentile response time
 - **Latency SLO**: < 200ms for 95% of requests
 - **Error Budget**: 0.05% = ~22 minutes downtime per month
+
+> **Template:** a fill-in-the-blanks SLA skeleton is provided in **[Appendix F](chapter-13-appendices.md)**.
 
 ### 2. 🚨 Incident and Problem Management
 
@@ -163,6 +171,8 @@ Why wasn't load testing updated?
 - Follow up on action items until completed
 - Celebrate what the team did well during response
 
+> **Template:** a ready-to-use blameless post-incident review form is provided in **[Appendix C](chapter-13-appendices.md)**.
+
 #### Incident Command System (ICS) Roles
 
 For significant incidents, establish clear role assignments:
@@ -177,6 +187,8 @@ For significant incidents, establish clear role assignments:
 | **System Specialists**      | Database, network, application, security experts investigating their domain. Report findings to Technical Lead.              |
 
 **Why ICS Matters**: Prevents confusion, ensures one voice to customers, captures information for post-incident review, scales well for complex incidents.
+
+> **Template:** a pocket checklist for whoever holds the Incident Commander role is provided in **[Appendix D](chapter-13-appendices.md)**.
 
 ---
 
@@ -247,6 +259,8 @@ For significant incidents, establish clear role assignments:
 - Security vulnerability fixes
 - Critical system repairs
 - Accelerated approval processes
+
+> **Template:** a change control form (with the all-important rollback section) is provided in **[Appendix E](chapter-13-appendices.md)**.
 
 #### Configuration Management
 

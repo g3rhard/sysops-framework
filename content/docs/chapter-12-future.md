@@ -18,7 +18,11 @@ By the end of this chapter, you will understand:
 - Carbon-aware and sustainable infrastructure practices
 - Multi-cloud operations strategy and its operational implications
 
+> **Principles in play.** The technologies change; the principles shouldn't. Read this chapter asking how each trend serves _Automation and Efficiency_ and _Risk Management_ ([Chapter 2](chapter-02-principles.md)) — and stay suspicious of anything that serves neither.
+
 ## 🚀 The Evolution of Operations
+
+Predicting the future of technology is a humbling business. The industry that confidently declared "nobody will need more than 640K of memory," that promised the paperless office, and that has been six months away from fully self-driving everything for roughly a decade is not a reliable oracle. So treat this chapter as a weather forecast, not a train timetable: useful for deciding whether to pack a coat, foolish to bet the house on. The trends below are real and worth watching — just hold them loosely, and keep the principles from Chapter 2 closer than any vendor roadmap.
 
 ### From Reactive to Predictive Operations
 

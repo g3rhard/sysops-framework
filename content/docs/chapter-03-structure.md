@@ -37,6 +37,49 @@ This multi-cycle approach acknowledges that operations teams simultaneously:
 
 Think of it less like a sprint and more like a hospital. The emergency room (daily) never closes and can't schedule its patients. The ward rounds (weekly) review what keeps coming through the door and adjust treatment. And the board (monthly) decides whether to build a new wing. Nobody sane asks the ER to stop accepting patients because it's "mid-sprint" — yet that is precisely what we ask of operations teams every time we hand them a single cadence and wish them luck.
 
+### Operating Model in One Page
+
+```mermaid
+flowchart TD
+    subgraph daily["Daily Operations Cycle (24-48h) — Owned by On-Call / All Team"]
+        D1[Monitor: dashboards, alerts, health checks]
+        D2[Respond: incidents, emergencies, urgent requests]
+        D3[Document: incident logs, change records, handoff notes]
+        D4[Review: daily patterns, priorities for tomorrow]
+        D1 --> D2 --> D3 --> D4
+    end
+
+    subgraph weekly["Weekly Improvement Cycle (7d) — Owned by Team Lead / Rotating Engineer"]
+        W1[Plan: pick improvement from daily patterns]
+        W2[Execute: automation, documentation, process fixes]
+        W3[Measure: did the improvement work?]
+        W4[Improve: update backlog, plan next week]
+        W1 --> W2 --> W3 --> W4
+    end
+
+    subgraph monthly["Monthly Strategy Cycle (4wk) — Owned by Team Lead / Manager"]
+        M1[Assess: capacity planning, risk analysis, goal setting]
+        M2[Design: architecture, project plan, resource allocation]
+        M3[Implement: strategic initiative execution]
+        M4[Evaluate: results, lessons learned, next month priorities]
+        M1 --> M2 --> M3 --> M4
+    end
+
+    D4 -- recurring pain points --> W1
+    W4 -- successful patterns --> M1
+    M3 -- new operational needs --> D1
+```
+
+### Cycle Ownership and Handoffs
+
+| Cycle | Primary Owner | Accountable For |
+|---|---|---|
+| Daily | On-call engineer (rotating) | Keeping services running, incident response, shift handoff |
+| Weekly | Team lead or rotating improvement lead | Delivering at least one verifiable improvement per week |
+| Monthly | Team lead or manager | Delivering at least one strategic initiative per month or a clear explanation of why it was deferred |
+
+**Handoff rule**: No output from a faster cycle disappears into a slower one without explicit acceptance. If the daily cycle identifies a recurring pattern that merits a weekly improvement, the daily owner must write it up just well enough for the weekly owner to pick up. One paragraph, one link to the incident log. Done is better than perfect.
+
 ## ⚡ Daily Operations Cycle (24-48 hours)
 
 ### Purpose
@@ -392,6 +435,40 @@ The three cycles are designed to work together without conflict:
 | Monthly Strategy    | 10–20%           | Concentrated in implementation weeks     |
 
 > **Reality check.** These percentages are a starting hypothesis, not a budget handed down from on high. If your daily operations are eating 90%, that's not a planning failure to paper over — it's the single most important number in this book telling you the team is underwater. Fix the drowning before you fret about hitting a tidy 20% improvement target.
+
+### Sample Schedule: Small Ops Team (3-4 People)
+
+| Time | Mon | Tue | Wed | Thu | Fri |
+|---|---|---|---|---|---|
+| **Daily** | Standalone (15min), review weekend incidents | Standalone, check alert health | Standalone, mid-week capacity check | Standalone, knowledge share | Standalone, weekly review prep |
+| **On-call** | Engineer A primary | Engineer A | Engineer B primary | Engineer B | Engineer A |
+| **Improvement** | 2h — plan weekly improvement | — | 2h — execute improvement | — | 1h — measure, document results |
+| **Monthly** | — | — | — | — | Month 1-2: Assess; Month 3: Design; Month 4: Implement |
+
+**Key constraint**: With 3-4 people, the weekly improvement time is only 4-5 hours total. Pick one small improvement per week, not three.
+
+### Sample Schedule: Platform/SRE Team (6-8 People)
+
+| Time | Mon | Tue | Wed | Thu | Fri |
+|---|---|---|---|---|---|
+| **Daily** | Standalone (15min), rotate incident commander | Standalone, service review | Standalone, error budget check | Standalone, knowledge share | Standalone, metrics review |
+| **On-call** | Primary + secondary rotation (weekly swap) | | | | |
+| **Improvement** | 4h — sprint-style improvement planning | 2h — paired automation work | 4h — improvement execution | 2h — paired work | 2h — demo & retro |
+| **Monthly** | 2h — monthly initiative kickoff | As needed | As needed | As needed | Monthly review + next month planning |
+
+**Key advantage**: With 6+ people, a dedicated improvement lead can rotate weekly, and the team can run small paired sessions (automation, documentation, refactoring) without pulling everyone away from operational responsibilities.
+
+### What to Do When Daily Work Dominates
+
+If the daily cycle consistently consumes more than 80% of capacity:
+
+1. Do not try to implement the weekly or monthly cycle yet. They will fail and create frustration.
+2. Spend two weeks measuring _exactly_ what consumes the daily cycle — capture every interruption, its duration, and its source.
+3. Identify the top three sources of daily work that are recurring, predictable, or automatable.
+4. Negotiate with stakeholders for 10% protected improvement time. Show them the data: "These three things cost us X hours per week. With 4 hours of protected time, we can automate one of them this month."
+5. Once daily work drops below 70%, introduce the weekly cycle. Once below 60%, introduce the monthly cycle.
+
+This is not failure — it is honest capacity planning. The framework adapts to your reality, not the other way around.
 
 ### Priority Resolution
 

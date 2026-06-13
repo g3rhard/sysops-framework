@@ -12,21 +12,61 @@
 
 ## Status Summary (as of 2026-06-12)
 
-| Area                    | Done | Partial | Remaining |
-| ----------------------- | ---- | ------- | --------- |
-| Chapter content gaps    | 14   | 0       | 0         |
-| Missing practices       | 5    | 0       | 0         |
-| Cross-references & data | 6    | 0       | 0         |
-| Appendices & glossary   | 2    | 0       | 0         |
-| Medium-priority content | 6    | 0       | 1         |
-| Diagrams                | 0    | 0       | 1         |
-| Gamification elements   | 0    | 0       | all       |
+| Area                            | Done | Partial | Remaining |
+| ------------------------------- | ---- | ------- | --------- |
+| Chapter content gaps            | 14   | 0       | 0         |
+| Missing practices               | 5    | 0       | 0         |
+| Cross-references & data         | 6    | 0       | 0         |
+| Appendices & glossary           | 2    | 0       | 0         |
+| Medium-priority content         | 6    | 0       | 1         |
+| Diagrams (matplotlib PNGs)      | 4    | 0       | 0         |
+| Mermaid conversion for PDF/EPUB | 0    | 0       | all       |
+| Foundation & consistency (P0)   | 0    | 0       | 11        |
+| Quality & infrastructure (P1)   | 0    | 0       | 4         |
+| Product & repo (P1/P2)          | 0    | 0       | 5         |
+| Gamification elements           | 0    | 0       | all       |
+
+---
+
+## 🏗️ P0 — Foundation & Consistency
+
+> **Status**: None started. These are the most critical items from the editorial audit — they fix the book's entry funnel, resolve internal contradictions, and establish the operating model.
+
+### Entry Funnel Rewrites
+
+- [ ] **`_index.md`: Clarify promise, audience, and outcomes** — Add a one-liner at the top ("What this framework fixes"), followed by explicit "Who this is for" / "Who should not use this" / "Outcome at 30/90/180 days". Collapse the benefits block and move community/support to the bottom. Add a compact Mermaid narrative-arc diagram and a "Team profile → Should you read this?" table. Remove or clearly mark commercial/training offers that aren't live yet.
+- [ ] **`getting-started/_index.md`: Restructure as pilot guide** — Rebuild as a decision-based entry point with two explicit tracks: "Pilot in one team" (30-day) and "Full rollout" (180-day). Replace abstract prerequisites with observable signals. Link success indicators to concrete artifacts. Add a clear exit to either "ready for pilot" or "close readiness gaps first".
+- [ ] **Chapter 1: Add formal Problem Statement and Design Requirements** — After the research block, add a formal 5–7 sentence "Problem Statement" section that closes the argument. After "Key Insights", add "Design Requirements for a Better Ops Methodology" so Chapter 2 reads as the answer, not a philosophical leap. Add small-team and regulated-environment examples to broaden relevance.
+- [ ] **Chapter 2: Add principle precedence rules and anti-patterns** — For each principle, add a consistent micro-structure: "what it protects / what it costs / common misuse / proxy metrics / failure mode". Add a precedence-rules table for conflicts (e.g. reliability vs speed). Strengthen the bridge to Chapter 3 so the three-cycle model follows naturally.
+- [ ] **Chapter 3: Add one-page operating model and concrete calendars** — Lead with a single-page "operating model" visual showing which work type lives in which cycle, outputs that flow between cycles, and cycle owners. Add two concrete schedule examples: one for a small ops team, one for a platform/SRE team. Clarify that the 60–70 / 20–30 / 10–20 split is a hypothesis, not a KPI.
+
+### Consistency Fixes
+
+- [ ] **Fix practice count everywhere (6/7/12 → 12)** — Audit and correct every mention of the practice count across all files: `chapter-04-comparison.md` (says "six"), `data-relationships.md` (says "seven"), `glossary.md` (says "seven"), `_index.md` and `chapter-01-challenge.md` and any other page that references the count. The canonical number is **12 core management practices** as defined in Chapter 6.
+- [ ] **Create `data/framework.yaml` as single source of truth** — A canonical YAML file describing cycles, principles, practices, metric categories, and their relationships. Use it to generate glossary clusters, data-relationship diagrams, practice-index tables, and home-page summaries so drift can never recur.
+- [ ] **Convert ASCII / list schemas to Mermaid diagrams** — Replace all ASCII-art diagrams and verbose list-based schemas in `content/docs/` with proper Mermaid ````mermaid` code blocks. Add captions and meaningful alt-text to every diagram. Key targets: `data-relationships.md` (heavy ASCII), `chapter-03-structure.md` (cycle flow), `chapter-06-practices.md` (practice maps), and any remaining list-as-diagram patterns.
+- [ ] **Fix `baseURL` in `hugo.yaml`** — Change `baseURL: https://g3rhard.github.io/sysops-framework` to `https://g3rhard.cc/sysops-framework/` to match the live site and repo metadata.
+- [ ] **Update `data-relationships.md` to 12-practice model + Mermaid** — Rewrite the entire page to reflect the current 12-practice model, convert its ASCII diagrams into Mermaid, and make it a generated-from-source page (tied to `data/framework.yaml`).
+- [ ] **Update `glossary.md` to 12-practice model** — Fix all references to "seven management practices". Add per-term cross-references ("see also", "related practice", "related metric", "related chapter"). Add canonical terminology policy to prevent future drift.
 
 ---
 
 ## 📚 Content Gaps
 
-### P1 — Chapter Enhancements
+### P1 — Chapter Enhancements (existing — verified complete)
+
+### P1 — Chapter Restructuring & Depth (new — from editorial audit)
+
+- [ ] **Chapter 4: Restructure as buyer's guide** — Rebuild from "framework debate" into "when to use SysOps vs Scrum vs Kanban vs hybrid". Fix the practice-count inconsistency inside the comparison table (P0 cross-reference). Add middle-market and small-team examples. Add a "Quick selection guide" table at the top, "Hybrid operating model patterns" section, and "Stakeholder translation kit".
+- [ ] **Chapter 5: Add pilot/full-rollout tracks** — Add two explicit adoption trajectories: a 30-day pilot track and a 180-day full rollout. Give each phase named owners (team lead, on-call owner, manager, sponsor) and required artifacts. Add go/no-go criteria per month and a rollback plan for the rollout itself.
+- [ ] **Chapter 6: Add per-practice executive summary block** — For each of the 12 practices, add a consistent top block: "why it exists / minimal version / mature version / key metrics / dependencies / typical anti-patterns". Add a one-page practice index table at the chapter top with columns: criticality, effort, best-first-signal. Medium-term: consider splitting into child pages.
+- [ ] **Chapter 7: Add audience-based metric views** — Tie each metric category to a specific audience (on-call, team lead, platform manager, exec sponsor). Add a KPI specification template (definition, owner, cadence, data source, RAG thresholds, action-on-breach). Expand "what not to measure" and "how metrics can be gamed".
+- [ ] **Chapter 8: Add minimum viable stacks by team size** — Add three pre-configured stacks at the chapter top: minimum for small team, balanced for mid-size, regulated for enterprise. Separate capability discussion from vendor examples (capability first, then tool choices). Add "what not to buy yet" guidance. Medium-term: split into subpages by tool category.
+- [ ] **Chapter 9: Add manager's playbook** — Add concrete manager-oriented content: performance-review signals, career-ladder examples, on-call policy blueprint, stakeholder-expectation reset guidance. Strengthen the "anti-hero culture without anti-expertise" narrative.
+- [ ] **Chapter 10: Add control-mapping layer** — Add a control-mapping table showing which practices map to SOC 2 / ISO 27001 / GDPR / internal audit requirements. Distinguish policy, procedure, and evidence more clearly. Add policy-as-code examples (OPA/Rego) and DR-exercise-by-maturity-level guidance.
+- [ ] **Chapter 11: Restructure as symptom-driven troubleshooting** — Rebuild around "what you see → probable cause → corrective action" pattern. Add decision trees, rescue playbooks, and false-adoption-signals section.
+- [ ] **Chapter 12: Separate near-term/mid-term/horizon** — Split trends into "do now", "watch", and "long-term adapt". Tie each trend back to specific existing chapters (what changes, what stays invariant).
+- [ ] **Chapter 13: Export templates as downloadable files** — Add real version-controlled template files in a `templates/` directory: incident, change, SLO, on-call, reporting. Create a `team-starter-pack.zip` that bundles the core templates. Update appendix pages to link to the downloadable versions.
 
 - [x] **Chapter 1: Add source citations** — Converted statistics to "preliminary research" caveat in `chapter-01-challenge.md` (line 37). _Verified._
 - [x] **Chapter 2: Acknowledge ITIL/ITSM** — "Note on ITIL and Service Management" section added in `chapter-02-principles.md` (lines 22–35), mapping all 6 principles to ITIL domains. _Verified._
@@ -83,7 +123,38 @@
 
 - [x] **Improve all diagrams** — P2. All four matplotlib scripts completely rewritten with a shared `scripts/diagrams/_design_system.py` design system providing a consistent colour palette, card/shadow helpers, and typography hierarchy. Each diagram now uses white card panels with coloured accent headers, status-coloured values, and proper data-coordinate layouts. `generate_diagrams.py` updated to inject the diagrams directory into `sys.path` so the design system module resolves correctly in CI. Output at 300 DPI, ~430–540 KB per PNG. _Verified — all 4 diagrams generate cleanly._
 
+### PDF/EPUB Mermaid Conversion
+
+> **Critical finding**: Hugo renders Mermaid via client-side JavaScript (browser only). The Pandoc + lualatex PDF/EPUB pipeline has **no Mermaid handling** — `mermaid` code blocks would appear as raw verbatim text in the printed output.
+
+- [ ] **Add Mermaid CLI to CI pipeline** — P1. Install `@mermaid-js/mermaid-cli` (or equivalent headless renderer) in the PDF/EPUB workflow. Add a preprocessing step that finds all ````mermaid` blocks in the assembled Markdown, renders each to a PNG/SVG, and replaces the block with a standard `![diagram](...)` image reference before Pandoc runs.
+- [ ] **Add Mermaid alt-text and caption standard** — P1. Every new Mermaid diagram block must include a caption comment and `![Alt text](...)` fallback so readers of the PDF/EPUB get the same information. Document this in the style guide (see **Quality & Infrastructure** below).
+- [ ] **Vendor Mermaid JS for offline/reliable web rendering** — P3. Currently the Docsy theme fetches Mermaid JS from a CDN. For deterministic rendering (including offline use), vendor the JS bundle in `static/` or `assets/` and reference it locally.
+
 ---
+
+## 🔧 Quality & Infrastructure
+
+> **Status**: Not started. P1 (CI gates), P2 (style guide, accessibility).
+
+- [ ] **Create `docs/style-guide.md`** — P2. Define editorial rules: preferred language variant, heading style, emoji policy (note: the PDF pipeline strips emoji — document which are safe and which are not), callout taxonomy (note, tip, warning, caution), table conventions, example formatting, citation style, file naming, and tone. This prevents register drift between opinionated prose and catalogue sections.
+- [ ] **Add docs quality CI (`docs-quality.yml`)** — P1. Four mandatory jobs:
+  - **Prose lint**: Vale with a custom style config to catch register drift, passive voice, weasel words, and inconsistent terminology.
+  - **Markdown lint**: `markdownlint-cli2` with the existing `.markdownlint.json` config to enforce consistent Markdown style.
+  - **Link check**: `lychee` to verify all internal and external links in Markdown files.
+  - **Accessibility smoke test**: Pa11y CI against the built Hugo site (or a subset of key pages) to catch missing alt-text, heading-hierarchy issues, and contrast problems.
+- [ ] **Adopt accessibility-by-default requirements** — P2. Document and enforce: descriptive headings with one meaningful hierarchy per page, alt text on every contentful image, correct data-table markup, and WCAG AA contrast. Reference W3C guidance. This is critical because new Mermaid diagrams and the existing matplotlib assets both need proper alt-text.
+- [ ] **Add SEO and social-card metadata** — P2. Fix `baseURL` in `hugo.yaml` (already in **P0 — Foundation & Consistency**). Verify canonical URLs, sitemap behaviour, Open Graph titles/descriptions/images. Create a dedicated book cover/social share image (not just a repurposed asset screenshot).
+
+## 📗 Product & Repo
+
+> **Status**: Not started. P1 (README), P2 (CONTRIBUTING, positioning).
+
+- [ ] **Update README** — P1. Make it more repo-oriented: what the project is, who it helps, how to browse docs locally, how releases work, what is auto-generated. Fix the "EPUB coming soon" claim (the workflow already generates EPUB). Extract shared intro blocks into a partial or data source so README and docs home don't diverge.
+- [ ] **Update CONTRIBUTING.md** — P2. Add a clear contributor journey: local preview setup, branch naming, PR checklist, link to style guide, expected review norms, issue labels. Distinguish core-content contributions from translation/community contributions.
+- [ ] **Clarify product positioning** — P2. The project currently speaks as open framework + practical book + proto-service (training, support, certification). Decide whether the commercial layer is "planned" or "active" and reflect that consistently on the home page, getting-started page, and README. Remove or clearly label any training/support sections that don't have live offerings.
+- [ ] **Add Buy Me a Coffee placement** — P3. Add a soft support ask at the end of the appendices (after value is delivered) and in README after downloads.
+- [ ] **Add LinkedIn announcement drafts** — P3. The `Analysis.md` contains ready-to-use announcement text in both English and Russian. Polish and publish when the P0/P1 work is complete.
 
 ## 📎 Citation Standards
 
@@ -102,7 +173,7 @@
 | Domain                                       | Trusted Source                           | Base URL                                                                                                                         |
 | -------------------------------------------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | **ITIL 4**                                   | PeopleCert / Axelos official ITIL site   | https://www.axelos.com/certifications/itil-service-management                                                                    |
-| **ITIL 5**                                   | PeopleCert ITIL 5 announcement           | https://www.peoplecert.org/itil-5                                                                                                |
+| **ITIL 5**                                   | PeopleCert ITIL 5 announcement           | https://www.peoplecert.org/news-and-announcements/itil-version-5-explained                                                                                                |
 | **DORA metrics**                             | DORA (DevOps Research and Assessment)    | https://dora.dev/research/2023/dora-report/                                                                                      |
 | **SLSA framework**                           | OpenSSF SLSA specification               | https://slsa.dev/spec/v1.0/                                                                                                      |
 | **SBOM — CycloneDX**                         | OWASP CycloneDX specification            | https://cyclonedx.org/specification/overview/                                                                                    |
@@ -123,11 +194,11 @@
 | **Ansible**                                  | Red Hat Ansible official docs            | https://docs.ansible.com/                                                                                                        |
 | **Backstage (IDP)**                          | CNCF Backstage official docs             | https://backstage.io/docs/                                                                                                       |
 | **FinOps Foundation**                        | FinOps Foundation (CNCF) official site   | https://www.finops.org/introduction/what-is-finops/                                                                              |
-| **Green Software Foundation / SCI**          | GSF Software Carbon Intensity spec       | https://greensoftware.foundation/articles/software-carbon-intensity                                                              |
+| **Green Software Foundation / SCI**          | GSF Software Carbon Intensity spec       | https://greensoftware.foundation/standards/sci/                                                              |
 | **Carbon Aware SDK**                         | GSF Carbon Aware SDK GitHub              | https://github.com/Green-Software-Foundation/carbon-aware-sdk                                                                    |
 | **GDPR Art. 33 / Art. 34**                   | EUR-Lex GDPR full text                   | https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679                                                           |
 | **EU Cyber Resilience Act**                  | EUR-Lex CRA                              | https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R2847                                                             |
-| **US EO 14028 (SBOM mandate)**               | White House EO 14028                     | https://www.whitehouse.gov/briefing-room/presidential-actions/2021/05/12/executive-order-on-improving-the-nations-cybersecurity/ |
+| **US EO 14028 (SBOM mandate)**               | Federal Register EO 14028                | https://www.govinfo.gov/content/pkg/FR-2021-05-17/html/2021-10460.htm |
 | **SOC 2**                                    | AICPA Trust Services Criteria            | https://www.aicpa-cima.com/resources/landing/system-and-organization-controls-soc-suite-of-services                              |
 | **ISO 27001**                                | ISO/IEC 27001:2022                       | https://www.iso.org/standard/27001                                                                                               |
 | **SRE book (Google)**                        | Google SRE book (free online)            | https://sre.google/sre-book/table-of-contents/                                                                                   |
@@ -143,14 +214,14 @@ Each item below lists the specific claims that need a source link added inline i
 #### Chapter 2 — Principles (`chapter-02-principles.md`)
 
 - [x] ITIL 4 release date (February 2019), 34 practices, 7 guiding principles, SVS model → [Axelos ITIL 4](https://www.axelos.com/certifications/itil-service-management)
-- [x] ITIL 5 announcement (January 2026) → [PeopleCert ITIL 5](https://www.peoplecert.org/itil-5)
+- [x] ITIL 5 announcement (January 2026) → [PeopleCert ITIL 5](https://www.peoplecert.org/news-and-announcements/itil-version-5-explained)
 
 #### Chapter 6 — Practices (`chapter-06-practices.md`)
 
 - [x] DORA four-key metrics (deployment frequency, lead time, change failure rate, MTTR) → [dora.dev](https://dora.dev/research/2023/dora-report/)
 - [x] DORA elite thresholds (deployment frequency on-demand, lead time < 1 hr, CFR < 5%, MTTR < 1 hr) → same DORA source
 - [x] NIST SP 800-88 (media sanitisation at decommission) → [NIST 800-88r1](https://doi.org/10.6028/NIST.SP.800-88r1)
-- [x] 3-2-1-1 backup rule (immutable/WORM copy) → [CISA Ransomware Guide](https://www.cisa.gov/topics/cyber-threats-and-advisories/ransomware) (added explanatory callout)
+- [x] 3-2-1-1 backup rule (immutable/WORM copy) → [CISA Ransomware Guide](https://www.cisa.gov/resources-tools/resources/stopransomware-guide) (added explanatory callout)
 
 #### Chapter 7 — Metrics (`chapter-07-metrics.md`)
 
@@ -172,7 +243,7 @@ Each item below lists the specific claims that need a source link added inline i
 - [x] SBOM CycloneDX format (OWASP standard) → [cyclonedx.org](https://cyclonedx.org/specification/overview/)
 - [x] SBOM SPDX (ISO/IEC 5962:2021) → [spdx.dev](https://spdx.dev/specifications/)
 - [x] SLSA levels 1–4 → [slsa.dev/spec/v1.0](https://slsa.dev/spec/v1.0/)
-- [x] US EO 14028 SBOM mandate → [whitehouse.gov EO 14028](https://www.whitehouse.gov/briefing-room/presidential-actions/2021/05/12/executive-order-on-improving-the-nations-cybersecurity/)
+- [x] US EO 14028 SBOM mandate → [Federal Register EO 14028](https://www.govinfo.gov/content/pkg/FR-2021-05-17/html/2021-10460.htm)
 - [x] EU Cyber Resilience Act (2024) → [EUR-Lex CRA](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R2847)
 - [x] GDPR Art. 33 (72-hour notification) and Art. 34 (individual notification) → [EUR-Lex GDPR](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679)
 - [x] NIST SP 800-88 at decommission step → [NIST 800-88r1](https://doi.org/10.6028/NIST.SP.800-88r1) — cited in chapter-06-practices.md; also present in chapter-10 context
@@ -182,7 +253,7 @@ Each item below lists the specific claims that need a source link added inline i
 #### Chapter 12 — Future (`chapter-12-future.md`)
 
 - [x] FinOps Foundation definition and three phases → [finops.org](https://www.finops.org/introduction/what-is-finops/)
-- [x] Software Carbon Intensity (SCI) score → [GSF SCI spec](https://greensoftware.foundation/articles/software-carbon-intensity)
+- [x] Software Carbon Intensity (SCI) score → [GSF SCI spec](https://greensoftware.foundation/standards/sci/)
 - [x] Carbon Aware SDK → [GitHub GSF](https://github.com/Green-Software-Foundation/carbon-aware-sdk)
 - [x] WattTime API → [watttime.org](https://www.watttime.org/api-documentation/)
 - [x] Electricity Maps API → [electricitymaps.com](https://www.electricitymaps.com/free-tier-api)
@@ -321,4 +392,4 @@ Each item below lists the specific claims that need a source link added inline i
 
 ---
 
-_Last verified: 2026-06-12. Re-verify completion status by grepping file content — do not infer from filenames or headings alone._
+_Last verified: 2026-06-13 (editorial audit incorporated). Re-verify completion status by grepping file content — do not infer from filenames or headings alone._

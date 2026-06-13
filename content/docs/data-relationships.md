@@ -34,8 +34,8 @@ back into the cycles, closing the loop.
               v
    +-----------------------+
    |  PILLAR 2: PRACTICES  |   Define the work performed
-   |  7 management         |
-   |  practices            |
+    |  12 management        |
+    |  practices            |
    +-----------------------+
               |
               |  produce

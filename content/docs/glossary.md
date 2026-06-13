@@ -130,7 +130,7 @@ A management philosophy focused on eliminating waste and optimizing processes. O
 ### M
 
 **Management Practice**
-One of the seven core operational practices in the SysOps Framework: Service Level Management, Incident Management, Change Management, Capacity & Performance Management, Knowledge & Documentation Management, Team & Skill Development, and Vendor Management.
+One of the twelve core management practices in the SysOps Framework.
 
 **Mean Time Between Failures (MTBF)**
 The average operational time between service failures. Indicates system stability and the effectiveness of reliability investments.
@@ -216,7 +216,7 @@ A deployment strategy where changes are deployed to a subset of systems first (e
 ### T
 
 **Team Development**
-One of the seven core management practices in the SysOps Framework, focused on cross-training, skill development, and career development paths.
+One of the twelve core management practices in the SysOps Framework, focused on cross-training, skill development, and career development paths.
 
 **Toil**
 Manual, repetitive work that doesn't provide long-term value and can be automated. Managing toil is a key focus of operations teams.
@@ -233,7 +233,7 @@ A metric showing cost relative to business outcomes (e.g., cost per transaction,
 ### V
 
 **Vendor Management**
-One of the seven core management practices in the SysOps Framework, focused on managing vendor relationships, ensuring SLA compliance, and optimizing vendor partnerships.
+One of the twelve core management practices in the SysOps Framework, focused on managing vendor relationships, ensuring SLA compliance, and optimizing vendor partnerships.
 
 ---
 
@@ -261,15 +261,20 @@ A security principle that assumes no system is inherently trustworthy, requiring
 | Weekly  | 7 days   | Planned improvements | Automation, root cause analysis, process improvement |
 | Monthly | ~30 days | Strategic decisions  | Capacity planning, architecture review, goal setting |
 
-### The Seven Management Practices
+### The Twelve Management Practices
 
 1. **Service Level Management** - Define and monitor SLOs, manage error budgets
-2. **Incident Management** - Respond to incidents, conduct blameless post-mortems
-3. **Change Management** - Plan and implement changes, manage risk
-4. **Capacity & Performance Management** - Forecast needs, optimize utilization
-5. **Knowledge & Documentation Management** - Create and maintain documentation, facilitate knowledge transfer
-6. **Team & Skill Development** - Cross-training, career development, skill building
-7. **Vendor Management** - Manage vendor relationships and SLA compliance
+2. **Incident and Problem Management** - Respond to incidents, conduct blameless post-mortems, perform root cause analysis
+3. **Change and Configuration Management** - Plan and implement changes, manage risk, maintain CMDB
+4. **Capacity and Performance Management** - Forecast needs, optimize utilization
+5. **Knowledge and Documentation Management** - Create and maintain documentation, facilitate knowledge transfer
+6. **Team and Skill Development** - Cross-training, career development, skill building
+7. **Vendor and Contract Management** - Manage vendor relationships, SLA compliance, contract lifecycle
+8. **Release Management** - Govern CI/CD pipelines, manage deployment gates, coordinate rollouts
+9. **Asset Management** - Track hardware/software assets, manage licensing, cloud resource tagging
+10. **Service Request Management** - Handle standardized requests via service catalog, automate fulfillment
+11. **Financial Management** - Budget planning, cost allocation, chargeback/showback models
+12. **Backup and Recovery Operations** - Define RTO/RPO, manage backup schedules, conduct restore tests
 
 ### The Six Core Principles
 

@@ -86,7 +86,7 @@ A quick disclaimer before the knives come out: this chapter is not a hit piece o
 | **Strategic Work**       | Difficult to protect from interruptions | Monthly cycle dedicated to strategy            |
 | **Metrics Focus**        | Flow time, throughput, WIP              | Service reliability, efficiency, AND flow      |
 | **Maturity Guidance**    | Minimal                                 | Explicit five-level maturity model             |
-| **Management Practices** | Not addressed                           | Six core practices defined                     |
+| **Management Practices** | Not addressed                           | Twelve core practices defined                     |
 | **When to Use**          | Stable, well-defined processes          | Mixed planned/unplanned work environments      |
 
 ### Real-World Scenario

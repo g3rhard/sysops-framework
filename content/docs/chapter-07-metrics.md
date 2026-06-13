@@ -25,6 +25,21 @@ Traditional agile metrics like velocity and story points don't capture the value
 
 A warning before you build a single dashboard: a metric is a streetlight, not the street. The moment a number becomes a target, people optimize the number — sometimes at the expense of the thing it was supposed to represent. Measure MTTR badly and you'll teach your team to close incidents fast and fix them never. Reward "tickets closed" and watch one real problem get split into nine tickets. Every metric in this chapter comes with the same unwritten footnote: _measure it because it helps you decide something, not because it looks good on a slide._
 
+### Who Needs Which Metric
+
+Not every metric is for every person. Each role in the team cares about a different slice:
+
+| Role | Primary Categories | What They Act On | When They Look |
+|---|---|---|---|
+| **On-Call Engineer** | Service Reliability, Operational Efficiency | Active alerts, error budget burn rate, incident status | Real-time / during shift |
+| **Team Lead / Ops Manager** | Operational Efficiency, Team Performance | Change success rate, MTTR trends, cross-training coverage, tool effectiveness | Daily standup, weekly review |
+| **Platform / Infra Manager** | Service Reliability, Business Value | SLO compliance, capacity utilization, cost per service unit, FinOps metrics | Weekly cycle, monthly report |
+| **Executive Sponsor** | Business Value, Service Reliability (summary) | Availability trends, cost efficiency, risk mitigation, strategic initiative progress | Monthly review, quarterly business review |
+
+These aren't hard boundaries — an on-call engineer might look at cost anomalies when debugging, and an executive sponsor might care about a specific incident's MTTR. But the table tells you what _default view_ each role needs on their dashboard. Build for that first; add secondary views later.
+
+> **Rule of thumb.** If you can't name the person who will act on a metric within 24 hours of it turning red, that metric is noise. Remove it.
+
 ## 🛡️ Service Reliability Metrics
 
 > **Linked practices ([Chapter 6](chapter-06-practices.md)):** these metrics are the scoreboard for _Service Level Management_ (Practice 1), _Incident and Problem Management_ (Practice 2), and _Backup & Recovery Operations_ (Practice 12). If a number here is unhealthy, the corresponding practice is where you go to fix it.
@@ -65,6 +80,8 @@ Error Budget:
   burn_rate: healthy
 ```
 
+> **Audience**: On-call engineers watch burn rate and MTTR in real time. Team leads review SLO attainment weekly. Executives see only the monthly summary — unless a service is burning its error budget faster than planned, in which case everyone sees it.
+
 ## ⚡ Operational Efficiency Metrics
 
 > **Linked practices ([Chapter 6](chapter-06-practices.md)):** these track the health of _Change and Configuration Management_ (Practice 3), _Capacity and Performance Management_ (Practice 4), _Release Management_ (Practice 8), and _Service Request Management_ (Practice 10).
@@ -102,6 +119,8 @@ Error Budget:
 3. **Target**: 60% automation coverage (realistic 25% improvement)
 4. **Value Measurement**: Time savings × hourly cost + error reduction + capacity for strategic work
 
+> **Audience**: Team leads own these metrics — they're the operational health scorecard. Platform managers watch change success rate and capacity utilization as proxy measures for process maturity. On-call engineers contribute data but shouldn't need to track the aggregate numbers.
+
 ## 👥 Team Performance Metrics
 
 > **Linked practices ([Chapter 6](chapter-06-practices.md)):** these measure the payoff from _Knowledge and Documentation Management_ (Practice 5) and _Team and Skill Development_ (Practice 6) — the practices that decide whether your team is resilient or just a bus-factor of one.
@@ -125,6 +144,8 @@ Error Budget:
 - Collaboration effectiveness and communication
 - Innovation time and continuous improvement engagement
 - Career development and growth opportunities
+
+> **Audience**: Team leads review cross-training coverage and skill development monthly. Managers watch documentation coverage and problem resolution time as indicators of team maturity. Individual team members see only their own development progress — comparing cross-training stats across the team undermines the practice.
 
 ## 💰 Business Value Metrics
 
@@ -169,6 +190,8 @@ Cloud Cost Metrics:
     Unused_Storage: $950/month
     Commitment_Gaps: $1,150/month
 ```
+
+> **Audience**: Platform managers and FinOps practitioners track cost allocation and waste ratio weekly. Executives see the unit economics trend and budget variance monthly — not the raw numbers. Showing an executive a dashboard full of FinOps line items is how you get eye contact with their coffee mug. Show them cost per transaction and whether it's going down.
 
 ---
 
@@ -247,6 +270,60 @@ Executive Dashboard:
 - Historical data retention and trending analysis
 - Role-based access and customization options
 - Mobile-friendly responsive design
+
+### KPI Specification Template
+
+Before you add a single metric to any dashboard, write its specification. This template forces you to answer the hard questions upfront — so you don't discover six months later that nobody knows what "green" means or who was supposed to fix a red number.
+
+```yaml
+metric_name: "<human-readable name>"
+category: "<one of: service_reliability, operational_efficiency, team_performance, business_value>"
+definition: "<precise formula or measurement method>"
+unit: "<ms, %, count, $, ratio>"
+
+owner:
+  role: "<on-call_engineer | team_lead | platform_manager | executive_sponsor>"
+  review_cadence: "<daily | weekly | monthly | quarterly>"
+
+thresholds:
+  green: "<healthy range or condition>"
+  amber: "<warning range — investigate soon>"
+  red: "<breach — immediate action required>"
+  action_on_red: "<what happens when red: page, create ticket, escalate>"
+
+data_source: "<which tool or system provides this metric>"
+measurement_window: "<rolling_hour | rolling_day | calendar_month | trailing_28d>"
+
+gaming_risk: "<how someone could cheat this metric>"
+mitigation: "<how to detect or prevent the gaming>"
+```
+
+**Example — filled template**:
+
+```yaml
+metric_name: "Error Budget Burn Rate"
+category: "service_reliability"
+definition: "(error budget consumed this month) / (total monthly error budget)"
+unit: "%"
+
+owner:
+  role: "on-call_engineer"
+  review_cadence: "daily"
+
+thresholds:
+  green: "< 50% consumed"
+  amber: "50–80% consumed"
+  red: "> 80% consumed — freeze feature deployments until next month"
+  action_on_red: "Slack alert to #release-coordination; change approval requires director sign-off"
+
+data_source: "Prometheus SLO recording rules + Grafana dashboard"
+measurement_window: "calendar_month"
+
+gaming_risk: "Artificially inflate error budget by extending the SLO target (e.g., 99.9% → 99.0% makes more budget)"
+mitigation: "SLO targets locked behind change management; quarterly SLO review requires team lead approval"
+```
+
+Apply this template to every metric on your dashboard. The `gaming_risk` field is the most important — if you can't think of how someone might game it, you haven't thought hard enough.
 
 ## 🔄 Continuous Improvement Through Metrics
 
@@ -346,29 +423,53 @@ Executive Dashboard:
 
 ## 💡 Common Metrics Pitfalls and Solutions
 
-### Pitfall 1: Vanity Metrics
+### The Big Four
 
-**Problem**: Tracking metrics that look impressive but don't drive decisions
+| Pitfall | How It Shows Up | Why It Happens | How to Fix It |
+|---|---|---|---|
+| **Vanity Metrics** | Dashboard looks great, nobody acts on it | Metric measures activity, not outcome | Before adding a metric, write down exactly what decision it will change and who makes it |
+| **Metric Overload** | 47 metrics on one screen, all "important" | No clear owner per metric; fear of missing something | Max 7 metrics per dashboard. If you need more, you need more audiences, not more numbers |
+| **Stale Baselines** | Comparing this month's performance against a pre-migration baseline from 18 months ago | Baselines set once and forgotten | Schedule baseline reviews alongside quarterly business reviews; update after any major infrastructure change |
+| **Goodhart's Law** | MTTR drops to 8 minutes but incidents recur because nobody fixes root causes | Metric is optimized, the underlying outcome is not | Every metric needs a counter-metric (e.g., MTTR + recurrence rate). Balanced scorecards catch gaming |
 
-**Solution**: Focus on actionable metrics that directly influence behavior and outcomes
+### What Not to Measure
 
-### Pitfall 2: Metric Overload
+Some things look measurable but aren't worth the cost of collection, or actively cause harm when measured.
 
-**Problem**: Too many metrics creating noise and confusion
+**Avoid measuring**:
 
-**Solution**: Limit dashboards to 5-7 key metrics per audience level
+- **Individual incident response time** — it teaches people to delay declaring an incident (the clock only starts when they acknowledge). Measure team-level MTTR instead.
+- **Uptime percent to two decimal places for low-criticality systems** — 99.73% vs 99.74% for an internal wiki is noise. Binary (green/red) is enough for Tier 3 and below.
+- **Number of runbooks written** — a terrible runbook that nobody uses counts as "written." Measure runbook usage and accuracy instead.
+- **Hours worked / overtime** — this metric inevitably becomes a target, and the target is always "work more." Measure sustainable on-call load, not hours.
+- **Velocity / story points** — these measure agile software delivery, not operations. They actively misrepresent ops work, where value is in prevention and stability, not feature output.
 
-### Pitfall 3: Gaming the System
+**What to measure instead**:
 
-**Problem**: Teams optimizing for metrics rather than real outcomes
+| Instead of | Measure |
+|---|---|
+| Uptime to 5 nines for everything | SLO attainment per criticality tier |
+| Individual response time | Team MTTR + recurrence rate |
+| Runbooks written | Runbook usage during incidents + accuracy score (post-incident review question: "did the runbook help?") |
+| Hours worked | On-call health score (interruptions slept through, pages per shift, time to decompress) |
 
-**Solution**: Use balanced scorecards and focus on business value alignment
+### How Metrics Can Be Gamed
 
-### Pitfall 4: Stale Baselines
+Every metric worth tracking can be manipulated. The trick is knowing how so you can build safeguards.
 
-**Problem**: Comparing against outdated or irrelevant baseline measurements
+**Common gaming patterns**:
 
-**Solution**: Regular baseline updates and contextual comparison periods
+1. **MTTR gaming**: Close the incident ticket without fixing the root cause. MTTR drops, but the same incident happens next week. *Defense:* Track recurrence rate alongside MTTR. Any incident that reoccurs within 30 days counts as a failure.
+
+2. **SLO attainment gaming**: Set SLO targets so low they're never breached. 99.9% attainment on a 99.0% SLO is not an achievement. *Defense:* Lock SLO targets in change management. Require team lead approval to relax a target. Track SLO target hardening (are SLOs getting tighter over time?).
+
+3. **Automation coverage gaming**: Count every tiny script as "automation" to inflate the percentage. *Defense:* Define "automation" as "eliminates a manual step that previously required a human decision." A cron job that existed before the metrics started doesn't count as new automation.
+
+4. **Cost per service unit gaming**: Include only direct infrastructure costs and exclude the labor, support, and overhead that make up 60% of the real cost. *Defense:* Use total cost of ownership (TCO) as the denominator. If a cost can't be attributed, publish it as "unattributed" rather than hiding it.
+
+5. **Ticket closure gaming**: Split a single problem into five tickets to show five "resolved" items. *Defense:* Require problem-to-ticket linkage. If five tickets share the same root cause, they count as one.
+
+> **Litmus test.** Ask yourself: "If this metric was the only thing my bonus depended on, what would I do differently?" If the honest answer is something that makes the system worse, you need to redesign the metric — or add a counter-metric that catches the bad behavior.
 
 ## 🎯 Chapter Summary
 

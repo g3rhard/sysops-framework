@@ -4,6 +4,7 @@
 
 > **Editorial conventions** (keep these in mind for every edit):
 >
+> - **Language**: **US English** (`-ize` spellings — organize, prioritize, standardize; `-or` — behavior, color, labor; `-er` — center, meter; `-ed` — learned, spelled). All content must use US English consistently. British spellings (`-ise`, `-our`, `-re`, `-t`) are considered errors. Exception: direct quotes and URLs preserve their original spelling.
 > - **Audience** is defined up front (README, `_index.md` "Who This Book Is For", and a Chapter 1 callout): teams of highly skilled individuals each running separate projects/systems/pagers under one team name, whose work is a mix of operational + R&D + only some development, where agile/scrum doesn't fit and they want _order_. The book is intentionally opinionated about bringing that shared work together without a lockstep cadence.
 > - **Readability**: chapters deliberately mix the necessary dense reference material with jokes, short stories, and wry asides so the book reads as human-written, not AI-generated. Preserve this voice when editing.
 > - **Appendix rule**: detailed tick-box checklists and milestone trackers live in `content/docs/chapter-13-appendices.md`. Chapters keep the narrative, key points, and general plan, then point to the appendix.
@@ -43,10 +44,10 @@
 ### Consistency Fixes
 
 - [ ] **Fix practice count everywhere (6/7/12 → 12)** — Audit and correct every mention of the practice count across all files: `chapter-04-comparison.md` (says "six"), `data-relationships.md` (says "seven"), `glossary.md` (says "seven"), `_index.md` and `chapter-01-challenge.md` and any other page that references the count. The canonical number is **12 core management practices** as defined in Chapter 6.
-- [ ] **Create `data/framework.yaml` as single source of truth** — A canonical YAML file describing cycles, principles, practices, metric categories, and their relationships. Use it to generate glossary clusters, data-relationship diagrams, practice-index tables, and home-page summaries so drift can never recur.
+- [x] **Create `data/framework.yaml` as single source of truth** — 236-line canonical YAML with cycles, principles, practices (all 12), metric categories (all 4), and relationships. _Verified._
 - [ ] **Convert ASCII / list schemas to Mermaid diagrams** — Replace all ASCII-art diagrams and verbose list-based schemas in `content/docs/` with proper Mermaid ````mermaid` code blocks. Add captions and meaningful alt-text to every diagram. Key targets: `data-relationships.md` (heavy ASCII), `chapter-03-structure.md` (cycle flow), `chapter-06-practices.md` (practice maps), and any remaining list-as-diagram patterns.
 - [ ] **Fix `baseURL` in `hugo.yaml`** — Change `baseURL: https://g3rhard.github.io/sysops-framework` to `https://g3rhard.cc/sysops-framework/` to match the live site and repo metadata.
-- [ ] **Update `data-relationships.md` to 12-practice model + Mermaid** — Rewrite the entire page to reflect the current 12-practice model, convert its ASCII diagrams into Mermaid, and make it a generated-from-source page (tied to `data/framework.yaml`).
+- [x] **Update `data-relationships.md` to 12-practice model + Mermaid** — All ASCII diagrams replaced with Mermaid (pillars, practice flows, feedback loops, dependency map). All 12 practices in cycle tables. Tied to `data/framework.yaml`. _Verified._
 - [ ] **Update `glossary.md` to 12-practice model** — Fix all references to "seven management practices". Add per-term cross-references ("see also", "related practice", "related metric", "related chapter"). Add canonical terminology policy to prevent future drift.
 
 ---

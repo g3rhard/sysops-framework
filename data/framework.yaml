@@ -1,0 +1,236 @@
+# SysOps Framework — Canonical Data Source
+# This file is the single source of truth for framework components.
+# All generated tables, diagrams, and cross-references should derive from here.
+
+framework:
+  name: "SysOps Framework"
+  description: "An operations methodology for teams whose work does not fit sprint boundaries"
+  version: "1.0"
+
+principles:
+  - id: 1
+    name: "Service Reliability First"
+    short: "Reliability over speed"
+    description: "Every decision and action prioritizes system reliability and service availability above all other considerations."
+  - id: 2
+    name: "Continuous Availability"
+    short: "Sustainable 24/7 operations"
+    description: "Operations work never stops. The framework must accommodate 24/7 responsibilities and on-call requirements without creating unsustainable burden."
+  - id: 3
+    name: "Rapid Response"
+    short: "Act fast, with safety"
+    description: "Built-in protocols for immediate response to critical issues without disrupting ongoing workflows or requiring management approval."
+  - id: 4
+    name: "Automation and Efficiency"
+    short: "Automate toil away"
+    description: "Systematic focus on automating repetitive tasks and improving operational efficiency through tooling and process optimization."
+  - id: 5
+    name: "Knowledge Sharing"
+    short: "Document, share, cross-train"
+    description: "Emphasis on documentation, knowledge transfer, and cross-training to ensure team resilience and reduce single points of failure."
+  - id: 6
+    name: "Risk Management"
+    short: "Plan for what can go wrong"
+    description: "Proactive identification and mitigation of operational risks, including capacity planning, security vulnerabilities, and system dependencies."
+
+cycles:
+  - id: 1
+    name: "Daily Operations Cycle"
+    cadence: "24-48 hours"
+    owner: "On-call engineer (rotating)"
+    phases:
+      - "Monitor"
+      - "Respond"
+      - "Document"
+      - "Review"
+    purpose: "Handle immediate operational needs: system monitoring, incident response, routine maintenance, urgent requests."
+    capacity_guidance: "60-70% of team time"
+
+  - id: 2
+    name: "Weekly Improvement Cycle"
+    cadence: "7 days"
+    owner: "Team lead or rotating improvement lead"
+    phases:
+      - "Plan"
+      - "Execute"
+      - "Measure"
+      - "Improve"
+    purpose: "Process improvements, automation initiatives, and addressing systemic issues identified during daily operations."
+    capacity_guidance: "20-30% of team time"
+
+  - id: 3
+    name: "Monthly Strategy Cycle"
+    cadence: "4 weeks"
+    owner: "Team lead or manager"
+    phases:
+      - "Assess"
+      - "Design"
+      - "Implement"
+      - "Evaluate"
+    purpose: "Larger projects, strategic initiatives, capacity planning, and technology evaluations."
+    capacity_guidance: "10-20% of team time"
+
+practices:
+  - id: 1
+    name: "Service Level Management"
+    short: "Define and monitor SLOs"
+    description: "Establish clear SLOs and SLIs for all critical services, implementing error budgets to balance reliability with the pace of change."
+    related_metrics:
+      - "Service Reliability"
+    cycles:
+      - 1
+      - 2
+      - 3
+
+  - id: 2
+    name: "Incident and Problem Management"
+    short: "Respond and learn"
+    description: "Develop comprehensive incident response procedures with clear escalation paths and communication protocols. Implement blameless post-incident reviews."
+    related_metrics:
+      - "Service Reliability"
+    cycles:
+      - 1
+      - 2
+
+  - id: 3
+    name: "Change and Configuration Management"
+    short: "Control changes safely"
+    description: "Risk-assessed change management processes for both routine changes and emergency fixes, maintaining accurate configuration management databases."
+    related_metrics:
+      - "Operational Efficiency"
+    cycles:
+      - 1
+      - 2
+      - 3
+
+  - id: 4
+    name: "Capacity and Performance Management"
+    short: "Plan for growth"
+    description: "Proactive monitoring and planning for system capacity needs, including predictive analytics and regular performance tuning."
+    related_metrics:
+      - "Operational Efficiency"
+    cycles:
+      - 1
+      - 2
+      - 3
+
+  - id: 5
+    name: "Knowledge and Documentation Management"
+    short: "Capture what you know"
+    description: "Systematic approach to capturing and sharing operational knowledge through runbooks, troubleshooting guides, and system documentation."
+    related_metrics:
+      - "Team Performance"
+    cycles:
+      - 1
+      - 2
+      - 3
+
+  - id: 6
+    name: "Team and Skill Development"
+    short: "Grow your people"
+    description: "Cross-training team members across multiple systems and technologies to reduce single points of failure and establish career development paths."
+    related_metrics:
+      - "Team Performance"
+    cycles:
+      - 1
+      - 2
+      - 3
+
+  - id: 7
+    name: "Vendor and Contract Management"
+    short: "Manage partner relationships"
+    description: "Manage relationships with external vendors, ensure SLA compliance, and optimise vendor partnerships to support operational objectives."
+    related_metrics:
+      - "Business Value"
+    cycles:
+      - 1
+      - 2
+      - 3
+
+  - id: 8
+    name: "Release Management"
+    short: "Ship safely and often"
+    description: "Govern the end-to-end lifecycle of software and infrastructure releases using CI/CD pipelines, deployment gates, and rollback criteria."
+    related_metrics:
+      - "Operational Efficiency"
+    cycles:
+      - 1
+      - 2
+      - 3
+
+  - id: 9
+    name: "Asset Management"
+    short: "Track everything you own"
+    description: "Maintain an accurate inventory of all infrastructure assets throughout their lifecycle, ensuring license compliance and cost control."
+    related_metrics:
+      - "Business Value"
+    cycles:
+      - 1
+      - 2
+      - 3
+
+  - id: 10
+    name: "Service Request Management"
+    short: "Fulfill requests consistently"
+    description: "Provide a standardised channel for pre-approved IT service requests, keeping fulfillment separate from incident response."
+    related_metrics:
+      - "Operational Efficiency"
+    cycles:
+      - 1
+      - 2
+      - 3
+
+  - id: 11
+    name: "Financial Management"
+    short: "Know what things cost"
+    description: "Give the operations team full visibility of its costs, linking every spending decision to business value with transparent forecasts."
+    related_metrics:
+      - "Business Value"
+    cycles:
+      - 1
+      - 2
+      - 3
+
+  - id: 12
+    name: "Backup and Recovery Operations"
+    short: "Prepare for the worst"
+    description: "Ensure every critical system can be restored within defined RTO and RPO through regular, tested backup procedures and recovery runbooks."
+    related_metrics:
+      - "Service Reliability"
+    cycles:
+      - 1
+      - 2
+      - 3
+
+metric_categories:
+  - id: 1
+    name: "Service Reliability"
+    description: "System uptime, availability, MTTR, MTBF, SLO compliance, error budget burn rate"
+    related_practices:
+      - 1
+      - 2
+      - 12
+
+  - id: 2
+    name: "Operational Efficiency"
+    description: "Automation coverage, incident response time, change success rate, capacity utilisation, release velocity"
+    related_practices:
+      - 3
+      - 4
+      - 8
+      - 10
+
+  - id: 3
+    name: "Team Performance"
+    description: "Knowledge transfer rate, cross-training completion, on-call health, documentation coverage"
+    related_practices:
+      - 5
+      - 6
+
+  - id: 4
+    name: "Business Value"
+    description: "Customer satisfaction, cost per service unit, FinOps metrics, vendor SLA compliance"
+    related_practices:
+      - 7
+      - 9
+      - 11

@@ -25,6 +25,33 @@ The comparison above illustrates fundamental differences between traditional agi
 
 A quick disclaimer before the knives come out: this chapter is not a hit piece on Scrum. Scrum is superb at what it was built for — a team of developers turning a backlog into shipped features on a steady rhythm. The problem isn't Scrum; it's using a fishing rod to dig a trench. The tool is fine. We're just doing different work.
 
+### Quick Selection Guide
+
+Not sure whether SysOps is right for you? Use this decision table:
+
+| Your team looks like... | Start with... |
+|---|---|
+| Feature-factory squad, clean 2-week sprints, rare interruptions | Scrum — SysOps is not for you |
+| Ops team drowning in interrupts, no time for improvements | SysOps — daily cycle first, then pilot |
+| Platform/SRE team with mixed planned/unplanned work | SysOps — all three cycles |
+| Small team (2-3 people), everything is on fire | Stabilise first, then SysOps daily cycle only |
+| Enterprise ops with regulated compliance requirements | SysOps + compliance overlay (Chapter 10) |
+| Kanban team, happy with flow, strategic work is protected | Stay with Kanban — monitor for when it breaks |
+| Hybrid: dev team uses Scrum, ops team supports them | Scrum for dev, SysOps for ops — see hybrid patterns below |
+
+```mermaid
+flowchart TD
+    Q{What describes your team?}
+    Q -->|Feature dev, rare interrupts| A[Stick with Scrum]
+    Q -->|Ops + interrupts, need improvement time| B[SysOps daily → weekly → monthly]
+    Q -->|Happy with Kanban, strategy is protected| C[Stay with Kanban]
+    Q -->|Small team, constantly on fire| D[Stabilise first, then daily cycle only]
+    Q -->|Regulated enterprise| E[SysOps + compliance overlay]
+    B --> F{Team size?}
+    F -->|3-4 people| G[Pilot daily + weekly, skip monthly]
+    F -->|6+ people| H[All three cycles from month 2]
+```
+
 ## 🏃‍♂️ Scrum vs SysOps Framework
 
 ### Work Structure
@@ -237,6 +264,18 @@ Most organizations successful with SRE are actually practicing a hybrid: SRE's e
 - **Service availability requirements**: 24/7 or high-availability expectations
 - **Interrupt-driven environment**: Regular emergencies and urgent requests
 
+### When Not to Use SysOps
+
+SysOps is not a universal replacement. It is wrong for some teams, and honest about it:
+
+| Situation | Why SysOps is the wrong fit | What to use instead |
+|---|---|---|
+| **Pure product development** — one product, one backlog, rare production interrupts | SysOps cycles add unnecessary structure to work that already fits a sprint cadence | Scrum, Kanban |
+| **Individual contributor without a team** | The framework assumes team handoffs and shared responsibility. A solo operator needs lighter structure. | Personal kanban, Getting Things Done |
+| **Team in active crisis** — ongoing outage, security breach, or restructuring | Implementing a new framework during a crisis splits attention. Stabilise first, then adopt. | Incident response procedures, then revisit SysOps |
+| **No management support at all** | Without leadership buy-in for protected improvement time, the weekly and monthly cycles will fail | Start with daily cycle only, build evidence, then negotiate |
+| **Fully outsourced operations** with no internal team | The framework is designed for teams that own their services. Managed service providers need different coordination patterns. | ITIL 4, vendor governance frameworks |
+
 ### Hybrid Approaches
 
 Some teams successfully combine approaches:
@@ -244,6 +283,44 @@ Some teams successfully combine approaches:
 - **Development projects**: Use Scrum for new system development
 - **Operations work**: Use SysOps for ongoing maintenance and support
 - **Cross-functional teams**: Different team members may use different frameworks
+
+### Hybrid Operating Model Patterns
+
+For teams that need to bridge development and operations, here are three proven hybrid patterns:
+
+**Pattern 1: Dev-Scrum / Ops-SysOps (side by side)**
+
+A development team runs Scrum for product features; an operations team runs SysOps for infrastructure, reliability, and support. They share a weekly coordination touchpoint where the dev team communicates upcoming releases and the ops team communicates capacity impacts or risks.
+
+```mermaid
+flowchart LR
+    subgraph dev["Dev Team — Scrum (2-week sprints)"]
+        DS[Sprint Planning] --> DD[Feature Work]
+        DD --> DR[Release]
+    end
+    subgraph ops["Ops Team — SysOps"]
+        OD[Daily Cycle] --> OW[Weekly Improvement]
+        OW --> OM[Monthly Strategy]
+    end
+    DR -.->|Release handoff| OW
+    OM -.->|Capacity notice| DS
+```
+
+**Pattern 2: Unified team, dual cadence (single team)**
+
+A single team owns both development and operations. They use a 2-week iteration for planned feature work (Scrum-like) while running a parallel daily operations cycle for interrupts. The daily cycle always takes priority; the 2-week iteration absorbs the leftover capacity. This is harder than it sounds and requires explicit WIP limits per person.
+
+**Pattern 3: Platform team as internal provider (product model)**
+
+The infrastructure/platform team treats the development teams as their customers. The platform team runs SysOps internally, with a monthly strategy cycle that aligns to the product roadmap. Development teams interact through a self-service portal (see Chapter 8 — platform engineering) and an SLA rather than through shared sprint planning.
+
+**Choosing a hybrid pattern**:
+
+| If you have... | Use pattern |
+|---|---|
+| Separate dev and ops teams | Pattern 1 (side by side) |
+| A single team doing both | Pattern 2 (dual cadence) — only if team is 5+ people |
+| A platform team serving product teams | Pattern 3 (internal provider) |
 
 ## 📊 Stakeholder Communication Differences
 
@@ -266,6 +343,25 @@ Some teams successfully combine approaches:
 **Traditional Agile**: "We completed 23 story points this sprint, but missed our commitment of 28 points due to production issues."
 
 **SysOps**: "We maintained 99.97% uptime this month, implemented automated failover for the payment system, and completed the security framework evaluation ahead of schedule."
+
+### Stakeholder Translation Kit
+
+Different audiences need different framing. Here is a cheat sheet for explaining the framework to each group:
+
+**To your manager**:
+> "We are replacing sprint-based planning with a model that has separate tracks for reactive work, improvements, and strategy. This means fewer missed commitments, measurable improvement every week, and a clear story about what the team is doing — instead of a retro where we apologise for production incidents."
+
+**To an executive**:
+> "The framework protects time for improvements instead of letting firefighting consume everything. Teams using it typically reduce incident frequency by addressing root causes systematically. The monthly cycle aligns operations work to business priorities."
+
+**To a development team**:
+> "It is not a competitor to Scrum — it is what ops uses so your sprints stop getting disrupted by infrastructure fires. A stable platform team means fewer mid-sprint production surprises for you."
+
+**To a new hire**:
+> "We work in three rhythms: daily is for keeping things running, weekly is for making things better, monthly is for big changes. You will be in the daily cycle first. Once you know the systems, you will rotate into improvements."
+
+**To a stakeholder asking "why are you changing methodology?"**:
+> "Currently, every incident makes our sprint plan wrong. We spend retros explaining why we missed commitments — the same reason every time. This framework stops pretending incidents are exceptional and gives them a proper place, so our planned work can actually get done."
 
 ## 🏆 Real-World Case Studies
 

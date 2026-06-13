@@ -23,6 +23,29 @@ By the end of this chapter, you will understand:
 
 Implementing the SysOps Framework requires a systematic, phased approach that minimizes disruption to ongoing operations while building new capabilities. The roadmap above shows six parallel tracks running over six months, each contributing to successful framework adoption.
 
+### Two Tracks: Pilot vs Full Rollout
+
+There is no single adoption path. Choose based on your team's readiness:
+
+| | **Track A: 30-Day Pilot** | **Track B: Full 180-Day Rollout** |
+|---|---|---|
+| **Who** | One team, testing the framework | Team(s) committed to full adoption |
+| **Prerequisite** | 4+ yes signals on the readiness assessment in [Getting Started](../getting-started/) | Successful 30-day pilot completed |
+| **Goal** | Prove the daily cycle works, measure improvement, decide | Institutionalise all three cycles + all 12 practices |
+| **Owners** | Team lead (drives), on-call engineer (daily cycle), one stakeholder sponsor | Team lead + manager (joint), rotating improvement lead, exec sponsor |
+| **Months** | 1 month | 6 months |
+
+**If you have not run a pilot, start there.** The full 180-day plan assumes the pilot has already validated the approach for your context.
+
+### Role-Based Responsibilities
+
+| Role | Pilot | Full Rollout |
+|---|---|---|
+| **Team lead** | Drives the daily cycle, runs standalones, unblocks the team | Runs weekly improvement cycle, reports to manager, coordinates with other teams |
+| **On-call engineer** | Owns the daily cycle's respond phase, logs incidents | Rotates as improvement lead, trains new team members |
+| **Manager** | Provides air cover, protects improvement time, reviews pilot results | Owns monthly strategy cycle, secures budget, enforces framework adherence |
+| **Executive sponsor** | Reviews pilot results, approves continuation | Champions cross-team adoption, removes organisational blockers |
+
 ## 🔍 Phase 1: Foundation and Assessment (Month 1)
 
 ### Foundation Track
@@ -251,6 +274,50 @@ At a glance, here's what "done" looks like for each phase:
 Each phase maps to the maturity levels in [Chapter 6](chapter-06-practices.md): expect practices to sit around Level 1–2 in Month 1, reach Level 3 (Defined) by Month 4, and stabilise at Level 4 (Managed) by Month 6, with a credible path to Level 5 (Optimizing).
 
 > **The detailed, month-by-month milestone tracker** — the printable checklist with every box to tick — lives in **[Appendix B](chapter-13-appendices.md)**, alongside the maturity targets for each month. Keep the narrative here; keep the tick-boxes there.
+
+## ⛔ Go/No-Go Decision Points
+
+Check these at each phase boundary. If the criteria are not met, do not advance — adapt or pause.
+
+| Phase boundary | Go criteria | No-go response |
+|---|---|---|
+| **End of pilot (Day 30)** | Daily cycle running consistently, 3+ incidents logged with documented response, team reports less chaos (even slightly), at least one improvement completed | Extend pilot by 2 weeks with adjusted scope, or stop and document why SysOps does not fit |
+| **Pilot → Full rollout (Month 1 → 2)** | Pilot go decision made, manager agrees to protect improvement time, baseline metrics collected | Do not start full rollout. Address the blocker first (see [Getting Started — Readiness Gaps](../getting-started/#readiness-gaps-that-block-rollout)) |
+| **End of Month 3** | Weekly cycle producing measurable improvements, at least one practice at maturity Level 2, team satisfaction stable or improving | Pause monthly cycle introduction. Spend Month 4 strengthening daily + weekly cycles. Reassess |
+| **End of Month 4** | Monthly strategy cycle launched, first strategic initiative complete or in progress, stakeholder reporting is happening | Extend the monthly cycle pilot by one month with adjusted scope |
+| **End of Month 6** | All three cycles running without active management, maturity Level 3+ on priority practices, team can articulate framework value without referencing the book | Accept Level 2 on some practices and plan targeted improvement for next quarter. Full maturity takes 12-18 months |
+
+## ↩️ Rollback Plan
+
+If the framework is not working after a genuine attempt, here is how to exit cleanly — without losing the improvements you have already made.
+
+### When to Trigger a Rollback
+
+Consider rolling back if:
+
+1. **Team burnout increases** despite the framework — measured by survey or observed attrition
+2. **Incident frequency or MTTR worsens** after 60 days of consistent practice (not during the learning curve)
+3. **Stakeholder trust erodes measurably** — e.g., the business bypasses the team for operational decisions
+4. **Management withdraws support for protected improvement time**, making the weekly cycle impossible
+
+### Rollback Steps
+
+1. **Stop the monthly strategy cycle first** — it has the least immediate impact
+2. **Keep the weekly improvement cycle** but make it optional, not mandatory — document everything you automated
+3. **Retain the daily operations cycle** — it is just disciplined operational practice that any team benefits from
+4. **Keep every artifact**: incident logs, improvement records, metrics baselines. They are valuable regardless of framework
+5. **Document why the rollback happened** — one page: what was tried, what broke, what was learned. This protects the next attempt (by you or someone else) from repeating the same mistakes
+
+### What You Keep
+
+Even in a rollback, the following are permanent improvements that no methodology change should undo:
+
+- Incident logging discipline
+- Post-incident reviews (even informal ones)
+- Automation you built
+- Documentation you created
+- Cross-training completed
+- Baseline metrics (they are valuable regardless of what comes next)
 
 ## 🚧 Common Implementation Challenges
 

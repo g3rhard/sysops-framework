@@ -178,21 +178,15 @@ A core principle of modern incident management is conducting **blameless post-in
 
 Use the "5 Whys" technique or Fishbone diagram:
 
-```text
-Why did customers experience an outage?
-→ The database server ran out of disk space
+> Causal chain: Customers experience an outage → Database server ran out of disk space → Log files grew unexpectedly large → New application increased logging volume by 10x → Load testing didn't include realistic logging config → Application team wasn't aware of logging requirements
 
-Why did the server run out of disk space?
-→ Log files grew unexpectedly large
-
-Why did log files grow large?
-→ A new application deployed yesterday increased logging volume by 10x
-
-Why wasn't this caught?
-→ Load testing didn't include realistic logging configuration
-
-Why wasn't load testing updated?
-→ The application team wasn't aware of logging configuration requirements
+```mermaid
+graph LR
+  A[Customers experience an outage] --> B[Database server ran out of disk space]
+  B --> C[Log files grew unexpectedly large]
+  C --> D[New application increased logging volume by 10x]
+  D --> E[Load testing didn't include realistic logging config]
+  E --> F[Application team wasn't aware of logging requirements]
 ```
 
 **Phase 4: Action Item Generation (During review)**

@@ -39,6 +39,8 @@ Not sure whether SysOps is right for you? Use this decision table:
 | Kanban team, happy with flow, strategic work is protected | Stay with Kanban — monitor for when it breaks |
 | Hybrid: dev team uses Scrum, ops team supports them | Scrum for dev, SysOps for ops — see hybrid patterns below |
 
+> **Diagram**: Methodology selection flowchart — team answers 3 questions to determine whether SysOps, Scrum, Kanban, or a hybrid fits best
+
 ```mermaid
 flowchart TD
     Q{What describes your team?}
@@ -291,6 +293,8 @@ For teams that need to bridge development and operations, here are three proven 
 **Pattern 1: Dev-Scrum / Ops-SysOps (side by side)**
 
 A development team runs Scrum for product features; an operations team runs SysOps for infrastructure, reliability, and support. They share a weekly coordination touchpoint where the dev team communicates upcoming releases and the ops team communicates capacity impacts or risks.
+
+> **Diagram**: Dev-Scrum / Ops-SysOps hybrid — dev sprint planning → feature work → release handoff to ops weekly cycle → ops monthly strategy → capacity notice back to dev
 
 ```mermaid
 flowchart LR

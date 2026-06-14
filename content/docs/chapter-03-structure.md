@@ -39,6 +39,8 @@ Think of it less like a sprint and more like a hospital. The emergency room (dai
 
 ### Operating Model in One Page
 
+> **Diagram**: Three-cycle operating model — Daily Operations (24-48h), Weekly Improvement (7d), Monthly Strategy (30d) — showing inputs, outputs, and owners for each cycle
+
 ```mermaid
 flowchart TD
     subgraph daily["Daily Operations Cycle (24-48h) — Owned by On-Call / All Team"]

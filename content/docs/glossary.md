@@ -16,21 +16,21 @@ A complete reference of terms, acronyms, and concepts used throughout the SysOps
 
 The following table defines preferred terms and deprecated or ambiguous phrasing to prevent drift across chapters:
 
-| Use this | Not this | Reason |
-|---|---|---|
-| Incident and Problem Management | Incident Management (alone) | The practice covers both; "Incident Management" alone omits problem RCA |
-| Change and Configuration Management | Change Management (alone) | CMDB discipline is part of the same practice |
-| Knowledge and Documentation Management | Knowledge Management (alone) | Documentation is the output; KM alone is too abstract |
-| Team and Skill Development | Team Development (alone) | Skill development is the concrete activity |
-| Vendor and Contract Management | Vendor Management (alone) | Contract lifecycle is integral, not optional |
-| Backup and Recovery Operations | Backup Operations (alone) | Recovery is the point; backup without tested recovery is false confidence |
-| Daily Operations Cycle | Daily standup / Daily Scrum | Standup is one activity within the cycle, not the cycle itself |
-| Weekly Improvement Cycle | Sprint / Iteration | Sprints imply commitment; improvement cycles imply experimentation |
-| Monthly Strategy Cycle | Monthly review / Planning session | Review is the end; the full cycle includes assess, design, implement, evaluate |
-| On-call engineer | On-call (noun) | "The on-call" dehumanizes; use "on-call engineer" or "on-call rotation" |
-| Standalone | Standup | Standup asks "are you on track?"; Standalone asks "is anything on fire?" |
-| Post-incident review | Post-mortem | "Post-mortem" can feel morbid; both are acceptable but PIR is preferred |
-| Error budget | Risk budget / downtime budget | Error budget is the established SRE term |
+| Use this                               | Not this                          | Reason                                                                         |
+| -------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------ |
+| Incident and Problem Management        | Incident Management (alone)       | The practice covers both; "Incident Management" alone omits problem RCA        |
+| Change and Configuration Management    | Change Management (alone)         | CMDB discipline is part of the same practice                                   |
+| Knowledge and Documentation Management | Knowledge Management (alone)      | Documentation is the output; KM alone is too abstract                          |
+| Team and Skill Development             | Team Development (alone)          | Skill development is the concrete activity                                     |
+| Vendor and Contract Management         | Vendor Management (alone)         | Contract lifecycle is integral, not optional                                   |
+| Backup and Recovery Operations         | Backup Operations (alone)         | Recovery is the point; backup without tested recovery is false confidence      |
+| Daily Operations Cycle                 | Daily standup / Daily Scrum       | Standup is one activity within the cycle, not the cycle itself                 |
+| Weekly Improvement Cycle               | Sprint / Iteration                | Sprints imply commitment; improvement cycles imply experimentation             |
+| Monthly Strategy Cycle                 | Monthly review / Planning session | Review is the end; the full cycle includes assess, design, implement, evaluate |
+| On-call engineer                       | On-call (noun)                    | "The on-call" dehumanizes; use "on-call engineer" or "on-call rotation"        |
+| Standalone                             | Standup                           | Standup asks "are you on track?"; Standalone asks "is anything on fire?"       |
+| Post-incident review                   | Post-mortem                       | "Post-mortem" can feel morbid; both are acceptable but PIR is preferred        |
+| Error budget                           | Risk budget / downtime budget     | Error budget is the established SRE term                                       |
 
 ### A
 
@@ -368,11 +368,11 @@ A security principle that assumes no system is inherently trustworthy, requiring
 
 ### The Three Operational Cycles
 
-| Cycle | Duration | Primary Focus | Example Activities |
-|---|---|---|---|
-| Daily | 24 hours | Reactive work | Incident response, urgent maintenance, monitoring |
-| Weekly | 7 days | Planned improvements | Automation, root cause analysis, process improvement |
-| Monthly | ~30 days | Strategic decisions | Capacity planning, architecture review, goal setting |
+| Cycle   | Duration | Primary Focus        | Example Activities                                   |
+| ------- | -------- | -------------------- | ---------------------------------------------------- |
+| Daily   | 24 hours | Reactive work        | Incident response, urgent maintenance, monitoring    |
+| Weekly  | 7 days   | Planned improvements | Automation, root cause analysis, process improvement |
+| Monthly | ~30 days | Strategic decisions  | Capacity planning, architecture review, goal setting |
 
 ### The Twelve Management Practices
 

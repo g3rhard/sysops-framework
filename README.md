@@ -1,100 +1,66 @@
-# The SysOps Framework
+# SysOps Framework
 
-> A Modern Methodology for System Administrators and Operations Teams
+> An operations methodology for teams whose work doesn't fit sprint boundaries.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-green)](https://github.com/g3rhard/sysops-framework)
 [![Release](https://img.shields.io/github/v/release/g3rhard/sysops-framework)](https://github.com/g3rhard/sysops-framework/releases)
 
-## 🎯 Overview
+## What this is
 
-Traditional agile methodologies like Scrum and SAFe have revolutionized software development, but they fall short when applied to system administration and operations teams. The **SysOps Framework** is a purpose-built methodology designed specifically for system administrators, system engineers, and operations teams who cannot work within traditional sprint boundaries but still need structured, efficient, and continuously improving workflows.
+The SysOps Framework replaces the single sprint cadence with three simultaneous cycles (daily, weekly, monthly) that match how operations work actually happens. It is a book, a methodology reference, and a set of downloadable templates — all in one repo.
 
-## � Who This Is For
+## Who it helps
 
-This book is for **teams of highly skilled individuals who each run their own corner of the world** — separate projects, separate systems, separate pagers — but share one team name. Your work is a genuine mix of **operational work** (reactive, never sleeps), **R&D** (prototyping the next thing), and **only some development** (rarely the majority, rarely a tidy backlog). If you've tried to run a sprint over that mix, you know it doesn't fit.
+Teams of highly skilled individual contributors sharing a team name but running separate projects, systems, and pagers. If Scrum/Kanban/SRE don't quite fit your ops mix, this is for you. See the **[full audience description](content/docs/_index.md)** for details.
 
-It's an opinionated book, and the opinion is this: a team of brilliant individualists becomes far more than the sum of its parts once you give the shared work a shared shape — _without_ forcing everyone into the same lockstep cadence. If you're a feature-factory squad shipping one product on a clean two-week heartbeat, Scrum is probably serving you fine. For everyone in the messy middle who just wants _order_, read on.
+## Browse locally
 
-## �📚 Documentation Structure
+**Prerequisites**: Go, Node.js, and [Hugo extended edition](https://gohugo.io/installation/).
 
-This framework is organized into comprehensive chapters for easy learning and implementation:
+```bash
+git clone https://github.com/g3rhard/sysops-framework
+cd sysops-framework
 
-### Part I: Foundation
+# Fetch the Docsy theme and its dependencies
+git submodule update --init --recursive
 
-- **Chapter 1**: [The Challenge](content/docs/chapter-01-challenge.md) - Why Traditional Agile Fails Operations Teams
-- **Chapter 2**: [Core Principles](content/docs/chapter-02-principles.md) - Values and Principles of the SysOps Framework
-- **Chapter 3**: [Framework Structure](content/docs/chapter-03-structure.md) - Multiple Operational Cycles
+# Install npm packages (required by Docsy for PostCSS, etc.)
+npm install
 
-### Part II: Implementation
+# Start the dev server
+hugo server
+```
 
-- **Chapter 4**: [Comparison](content/docs/chapter-04-comparison.md) - Traditional Agile vs SysOps Framework
-- **Chapter 5**: [Implementation Strategy](content/docs/chapter-05-implementation.md) - Phased Approach and Roadmap
-- **Chapter 6**: [Management Practices](content/docs/chapter-06-practices.md) - Essential Management Practices
+Open http://localhost:1313/sysops-framework/.
 
-### Part III: Operations
+## Read online
 
-- **Chapter 7**: [Metrics & Measurement](content/docs/chapter-07-metrics.md) - Success Measurement and KPIs
-- **Chapter 8**: [Tools & Technology](content/docs/chapter-08-tools.md) - Supporting Technology Stack
-- **Chapter 9**: [Culture & Organization](content/docs/chapter-09-culture.md) - Cultural Considerations
+The fully rendered site is published at **[g3rhard.cc/sysops-framework](https://g3rhard.cc/sysops-framework/)**.
 
-### Part IV: Advanced Topics
+## Download
 
-- **Chapter 10**: [Risk & Compliance](content/docs/chapter-10-risk.md) - Risk Management and Compliance
-- **Chapter 11**: [Challenges & Solutions](content/docs/chapter-11-challenges.md) - Limitations and Solutions
-- **Chapter 12**: [Future Evolution](content/docs/chapter-12-future.md) - Adaptation and Growth
+PDF and EPUB versions are built automatically from the latest tagged release:
 
-## 🚀 Quick Start
+- [Releases page](https://github.com/g3rhard/sysops-framework/releases)
+- All templates are in the [`templates/`](templates/) directory — PIR, change control, on-call policy, SLA, and more
 
-1. **Assessment**: Start with [Chapter 1](content/docs/chapter-01-challenge.md) to understand if your team faces the challenges addressed by this framework
-2. **Foundation**: Read [Chapter 2](content/docs/chapter-02-principles.md) and [Chapter 3](content/docs/chapter-03-structure.md) to understand core concepts
-3. **Planning**: Use [Chapter 5](content/docs/chapter-05-implementation.md) to plan your implementation approach
-4. **Implementation**: Follow the 6-month roadmap with supporting chapters
+## What's auto-generated
 
-## 📊 Visual Resources
+| Artifact          | Source                              | Trigger                            |
+| ----------------- | ----------------------------------- | ---------------------------------- |
+| GitHub Pages site | `content/` + Hugo                   | Push to `main`                     |
+| PDF / EPUB        | `content/` → Pandoc + lualatex      | Tagged release (`v*`)              |
 
-- Framework Overview Diagram
-- Implementation Roadmap
-- Metrics Dashboard
-- Comparison Charts
 
-_Charts and diagrams are available in the [assets](assets/) directory and embedded within relevant chapters._
+## Quick links
 
-## 🎮 Interactive Elements
+- [Chapter 1 — The Challenge](content/docs/chapter-01-challenge.md)
+- [Chapter 6 — 12 Management Practices](content/docs/chapter-06-practices.md)
+- [Implementation roadmap](content/docs/chapter-05-implementation.md)
+- [Glossary](content/docs/glossary.md)
+- [Appendices / templates](content/docs/chapter-13-appendices.md)
 
-- **Scenario Challenges**: Real-world situations to test your understanding
-- **Implementation Quizzes**: Self-assessment tools for each chapter
-- **Role-Playing Exercises**: Team-based activities to practice framework concepts
-- **Gamified Progress**: Achievement system for framework mastery
+## License
 
-_Interactive elements are being developed and will be available in future releases._
-
-## 🤝 Contributing
-
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on:
-
-- Reporting issues or suggesting improvements
-- Adding real-world case studies
-- Contributing interactive elements
-- Translating content
-
-## 📦 Downloads
-
-- **PDF Version**: Available in [Releases](https://github.com/g3rhard/sysops-framework/releases)
-- **EPUB Version**: Coming soon
-- **Training Materials**: Presentation slides and workshop materials
-
-## 📄 License
-
-This work is licensed under the [MIT License](LICENSE) - see the LICENSE file for details.
-
-## 🙏 Acknowledgments
-
-- Inspired by challenges faced by operations teams worldwide
-- Built on principles from Site Reliability Engineering, DevOps, and Lean methodologies
-- Community feedback and real-world implementation experiences
-
-## 📧 Contact
-
-- **Issues**: Use [GitHub Issues](https://github.com/g3rhard/sysops-framework/issues)
-- **Discussions**: Join [GitHub Discussions](https://github.com/g3rhard/sysops-framework/discussions)
+MIT — see [LICENSE](LICENSE).

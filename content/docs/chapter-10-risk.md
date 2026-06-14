@@ -245,19 +245,93 @@ Penetration testing proactively identifies exploitable vulnerabilities before at
 
 ## 📋 Compliance Management
 
-### Regulatory Framework Integration
+### Policy, Procedure, and Evidence — The Three Layers
 
-**Common Compliance Requirements**:
+Before mapping controls, it's essential to distinguish the three layers of compliance. Mixing them up is the most common source of audit findings.
 
-| Regulation           | Domain                                                      |
-| -------------------- | ----------------------------------------------------------- |
-| SOX (Sarbanes-Oxley) | Financial controls and audit trails                         |
-| HIPAA                | Healthcare information privacy and security                 |
-| PCI DSS              | Payment card industry data security standards               |
-| GDPR                 | General Data Protection Regulation                          |
-| SOC 2                | Service organization controls for security and availability |
+| Layer         | Definition                       | Example                                                                                                  | Who Owns It                   |
+| ------------- | -------------------------------- | -------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| **Policy**    | What must be done (the rule)     | "All production changes must be approved before deployment"                                              | Security / Compliance officer |
+| **Procedure** | How it's done (the steps)        | "Submit a change request in Jira → Team lead reviews → Deploy via CI/CD → Verify health"                 | Team lead / Process owner     |
+| **Evidence**  | Proof it was done (the artifact) | Change request ticket, approval timestamp, CI/CD pipeline log with green build, post-deploy health check | Engineer / Automation         |
 
-**Compliance Integration Strategies**:
+> **Common failure mode.** Teams document a policy without a procedure (it says what but not how), or a procedure without evidence collection (everyone follows the steps but nothing proves it after the fact). An auditor needs all three: "show me your policy" → "show me your procedure" → "show me evidence it was followed." If any link is missing, the control is not operating effectively.
+
+### Control-Mapping Table: Practices to Frameworks
+
+The SysOps Framework is not a compliance framework — but its practices implement controls that satisfy compliance requirements. Use this table to map which SysOps practice produces the evidence for which control in SOC 2, ISO 27001, and GDPR. This is your audit readiness blueprint: for every control, you can point to a practice, the procedure under that practice, and the evidence it generates.
+
+| SysOps Practice                             | SOC 2 (Trust Services Criteria)              | ISO 27001 (Annex A)                                                  | GDPR (Articles)                  | Evidence Produced                                           |
+| ------------------------------------------- | -------------------------------------------- | -------------------------------------------------------------------- | -------------------------------- | ----------------------------------------------------------- |
+| **1. Service Level Management**             | Availability (A1.1, A1.2)                    | A.12.1 (Operational planning)                                        | Art. 32 (Security of processing) | SLO attainment reports, error budget logs                   |
+| **2. Incident & Problem Management**        | Security (CC7.3, CC7.4), Availability (A1.3) | A.16.1 (Incident management)                                         | Art. 33/34 (Breach notification) | Incident timeline, PIR, action items                        |
+| **3. Change & Configuration Management**    | Change management (CC8.1)                    | A.12.1 (Change management), A.12.5 (Control of operational software) | Art. 32                          | Change tickets, approval records, CMDB audit trail          |
+| **4. Capacity & Performance Management**    | Availability (A1.2)                          | A.12.1 (Capacity management)                                         | —                                | Capacity trend reports, performance baselines               |
+| **5. Knowledge & Documentation Management** | —                                            | A.7.5 (Documentation)                                                | Art. 5 (Accountability)          | Runbooks, SOPs, system documentation                        |
+| **6. Team & Skill Development**             | —                                            | A.7.2 (Competence)                                                   | —                                | Training records, skill matrix                              |
+| **7. Vendor & Contract Management**         | Vendor management (CC9.1, CC9.2)             | A.15.1 (Supplier relationships)                                      | Art. 28 (Processor)              | SLA compliance reports, vendor risk assessments             |
+| **8. Release Management**                   | Change management (CC8.1)                    | A.12.1, A.12.6 (Technical vulnerability management)                  | Art. 32                          | CI/CD pipeline logs, deployment approvals, rollback records |
+| **9. Asset Management**                     | Physical security (A1.4 — if hardware)       | A.8.1 (Asset inventory)                                              | Art. 32                          | CMDB, asset register, license records                       |
+| **10. Service Request Management**          | —                                            | A.12.1                                                               | —                                | Request tickets, fulfillment SLA reports                    |
+| **11. Financial Management**                | —                                            | —                                                                    | —                                | Budget reports, cost allocation records                     |
+| **12. Backup & Recovery Operations**        | Availability (A1.3)                          | A.12.3 (Backup), A.17.1 (Business continuity)                        | Art. 32                          | Backup success logs, restore test results, DR test reports  |
+
+> **How to read this table.** If your SOC 2 auditor asks for change management evidence (CC8.1), point them to Practice 3 (Change & Configuration Management), whose procedure produces change tickets, approval records, and CMDB audit trails as evidence. If they find a gap in evidence collection, strengthen the procedure — not the tool.
+
+### Policy-as-Code for Compliance
+
+The bridge between "policy exists on paper" and "policy is enforced automatically" is Policy-as-Code. Instead of relying on manual compliance checks, encode the policy rules and let CI/CD and admission control enforce them.
+
+**How Policy-as-Code serves each compliance layer**:
+
+| Compliance Layer | Policy-as-Code Application                                                    | Example                                                                     |
+| ---------------- | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| **Policy**       | Policy written as Rego (OPA) or YAML (Kyverno) rules                          | "All containers must come from an approved registry"                        |
+| **Procedure**    | Policy evaluated in CI/CD pipeline gates and Kubernetes admission webhooks    | OPA Gatekeeper rejects pods from unapproved registries at deploy time       |
+| **Evidence**     | Admission decision logged with timestamp, request payload, and policy version | Audit log shows "Pod X was rejected by policy v1.3 at 2026-06-13T14:22:00Z" |
+
+**Examples for compliance-relevant controls**:
+
+```rego
+# OPA Gatekeeper: Require encryption in transit (GDPR Art. 32, SOC 2 CC6.1)
+package ingress_tls
+
+violation[{"msg": msg}] {
+  ingress := input.review.object
+  not ingress.spec.tls
+  msg := sprintf("Ingress %v must have TLS configured — encryption in transit is required", [ingress.metadata.name])
+}
+```
+
+```yaml
+# Kyverno: Require resource limits (ISO 27001 A.12.1 — capacity management)
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-resource-limits
+spec:
+  validationFailureAction: enforce
+  rules:
+    - name: check-containers
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      validate:
+        message: "All containers must specify resource requests and limits"
+        pattern:
+          spec:
+            containers:
+              - resources:
+                  limits:
+                    memory: "?*"
+                    cpu: "?*"
+```
+
+> **Start with the highest-risk controls first.** Do not attempt to encode every policy before the audit — you never will. Instead, pick the three controls that scare you most (e.g., "no unapproved image registries," "TLS required on all ingress," "backup retention ≥ 30 days"), build policies for those, validate they work, and expand incrementally. Three enforced policies beat thirty written policies that nobody checks.
+
+### Compliance Integration Strategies
 
 - **Built-in Controls**: Embed compliance requirements into operational processes
 - **Automated Evidence**: Generate compliance artifacts through normal operations

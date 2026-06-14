@@ -16,6 +16,8 @@ The SysOps Framework consists of interconnected components that work together to
 
 The SysOps Framework rests on three pillars that continuously feed into one another: **Cycles** set the operating rhythm, **Practices** define the work done within that rhythm, and **Metrics** measure the outcomes. The metrics then feed back into the cycles, closing the loop.
 
+> **Diagram**: Three-pillar framework structure — Cycles define rhythm, Practices define work, Metrics measure outcomes — with feedback loops between all three
+
 ```mermaid
 flowchart TD
     subgraph framework["SysOps Framework"]
@@ -26,7 +28,7 @@ flowchart TD
     end
 ```
 
-**How to read it:** Cycles *drive* which Practices run and when; Practices *produce* the data captured as Metrics; Metrics *feed back* into the next round of Cycles, so the framework continuously improves.
+**How to read it:** Cycles _drive_ which Practices run and when; Practices _produce_ the data captured as Metrics; Metrics _feed back_ into the next round of Cycles, so the framework continuously improves.
 
 ---
 
@@ -36,55 +38,57 @@ Each management practice is applied across all three operational cycles with dif
 
 ### Daily Operations Cycle (24-48h)
 
-| Practice | Daily Activities | Output/Measurement |
-|---|---|---|
-| **Service Level Management** | Monitor SLO compliance, track error budget consumption | Daily SLI metrics, burn rate |
-| **Incident and Problem Management** | Detect incidents, respond, restore service, document timeline | Incident logs, response times |
-| **Change and Configuration Management** | Execute approved standard changes, update CMDB | Change records, CI updates |
-| **Capacity and Performance Management** | Monitor utilisation, performance, availability | Real-time dashboards |
-| **Knowledge and Documentation Management** | Update runbooks during incidents, capture new knowledge | Updated documentation |
-| **Team and Skill Development** | On-the-job learning, peer support, skill application | Skill progression notes |
-| **Vendor and Contract Management** | Escalate vendor issues, monitor vendor service health | SLA impact tracking |
-| **Release Management** | Monitor post-deployment health, trigger rollbacks on SLO breach | Deployment health checks |
-| **Asset Management** | Verify CI accuracy after incidents, update CMDB | Asset records |
-| **Service Request Management** | Fulfil standard requests, monitor same-day SLA queue | Request fulfilment rate |
-| **Financial Management** | Monitor daily cloud spend, flag cost anomalies | Daily cost reports |
-| **Backup and Recovery Operations** | Verify overnight backup jobs, respond to backup failures | Backup success rate |
+| Practice                                   | Daily Activities                                                | Output/Measurement            |
+| ------------------------------------------ | --------------------------------------------------------------- | ----------------------------- |
+| **Service Level Management**               | Monitor SLO compliance, track error budget consumption          | Daily SLI metrics, burn rate  |
+| **Incident and Problem Management**        | Detect incidents, respond, restore service, document timeline   | Incident logs, response times |
+| **Change and Configuration Management**    | Execute approved standard changes, update CMDB                  | Change records, CI updates    |
+| **Capacity and Performance Management**    | Monitor utilisation, performance, availability                  | Real-time dashboards          |
+| **Knowledge and Documentation Management** | Update runbooks during incidents, capture new knowledge         | Updated documentation         |
+| **Team and Skill Development**             | On-the-job learning, peer support, skill application            | Skill progression notes       |
+| **Vendor and Contract Management**         | Escalate vendor issues, monitor vendor service health           | SLA impact tracking           |
+| **Release Management**                     | Monitor post-deployment health, trigger rollbacks on SLO breach | Deployment health checks      |
+| **Asset Management**                       | Verify CI accuracy after incidents, update CMDB                 | Asset records                 |
+| **Service Request Management**             | Fulfil standard requests, monitor same-day SLA queue            | Request fulfilment rate       |
+| **Financial Management**                   | Monitor daily cloud spend, flag cost anomalies                  | Daily cost reports            |
+| **Backup and Recovery Operations**         | Verify overnight backup jobs, respond to backup failures        | Backup success rate           |
 
 ### Weekly Improvement Cycle (7d)
 
-| Practice | Weekly Activities | Output/Measurement |
-|---|---|---|
-| **Service Level Management** | Review weekly SLO compliance, analyse trends, adjust budgets | SLO trend analysis |
-| **Incident and Problem Management** | Root cause analysis, identify patterns, plan preventive actions | Problem statements |
-| **Change and Configuration Management** | Plan normal changes, schedule maintenance, risk assessment | Change calendar |
-| **Capacity and Performance Management** | Analyse weekly trends, identify bottlenecks | Capacity reports |
-| **Knowledge and Documentation Management** | Knowledge sharing sessions, documentation reviews | Training records |
-| **Team and Skill Development** | Cross-training, skill gap identification, mentoring | Skills matrix updates |
-| **Vendor and Contract Management** | Weekly SLA compliance review, vendor performance metrics | Vendor scorecards |
-| **Release Management** | DORA metrics review, release retrospectives, pipeline health | DORA trend report |
-| **Asset Management** | CMDB reconciliation, EOL asset alerts, license utilisation | Reconciliation report |
-| **Service Request Management** | Request queue review, SLA compliance, automation opportunities | Fulfilment metrics |
-| **Financial Management** | Cloud spend vs budget review, rightsizing recommendations | Weekly cost report |
-| **Backup and Recovery Operations** | Review backup success rates, partial restore test results | Restore test log |
+| Practice                                   | Weekly Activities                                               | Output/Measurement    |
+| ------------------------------------------ | --------------------------------------------------------------- | --------------------- |
+| **Service Level Management**               | Review weekly SLO compliance, analyse trends, adjust budgets    | SLO trend analysis    |
+| **Incident and Problem Management**        | Root cause analysis, identify patterns, plan preventive actions | Problem statements    |
+| **Change and Configuration Management**    | Plan normal changes, schedule maintenance, risk assessment      | Change calendar       |
+| **Capacity and Performance Management**    | Analyse weekly trends, identify bottlenecks                     | Capacity reports      |
+| **Knowledge and Documentation Management** | Knowledge sharing sessions, documentation reviews               | Training records      |
+| **Team and Skill Development**             | Cross-training, skill gap identification, mentoring             | Skills matrix updates |
+| **Vendor and Contract Management**         | Weekly SLA compliance review, vendor performance metrics        | Vendor scorecards     |
+| **Release Management**                     | DORA metrics review, release retrospectives, pipeline health    | DORA trend report     |
+| **Asset Management**                       | CMDB reconciliation, EOL asset alerts, license utilisation      | Reconciliation report |
+| **Service Request Management**             | Request queue review, SLA compliance, automation opportunities  | Fulfilment metrics    |
+| **Financial Management**                   | Cloud spend vs budget review, rightsizing recommendations       | Weekly cost report    |
+| **Backup and Recovery Operations**         | Review backup success rates, partial restore test results       | Restore test log      |
 
 ### Monthly Strategy Cycle (4wk)
 
-| Practice | Monthly Activities | Output/Measurement |
-|---|---|---|
-| **Service Level Management** | Strategic SLO planning, business alignment | Updated SLOs, business case |
-| **Change and Configuration Management** | Major change planning, risk assessment, architecture review | Change roadmap |
-| **Capacity and Performance Management** | Long-term capacity planning, architecture decisions | Capacity forecast |
-| **Knowledge and Documentation Management** | Knowledge strategy review, tool evaluation | Knowledge plan |
-| **Team and Skill Development** | Career development planning, org-wide skill strategy | Development plans |
-| **Vendor and Contract Management** | Vendor business reviews, contract negotiations, strategic assessment | Contract updates |
-| **Release Management** | Release strategy review, pipeline investment decisions | Release strategy doc |
-| **Asset Management** | Full CMDB audit, EOL planning, software license reconciliation | Audit report |
-| **Service Request Management** | Service catalog review, SLA target review, automation roadmap | Catalog update |
-| **Financial Management** | Monthly cost report to stakeholders, budget variance analysis | Financial report |
-| **Backup and Recovery Operations** | Full restore test review, DR simulation planning | DR readiness report |
+| Practice                                   | Monthly Activities                                                   | Output/Measurement          |
+| ------------------------------------------ | -------------------------------------------------------------------- | --------------------------- |
+| **Service Level Management**               | Strategic SLO planning, business alignment                           | Updated SLOs, business case |
+| **Change and Configuration Management**    | Major change planning, risk assessment, architecture review          | Change roadmap              |
+| **Capacity and Performance Management**    | Long-term capacity planning, architecture decisions                  | Capacity forecast           |
+| **Knowledge and Documentation Management** | Knowledge strategy review, tool evaluation                           | Knowledge plan              |
+| **Team and Skill Development**             | Career development planning, org-wide skill strategy                 | Development plans           |
+| **Vendor and Contract Management**         | Vendor business reviews, contract negotiations, strategic assessment | Contract updates            |
+| **Release Management**                     | Release strategy review, pipeline investment decisions               | Release strategy doc        |
+| **Asset Management**                       | Full CMDB audit, EOL planning, software license reconciliation       | Audit report                |
+| **Service Request Management**             | Service catalog review, SLA target review, automation roadmap        | Catalog update              |
+| **Financial Management**                   | Monthly cost report to stakeholders, budget variance analysis        | Financial report            |
+| **Backup and Recovery Operations**         | Full restore test review, DR simulation planning                     | DR readiness report         |
 
 ### Practice-to-Cycle Dependency Map
+
+> **Diagram**: All 12 practices mapped to Daily, Weekly, and Monthly cycles showing which practice lives in which cycle
 
 ```mermaid
 flowchart LR
@@ -217,6 +221,8 @@ Each metric category is supported by specific management practices:
 
 ### Service Level Management Data Flow
 
+> **Diagram**: Data flow from customer requirements through SLI/SLO definition, monitoring, error budget tracking, to business value reporting
+
 ```mermaid
 flowchart LR
     A[Customer Requirements] --> B[Define SLIs/SLOs]
@@ -229,6 +235,8 @@ flowchart LR
 ```
 
 ### Incident and Problem Management Data Flow
+
+> **Diagram**: Incident flow from alert/detection through triage, resolution, post-incident review, to problem management and knowledge base updates
 
 ```mermaid
 flowchart LR
@@ -243,6 +251,8 @@ flowchart LR
 ```
 
 ### Change and Configuration Management Data Flow
+
+> **Diagram**: Change flow from work identification through categorisation, risk assessment, approval, implementation, to CMDB update
 
 ```mermaid
 flowchart LR
@@ -307,13 +317,13 @@ flowchart LR
 
 The practice maturity model (Chapter 6) shows how practices evolve through five levels:
 
-| Level | Characteristics | Data/Metrics Implication |
-|---|---|---|
-| 1 - Initial | Ad hoc, reactive | No formal metrics, anecdotal reporting |
-| 2 - Repeatable | Defined procedures, basic tracking | Basic metrics collected, inconsistent |
-| 3 - Defined | Standardised practices, integrated | Consistent metrics, trend visibility |
-| 4 - Managed | Measured, continuously improved | Detailed metrics, cause-effect analysis |
-| 5 - Optimising | Continuously evolving, innovative | Predictive metrics, proactive optimisation |
+| Level          | Characteristics                    | Data/Metrics Implication                   |
+| -------------- | ---------------------------------- | ------------------------------------------ |
+| 1 - Initial    | Ad hoc, reactive                   | No formal metrics, anecdotal reporting     |
+| 2 - Repeatable | Defined procedures, basic tracking | Basic metrics collected, inconsistent      |
+| 3 - Defined    | Standardised practices, integrated | Consistent metrics, trend visibility       |
+| 4 - Managed    | Measured, continuously improved    | Detailed metrics, cause-effect analysis    |
+| 5 - Optimising | Continuously evolving, innovative  | Predictive metrics, proactive optimisation |
 
 **Each practice progresses independently:** You might have Incident Management at Level 3, Change Management at Level 2, and Service Level Management at Level 4.
 
@@ -322,6 +332,8 @@ The [Getting Started guide](getting-started/) maps these maturity levels to impl
 ---
 
 ## Key Implementation Dependencies
+
+> **Diagram**: Practice dependency graph showing which practices depend on others — e.g., SLO Management depends on Knowledge Management, Incident Management depends on SLO Management
 
 ```mermaid
 flowchart TD
@@ -361,6 +373,8 @@ flowchart TD
 
 ### The Continuous Improvement Cycle
 
+> **Diagram**: Continuous improvement loop — daily incidents captured → weekly improvement → monthly strategy → prioritised improvements feed back into daily operations
+
 ```mermaid
 flowchart TD
     A[Daily Incident / Task] --> B[Incident Data Captured]
@@ -375,6 +389,8 @@ flowchart TD
 ```
 
 ### The Metric-Driven Cycle
+
+> **Diagram**: Metric-driven cycle — define metrics → implement measurement → collect data → analyse trends → adjust targets → repeat
 
 ```mermaid
 flowchart TD
@@ -409,4 +425,4 @@ A: Three ways:
 
 **Q: What happens if we implement cycles without practices?**
 
-A: Cycles without practices lead to "process theatre" — meetings and activities without clear purpose. Practices define *what* happens in each cycle. Both are essential.
+A: Cycles without practices lead to "process theatre" — meetings and activities without clear purpose. Practices define _what_ happens in each cycle. Both are essential.

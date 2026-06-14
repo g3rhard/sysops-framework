@@ -29,12 +29,12 @@ A warning before you build a single dashboard: a metric is a streetlight, not th
 
 Not every metric is for every person. Each role in the team cares about a different slice:
 
-| Role | Primary Categories | What They Act On | When They Look |
-|---|---|---|---|
-| **On-Call Engineer** | Service Reliability, Operational Efficiency | Active alerts, error budget burn rate, incident status | Real-time / during shift |
-| **Team Lead / Ops Manager** | Operational Efficiency, Team Performance | Change success rate, MTTR trends, cross-training coverage, tool effectiveness | Daily standup, weekly review |
-| **Platform / Infra Manager** | Service Reliability, Business Value | SLO compliance, capacity utilization, cost per service unit, FinOps metrics | Weekly cycle, monthly report |
-| **Executive Sponsor** | Business Value, Service Reliability (summary) | Availability trends, cost efficiency, risk mitigation, strategic initiative progress | Monthly review, quarterly business review |
+| Role                         | Primary Categories                            | What They Act On                                                                     | When They Look                            |
+| ---------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------ | ----------------------------------------- |
+| **On-Call Engineer**         | Service Reliability, Operational Efficiency   | Active alerts, error budget burn rate, incident status                               | Real-time / during shift                  |
+| **Team Lead / Ops Manager**  | Operational Efficiency, Team Performance      | Change success rate, MTTR trends, cross-training coverage, tool effectiveness        | Daily standup, weekly review              |
+| **Platform / Infra Manager** | Service Reliability, Business Value           | SLO compliance, capacity utilization, cost per service unit, FinOps metrics          | Weekly cycle, monthly report              |
+| **Executive Sponsor**        | Business Value, Service Reliability (summary) | Availability trends, cost efficiency, risk mitigation, strategic initiative progress | Monthly review, quarterly business review |
 
 These aren't hard boundaries — an on-call engineer might look at cost anomalies when debugging, and an executive sponsor might care about a specific incident's MTTR. But the table tells you what _default view_ each role needs on their dashboard. Build for that first; add secondary views later.
 
@@ -46,13 +46,13 @@ These aren't hard boundaries — an on-call engineer might look at cost anomalie
 
 ### Primary Indicators
 
-| Metric | Definition | Target Range | Measurement | Business Value |
-| ------ | ---------- | ------------ | ----------- | -------------- |
-| Uptime and Availability | Percentage of time services are operational and accessible | 99.9%+ for critical services, 99.5%+ for important services | Automated monitoring with synthetic transactions | Direct correlation to revenue and customer satisfaction |
-| Mean Time to Recovery (MTTR) | Average time from incident detection to service restoration | <30 min for critical services, <2 hr for standard services | Incident tracking from alert to resolution confirmation | Minimizes business impact of service disruptions |
-| Mean Time Between Failures (MTBF) | Average operational time between service failures | >720 hours for critical systems | Time tracking between incident occurrences | Indicates system stability and reliability investment effectiveness |
-| SLO Compliance ([Google SRE Book — Ch. 4](https://sre.google/sre-book/service-level-objectives/)) | Percentage of time meeting defined service level targets | 95%+ compliance across all defined SLOs | Automated calculation based on SLI data | Demonstrates commitment to service quality standards |
-| Error Budget Burn Rate | Rate at which reliability budget is being consumed | <50% of monthly budget consumed | Real-time tracking of error budget consumption | Balances reliability with innovation and change velocity |
+| Metric                                                                                            | Definition                                                  | Target Range                                                | Measurement                                             | Business Value                                                      |
+| ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------- |
+| Uptime and Availability                                                                           | Percentage of time services are operational and accessible  | 99.9%+ for critical services, 99.5%+ for important services | Automated monitoring with synthetic transactions        | Direct correlation to revenue and customer satisfaction             |
+| Mean Time to Recovery (MTTR)                                                                      | Average time from incident detection to service restoration | <30 min for critical services, <2 hr for standard services  | Incident tracking from alert to resolution confirmation | Minimizes business impact of service disruptions                    |
+| Mean Time Between Failures (MTBF)                                                                 | Average operational time between service failures           | >720 hours for critical systems                             | Time tracking between incident occurrences              | Indicates system stability and reliability investment effectiveness |
+| SLO Compliance ([Google SRE Book — Ch. 4](https://sre.google/sre-book/service-level-objectives/)) | Percentage of time meeting defined service level targets    | 95%+ compliance across all defined SLOs                     | Automated calculation based on SLI data                 | Demonstrates commitment to service quality standards                |
+| Error Budget Burn Rate                                                                            | Rate at which reliability budget is being consumed          | <50% of monthly budget consumed                             | Real-time tracking of error budget consumption          | Balances reliability with innovation and change velocity            |
 
 ### Implementation Example
 
@@ -88,13 +88,13 @@ Error Budget:
 
 ### Automation and Process Metrics
 
-| Metric | Definition | Target Range | Measurement | Business Value |
-| ------ | ---------- | ------------ | ----------- | -------------- |
-| Automation Coverage | Percentage of routine tasks performed automatically | 70%+ of repetitive tasks automated | Task inventory with automation status tracking | Reduces manual effort and increases consistency |
-| Incident Response Time | Time from alert generation to initial human response | <15 min for critical alerts, <60 min for warnings | Timestamp analysis from monitoring to acknowledgment | Demonstrates operational readiness and responsiveness |
-| Change Success Rate | Percentage of changes implemented without causing incidents | 95%+ success rate for normal changes | Change tracking with incident correlation analysis | Shows process maturity and risk management effectiveness |
-| Capacity Utilization | Optimal resource usage without performance degradation | 60–80% utilization for most resources | Resource monitoring with performance correlation | Maximizes infrastructure investment while maintaining performance |
-| Tool Effectiveness Score | Team satisfaction and productivity with operational tools | 8/10 average satisfaction score | Regular surveys and productivity analysis | Ensures tool investments support team effectiveness |
+| Metric                   | Definition                                                  | Target Range                                      | Measurement                                          | Business Value                                                    |
+| ------------------------ | ----------------------------------------------------------- | ------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------- |
+| Automation Coverage      | Percentage of routine tasks performed automatically         | 70%+ of repetitive tasks automated                | Task inventory with automation status tracking       | Reduces manual effort and increases consistency                   |
+| Incident Response Time   | Time from alert generation to initial human response        | <15 min for critical alerts, <60 min for warnings | Timestamp analysis from monitoring to acknowledgment | Demonstrates operational readiness and responsiveness             |
+| Change Success Rate      | Percentage of changes implemented without causing incidents | 95%+ success rate for normal changes              | Change tracking with incident correlation analysis   | Shows process maturity and risk management effectiveness          |
+| Capacity Utilization     | Optimal resource usage without performance degradation      | 60–80% utilization for most resources             | Resource monitoring with performance correlation     | Maximizes infrastructure investment while maintaining performance |
+| Tool Effectiveness Score | Team satisfaction and productivity with operational tools   | 8/10 average satisfaction score                   | Regular surveys and productivity analysis            | Ensures tool investments support team effectiveness               |
 
 ### 🎮 Interactive Exercise: Efficiency Optimization
 
@@ -127,13 +127,13 @@ Error Budget:
 
 ### Knowledge and Capability Indicators
 
-| Metric | Definition | Target Range | Measurement | Business Value |
-| ------ | ---------- | ------------ | ----------- | -------------- |
-| Knowledge Transfer Rate | Effectiveness of knowledge sharing and documentation practices | 90%+ of critical knowledge documented and accessible | Knowledge audits and accessibility testing | Reduces single points of failure and improves team resilience |
-| Cross-Training Completion | Percentage of team members trained on multiple critical systems | 80%+ of team cross-trained on critical systems | Skills matrix tracking and competency assessments | Improves team flexibility and reduces knowledge silos |
-| On-Call Rotation Health | Sustainability and fairness of on-call responsibilities | "Green" status with balanced load distribution | Rotation analysis, workload distribution, team feedback | Maintains team morale and prevents burnout |
-| Problem Resolution Time | Average time to resolve complex problems (not incidents) | <2 hr for standard problems, <8 hr for complex issues | Problem tracking from identification to permanent resolution | Demonstrates team capability and process maturity |
-| Documentation Coverage | Percentage of systems and processes with current documentation | 85%+ coverage with quarterly update verification | Documentation inventory with currency tracking | Enables effective knowledge transfer and faster onboarding |
+| Metric                    | Definition                                                      | Target Range                                          | Measurement                                                  | Business Value                                                |
+| ------------------------- | --------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------- |
+| Knowledge Transfer Rate   | Effectiveness of knowledge sharing and documentation practices  | 90%+ of critical knowledge documented and accessible  | Knowledge audits and accessibility testing                   | Reduces single points of failure and improves team resilience |
+| Cross-Training Completion | Percentage of team members trained on multiple critical systems | 80%+ of team cross-trained on critical systems        | Skills matrix tracking and competency assessments            | Improves team flexibility and reduces knowledge silos         |
+| On-Call Rotation Health   | Sustainability and fairness of on-call responsibilities         | "Green" status with balanced load distribution        | Rotation analysis, workload distribution, team feedback      | Maintains team morale and prevents burnout                    |
+| Problem Resolution Time   | Average time to resolve complex problems (not incidents)        | <2 hr for standard problems, <8 hr for complex issues | Problem tracking from identification to permanent resolution | Demonstrates team capability and process maturity             |
+| Documentation Coverage    | Percentage of systems and processes with current documentation  | 85%+ coverage with quarterly update verification      | Documentation inventory with currency tracking               | Enables effective knowledge transfer and faster onboarding    |
 
 ### Team Health Assessment
 
@@ -153,22 +153,22 @@ Error Budget:
 
 ### Strategic Impact Measurements
 
-| Metric | Definition | Target Range | Measurement | Business Value |
-| ------ | ---------- | ------------ | ----------- | -------------- |
-| Customer Satisfaction Score | Internal customer satisfaction with IT services and support | 4.5/5 average satisfaction rating | Regular surveys and feedback collection | Demonstrates service quality and stakeholder alignment |
-| Business Service Availability | Uptime of business-critical services during business hours | 99.5%+ availability during business hours | Business-hour focused availability tracking | Direct impact on business operations and revenue |
-| Cost Per Service Unit | Total cost of operations divided by service units delivered | Decreasing trend year-over-year | Financial analysis with service volume correlation | Demonstrates operational efficiency and cost optimization |
+| Metric                        | Definition                                                  | Target Range                              | Measurement                                        | Business Value                                            |
+| ----------------------------- | ----------------------------------------------------------- | ----------------------------------------- | -------------------------------------------------- | --------------------------------------------------------- |
+| Customer Satisfaction Score   | Internal customer satisfaction with IT services and support | 4.5/5 average satisfaction rating         | Regular surveys and feedback collection            | Demonstrates service quality and stakeholder alignment    |
+| Business Service Availability | Uptime of business-critical services during business hours  | 99.5%+ availability during business hours | Business-hour focused availability tracking        | Direct impact on business operations and revenue          |
+| Cost Per Service Unit         | Total cost of operations divided by service units delivered | Decreasing trend year-over-year           | Financial analysis with service volume correlation | Demonstrates operational efficiency and cost optimization |
 
 ### FinOps (Financial Operations) Metrics ([FinOps Foundation](https://www.finops.org/introduction/what-is-finops/))
 
-| Metric | Definition | Target Range | Measurement | Business Value |
-| ------ | ---------- | ------------ | ----------- | -------------- |
-| Cloud Cost Allocation | Accurate attribution of cloud costs to services, teams, or departments | 100% allocation with <5% unallocated "shared" costs | Cloud billing analysis with tagging compliance tracking | Enables cost accountability and chargeback models |
-| Cloud Waste Ratio | Percentage of cloud spending on idle or underutilized resources | <15% waste (industry average is 30%) | Instance utilization analysis, reserved instance coverage, storage audits | Direct opportunity for cost reduction |
-| Unit Economics | Cost per key business metric (e.g., per transaction, per user, per GB processed) | Decreasing trend month-over-month | Cloud costs divided by application metrics | Demonstrates how cost relates to business outcomes |
-| Reserved Instance and Commitment Coverage | Percentage of workloads using reserved capacity vs. on-demand pricing | 60%+ for predictable workloads, 20%+ for variable workloads | Commitment utilization tracking and forecast comparison | Demonstrates cost optimization through commitment planning |
-| Right-Sizing Efficiency | Percentage of instances operating within optimal sizing parameters | 85%+ of instances properly sized (not over- or under-provisioned) | CPU/memory utilization analysis with instance type cost efficiency | Identifies quick wins for cost reduction |
-| Cost Anomaly Detection | Ability to identify unusual spending patterns quickly | Detect anomalies within 24–48 hours of occurrence | Automated cost trending and deviation analysis | Prevents runaway costs and identifies infrastructure issues |
+| Metric                                    | Definition                                                                       | Target Range                                                      | Measurement                                                               | Business Value                                              |
+| ----------------------------------------- | -------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Cloud Cost Allocation                     | Accurate attribution of cloud costs to services, teams, or departments           | 100% allocation with <5% unallocated "shared" costs               | Cloud billing analysis with tagging compliance tracking                   | Enables cost accountability and chargeback models           |
+| Cloud Waste Ratio                         | Percentage of cloud spending on idle or underutilized resources                  | <15% waste (industry average is 30%)                              | Instance utilization analysis, reserved instance coverage, storage audits | Direct opportunity for cost reduction                       |
+| Unit Economics                            | Cost per key business metric (e.g., per transaction, per user, per GB processed) | Decreasing trend month-over-month                                 | Cloud costs divided by application metrics                                | Demonstrates how cost relates to business outcomes          |
+| Reserved Instance and Commitment Coverage | Percentage of workloads using reserved capacity vs. on-demand pricing            | 60%+ for predictable workloads, 20%+ for variable workloads       | Commitment utilization tracking and forecast comparison                   | Demonstrates cost optimization through commitment planning  |
+| Right-Sizing Efficiency                   | Percentage of instances operating within optimal sizing parameters               | 85%+ of instances properly sized (not over- or under-provisioned) | CPU/memory utilization analysis with instance type cost efficiency        | Identifies quick wins for cost reduction                    |
+| Cost Anomaly Detection                    | Ability to identify unusual spending patterns quickly                            | Detect anomalies within 24–48 hours of occurrence                 | Automated cost trending and deviation analysis                            | Prevents runaway costs and identifies infrastructure issues |
 
 #### Example: Cloud Cost Management Dashboard
 
@@ -195,10 +195,10 @@ Cloud Cost Metrics:
 
 ---
 
-| Metric | Definition | Target Range | Measurement | Business Value |
-| ------ | ---------- | ------------ | ----------- | -------------- |
-| Innovation Time Percentage | Time spent on improvements and innovation vs. maintenance | 20%+ of time dedicated to improvements and innovation | Time tracking with activity categorization | Shows focus on continuous improvement and strategic value |
-| Risk Mitigation Effectiveness | Success rate in identifying and preventing operational risks | "High" effectiveness with proactive issue prevention | Risk assessment tracking with outcome analysis | Demonstrates proactive management and business protection |
+| Metric                        | Definition                                                   | Target Range                                          | Measurement                                    | Business Value                                            |
+| ----------------------------- | ------------------------------------------------------------ | ----------------------------------------------------- | ---------------------------------------------- | --------------------------------------------------------- |
+| Innovation Time Percentage    | Time spent on improvements and innovation vs. maintenance    | 20%+ of time dedicated to improvements and innovation | Time tracking with activity categorization     | Shows focus on continuous improvement and strategic value |
+| Risk Mitigation Effectiveness | Success rate in identifying and preventing operational risks | "High" effectiveness with proactive issue prevention  | Risk assessment tracking with outcome analysis | Demonstrates proactive management and business protection |
 
 ## 📈 Dashboard Design and Implementation
 
@@ -425,12 +425,12 @@ Apply this template to every metric on your dashboard. The `gaming_risk` field i
 
 ### The Big Four
 
-| Pitfall | How It Shows Up | Why It Happens | How to Fix It |
-|---|---|---|---|
-| **Vanity Metrics** | Dashboard looks great, nobody acts on it | Metric measures activity, not outcome | Before adding a metric, write down exactly what decision it will change and who makes it |
-| **Metric Overload** | 47 metrics on one screen, all "important" | No clear owner per metric; fear of missing something | Max 7 metrics per dashboard. If you need more, you need more audiences, not more numbers |
-| **Stale Baselines** | Comparing this month's performance against a pre-migration baseline from 18 months ago | Baselines set once and forgotten | Schedule baseline reviews alongside quarterly business reviews; update after any major infrastructure change |
-| **Goodhart's Law** | MTTR drops to 8 minutes but incidents recur because nobody fixes root causes | Metric is optimized, the underlying outcome is not | Every metric needs a counter-metric (e.g., MTTR + recurrence rate). Balanced scorecards catch gaming |
+| Pitfall             | How It Shows Up                                                                        | Why It Happens                                       | How to Fix It                                                                                                |
+| ------------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **Vanity Metrics**  | Dashboard looks great, nobody acts on it                                               | Metric measures activity, not outcome                | Before adding a metric, write down exactly what decision it will change and who makes it                     |
+| **Metric Overload** | 47 metrics on one screen, all "important"                                              | No clear owner per metric; fear of missing something | Max 7 metrics per dashboard. If you need more, you need more audiences, not more numbers                     |
+| **Stale Baselines** | Comparing this month's performance against a pre-migration baseline from 18 months ago | Baselines set once and forgotten                     | Schedule baseline reviews alongside quarterly business reviews; update after any major infrastructure change |
+| **Goodhart's Law**  | MTTR drops to 8 minutes but incidents recur because nobody fixes root causes           | Metric is optimized, the underlying outcome is not   | Every metric needs a counter-metric (e.g., MTTR + recurrence rate). Balanced scorecards catch gaming         |
 
 ### What Not to Measure
 
@@ -446,12 +446,12 @@ Some things look measurable but aren't worth the cost of collection, or actively
 
 **What to measure instead**:
 
-| Instead of | Measure |
-|---|---|
-| Uptime to 5 nines for everything | SLO attainment per criticality tier |
-| Individual response time | Team MTTR + recurrence rate |
-| Runbooks written | Runbook usage during incidents + accuracy score (post-incident review question: "did the runbook help?") |
-| Hours worked | On-call health score (interruptions slept through, pages per shift, time to decompress) |
+| Instead of                       | Measure                                                                                                  |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Uptime to 5 nines for everything | SLO attainment per criticality tier                                                                      |
+| Individual response time         | Team MTTR + recurrence rate                                                                              |
+| Runbooks written                 | Runbook usage during incidents + accuracy score (post-incident review question: "did the runbook help?") |
+| Hours worked                     | On-call health score (interruptions slept through, pages per shift, time to decompress)                  |
 
 ### How Metrics Can Be Gamed
 
@@ -459,15 +459,15 @@ Every metric worth tracking can be manipulated. The trick is knowing how so you 
 
 **Common gaming patterns**:
 
-1. **MTTR gaming**: Close the incident ticket without fixing the root cause. MTTR drops, but the same incident happens next week. *Defense:* Track recurrence rate alongside MTTR. Any incident that reoccurs within 30 days counts as a failure.
+1. **MTTR gaming**: Close the incident ticket without fixing the root cause. MTTR drops, but the same incident happens next week. _Defense:_ Track recurrence rate alongside MTTR. Any incident that reoccurs within 30 days counts as a failure.
 
-2. **SLO attainment gaming**: Set SLO targets so low they're never breached. 99.9% attainment on a 99.0% SLO is not an achievement. *Defense:* Lock SLO targets in change management. Require team lead approval to relax a target. Track SLO target hardening (are SLOs getting tighter over time?).
+2. **SLO attainment gaming**: Set SLO targets so low they're never breached. 99.9% attainment on a 99.0% SLO is not an achievement. _Defense:_ Lock SLO targets in change management. Require team lead approval to relax a target. Track SLO target hardening (are SLOs getting tighter over time?).
 
-3. **Automation coverage gaming**: Count every tiny script as "automation" to inflate the percentage. *Defense:* Define "automation" as "eliminates a manual step that previously required a human decision." A cron job that existed before the metrics started doesn't count as new automation.
+3. **Automation coverage gaming**: Count every tiny script as "automation" to inflate the percentage. _Defense:_ Define "automation" as "eliminates a manual step that previously required a human decision." A cron job that existed before the metrics started doesn't count as new automation.
 
-4. **Cost per service unit gaming**: Include only direct infrastructure costs and exclude the labor, support, and overhead that make up 60% of the real cost. *Defense:* Use total cost of ownership (TCO) as the denominator. If a cost can't be attributed, publish it as "unattributed" rather than hiding it.
+4. **Cost per service unit gaming**: Include only direct infrastructure costs and exclude the labor, support, and overhead that make up 60% of the real cost. _Defense:_ Use total cost of ownership (TCO) as the denominator. If a cost can't be attributed, publish it as "unattributed" rather than hiding it.
 
-5. **Ticket closure gaming**: Split a single problem into five tickets to show five "resolved" items. *Defense:* Require problem-to-ticket linkage. If five tickets share the same root cause, they count as one.
+5. **Ticket closure gaming**: Split a single problem into five tickets to show five "resolved" items. _Defense:_ Require problem-to-ticket linkage. If five tickets share the same root cause, they count as one.
 
 > **Litmus test.** Ask yourself: "If this metric was the only thing my bonus depended on, what would I do differently?" If the honest answer is something that makes the system worse, you need to redesign the metric — or add a counter-metric that catches the bad behavior.
 

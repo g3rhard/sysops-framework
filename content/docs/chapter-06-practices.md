@@ -25,20 +25,20 @@ Twelve practices is a lot to swallow in one sitting, so don't try. Nobody implem
 
 ### Practice Index
 
-| # | Practice | Criticality | Effort | Best First Signal |
-|---|---|---|---|---|
-| 1 | Service Level Management | High | Medium | Any service has no SLO defined |
-| 2 | Incident and Problem Management | High | Medium | Firefighting dominates every day |
-| 3 | Change and Configuration Management | High | Medium | Unapproved changes cause incidents |
-| 4 | Capacity and Performance Management | High | Medium | Systems slow down under load |
-| 5 | Knowledge and Documentation Management | Medium | Low | Same incident happens three times |
-| 6 | Team and Skill Development | Medium | Low | Single person knows each system |
-| 7 | Vendor and Contract Management | Medium | Medium | Vendor SLA miss hurts the team |
-| 8 | Release Management | High | High | Deployment causes a production issue |
-| 9 | Asset Management | Medium | Medium | Can't find what hardware is deployed |
-| 10 | Service Request Management | Low | Medium | Ops team is the IT helpdesk |
-| 11 | Financial Management | Low | High | No idea what ops costs per month |
-| 12 | Backup and Recovery Operations | High | Medium | Last backup test was "a while ago" |
+| #   | Practice                               | Criticality | Effort | Best First Signal                    |
+| --- | -------------------------------------- | ----------- | ------ | ------------------------------------ |
+| 1   | Service Level Management               | High        | Medium | Any service has no SLO defined       |
+| 2   | Incident and Problem Management        | High        | Medium | Firefighting dominates every day     |
+| 3   | Change and Configuration Management    | High        | Medium | Unapproved changes cause incidents   |
+| 4   | Capacity and Performance Management    | High        | Medium | Systems slow down under load         |
+| 5   | Knowledge and Documentation Management | Medium      | Low    | Same incident happens three times    |
+| 6   | Team and Skill Development             | Medium      | Low    | Single person knows each system      |
+| 7   | Vendor and Contract Management         | Medium      | Medium | Vendor SLA miss hurts the team       |
+| 8   | Release Management                     | High        | High   | Deployment causes a production issue |
+| 9   | Asset Management                       | Medium      | Medium | Can't find what hardware is deployed |
+| 10  | Service Request Management             | Low         | Medium | Ops team is the IT helpdesk          |
+| 11  | Financial Management                   | Low         | High   | No idea what ops costs per month     |
+| 12  | Backup and Recovery Operations         | High        | Medium | Last backup test was "a while ago"   |
 
 ### 1. 📊 Service Level Management
 
@@ -60,12 +60,12 @@ Twelve practices is a lot to swallow in one sitting, so don't try. Nobody implem
 
 **Service Level Indicators (SLIs)**:
 
-| SLI          | What It Measures                              |
-| ------------ | --------------------------------------------- |
-| Availability | Percentage of time service is operational     |
-| Latency      | Response time for user requests               |
-| Throughput   | Volume of successful requests processed       |
-| Quality      | Percentage of requests served without errors  |
+| SLI          | What It Measures                             |
+| ------------ | -------------------------------------------- |
+| Availability | Percentage of time service is operational    |
+| Latency      | Response time for user requests              |
+| Throughput   | Volume of successful requests processed      |
+| Quality      | Percentage of requests served without errors |
 
 **Service Level Objectives (SLOs)**:
 
@@ -331,13 +331,13 @@ For significant incidents, establish clear role assignments:
 
 **Change Risk Factors**:
 
-| Factor       | Question to Ask                              |
-| ------------ | -------------------------------------------- |
-| Complexity   | How many components are affected?            |
-| Testing      | How thoroughly has the change been tested?   |
-| Timing       | When will the change be implemented?         |
-| Rollback     | How easily can the change be reversed?       |
-| Dependencies | What other systems might be affected?        |
+| Factor       | Question to Ask                            |
+| ------------ | ------------------------------------------ |
+| Complexity   | How many components are affected?          |
+| Testing      | How thoroughly has the change been tested? |
+| Timing       | When will the change be implemented?       |
+| Rollback     | How easily can the change be reversed?     |
+| Dependencies | What other systems might be affected?      |
 
 **Risk Mitigation Strategies**:
 
@@ -992,13 +992,13 @@ Every Tier 1 and Tier 2 system must have a documented recovery runbook containin
 
 ### Maturity Levels
 
-| Level | Name       | What It Looks Like                                     |
-| ----- | ---------- | ------------------------------------------------------ |
-| 1     | Initial    | Practices are ad hoc and reactive                      |
-| 2     | Repeatable | Basic practices are defined and followed               |
-| 3     | Defined    | Practices are standardized and integrated              |
-| 4     | Managed    | Practices are measured and continuously improved       |
-| 5     | Optimizing | Practices are continuously evolving and innovative     |
+| Level | Name       | What It Looks Like                                 |
+| ----- | ---------- | -------------------------------------------------- |
+| 1     | Initial    | Practices are ad hoc and reactive                  |
+| 2     | Repeatable | Basic practices are defined and followed           |
+| 3     | Defined    | Practices are standardized and integrated          |
+| 4     | Managed    | Practices are measured and continuously improved   |
+| 5     | Optimizing | Practices are continuously evolving and innovative |
 
 > **Note.** Maturity is per-practice, not a single team-wide grade. It's completely normal — healthy, even — to be Level 4 at Incident Management and Level 1 at Financial Management. Resist the urge to average them into one flattering number; the whole point is to see clearly where the next bit of effort actually pays off.
 

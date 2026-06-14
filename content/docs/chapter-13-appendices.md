@@ -12,7 +12,7 @@ The chapters make the argument. The appendices give you the paperwork.
 
 Everything here is meant to be copied, pasted, butchered, and made your own. Nothing in this section is sacred — if a field doesn't apply to your team, delete it; if you need three more, add them. These are starting points, not commandments. The fastest way to ruin a good template is to treat it as a form to be _completed_ rather than a tool for _thinking_.
 
-> **📥 Downloadable versions**: All templates below are available as separate Markdown files in the [`templates/`](https://github.com/g3rhard/sysops-framework/tree/main/templates) directory. You can also grab the **[team-starter-pack.zip](https://github.com/g3rhard/sysops-framework/raw/main/team-starter-pack.zip)** — a single archive containing all core templates.
+> **📥 Downloadable versions**: All templates below are available as separate Markdown files in the [`templates/`](https://github.com/g3rhard/sysops-framework/tree/main/templates) directory.
 
 A note on placement: detailed, tick-box-heavy material lives here on purpose. The chapters keep the narrative and the key decisions; the appendices hold the granular checklists so the story stays readable and the reference material stays findable. When a chapter says "see the appendix," this is where it's pointing.
 
@@ -315,6 +315,6 @@ Effective date:      <YYYY-MM-DD>     Review cadence: <e.g., every 6 months>
 
 These templates are deliberately generic so they survive contact with your reality. As your team matures, fold your hard-won specifics back into them — the best version of every template in this book is the one your team has already broken and rebuilt twice.
 
-**Download the starter pack**: All templates are in the [`templates/`](https://github.com/g3rhard/sysops-framework/tree/main/templates) directory. Grab the **[team-starter-pack.zip](https://github.com/g3rhard/sysops-framework/raw/main/team-starter-pack.zip)** for a single-archive download. Run `./templates/package-starter-pack.sh` to regenerate the zip after making local customisations.
+All templates live in the [`templates/`](https://github.com/g3rhard/sysops-framework/tree/main/templates) directory. Copy what you need, adapt, and version-control alongside your operational docs.
 
 For the reasoning behind each artifact, follow the cross-references back into the chapters. For terminology, see the [Glossary](glossary.md). For how cycles, practices, and metrics interconnect, see the [Framework Data Relationships](data-relationships.md) page.

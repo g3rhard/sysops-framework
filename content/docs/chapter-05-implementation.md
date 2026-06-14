@@ -27,24 +27,24 @@ Implementing the SysOps Framework requires a systematic, phased approach that mi
 
 There is no single adoption path. Choose based on your team's readiness:
 
-| | **Track A: 30-Day Pilot** | **Track B: Full 180-Day Rollout** |
-|---|---|---|
-| **Who** | One team, testing the framework | Team(s) committed to full adoption |
-| **Prerequisite** | 4+ yes signals on the readiness assessment in [Getting Started](../getting-started/) | Successful 30-day pilot completed |
-| **Goal** | Prove the daily cycle works, measure improvement, decide | Institutionalise all three cycles + all 12 practices |
-| **Owners** | Team lead (drives), on-call engineer (daily cycle), one stakeholder sponsor | Team lead + manager (joint), rotating improvement lead, exec sponsor |
-| **Months** | 1 month | 6 months |
+|                  | **Track A: 30-Day Pilot**                                                            | **Track B: Full 180-Day Rollout**                                    |
+| ---------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| **Who**          | One team, testing the framework                                                      | Team(s) committed to full adoption                                   |
+| **Prerequisite** | 4+ yes signals on the readiness assessment in [Getting Started](../getting-started/) | Successful 30-day pilot completed                                    |
+| **Goal**         | Prove the daily cycle works, measure improvement, decide                             | Institutionalise all three cycles + all 12 practices                 |
+| **Owners**       | Team lead (drives), on-call engineer (daily cycle), one stakeholder sponsor          | Team lead + manager (joint), rotating improvement lead, exec sponsor |
+| **Months**       | 1 month                                                                              | 6 months                                                             |
 
 **If you have not run a pilot, start there.** The full 180-day plan assumes the pilot has already validated the approach for your context.
 
 ### Role-Based Responsibilities
 
-| Role | Pilot | Full Rollout |
-|---|---|---|
-| **Team lead** | Drives the daily cycle, runs standalones, unblocks the team | Runs weekly improvement cycle, reports to manager, coordinates with other teams |
-| **On-call engineer** | Owns the daily cycle's respond phase, logs incidents | Rotates as improvement lead, trains new team members |
-| **Manager** | Provides air cover, protects improvement time, reviews pilot results | Owns monthly strategy cycle, secures budget, enforces framework adherence |
-| **Executive sponsor** | Reviews pilot results, approves continuation | Champions cross-team adoption, removes organisational blockers |
+| Role                  | Pilot                                                                | Full Rollout                                                                    |
+| --------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| **Team lead**         | Drives the daily cycle, runs standalones, unblocks the team          | Runs weekly improvement cycle, reports to manager, coordinates with other teams |
+| **On-call engineer**  | Owns the daily cycle's respond phase, logs incidents                 | Rotates as improvement lead, trains new team members                            |
+| **Manager**           | Provides air cover, protects improvement time, reviews pilot results | Owns monthly strategy cycle, secures budget, enforces framework adherence       |
+| **Executive sponsor** | Reviews pilot results, approves continuation                         | Champions cross-team adoption, removes organisational blockers                  |
 
 ## 🔍 Phase 1: Foundation and Assessment (Month 1)
 
@@ -131,7 +131,7 @@ Before implementing changes, establish baseline measurements:
 **Team Track**:
 
 - Begin cross-training on critical systems
-- Establish on-call rotation and handoff procedures
+- Define incident response coverage: formal on-call rotation for teams large enough to sustain one (typically 5+); automated alerting + shared response for smaller teams
 - Create role definitions for daily operations cycle
 - Start regular daily review meetings
 
@@ -279,13 +279,13 @@ Each phase maps to the maturity levels in [Chapter 6](chapter-06-practices.md): 
 
 Check these at each phase boundary. If the criteria are not met, do not advance — adapt or pause.
 
-| Phase boundary | Go criteria | No-go response |
-|---|---|---|
-| **End of pilot (Day 30)** | Daily cycle running consistently, 3+ incidents logged with documented response, team reports less chaos (even slightly), at least one improvement completed | Extend pilot by 2 weeks with adjusted scope, or stop and document why SysOps does not fit |
-| **Pilot → Full rollout (Month 1 → 2)** | Pilot go decision made, manager agrees to protect improvement time, baseline metrics collected | Do not start full rollout. Address the blocker first (see [Getting Started — Readiness Gaps](../getting-started/#readiness-gaps-that-block-rollout)) |
-| **End of Month 3** | Weekly cycle producing measurable improvements, at least one practice at maturity Level 2, team satisfaction stable or improving | Pause monthly cycle introduction. Spend Month 4 strengthening daily + weekly cycles. Reassess |
-| **End of Month 4** | Monthly strategy cycle launched, first strategic initiative complete or in progress, stakeholder reporting is happening | Extend the monthly cycle pilot by one month with adjusted scope |
-| **End of Month 6** | All three cycles running without active management, maturity Level 3+ on priority practices, team can articulate framework value without referencing the book | Accept Level 2 on some practices and plan targeted improvement for next quarter. Full maturity takes 12-18 months |
+| Phase boundary                         | Go criteria                                                                                                                                                   | No-go response                                                                                                                                       |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **End of pilot (Day 30)**              | Daily cycle running consistently, 3+ incidents logged with documented response, team reports less chaos (even slightly), at least one improvement completed   | Extend pilot by 2 weeks with adjusted scope, or stop and document why SysOps does not fit                                                            |
+| **Pilot → Full rollout (Month 1 → 2)** | Pilot go decision made, manager agrees to protect improvement time, baseline metrics collected                                                                | Do not start full rollout. Address the blocker first (see [Getting Started — Readiness Gaps](../getting-started/#readiness-gaps-that-block-rollout)) |
+| **End of Month 3**                     | Weekly cycle producing measurable improvements, at least one practice at maturity Level 2, team satisfaction stable or improving                              | Pause monthly cycle introduction. Spend Month 4 strengthening daily + weekly cycles. Reassess                                                        |
+| **End of Month 4**                     | Monthly strategy cycle launched, first strategic initiative complete or in progress, stakeholder reporting is happening                                       | Extend the monthly cycle pilot by one month with adjusted scope                                                                                      |
+| **End of Month 6**                     | All three cycles running without active management, maturity Level 3+ on priority practices, team can articulate framework value without referencing the book | Accept Level 2 on some practices and plan targeted improvement for next quarter. Full maturity takes 12-18 months                                    |
 
 ## ↩️ Rollback Plan
 
@@ -391,35 +391,35 @@ Even in a rollback, the following are permanent improvements that no methodology
 
 ### Implementation Health Metrics
 
-| Metric           | What It Tracks                                                          |
-| ---------------- | ----------------------------------------------------------------------- |
-| Adoption rate    | Percentage of framework practices being used consistently               |
-| Process maturity | Assessment of how well each cycle is functioning                        |
-| Tool integration | Level of automation and tool integration achieved                       |
-| Team capability  | Skills and expertise development progress                               |
-| Cultural change  | Evidence of cultural transformation and continuous improvement mindset  |
+| Metric           | What It Tracks                                                         |
+| ---------------- | ---------------------------------------------------------------------- |
+| Adoption rate    | Percentage of framework practices being used consistently              |
+| Process maturity | Assessment of how well each cycle is functioning                       |
+| Tool integration | Level of automation and tool integration achieved                      |
+| Team capability  | Skills and expertise development progress                              |
+| Cultural change  | Evidence of cultural transformation and continuous improvement mindset |
 
 ## 🔄 Adaptation and Customization
 
 ### Framework Customization Guidelines
 
-| Guideline                 | What It Means                                                     |
-| ------------------------- | ---------------------------------------------------------------- |
-| Maintain core principles  | Don't compromise the fundamental values and principles           |
-| Adapt cycle timing        | Adjust cycle lengths based on your environment                   |
-| Customize metrics         | Use metrics that matter to your stakeholders                     |
-| Scale appropriately       | Adjust complexity based on team size and maturity                |
-| Integrate organizationally | Align with existing organizational processes where beneficial   |
+| Guideline                  | What It Means                                                 |
+| -------------------------- | ------------------------------------------------------------- |
+| Maintain core principles   | Don't compromise the fundamental values and principles        |
+| Adapt cycle timing         | Adjust cycle lengths based on your environment                |
+| Customize metrics          | Use metrics that matter to your stakeholders                  |
+| Scale appropriately        | Adjust complexity based on team size and maturity             |
+| Integrate organizationally | Align with existing organizational processes where beneficial |
 
 ### Industry-Specific Adaptations
 
-| Industry           | Adaptation Emphasis                                       |
-| ------------------ | --------------------------------------------------------- |
-| Financial services | Enhanced compliance and audit trail requirements          |
-| Healthcare         | Patient safety and regulatory compliance integration      |
-| Manufacturing      | Integration with production planning and quality systems  |
-| Technology         | Alignment with development and product release cycles      |
-| Government         | Compliance with procurement and security regulations      |
+| Industry           | Adaptation Emphasis                                      |
+| ------------------ | -------------------------------------------------------- |
+| Financial services | Enhanced compliance and audit trail requirements         |
+| Healthcare         | Patient safety and regulatory compliance integration     |
+| Manufacturing      | Integration with production planning and quality systems |
+| Technology         | Alignment with development and product release cycles    |
+| Government         | Compliance with procurement and security regulations     |
 
 ## 🎯 Chapter Summary
 

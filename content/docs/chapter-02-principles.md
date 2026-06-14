@@ -67,22 +67,24 @@ A word on why principles come before process. Every operations veteran has, at s
 
 ### ⚡ 2. Continuous Availability
 
-**The Principle**: Operations work never stops. The framework must accommodate 24/7 responsibilities and on-call requirements without creating unsustainable burden.
+**The Principle**: Operations work never stops. The framework must accommodate the reality that critical systems need attention outside business hours, without requiring teams to run unsustainable 24/7 on-call rotations.
 
-**Why It Matters**: Unlike development sprints that have clear start and end points, operational responsibilities require constant vigilance. Systems don't respect business hours, and critical issues don't wait for convenient timing.
+**Why It Matters**: Unlike development sprints that have clear start and end points, operational responsibilities don't pause. Systems don't respect business hours. But how you handle that varies by team size: a 3-person team supporting internal tools probably shouldn't run a formal 24/7 rotation; a 15-person team running customer-facing infrastructure at an SLA probably should.
 
 **In Practice**:
 
-- Design workflows that support sustainable on-call rotations
-- Create processes that work across time zones and shift changes
-- Build redundancy in team knowledge and capabilities
+- Design for resilience so that systems can survive unattended hours without human intervention
+- Where formal on-call is justified, build rotations that are sustainable: fair load distribution, documented handoffs, clear escalation
+- Create processes that work across time zones and shift changes where applicable
+- Build redundancy in team knowledge and capabilities through cross-training
 - Plan for handoffs and continuity during planned and unplanned absences
+- **Small teams should prefer making systems self-healing over recruiting a body to carry a pager**
 
-**Real-World Example**: The framework includes provisions for cross-training and documentation that ensure any team member can handle critical incidents, reducing single points of failure in team expertise.
+**Real-World Example**: A startup with three engineers running a SaaS platform automated their restore process and added a 24-hour grace period on non-critical alerts. Instead of a formal on-call rotation, each engineer carries a phone but pages go to a shared queue — anyone can pick up, and overnight pages are virtually non-existent because critical alerts auto-remediate.
 
 **What it protects**: Team sustainability and work-life balance. Followed properly, this principle prevents the burnout that comes from treating operations as a 24/7 death march.
 
-**What it costs**: Coverage overhead. Maintaining sustainable on-call requires enough team members, good handoff processes, and the discipline to actually hand off rather than stay involved. Small teams bear this cost most heavily.
+**What it costs**: Coverage overhead. Where formal on-call is justified, maintaining it requires enough team members, good handoff processes, and the discipline to actually hand off rather than stay involved. Small teams bear this cost most heavily — which is why they should automate instead.
 
 **Common misuse**: Treating "continuous availability" as requiring every team member to be available 24/7. The principle is about designing _systems_ for continuous availability, not requiring continuous human availability.
 
@@ -293,24 +295,24 @@ Principles will conflict. That is not a design flaw — it is reality. The frame
 
 ### Conflict Decision Matrix
 
-| When these principles conflict... | ...the tiebreaker is |
-|---|---|
-| **Service Reliability** vs **Rapid Response** | Rapid Response takes priority during active incidents (fix first, review later). Service Reliability takes priority during planning and prevention. |
-| **Service Reliability** vs **Automation** | If automation reduces long-term reliability (untested, risky automation), Service Reliability wins. If automation reduces toil that currently distracts from reliability work, Automation wins. |
-| **Continuous Availability** vs **Knowledge Sharing** | These rarely conflict — good handoffs (Continuous Availability) require good documentation (Knowledge Sharing). When they do compete for time, the current operational load determines priority. |
-| **Rapid Response** vs **Risk Management** | During an active incident, Rapid Response wins. In all other contexts, Risk Management wins — the best incident is the one that never happened. |
-| **Automation** vs **Knowledge Sharing** | Automation should always be documented. If a choice must be made, automate first (to free capacity), then document. Undocumented automation is technical debt; unautomated documentation is just a different kind of debt. |
-| **Knowledge Sharing** vs **Rapid Response** | During an incident, respond first and document after. The post-incident review process (Chapter 6) ensures documentation happens — just not during the firefight. |
+| When these principles conflict...                    | ...the tiebreaker is                                                                                                                                                                                                       |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Service Reliability** vs **Rapid Response**        | Rapid Response takes priority during active incidents (fix first, review later). Service Reliability takes priority during planning and prevention.                                                                        |
+| **Service Reliability** vs **Automation**            | If automation reduces long-term reliability (untested, risky automation), Service Reliability wins. If automation reduces toil that currently distracts from reliability work, Automation wins.                            |
+| **Continuous Availability** vs **Knowledge Sharing** | These rarely conflict — good handoffs (Continuous Availability) require good documentation (Knowledge Sharing). When they do compete for time, the current operational load determines priority.                           |
+| **Rapid Response** vs **Risk Management**            | During an active incident, Rapid Response wins. In all other contexts, Risk Management wins — the best incident is the one that never happened.                                                                            |
+| **Automation** vs **Knowledge Sharing**              | Automation should always be documented. If a choice must be made, automate first (to free capacity), then document. Undocumented automation is technical debt; unautomated documentation is just a different kind of debt. |
+| **Knowledge Sharing** vs **Rapid Response**          | During an incident, respond first and document after. The post-incident review process (Chapter 6) ensures documentation happens — just not during the firefight.                                                          |
 
 ### When Principles Are Balanced (Stable State)
 
-| Scenario | Lead Principle | Supporting Principles |
-|---|---|---|
-| Morning standalone, systems healthy | Continuous Availability | Knowledge Sharing (brief handoff) |
-| Vulnerability disclosed, patch available | Rapid Response, Risk Management | Service Reliability (testing before deploy) |
-| Capacity planning for next quarter | Risk Management | Service Reliability, Automation |
-| New team member onboarding | Knowledge Sharing | Continuous Availability (pairing with on-call) |
-| Incident post-mortem | Knowledge Sharing | Risk Management, Service Reliability |
+| Scenario                                 | Lead Principle                  | Supporting Principles                          |
+| ---------------------------------------- | ------------------------------- | ---------------------------------------------- |
+| Morning standalone, systems healthy      | Continuous Availability         | Knowledge Sharing (brief handoff)              |
+| Vulnerability disclosed, patch available | Rapid Response, Risk Management | Service Reliability (testing before deploy)    |
+| Capacity planning for next quarter       | Risk Management                 | Service Reliability, Automation                |
+| New team member onboarding               | Knowledge Sharing               | Continuous Availability (pairing with on-call) |
+| Incident post-mortem                     | Knowledge Sharing               | Risk Management, Service Reliability           |
 
 ## 📈 Measuring Principle Adherence
 
@@ -333,14 +335,14 @@ These principles aren't just theoretical concepts - they're practical tools that
 
 The six principles are not abstract values. Each one demands a specific structural response in how the team organises its work:
 
-| Principle | Demands a cycle that... | → Delivered by |
-|---|---|---|
-| **Service Reliability First** | Never stops monitoring, never defers response | Daily Operations Cycle (24/7) |
-| **Continuous Availability** | Works across shifts, hands off cleanly | Daily → Weekly handoff design |
-| **Rapid Response** | Has pre-authorised protocols, no approval bottlenecks | Daily Operations Cycle — Respond phase |
-| **Automation and Efficiency** | Protects time for improvement work | Weekly Improvement Cycle |
-| **Knowledge Sharing** | Ensures documentation happens, not just planned | Weekly cycle — Document phase; Monthly cycle — post-mortems |
-| **Risk Management** | Creates space for proactive planning | Monthly Strategy Cycle |
+| Principle                     | Demands a cycle that...                               | → Delivered by                                              |
+| ----------------------------- | ----------------------------------------------------- | ----------------------------------------------------------- |
+| **Service Reliability First** | Never stops monitoring, never defers response         | Daily Operations Cycle (24/7)                               |
+| **Continuous Availability**   | Works across shifts, hands off cleanly                | Daily → Weekly handoff design                               |
+| **Rapid Response**            | Has pre-authorised protocols, no approval bottlenecks | Daily Operations Cycle — Respond phase                      |
+| **Automation and Efficiency** | Protects time for improvement work                    | Weekly Improvement Cycle                                    |
+| **Knowledge Sharing**         | Ensures documentation happens, not just planned       | Weekly cycle — Document phase; Monthly cycle — post-mortems |
+| **Risk Management**           | Creates space for proactive planning                  | Monthly Strategy Cycle                                      |
 
 The three-cycle structure in Chapter 3 is not an arbitrary design choice — it is the operating model that these six principles, taken together, logically require. Read the next chapter as the structural answer to the values defined here.
 

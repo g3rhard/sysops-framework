@@ -235,14 +235,14 @@ Through analysis of successful operations teams, several key needs emerge that t
 
 If traditional agile is the wrong container, what would the right one look like? From the pain points, scenarios, and key insights above, we can derive a set of requirements that any operations methodology must satisfy:
 
-| # | Requirement | Why | Rules out |
-|---|---|---|---|
-| 1 | **Multi-horizon planning** — separate cadences for reactive, improvement, and strategic work | Operations has work at three different time horizons, each with a different planning approach | Single-cadence frameworks (Scrum, SAFe) |
-| 2 | **Built-in interrupt capacity** — unplanned work is expected, not exceptional | Interruptions are a feature of operations, not a defect to be managed out | Any methodology with fixed sprint commitments |
-| 3 | **Service-focused metrics** — measure availability, reliability, and toil, not velocity | The value of operations is in keeping services running, not shipping features | Velocity-based measurement systems |
-| 4 | **Sustainable improvement cycle** — protected time for proactive work that does not compete with reactive demands | Without structural protection, improvement work dies first | Teams that allocate "some percentage of time" without structural separation |
-| 5 | **Principle-driven decisions** — a values framework for choices the runbook does not cover | Operations veterans make judgement calls under pressure daily; they need principles, not more procedures | Purely procedural frameworks |
-| 6 | **Progressive adoption** — teams can start with one cycle and expand, not a big-bang transformation | Most operations teams lack the slack for a full framework rollout | All-or-nothing methodologies |
+| #   | Requirement                                                                                                       | Why                                                                                                      | Rules out                                                                   |
+| --- | ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| 1   | **Multi-horizon planning** — separate cadences for reactive, improvement, and strategic work                      | Operations has work at three different time horizons, each with a different planning approach            | Single-cadence frameworks (Scrum, SAFe)                                     |
+| 2   | **Built-in interrupt capacity** — unplanned work is expected, not exceptional                                     | Interruptions are a feature of operations, not a defect to be managed out                                | Any methodology with fixed sprint commitments                               |
+| 3   | **Service-focused metrics** — measure availability, reliability, and toil, not velocity                           | The value of operations is in keeping services running, not shipping features                            | Velocity-based measurement systems                                          |
+| 4   | **Sustainable improvement cycle** — protected time for proactive work that does not compete with reactive demands | Without structural protection, improvement work dies first                                               | Teams that allocate "some percentage of time" without structural separation |
+| 5   | **Principle-driven decisions** — a values framework for choices the runbook does not cover                        | Operations veterans make judgement calls under pressure daily; they need principles, not more procedures | Purely procedural frameworks                                                |
+| 6   | **Progressive adoption** — teams can start with one cycle and expand, not a big-bang transformation               | Most operations teams lack the slack for a full framework rollout                                        | All-or-nothing methodologies                                                |
 
 **What this means for the rest of the book:** Chapter 2 (Core Principles) satisfies requirement 5. Chapter 3 (Framework Structure) satisfies requirements 1, 2, and 4. Chapters 6 and 7 satisfy requirement 3. Chapter 5 describes the progressive adoption that requirement 6 demands.
 

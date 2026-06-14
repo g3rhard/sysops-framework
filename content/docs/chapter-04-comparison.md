@@ -29,15 +29,15 @@ A quick disclaimer before the knives come out: this chapter is not a hit piece o
 
 Not sure whether SysOps is right for you? Use this decision table:
 
-| Your team looks like... | Start with... |
-|---|---|
-| Feature-factory squad, clean 2-week sprints, rare interruptions | Scrum — SysOps is not for you |
-| Ops team drowning in interrupts, no time for improvements | SysOps — daily cycle first, then pilot |
-| Platform/SRE team with mixed planned/unplanned work | SysOps — all three cycles |
-| Small team (2-3 people), everything is on fire | Stabilise first, then SysOps daily cycle only |
-| Enterprise ops with regulated compliance requirements | SysOps + compliance overlay (Chapter 10) |
-| Kanban team, happy with flow, strategic work is protected | Stay with Kanban — monitor for when it breaks |
-| Hybrid: dev team uses Scrum, ops team supports them | Scrum for dev, SysOps for ops — see hybrid patterns below |
+| Your team looks like...                                         | Start with...                                             |
+| --------------------------------------------------------------- | --------------------------------------------------------- |
+| Feature-factory squad, clean 2-week sprints, rare interruptions | Scrum — SysOps is not for you                             |
+| Ops team drowning in interrupts, no time for improvements       | SysOps — daily cycle first, then pilot                    |
+| Platform/SRE team with mixed planned/unplanned work             | SysOps — all three cycles                                 |
+| Small team (2-3 people), everything is on fire                  | Stabilise first, then SysOps daily cycle only             |
+| Enterprise ops with regulated compliance requirements           | SysOps + compliance overlay (Chapter 10)                  |
+| Kanban team, happy with flow, strategic work is protected       | Stay with Kanban — monitor for when it breaks             |
+| Hybrid: dev team uses Scrum, ops team supports them             | Scrum for dev, SysOps for ops — see hybrid patterns below |
 
 > **Diagram**: Methodology selection flowchart — team answers 3 questions to determine whether SysOps, Scrum, Kanban, or a hybrid fits best
 
@@ -115,7 +115,7 @@ flowchart TD
 | **Strategic Work**       | Difficult to protect from interruptions | Monthly cycle dedicated to strategy            |
 | **Metrics Focus**        | Flow time, throughput, WIP              | Service reliability, efficiency, AND flow      |
 | **Maturity Guidance**    | Minimal                                 | Explicit five-level maturity model             |
-| **Management Practices** | Not addressed                           | Twelve core practices defined                     |
+| **Management Practices** | Not addressed                           | Twelve core practices defined                  |
 | **When to Use**          | Stable, well-defined processes          | Mixed planned/unplanned work environments      |
 
 ### Real-World Scenario
@@ -156,12 +156,12 @@ SysOps Framework and SRE are **not competing approaches** — SRE practices shou
 
 ### Core SRE Concepts
 
-| SRE Concept                  | What It Means                                                                 |
-| ---------------------------- | ----------------------------------------------------------------------------- |
-| Error budgets                | Maximum acceptable downtime per period (e.g., 99.9% SLO = 43 minutes/month)   |
-| Toil measurement             | Manual, repetitive work that doesn't provide long-term value                  |
-| Production readiness reviews | Ensuring systems meet operational standards before deployment                 |
-| Blameless post-mortems       | Learning-focused incident analysis                                            |
+| SRE Concept                  | What It Means                                                               |
+| ---------------------------- | --------------------------------------------------------------------------- |
+| Error budgets                | Maximum acceptable downtime per period (e.g., 99.9% SLO = 43 minutes/month) |
+| Toil measurement             | Manual, repetitive work that doesn't provide long-term value                |
+| Production readiness reviews | Ensuring systems meet operational standards before deployment               |
+| Blameless post-mortems       | Learning-focused incident analysis                                          |
 
 ### How SysOps Incorporates SRE
 
@@ -270,13 +270,13 @@ Most organizations successful with SRE are actually practicing a hybrid: SRE's e
 
 SysOps is not a universal replacement. It is wrong for some teams, and honest about it:
 
-| Situation | Why SysOps is the wrong fit | What to use instead |
-|---|---|---|
-| **Pure product development** — one product, one backlog, rare production interrupts | SysOps cycles add unnecessary structure to work that already fits a sprint cadence | Scrum, Kanban |
-| **Individual contributor without a team** | The framework assumes team handoffs and shared responsibility. A solo operator needs lighter structure. | Personal kanban, Getting Things Done |
-| **Team in active crisis** — ongoing outage, security breach, or restructuring | Implementing a new framework during a crisis splits attention. Stabilise first, then adopt. | Incident response procedures, then revisit SysOps |
-| **No management support at all** | Without leadership buy-in for protected improvement time, the weekly and monthly cycles will fail | Start with daily cycle only, build evidence, then negotiate |
-| **Fully outsourced operations** with no internal team | The framework is designed for teams that own their services. Managed service providers need different coordination patterns. | ITIL 4, vendor governance frameworks |
+| Situation                                                                           | Why SysOps is the wrong fit                                                                                                  | What to use instead                                         |
+| ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| **Pure product development** — one product, one backlog, rare production interrupts | SysOps cycles add unnecessary structure to work that already fits a sprint cadence                                           | Scrum, Kanban                                               |
+| **Individual contributor without a team**                                           | The framework assumes team handoffs and shared responsibility. A solo operator needs lighter structure.                      | Personal kanban, Getting Things Done                        |
+| **Team in active crisis** — ongoing outage, security breach, or restructuring       | Implementing a new framework during a crisis splits attention. Stabilise first, then adopt.                                  | Incident response procedures, then revisit SysOps           |
+| **No management support at all**                                                    | Without leadership buy-in for protected improvement time, the weekly and monthly cycles will fail                            | Start with daily cycle only, build evidence, then negotiate |
+| **Fully outsourced operations** with no internal team                               | The framework is designed for teams that own their services. Managed service providers need different coordination patterns. | ITIL 4, vendor governance frameworks                        |
 
 ### Hybrid Approaches
 
@@ -320,11 +320,11 @@ The infrastructure/platform team treats the development teams as their customers
 
 **Choosing a hybrid pattern**:
 
-| If you have... | Use pattern |
-|---|---|
-| Separate dev and ops teams | Pattern 1 (side by side) |
-| A single team doing both | Pattern 2 (dual cadence) — only if team is 5+ people |
-| A platform team serving product teams | Pattern 3 (internal provider) |
+| If you have...                        | Use pattern                                          |
+| ------------------------------------- | ---------------------------------------------------- |
+| Separate dev and ops teams            | Pattern 1 (side by side)                             |
+| A single team doing both              | Pattern 2 (dual cadence) — only if team is 5+ people |
+| A platform team serving product teams | Pattern 3 (internal provider)                        |
 
 ## 📊 Stakeholder Communication Differences
 
@@ -353,18 +353,23 @@ The infrastructure/platform team treats the development teams as their customers
 Different audiences need different framing. Here is a cheat sheet for explaining the framework to each group:
 
 **To your manager**:
+
 > "We are replacing sprint-based planning with a model that has separate tracks for reactive work, improvements, and strategy. This means fewer missed commitments, measurable improvement every week, and a clear story about what the team is doing — instead of a retro where we apologise for production incidents."
 
 **To an executive**:
+
 > "The framework protects time for improvements instead of letting firefighting consume everything. Teams using it typically reduce incident frequency by addressing root causes systematically. The monthly cycle aligns operations work to business priorities."
 
 **To a development team**:
+
 > "It is not a competitor to Scrum — it is what ops uses so your sprints stop getting disrupted by infrastructure fires. A stable platform team means fewer mid-sprint production surprises for you."
 
 **To a new hire**:
+
 > "We work in three rhythms: daily is for keeping things running, weekly is for making things better, monthly is for big changes. You will be in the daily cycle first. Once you know the systems, you will rotate into improvements."
 
 **To a stakeholder asking "why are you changing methodology?"**:
+
 > "Currently, every incident makes our sprint plan wrong. We spend retros explaining why we missed commitments — the same reason every time. This framework stops pretending incidents are exceptional and gives them a proper place, so our planned work can actually get done."
 
 ## 🏆 Real-World Case Studies

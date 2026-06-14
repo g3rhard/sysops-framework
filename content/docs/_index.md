@@ -32,11 +32,11 @@ If you've ever tried to run a sprint over that mix, you already know the punchli
 
 ## What You Can Expect — and When
 
-| Timeframe | What changes |
-|---|---|
-| **30 days** | Daily operations cycle running, baseline metrics established, first improvement identified and completed |
-| **90 days** | All three cycles operational, firefighting measured and measurably down, stakeholder communication rhythm set |
-| **180 days** | Framework practices institutionalised, toil burden reduced, team resilience measurably improved |
+| Timeframe    | What changes                                                                                                  |
+| ------------ | ------------------------------------------------------------------------------------------------------------- |
+| **30 days**  | Daily operations cycle running, baseline metrics established, first improvement identified and completed      |
+| **90 days**  | All three cycles operational, firefighting measured and measurably down, stakeholder communication rhythm set |
+| **180 days** | Framework practices institutionalised, toil burden reduced, team resilience measurably improved               |
 
 ## The Narrative Arc
 
@@ -55,12 +55,12 @@ flowchart LR
 
 ## Quick Navigation
 
-| Layer | Chapters | What you get |
-|---|---|---|
-| **Primer** | 1–3 | The problem, the principles, the operating model — start here |
-| **Handbook** | 4–5 | Comparison with other frameworks, 6-month implementation roadmap |
-| **Reference** | 6–10 | 12 management practices, metrics, tools, culture, risk & compliance |
-| **Support** | 11–13 | Challenges, future evolution, appendices with templates & glossary |
+| Layer         | Chapters | What you get                                                        |
+| ------------- | -------- | ------------------------------------------------------------------- |
+| **Primer**    | 1–3      | The problem, the principles, the operating model — start here       |
+| **Handbook**  | 4–5      | Comparison with other frameworks, 6-month implementation roadmap    |
+| **Reference** | 6–10     | 12 management practices, metrics, tools, culture, risk & compliance |
+| **Support**   | 11–13    | Challenges, future evolution, appendices with templates & glossary  |
 
 ### Detailed Reading Paths
 
@@ -89,18 +89,21 @@ flowchart LR
 ## What You Get Out of This
 
 ### For Operations Teams
+
 - Work with operational reality instead of against it — no more explaining firefighting as a "sprint defect"
 - Sustainable on-call and improvement practices that prevent burnout
 - Clear development paths and recognised expertise
 - Reduced single points of failure through knowledge sharing
 
 ### For Organisations
+
 - Better service availability and fewer incidents
 - Lower costs through prevention and automation
 - Operations work connected to business value
 - Operational excellence as a strategic capability
 
 ### For Stakeholders
+
 - Clear communication about operational status
 - Reliable service delivery and change management
 - Visible connection between IT investment and business outcomes

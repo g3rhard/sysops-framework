@@ -21,11 +21,11 @@ By the end of this chapter, you will understand:
 
 Traditional agile frameworks use a single cycle (sprint) to organize all work. This creates artificial constraints for operations teams who handle different types of work with different time horizons and urgency levels. The SysOps Framework uses three interconnected cycles that run simultaneously:
 
-| Cycle                       | Cadence    | Focus                                          |
-| --------------------------- | ---------- | ---------------------------------------------- |
-| Daily Operations Cycle      | 24–48 hours | Immediate operational needs                    |
-| Weekly Improvement Cycle    | 7 days     | Process improvements and systematic issues     |
-| Monthly Strategy Cycle      | 4 weeks    | Strategic initiatives and major projects       |
+| Cycle                    | Cadence     | Focus                                      |
+| ------------------------ | ----------- | ------------------------------------------ |
+| Daily Operations Cycle   | 24–48 hours | Immediate operational needs                |
+| Weekly Improvement Cycle | 7 days      | Process improvements and systematic issues |
+| Monthly Strategy Cycle   | 4 weeks     | Strategic initiatives and major projects   |
 
 ![Framework Structure Diagram](../assets/sysops-framework-diagram.png)
 
@@ -74,11 +74,11 @@ flowchart TD
 
 ### Cycle Ownership and Handoffs
 
-| Cycle | Primary Owner | Accountable For |
-|---|---|---|
-| Daily | On-call engineer (rotating) | Keeping services running, incident response, shift handoff |
-| Weekly | Team lead or rotating improvement lead | Delivering at least one verifiable improvement per week |
-| Monthly | Team lead or manager | Delivering at least one strategic initiative per month or a clear explanation of why it was deferred |
+| Cycle   | Primary Owner                          | Accountable For                                                                                      |
+| ------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Daily   | On-call engineer (rotating)            | Keeping services running, incident response, shift handoff                                           |
+| Weekly  | Team lead or rotating improvement lead | Delivering at least one verifiable improvement per week                                              |
+| Monthly | Team lead or manager                   | Delivering at least one strategic initiative per month or a clear explanation of why it was deferred |
 
 **Handoff rule**: No output from a faster cycle disappears into a slower one without explicit acceptance. If the daily cycle identifies a recurring pattern that merits a weekly improvement, the daily owner must write it up just well enough for the weekly owner to pick up. One paragraph, one link to the incident log. Done is better than perfect.
 
@@ -430,33 +430,33 @@ The three cycles are designed to work together without conflict:
 
 ### Resource Allocation
 
-| Cycle               | Typical Capacity | Notes                                    |
-| ------------------- | ---------------- | ---------------------------------------- |
-| Daily Operations    | 60–70%           | Varies by team and environment           |
-| Weekly Improvements | 20–30%           | The cycle where toil goes to die         |
-| Monthly Strategy    | 10–20%           | Concentrated in implementation weeks     |
+| Cycle               | Typical Capacity | Notes                                |
+| ------------------- | ---------------- | ------------------------------------ |
+| Daily Operations    | 60–70%           | Varies by team and environment       |
+| Weekly Improvements | 20–30%           | The cycle where toil goes to die     |
+| Monthly Strategy    | 10–20%           | Concentrated in implementation weeks |
 
 > **Reality check.** These percentages are a starting hypothesis, not a budget handed down from on high. If your daily operations are eating 90%, that's not a planning failure to paper over — it's the single most important number in this book telling you the team is underwater. Fix the drowning before you fret about hitting a tidy 20% improvement target.
 
 ### Sample Schedule: Small Ops Team (3-4 People)
 
-| Time | Mon | Tue | Wed | Thu | Fri |
-|---|---|---|---|---|---|
-| **Daily** | Standalone (15min), review weekend incidents | Standalone, check alert health | Standalone, mid-week capacity check | Standalone, knowledge share | Standalone, weekly review prep |
-| **On-call** | Engineer A primary | Engineer A | Engineer B primary | Engineer B | Engineer A |
-| **Improvement** | 2h — plan weekly improvement | — | 2h — execute improvement | — | 1h — measure, document results |
-| **Monthly** | — | — | — | — | Month 1-2: Assess; Month 3: Design; Month 4: Implement |
+| Time            | Mon                                          | Tue                            | Wed                                 | Thu                         | Fri                                                    |
+| --------------- | -------------------------------------------- | ------------------------------ | ----------------------------------- | --------------------------- | ------------------------------------------------------ |
+| **Daily**       | Standalone (15min), review weekend incidents | Standalone, check alert health | Standalone, mid-week capacity check | Standalone, knowledge share | Standalone, weekly review prep                         |
+| **On-call**     | Engineer A primary                           | Engineer A                     | Engineer B primary                  | Engineer B                  | Engineer A                                             |
+| **Improvement** | 2h — plan weekly improvement                 | —                              | 2h — execute improvement            | —                           | 1h — measure, document results                         |
+| **Monthly**     | —                                            | —                              | —                                   | —                           | Month 1-2: Assess; Month 3: Design; Month 4: Implement |
 
 **Key constraint**: With 3-4 people, the weekly improvement time is only 4-5 hours total. Pick one small improvement per week, not three.
 
 ### Sample Schedule: Platform/SRE Team (6-8 People)
 
-| Time | Mon | Tue | Wed | Thu | Fri |
-|---|---|---|---|---|---|
-| **Daily** | Standalone (15min), rotate incident commander | Standalone, service review | Standalone, error budget check | Standalone, knowledge share | Standalone, metrics review |
-| **On-call** | Primary + secondary rotation (weekly swap) | | | | |
-| **Improvement** | 4h — sprint-style improvement planning | 2h — paired automation work | 4h — improvement execution | 2h — paired work | 2h — demo & retro |
-| **Monthly** | 2h — monthly initiative kickoff | As needed | As needed | As needed | Monthly review + next month planning |
+| Time            | Mon                                           | Tue                         | Wed                            | Thu                         | Fri                                  |
+| --------------- | --------------------------------------------- | --------------------------- | ------------------------------ | --------------------------- | ------------------------------------ |
+| **Daily**       | Standalone (15min), rotate incident commander | Standalone, service review  | Standalone, error budget check | Standalone, knowledge share | Standalone, metrics review           |
+| **On-call**     | Primary + secondary rotation (weekly swap)    |                             |                                |                             |                                      |
+| **Improvement** | 4h — sprint-style improvement planning        | 2h — paired automation work | 4h — improvement execution     | 2h — paired work            | 2h — demo & retro                    |
+| **Monthly**     | 2h — monthly initiative kickoff               | As needed                   | As needed                      | As needed                   | Monthly review + next month planning |
 
 **Key advantage**: With 6+ people, a dedicated improvement lead can rotate weekly, and the team can run small paired sessions (automation, documentation, refactoring) without pulling everyone away from operational responsibilities.
 

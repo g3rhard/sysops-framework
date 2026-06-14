@@ -14,14 +14,14 @@ The SysOps Framework works best when you start small, prove the model, then expa
 
 Answer yes/no to each signal, not aspiration:
 
-| Signal | Yes | No |
-|---|---|---|
-| Your team spends more time firefighting than improving | ☐ | ☐ |
-| Sprint commitments get disrupted by operational emergencies at least once a month | ☐ | ☐ |
-| You have basic monitoring and incident tracking in place | ☐ | ☐ |
-| At least one person on the team is willing to try a different approach | ☐ | ☐ |
-| Your manager knows operations work doesn't fit sprints | ☐ | ☐ |
-| You can protect 20% of team time for improvements | ☐ | ☐ |
+| Signal                                                                            | Yes | No  |
+| --------------------------------------------------------------------------------- | --- | --- |
+| Your team spends more time firefighting than improving                            | ☐   | ☐   |
+| Sprint commitments get disrupted by operational emergencies at least once a month | ☐   | ☐   |
+| You have basic monitoring and incident tracking in place                          | ☐   | ☐   |
+| At least one person on the team is willing to try a different approach            | ☐   | ☐   |
+| Your manager knows operations work doesn't fit sprints                            | ☐   | ☐   |
+| You can protect 20% of team time for improvements                                 | ☐   | ☐   |
 
 **4+ "Yes"** → You are ready to pilot. Start the **[30-day pilot track](#track-a-30-day-pilot)**.
 
@@ -30,6 +30,8 @@ Answer yes/no to each signal, not aspiration:
 **0-1 "Yes"** → Start by reading [Chapter 1](../chapter-01-challenge/) and [Chapter 2](../chapter-02-principles/). Your team needs to feel the problem before the solution will stick.
 
 ## Choose Your Adoption Path
+
+> **Diagram**: Adoption decision tree — quick assessment → pilot (30-day) or read first → full rollout (180-day) or adapt
 
 ```mermaid
 flowchart TD
@@ -96,13 +98,13 @@ Run this in one team. Do not attempt to roll out to multiple teams until the pil
 
 ### Sample Weekly Calendar (Pilot)
 
-| Day | Daily Cycle | Improvement Time |
-|---|---|---|
-| Monday | Standalone + review weekend incidents | 2h — plan first improvement |
-| Tuesday | Standalone + monitoring review | — |
-| Wednesday | Standalone + mid-week check | 2h — execute improvement |
-| Thursday | Standalone + knowledge share | — |
-| Friday | Standalone + weekly review + metrics update | — |
+| Day       | Daily Cycle                                 | Improvement Time            |
+| --------- | ------------------------------------------- | --------------------------- |
+| Monday    | Standalone + review weekend incidents       | 2h — plan first improvement |
+| Tuesday   | Standalone + monitoring review              | —                           |
+| Wednesday | Standalone + mid-week check                 | 2h — execute improvement    |
+| Thursday  | Standalone + knowledge share                | —                           |
+| Friday    | Standalone + weekly review + metrics update | —                           |
 
 ---
 
@@ -141,22 +143,22 @@ Only start this once the 30-day pilot shows clear value. Do not skip the pilot.
 
 If you scored 2-3 "Yes" on the assessment, address these before or during the pilot:
 
-| Gap | What to do |
-|---|---|
-| No monitoring or incident tracking | Set up basic monitoring (Prometheus + AlertManager or equivalent) and a shared incident log before week 1 |
-| No management awareness | Have the team lead read Chapter 1 and share the key points with their manager |
-| No time for improvements | Start by measuring how much time is lost to firefighting, then negotiate for 10% improvement time |
-| Team is too overwhelmed to try | Address the most painful operational issue first (use Chapter 6's priority guidance). If there is literally no capacity, SysOps cannot help until the immediate crisis is stabilised |
+| Gap                                | What to do                                                                                                                                                                           |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| No monitoring or incident tracking | Set up basic monitoring (Prometheus + AlertManager or equivalent) and a shared incident log before week 1                                                                            |
+| No management awareness            | Have the team lead read Chapter 1 and share the key points with their manager                                                                                                        |
+| No time for improvements           | Start by measuring how much time is lost to firefighting, then negotiate for 10% improvement time                                                                                    |
+| Team is too overwhelmed to try     | Address the most painful operational issue first (use Chapter 6's priority guidance). If there is literally no capacity, SysOps cannot help until the immediate crisis is stabilised |
 
 ---
 
 ## Artifacts You Should Have
 
-| Day 30 | Day 90 | Day 180 |
-|---|---|---|
-| `baseline-metrics.csv` | Metrics dashboard | Automated reporting |
-| Incident log (5+ entries) | `stakeholder-update.md` (monthly) | Stakeholder report template |
-| `pilot-retrospective.md` | Practice maturity assessments | All artifacts templated and repeatable |
+| Day 30                    | Day 90                            | Day 180                                |
+| ------------------------- | --------------------------------- | -------------------------------------- |
+| `baseline-metrics.csv`    | Metrics dashboard                 | Automated reporting                    |
+| Incident log (5+ entries) | `stakeholder-update.md` (monthly) | Stakeholder report template            |
+| `pilot-retrospective.md`  | Practice maturity assessments     | All artifacts templated and repeatable |
 
 ---
 

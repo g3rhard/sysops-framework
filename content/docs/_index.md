@@ -40,6 +40,8 @@ If you've ever tried to run a sprint over that mix, you already know the punchli
 
 ## The Narrative Arc
 
+> **Diagram**: Book narrative arc — from problem (sprint logic breaks ops) through solution (principles, cycles, methodology selection) to reference content (12 practices, metrics, tools, templates)
+
 ```mermaid
 flowchart LR
     A[Why sprint logic breaks ops] --> B[What SysOps fixes instead]

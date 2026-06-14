@@ -144,6 +144,8 @@ This is not a people problem. It is a methodology problem. The work is not wrong
 
 The visual difference between planned and interrupt-driven work tells the story more clearly than any table:
 
+> **Diagram**: Comparison of development sprint flow (plan → build → test → release → retro) vs operations reality (on-call → incidents → interrupts → firefighting)
+
 ```mermaid
 flowchart LR
     subgraph dev["Development Sprint (2 weeks)"]

@@ -1,4 +1,4 @@
-baseURL: https://g3rhard.github.io/sysops-framework
+baseURL: https://g3rhard.cc/sysops-framework/
 locale: en-us
 title: SysOps Framework
 theme: docsy
@@ -28,6 +28,11 @@ module:
     min: 0.146.0
   imports:
     - path: github.com/gohugoio/hugo-mod-bootstrap-scss/v5
+  mounts:
+    # Docsy expects @fortawesome/fontawesome-free in themes/docsy/node_modules/
+    # but we keep deps in the project root. Mount it so Docsy's SCSS resolves.
+    - source: node_modules/@fortawesome/fontawesome-free
+      target: assets/vendor/Font-Awesome
 
 minify:
   disableXML: true

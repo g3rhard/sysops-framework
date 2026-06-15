@@ -29,6 +29,16 @@ Answer yes/no to each signal, not aspiration:
 
 **0-1 "Yes"** → Start by reading [Chapter 1](../chapter-01-challenge/) and [Chapter 2](../chapter-02-principles/). Your team needs to feel the problem before the solution will stick.
 
+## Manager Brief: What You Are Approving
+
+A SysOps pilot is not a process rebrand. You are approving three practical changes:
+
+1. **Interrupt work becomes visible** instead of being hidden inside failed sprint commitments.
+2. **Improvement work gets protected capacity** instead of being postponed whenever operations gets busy.
+3. **Stakeholder reporting changes** from activity lists to service health, risk, toil, and completed improvements.
+
+The pilot should be judged by whether it reduces confusion and improves operational learning, not by whether the team appears busier.
+
 ## Choose Your Adoption Path
 
 > **Diagram**: Adoption decision tree — quick assessment → pilot (30-day) or read first → full rollout (180-day) or adapt
@@ -138,6 +148,19 @@ Only start this once the 30-day pilot shows clear value. Do not skip the pilot.
 - Team can articulate what the framework does for them without referring to the book
 
 ---
+
+## Stop Conditions
+
+Pause or roll back the rollout if any of these conditions appear:
+
+| Stop condition                                                       | Why it matters                                          | What to do instead                                                 |
+| -------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------ |
+| Daily cycle becomes a second status meeting                          | The framework is adding ceremony without improving flow | Replace the meeting with a visible queue and short triage          |
+| Weekly improvement work is never protected                           | The team is still in firefighting mode                  | Reduce scope and run daily-only mode for 2–4 more weeks            |
+| Stakeholders still demand sprint-style commitments for reactive work | The operating model has not been understood             | Run a stakeholder reset using Chapter 4 language                   |
+| Metrics are used to blame individuals                                | Measurement will destroy trust                          | Stop metric reporting until ownership and interpretation are clear |
+
+A stopped pilot is not failure. It is evidence that the team needs a smaller adoption mode or stronger sponsorship.
 
 ## Readiness Gaps That Block Rollout
 

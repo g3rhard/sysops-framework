@@ -6,6 +6,17 @@ description: >
   "A comprehensive reference for SysOps Framework terminology and acronyms."
 ---
 
+## Editorial Terminology Standard
+
+Use this glossary as the canonical language for the whole repository. When adding or editing chapters:
+
+- prefer existing glossary terms over inventing synonyms;
+- add a term when a concept appears in more than one chapter;
+- avoid using the same word for different things, especially “incident,” “problem,” “request,” “change,” and “risk”;
+- keep vendor names out of definitions unless the term is vendor-specific.
+
+This keeps the framework readable as a methodology rather than a collection of related essays.
+
 ## SysOps Framework Glossary
 
 A complete reference of terms, acronyms, and concepts used throughout the SysOps Framework book.
@@ -164,7 +175,7 @@ One of the twelve core management practices in the SysOps Framework. Encompasses
 > **See also**: Blameless PIR, Five Whys | **Related metrics**: Service Reliability | **Chapter**: 6 (Practices)
 
 **ITIL (Information Technology Infrastructure Library)**
-A comprehensive framework describing IT service management best practices. **ITIL 4** ([Axelos](https://www.axelos.com/certifications/itil-service-management), February 2019) is the current stable standard with 34 practices and the Service Value System. **ITIL 5** ([PeopleCert](https://www.peoplecert.org/news-and-announcements/itil-version-5-explained), announced January 2026) Foundation is available; full practice library pending. The SysOps Framework operationalises many ITIL 4 concepts.
+A comprehensive framework describing IT service management best practices. SysOps uses ITIL-style service-management concepts as vocabulary, but keeps version-specific ITIL alignment outside the core methodology. The stable idea is service management; the exact certification and practice-library landscape should be reviewed periodically.
 
 > **Chapter**: 2 (Principles)
 
@@ -285,7 +296,7 @@ A formal agreement between operations and customers/stakeholders defining the ex
 **Service Level Indicator (SLI)**
 A measurable metric that reflects the service user's experience. Common SLIs include availability, latency, throughput, and error rate.
 
-> **See also**: SLO, Error Budget | **Related practice**: Service Level Management | **Chapter**: 7 (Metrics) — see [Google SRE Book Ch.4](https://sre.google/sre-book/service-level-objectives/) for canonical definitions
+> **See also**: SLO, Error Budget | **Related practice**: Service Level Management | **Chapter**: 7 (Metrics) - see [Google SRE Book Ch.4](https://sre.google/sre-book/service-level-objectives/) for canonical definitions
 
 **Service Level Management**
 One of the twelve core management practices in the SysOps Framework. Establishes SLOs and SLIs, implements error budgets, and drives reliability accountability.
@@ -376,35 +387,35 @@ A security principle that assumes no system is inherently trustworthy, requiring
 
 ### The Twelve Management Practices
 
-1. **Service Level Management** — Define and monitor SLOs, manage error budgets
-2. **Incident and Problem Management** — Respond to incidents, conduct blameless post-mortems, perform root cause analysis
-3. **Change and Configuration Management** — Plan and implement changes, manage risk, maintain CMDB
-4. **Capacity and Performance Management** — Forecast needs, optimise utilization
-5. **Knowledge and Documentation Management** — Create and maintain documentation, facilitate knowledge transfer
-6. **Team and Skill Development** — Cross-training, career development, skill building
-7. **Vendor and Contract Management** — Manage vendor relationships, SLA compliance, contract lifecycle
-8. **Release Management** — Govern CI/CD pipelines, manage deployment gates, coordinate rollouts
-9. **Asset Management** — Track hardware/software assets, manage licensing, cloud resource tagging
-10. **Service Request Management** — Handle standardized requests via service catalog, automate fulfillment
-11. **Financial Management** — Budget planning, cost allocation, chargeback/showback models
-12. **Backup and Recovery Operations** — Define RTO/RPO, manage backup schedules, conduct restore tests
+1. **Service Level Management** - Define and monitor SLOs, manage error budgets
+2. **Incident and Problem Management** - Respond to incidents, conduct blameless post-mortems, perform root cause analysis
+3. **Change and Configuration Management** - Plan and implement changes, manage risk, maintain CMDB
+4. **Capacity and Performance Management** - Forecast needs, optimise utilization
+5. **Knowledge and Documentation Management** - Create and maintain documentation, facilitate knowledge transfer
+6. **Team and Skill Development** - Cross-training, career development, skill building
+7. **Vendor and Contract Management** - Manage vendor relationships, SLA compliance, contract lifecycle
+8. **Release Management** - Govern CI/CD pipelines, manage deployment gates, coordinate rollouts
+9. **Asset Management** - Track hardware/software assets, manage licensing, cloud resource tagging
+10. **Service Request Management** - Handle standardized requests via service catalog, automate fulfillment
+11. **Financial Management** - Budget planning, cost allocation, chargeback/showback models
+12. **Backup and Recovery Operations** - Define RTO/RPO, manage backup schedules, conduct restore tests
 
 ### The Six Core Principles
 
-1. **Service Reliability First** — Prioritise reliability and availability
-2. **Continuous Availability** — Support 24/7 operations sustainably
-3. **Rapid Response** — Enable quick emergency response
-4. **Automation and Efficiency** — Systematically automate routine work
-5. **Knowledge Sharing** — Document and transfer operational knowledge
-6. **Risk Management** — Proactively identify and mitigate risks
+1. **Service Reliability First** - Prioritise reliability and availability
+2. **Continuous Availability** - Support 24/7 operations sustainably
+3. **Rapid Response** - Enable quick emergency response
+4. **Automation and Efficiency** - Systematically automate routine work
+5. **Knowledge Sharing** - Document and transfer operational knowledge
+6. **Risk Management** - Proactively identify and mitigate risks
 
 ---
 
 ## Related Framework Comparisons
 
-- **Kanban** — Continuous flow methodology, effective for interrupt-driven work (see Ch4)
-- **Scrum** — Sprint-based development framework, not optimized for operations (see Ch4)
-- **SAFe** — Large-scale agile framework for multi-team coordination (see Ch4)
-- **ITIL 4** — Current (2019–) IT service management standard with 34 practices and a Service Value System model; ITIL 5 announced January 2026 — monitor for updates (see Ch2)
-- **SRE** — Site reliability engineering practices that integrate naturally with SysOps cycles (see Ch4)
-- **Lean** — Management philosophy emphasising waste elimination and continuous improvement (see Ch4)
+- **Kanban** - Continuous flow methodology, effective for interrupt-driven work (see Ch4)
+- **Scrum** - Sprint-based development framework, not optimized for operations (see Ch4)
+- **SAFe** - Large-scale agile framework for multi-team coordination (see Ch4)
+- **ITIL / ITSM** - Service-management frameworks and vocabulary; use SysOps as a lightweight operating layer, and keep version-specific alignment current (see Ch2)
+- **SRE** - Site reliability engineering practices that integrate naturally with SysOps cycles (see Ch4)
+- **Lean** - Management philosophy emphasising waste elimination and continuous improvement (see Ch4)

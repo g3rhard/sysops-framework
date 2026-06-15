@@ -10,6 +10,17 @@ description: >
 
 The SysOps Framework consists of interconnected components that work together to create a cohesive operational methodology. This document explains how the different pieces relate to and support each other.
 
+## Start by Symptom
+
+Use this map backwards when the team is under pressure. Start with the symptom, then find the data relationships that explain it.
+
+| Symptom            | Data to connect                                                    | Likely chapter    |
+| ------------------ | ------------------------------------------------------------------ | ----------------- |
+| Repeated incidents | Incident → problem → action item → owner → due date                | Chapters 6, 7, 11 |
+| Change failures    | Change → service → risk → incident correlation                     | Chapters 6, 10    |
+| Audit panic        | Control → evidence → artifact → review cadence                     | Chapters 10, 13   |
+| Burnout            | On-call event → alert quality → rotation health → improvement work | Chapters 7, 9     |
+
 ---
 
 ## The Three Pillars: Cycles, Practices, and Metrics

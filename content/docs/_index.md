@@ -30,6 +30,20 @@ If you've ever tried to run a sprint over that mix, you already know the punchli
 - You're looking for a certification or compliance framework. This is a methodology, not an audit standard.
 - Your team is entirely project-driven with no operational responsibilities. You don't have the problem this framework solves.
 
+## Fit / Skip Matrix
+
+Use this matrix before you read the whole book. SysOps is useful when the shape of work is the problem; it is unnecessary when your current operating model already matches reality.
+
+| Your situation                                                                        | Fit                  | Better first move                                                 |
+| ------------------------------------------------------------------------------------- | -------------------- | ----------------------------------------------------------------- |
+| Operations, infrastructure, platform, or sysadmin team with frequent interrupts       | **Strong fit**       | Start with Chapter 1, then pilot the daily cycle                  |
+| Team has support, incidents, patching, compliance, and project work at the same time  | **Strong fit**       | Use the 30-day pilot and template pack                            |
+| Product team with one backlog, rare production interrupts, and stable sprint goals    | **Weak fit**         | Keep Scrum/Kanban and borrow only metrics or templates            |
+| Team has no service ownership and only receives tickets from another operations group | **Partial fit**      | Clarify ownership before adopting cycles                          |
+| Organisation needs formal audit certification                                         | **Not enough alone** | Use ITSM/compliance frameworks; use SysOps as the operating layer |
+
+> **Start small.** If the matrix says “strong fit,” do not adopt the whole framework at once. Start with the daily cycle and one visible improvement target.
+
 ## What You Can Expect — and When
 
 | Timeframe    | What changes                                                                                                  |
@@ -108,6 +122,19 @@ flowchart LR
 - Reliable service delivery and change management
 - Visible connection between IT investment and business outcomes
 - Proactive risk management and business continuity
+
+## Operating Kit
+
+The framework is not only explanatory text. The most reusable parts are the artifacts:
+
+- incident review and incident commander templates
+- change-control form
+- SLA template
+- on-call policy template
+- reporting template
+- data relationship map and glossary
+
+Use the book to understand the operating model, then use the templates to make the model visible in daily work.
 
 ## Resources
 

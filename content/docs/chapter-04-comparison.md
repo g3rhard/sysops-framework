@@ -278,6 +278,17 @@ SysOps is not a universal replacement. It is wrong for some teams, and honest ab
 | **No management support at all**                                                    | Without leadership buy-in for protected improvement time, the weekly and monthly cycles will fail                            | Start with daily cycle only, build evidence, then negotiate |
 | **Fully outsourced operations** with no internal team                               | The framework is designed for teams that own their services. Managed service providers need different coordination patterns. | ITIL 4, vendor governance frameworks                        |
 
+### When SysOps Is Too Much
+
+SysOps is the wrong answer when the team does not own operational outcomes. It can also be too much when a simple board and a weekly review already solve the problem.
+
+Use the lightest model that makes reality visible:
+
+- If interruptions are rare, keep Scrum or Kanban.
+- If work is visible but improvements never happen, add only the weekly improvement cycle.
+- If strategy is disconnected from daily pain, add the monthly cycle.
+- If all three problems exist, adopt the full model.
+
 ### Hybrid Approaches
 
 Some teams successfully combine approaches:

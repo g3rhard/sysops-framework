@@ -20,9 +20,17 @@ By the end of this chapter, you will understand:
 
 ## 🛠️ The SysOps Technology Stack
 
+### Stable Capabilities vs Perishable Product Names
+
+This chapter has two layers. The stable layer is the set of capabilities an operations team needs: observability, incident response, automation, knowledge management, delivery control, policy enforcement, cost visibility, and platform interfaces. The perishable layer is the list of product names.
+
+Treat named tools as examples validated at the time of writing, not timeless defaults. When a vendor changes pricing, product direction, or lifecycle status, update the tool table without rewriting the methodology.
+
+> **Freshness rule.** If a recommendation names a commercial product, add a review date or keep the claim deliberately generic.
+
 Modern operations teams require integrated toolsets that support the SysOps Framework's multi-cycle approach. Unlike development-focused tools, operations tools must handle continuous monitoring, immediate response capabilities, and seamless integration across multiple systems and teams.
 
-One caution before the shopping spree. Every team eventually meets the colleague who is convinced the next outage would be prevented by just the right tool — and who has a browser with forty open tabs to prove it. Tools don't fix broken processes; they automate them, which means a bad process plus a great tool gives you a faster, more expensive bad process. Buy tools to remove toil from a practice you already understand, not to paper over one you've been avoiding.
+One caution before the shopping spree. Every team eventually meets the colleague who is convinced the next outage would be prevented by just the right tool - and who has a browser with forty open tabs to prove it. Tools don't fix broken processes; they automate them, which means a bad process plus a great tool gives you a faster, more expensive bad process. Buy tools to remove toil from a practice you already understand, not to paper over one you've been avoiding.
 
 ### Tool Categories Overview
 
@@ -40,21 +48,21 @@ The SysOps Framework requires tools in nine essential categories:
 
 ### Minimum Viable Stacks by Team Size
 
-Your ideal tool stack depends on team size, budget, and compliance requirements — not on what's newest or most popular. Below are three pre-configured starting stacks. These are not shopping lists; they are _minimum viable_ sets. Add tools only when a specific practice deficiency requires them.
+Your ideal tool stack depends on team size, budget, and compliance requirements - not on what's newest or most popular. Below are three pre-configured starting stacks. These are not shopping lists; they are _minimum viable_ sets. Add tools only when a specific practice deficiency requires them.
 
 #### Stack A: Small Team (2-5 people)
 
 **Profile**: Lean ops team, moderate compliance needs, limited budget, preferring SaaS over self-hosted.
 
-| Category           | Tool Choice                                                      | Why This                                                             |
-| ------------------ | ---------------------------------------------------------------- | -------------------------------------------------------------------- |
-| Monitoring         | Prometheus + Grafana Cloud (free tier) or Datadog (startup plan) | One integrated stack; alerting built-in; no self-hosted infra burden |
-| Incident Mgmt      | PagerDuty or Opsgenie + Slack                                    | Simple on-call scheduling, mobile app, Slack integration             |
-| Knowledge Mgmt     | GitHub/GitLab wiki or Notion                                     | Version-controlled or accessible; zero additional infra              |
-| Automation         | Ansible                                                          | Agentless, low learning curve, huge community library                |
-| IaC / Provisioning | Terraform / OpenTofu                                             | Industry standard; HCL is simpler than full programming languages    |
-| CI / CD            | GitHub Actions or GitLab CI                                      | Included with your code host; no separate billing or maintenance     |
-| Communication      | Slack or Microsoft Teams                                         | Already in use by most teams; ChatOps via bot integrations           |
+| Category           | Tool Choice                                                                            | Why This                                                             |
+| ------------------ | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Monitoring         | Prometheus + Grafana Cloud (free tier) or Datadog (startup plan)                       | One integrated stack; alerting built-in; no self-hosted infra burden |
+| Incident Mgmt      | PagerDuty, Jira Service Management, incident.io, FireHydrant, or similar + Slack/Teams | Simple on-call scheduling, mobile app, Slack integration             |
+| Knowledge Mgmt     | GitHub/GitLab wiki or Notion                                                           | Version-controlled or accessible; zero additional infra              |
+| Automation         | Ansible                                                                                | Agentless, low learning curve, huge community library                |
+| IaC / Provisioning | Terraform / OpenTofu                                                                   | Industry standard; HCL is simpler than full programming languages    |
+| CI / CD            | GitHub Actions or GitLab CI                                                            | Included with your code host; no separate billing or maintenance     |
+| Communication      | Slack or Microsoft Teams                                                               | Already in use by most teams; ChatOps via bot integrations           |
 
 > **Keep your wallet closed**: Do not buy a dedicated CMDB, a service catalog platform, or an Internal Developer Platform at this size. You don't have enough services or team members to justify the overhead. A spreadsheet or a wiki page with a table of services is sufficient.
 
@@ -138,7 +146,7 @@ Tools exist to serve practices, not the other way around. Buying a tool before y
 - **SysOps Integration**: Adopt OTel as the single instrumentation standard so observability backends are interchangeable; eliminates vendor lock-in and aligns with CNCF ecosystem
 - **Getting Started**: Deploy the OTel Collector as a sidecar or DaemonSet; configure exporters for your chosen backends; use semantic conventions for consistent attribute naming
 
-> **Warning.** More monitoring is not more insight. A wall of dashboards and a pager that fires forty times a night doesn't make you observant — it makes you numb. Every alert that isn't actionable trains the on-call engineer to ignore the next one, and the alert they finally tune out is always the one that mattered. Alert on symptoms users feel, not on every metric you can scrape.
+> **Warning.** More monitoring is not more insight. A wall of dashboards and a pager that fires forty times a night doesn't make you observant - it makes you numb. Every alert that isn't actionable trains the on-call engineer to ignore the next one, and the alert they finally tune out is always the one that mattered. Alert on symptoms users feel, not on every metric you can scrape.
 
 - 50 servers across 3 data centers
 - Microservices architecture with 25 services
@@ -162,7 +170,7 @@ Tools exist to serve practices, not the other way around. Buying a tool before y
 
 ## 🤖 Automation and Orchestration Tools
 
-> This section is the canonical catalogue of automation _tooling_ — the _how_. The automation _principle_ (the why) is defined in [Chapter 2 — Automation and Efficiency](chapter-02-principles.md); the runbook _concept_ (the what) in [Chapter 6](chapter-06-practices.md); and automation _metrics_ in [Chapter 7](chapter-07-metrics.md).
+> This section is the canonical catalogue of automation _tooling_ - the _how_. The automation _principle_ (the why) is defined in [Chapter 2 - Automation and Efficiency](chapter-02-principles.md); the runbook _concept_ (the what) in [Chapter 6](chapter-06-practices.md); and automation _metrics_ in [Chapter 7](chapter-07-metrics.md).
 
 ### Infrastructure as Code (IaC)
 
@@ -177,14 +185,14 @@ Tools exist to serve practices, not the other way around. Buying a tool before y
 - **Purpose**: Use Git as the single source of truth for declarative infrastructure and application configuration; automated reconciliation loops continuously align the live state to the desired state stored in Git
 - **Key Features**: Pull-based deployments, drift detection, Git as audit trail, automated rollback on divergence
 - **Popular Tools**: ArgoCD, Flux CD, Rancher Fleet
-- **SysOps Integration**: Replaces manual `kubectl apply` and ad-hoc scripts; ties directly into the Release Management practice (Practice 8) — every production change has an auditable Git commit
+- **SysOps Integration**: Replaces manual `kubectl apply` and ad-hoc scripts; ties directly into the Release Management practice (Practice 8) - every production change has an auditable Git commit
 
 **[ArgoCD](https://argo-cd.readthedocs.io/en/stable/) specifics**:
 
 - Web UI and CLI for visualising application sync state across clusters
 - ApplicationSet controller for managing hundreds of apps at scale
 - RBAC integration and SSO support
-- Rollback by reverting a Git commit — no bespoke rollback runbook needed
+- Rollback by reverting a Git commit - no bespoke rollback runbook needed
 
 **[Flux CD](https://fluxcd.io/flux/) specifics**:
 
@@ -194,7 +202,7 @@ Tools exist to serve practices, not the other way around. Buying a tool before y
 
 **Service Mesh Operations**
 
-- **Purpose**: Manage service-to-service communication security, observability, and traffic control at the infrastructure layer — without application code changes
+- **Purpose**: Manage service-to-service communication security, observability, and traffic control at the infrastructure layer - without application code changes
 - **Key Features**: Mutual TLS (mTLS) between services, fine-grained traffic routing (canary, A/B), circuit breaking, automatic retry, distributed tracing injection
 - **Popular Tools**: Istio, Linkerd, Cilium Service Mesh, AWS App Mesh
 - **SysOps Integration**: Provides the traffic-shifting mechanism needed for canary and blue/green deployments in Release Management; generates per-service golden signals (latency, error rate, throughput) automatically
@@ -235,11 +243,11 @@ Automation Stack Integration:
 
 ### Incident Lifecycle Management
 
-| Tool                              | Purpose                                                     | Key Features                                                  | Popular Tools                                             | SysOps Integration                                  |
-| --------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------- |
-| Alert Aggregation and Correlation | Reduce alert noise and group related incidents              | Alert routing, de-duplication, correlation rules              | PagerDuty, Opsgenie, VictorOps, ServiceNow                | Critical for daily operations cycle response phase  |
-| Incident Response Coordination    | Coordinate team response and communication during incidents | Escalation policies, conference bridges, status pages         | Incident.io, FireHydrant, PagerDuty, Atlassian Statuspage | Enables effective incident response protocols       |
-| Post-Incident Analysis            | Capture lessons learned and prevent incident recurrence     | Timeline reconstruction, root cause analysis, action tracking | Jeli, Blameless, PagerDuty Post-Mortems, custom solutions | Feeds weekly improvement cycle with systemic issues |
+| Tool                              | Purpose                                                     | Key Features                                                  | Popular Tools                                                                            | SysOps Integration                                  |
+| --------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| Alert Aggregation and Correlation | Reduce alert noise and group related incidents              | Alert routing, de-duplication, correlation rules              | PagerDuty, Jira Service Management, incident.io, FireHydrant, Splunk On-Call, ServiceNow | Critical for daily operations cycle response phase  |
+| Incident Response Coordination    | Coordinate team response and communication during incidents | Escalation policies, conference bridges, status pages         | Incident.io, FireHydrant, PagerDuty, Atlassian Statuspage                                | Enables effective incident response protocols       |
+| Post-Incident Analysis            | Capture lessons learned and prevent incident recurrence     | Timeline reconstruction, root cause analysis, action tracking | Jeli, Blameless, PagerDuty Post-Mortems, custom solutions                                | Feeds weekly improvement cycle with systemic issues |
 
 ### Communication and Status Management
 
@@ -280,13 +288,13 @@ Automation Stack Integration:
 
 - **Purpose**: Bring tooling, automation, and decision-making into the chat interface so that operations happen conversationally with a shared, searchable log visible to the whole team
 - **Key Features**: Bot-driven deployments, alert routing into chat channels, slash commands for runbook execution, automated status updates
-- **Popular Tools**: PagerDuty + Slack integration, Opsgenie + Teams, Errbot, Hubot, Lita; dedicated platforms: Stack Overflow Teams, Mattermost with bots
+- **Popular Tools**: PagerDuty + Slack integration, Jira Service Management + Teams, incident.io, FireHydrant, Errbot, Hubot, Lita; dedicated platforms: Stack Overflow Teams, Mattermost with bots
 - **SysOps Integration**: Reduces context-switching during incidents; every action executed via chat is logged and auditable; enables async incident response for distributed teams
 
-**Example ChatOps Workflow — Incident Response**:
+**Example ChatOps Workflow - Incident Response**:
 
 ```
-[Monitor] #alerts: ⚠️  P1 — payment-api error rate 3.2% (SLO: <0.5%)
+[Monitor] #alerts: ⚠️  P1 - payment-api error rate 3.2% (SLO: <0.5%)
 [Bot]     Incident #1842 created. IC: @alice  Scribe: @bob
           Runbook: https://wiki/payment-api-high-error-rate
 /ack 1842               → Alice acknowledges, IC status updated in incident tool
@@ -328,7 +336,7 @@ Automation Stack Integration:
 
 ## 🏗️ Modern Platform Engineering Patterns
 
-Platform Engineering has emerged as the discipline that applies product-thinking to the internal tools and infrastructure that development and operations teams consume. Instead of every team managing their own bespoke toolchains, a dedicated Platform Engineering team builds and operates an **Internal Developer Platform (IDP)** — a curated, self-service layer on top of infrastructure.
+Platform Engineering has emerged as the discipline that applies product-thinking to the internal tools and infrastructure that development and operations teams consume. Instead of every team managing their own bespoke toolchains, a dedicated Platform Engineering team builds and operates an **Internal Developer Platform (IDP)** - a curated, self-service layer on top of infrastructure.
 
 ### Internal Developer Platform (IDP)
 
@@ -342,7 +350,7 @@ Platform Engineering has emerged as the discipline that applies product-thinking
 | Environment management       | On-demand ephemeral environments for dev/test    | Crossplane, Terraform + Atlantis                                 |
 | Cost visibility              | Per-team/per-service cloud spend                 | Kubecost, OpenCost, Infracost                                    |
 
-**SysOps Integration**: The IDP enforces the standards set by the Release Management (Practice 8) and Change Management (Practice 3) practices at the self-service level — teams can move fast within guardrails without requiring ops-team intervention.
+**SysOps Integration**: The IDP enforces the standards set by the Release Management (Practice 8) and Change Management (Practice 3) practices at the self-service level - teams can move fast within guardrails without requiring ops-team intervention.
 
 ### Policy-as-Code (PaC)
 
@@ -355,7 +363,7 @@ Platform Engineering has emerged as the discipline that applies product-thinking
 - General-purpose policy engine using the Rego language
 - Integrations: Kubernetes admission controller (OPA Gatekeeper), API gateway, CI pipeline
 - Use cases: Block non-compliant container images; enforce resource limits; require approved image registries; mandate labels/annotations
-- CNCF graduated project — production-proven at scale
+- CNCF graduated project - production-proven at scale
 
 **[Kyverno](https://kyverno.io/docs/)**:
 
@@ -378,7 +386,7 @@ violation[{"msg": msg}] {
 }
 ```
 
-**SysOps Integration**: Policy-as-Code closes the gap between the security controls defined in Chapter 10 (Risk & Compliance) and their enforcement — violations are caught automatically in CI/CD rather than discovered in audits.
+**SysOps Integration**: Policy-as-Code closes the gap between the security controls defined in Chapter 10 (Risk & Compliance) and their enforcement - violations are caught automatically in CI/CD rather than discovered in audits.
 
 ### GitOps at Scale: Multi-Environment Patterns
 
@@ -402,7 +410,7 @@ gitops-repo/
     └── policies/            # OPA Gatekeeper constraints
 ```
 
-All changes to any environment — including platform components — flow through Git pull requests with automated OPA validation in CI before ArgoCD reconciles them to the target cluster.
+All changes to any environment - including platform components - flow through Git pull requests with automated OPA validation in CI before ArgoCD reconciles them to the target cluster.
 
 ## Networking & Infrastructure Operations
 
@@ -450,11 +458,11 @@ Load balancers sit in front of every critical service. Misunderstanding their co
 | **DNS-based (GSLB)**     | L3/L4           | Global traffic routing between regions; failover between data centres                               |
 | **Network LB**           | L4 (TCP/UDP)    | High-throughput, low-latency; no TLS termination; used for non-HTTP workloads                       |
 | **Application LB**       | L7 (HTTP/HTTPS) | Path/header-based routing, TLS termination, WebSocket, gRPC; most common for web services           |
-| **Service mesh sidecar** | L7 (internal)   | Service-to-service routing within Kubernetes; mTLS, circuit breaking (see Chapter 8 — Service Mesh) |
+| **Service mesh sidecar** | L7 (internal)   | Service-to-service routing within Kubernetes; mTLS, circuit breaking (see Chapter 8 - Service Mesh) |
 
 **Health Check Design**:
 
-- Use a **dedicated health endpoint** (e.g., `/health` or `/readiness`) that checks the application’s own dependencies (DB connectivity, cache reachability) — not just HTTP 200 from the web server
+- Use a **dedicated health endpoint** (e.g., `/health` or `/readiness`) that checks the application’s own dependencies (DB connectivity, cache reachability) - not just HTTP 200 from the web server
 - Set health check thresholds: mark unhealthy after 2–3 consecutive failures; mark healthy again after 3 consecutive successes (hysteresis prevents flapping)
 - **Separate readiness from liveness** (Kubernetes pattern): readiness gates traffic routing; liveness controls container restart
 - Test health checks monthly: deliberately fail an instance and confirm the LB removes it from the pool within the expected window
@@ -462,7 +470,7 @@ Load balancers sit in front of every critical service. Misunderstanding their co
 **Operational Runbook Items**:
 
 - **Draining before maintenance**: gracefully remove a node from the LB pool (drain connections) before patching; verify zero active connections before proceeding
-- **Sticky sessions**: document which services use session affinity; sticky sessions mask scaling issues — prefer stateless services where possible
+- **Sticky sessions**: document which services use session affinity; sticky sessions mask scaling issues - prefer stateless services where possible
 - **TLS termination and certificate rotation**: automate cert renewal (Let’s Encrypt / ACME, AWS ACM auto-renewal); alert 30 days before expiry; test renewal in staging
 - **Connection timeout tuning**: align LB idle timeout with upstream service timeout + 10%; misaligned timeouts cause cryptic 504 errors
 

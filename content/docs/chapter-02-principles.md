@@ -21,24 +21,28 @@ While the Agile Manifesto revolutionized software development, operations teams 
 
 ### Note on ITIL and Service Management
 
-The principles outlined in this chapter align closely with **ITIL 4 (Information Technology Infrastructure Library, 4th edition)** and **IT Service Management (ITSM)** best practices. ITIL 4, released in February 2019 ([Axelos ITIL 4](https://www.axelos.com/certifications/itil-service-management)), introduced the **Service Value System (SVS)** model, **34 management practices**, and **7 guiding principles** as its core structure, replacing the earlier lifecycle-stage model of ITIL v3. If you're familiar with ITIL 4, you'll recognise that SysOps Framework operationalises many ITIL 4 concepts:
+If you already work with ITIL or another IT service management model, read SysOps as an **operationalisation layer**, not as a competing framework. ITIL gives a broad service-management vocabulary: services, incidents, problems, changes, knowledge, risk, suppliers, and continual improvement. SysOps focuses on the smaller operating rhythm that helps teams apply those ideas under real interrupt load.
 
-- **Service Reliability First** ↔ ITIL 4 Service Design practice and Availability Management
-- **Continuous Availability** ↔ ITIL 4 Availability Management and IT Service Continuity Management
-- **Rapid Response** ↔ ITIL 4 Incident Management and Problem Management practices
-- **Automation and Efficiency** ↔ ITIL 4 Deployment Management practice and the guiding principle "Optimise and Automate"
-- **Knowledge Sharing** ↔ ITIL 4 Knowledge Management practice and the guiding principle "Collaborate and Promote Visibility"
-- **Risk Management** ↔ ITIL 4 Risk Management practice and Information Security Management
+The difference is practical scope:
 
-The key difference is **structure and operationalisation**: ITIL 4 provides a comprehensive framework describing best practices via its Service Value Chain and 34 practices; SysOps Framework combines ITIL 4 principles with an operational structure (the daily/weekly/monthly cycles from Chapter 3) that makes these practices actionable and sustainable for teams of all sizes.
+- **ITSM frameworks** describe a wide service-management system.
+- **SysOps Framework** describes how an operations team structures daily response, weekly improvement, and monthly strategy.
+- **Templates and practices** translate that structure into visible work.
 
-**For ITIL 4 practitioners**: SysOps Framework provides a practical, lightweight implementation pathway for ITIL 4 service management without requiring a full ITIL compliance programme or a comprehensive ITSM tool suite.
+Version-specific ITIL alignment changes over time, so this chapter avoids making the core principles depend on one ITIL release. Treat detailed ITIL mapping as reference material that should be refreshed periodically, not as the foundation of the SysOps model.
 
-> **Note on ITIL 5**: [PeopleCert announced ITIL 5](https://www.peoplecert.org/itil-5) in January 2026 and the Foundation certification became available. At the time of writing (mid-2026) the full ITIL 5 practice library is not yet widely published. The SysOps Framework will be updated to align with ITIL 5 once its content is stable. Monitor the [ITIL official site](https://www.axelos.com/certifications/itil-service-management) for updates.
+### Principle Summary Table
 
----
+| Principle                 | Protects                                 | Costs / trade-off                               | Warning signal when ignored                     |
+| ------------------------- | ---------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| Service Reliability First | User trust and business continuity       | Slower risky change                             | Features ship while services become fragile     |
+| Continuous Availability   | Operational confidence                   | Ongoing investment in redundancy and monitoring | Every maintenance window becomes a crisis       |
+| Rapid Response            | Time to restore and stakeholder trust    | Interrupt capacity must be reserved             | Incidents wait for process permission           |
+| Automation and Efficiency | Team capacity and consistency            | Upfront engineering effort                      | The same manual task returns every week         |
+| Knowledge Sharing         | Resilience and onboarding                | Documentation discipline                        | Only one person knows how critical systems work |
+| Risk Management           | Security, compliance, and sustainability | Some work must be slowed or rejected            | Risk is discovered after the change, not before |
 
-A word on why principles come before process. Every operations veteran has, at some point, found themselves at 3 a.m. holding a decision the runbook never anticipated: the failover worked, but now the _primary_ is back and disagreeing with the secondary about who owns the truth. There is no procedure for that. There is only judgement — and judgement, under pressure, is just your principles showing. The six values below are the ones we want showing when the runbook runs out.
+Use this table as the quick reference. The rest of the chapter explains the principles in depth.
 
 ### 🛡️ 1. Service Reliability First
 

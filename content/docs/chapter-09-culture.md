@@ -15,7 +15,7 @@ By the end of this chapter, you will understand:
 - Strategies for managing organizational resistance and change
 - Leadership approaches that support operations team transformation
 
-> **Principles in play.** Culture is where _Knowledge Sharing_ either lives or dies, and where _Continuous Availability_ ([Chapter 2](chapter-02-principles.md)) is kept humane — sustainable on-call instead of slow-motion burnout.
+> **Principles in play.** Culture is where _Knowledge Sharing_ either lives or dies, and where _Continuous Availability_ ([Chapter 2](chapter-02-principles.md)) is kept humane - sustainable on-call instead of slow-motion burnout.
 
 ## 🌱 Building an Operations-Focused Culture
 
@@ -32,9 +32,9 @@ Traditional organizational cultures often prioritize speed of delivery over oper
 | Proactive prevention over reactive response | React quickly when things go wrong                         | Invest in preventing things from going wrong                            | Excellence in both prevention and response capabilities                  | Allocate time and resources for preventive work                       |
 | Team resilience over individual heroes      | Rely on expert individuals to solve critical problems      | Build team capabilities that don't depend on specific individuals       | Value expertise while ensuring knowledge sharing and cross-training      | Reward knowledge sharing and mentoring alongside individual expertise |
 
-> Every team has a Dave. Dave is brilliant, Dave knows where all the bodies are buried, and Dave is the only person who understands the billing batch job — which is fine right up until Dave goes on holiday to a place without signal and the batch job decides that's the week to misbehave. The hero culture feels great until the hero is unreachable. The goal isn't to get rid of Dave; it's to make sure the team survives Dave's well-deserved week off. (Dave, incidentally, also deserves to take a holiday without his phone.)
+> Every team has a Dave. Dave is brilliant, Dave knows where all the bodies are buried, and Dave is the only person who understands the billing batch job - which is fine right up until Dave goes on holiday to a place without signal and the batch job decides that's the week to misbehave. The hero culture feels great until the hero is unreachable. The goal isn't to get rid of Dave; it's to make sure the team survives Dave's well-deserved week off. (Dave, incidentally, also deserves to take a holiday without his phone.)
 >
-> **A critical nuance**: anti-hero culture is not anti-expertise. The goal is not to flatten expertise or pretend everyone is interchangeable — it's to ensure that expertise is _shared_ rather than hoarded. Dave's deep knowledge of the billing batch job is valuable and should be recognised, compensated, and celebrated. What should not be celebrated is a team structure where only Dave can fix the billing batch job. The two things look similar from the outside but are opposites: one rewards expertise _and_ resilience; the other rewards expertise _instead of_ resilience. Pay your experts well, celebrate their depth, and also hold them accountable for documenting, mentoring, and ultimately making themselves non-critical.
+> **A critical nuance**: anti-hero culture is not anti-expertise. The goal is not to flatten expertise or pretend everyone is interchangeable - it's to ensure that expertise is _shared_ rather than hoarded. Dave's deep knowledge of the billing batch job is valuable and should be recognised, compensated, and celebrated. What should not be celebrated is a team structure where only Dave can fix the billing batch job. The two things look similar from the outside but are opposites: one rewards expertise _and_ resilience; the other rewards expertise _instead of_ resilience. Pay your experts well, celebrate their depth, and also hold them accountable for documenting, mentoring, and ultimately making themselves non-critical.
 
 ## 🏢 Organizational Structure and Support
 
@@ -75,28 +75,28 @@ Middle managers often face the greatest pressure to balance operational needs wi
 
 ### Role-Responsibility Mapping
 
-Every ops team has a set of distinct hats that don't always match job titles. This table maps common roles to their primary responsibilities within the framework's cycles and practices. Use it to clarify who owns what — before a gap or overlap becomes a problem.
+Every ops team has a set of distinct hats that don't always match job titles. This table maps common roles to their primary responsibilities within the framework's cycles and practices. Use it to clarify who owns what - before a gap or overlap becomes a problem.
 
 | Role                                       | Primary Accountability                                                                                                            | Which Cycle They Own                                    | Key Practices They Drive                                                           | Typical Decisions                                                                                                      |
 | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| **Principal Engineer**                     | Technical vision and architecture decisions that affect reliability, cost, and scalability                                        | Monthly Strategy — sets technical direction             | Capacity & Performance (4), Financial Management (11)                              | "Which cloud region should we expand to?" "Monolith or microservices?" "When do we migrate off this vendor?"           |
-| **Architect**                              | System design, integration patterns, technology selection within the vision                                                       | Monthly Strategy — reviews and proposes                 | Change & Configuration (3), Release Management (8), Asset Management (9)           | "Which monitoring stack fits our topology?" "How do we design for multi-region failover?" "What's the migration path?" |
-| **Team Leader (Functional & Operational)** | People management, prioritisation, stakeholder communication, removing blockers                                                   | Weekly Improvement — runs the retro and priority review | Team & Skill Development (6), Knowledge & Documentation (5), Vendor & Contract (7) | "Who is on-call next week?" "What improvement do we fund this quarter?" "Can the team absorb this new service?"        |
-| **Platform Manager**                       | Infrastructure platform health, cost control, vendor relationships, SLO negotiation                                               | Daily Operations — owns the dashboard and alert triage  | Service Level Management (1), Financial Management (11), Vendor & Contract (7)     | "Do we accept this SLO?" "Is the platform bill within budget?" "Which alert gets a runbook?"                           |
-| **Service Owner**                          | Day-to-day health of a specific service (e.g., Azure, Kubernetes, a database cluster); first responder for incidents affecting it | Daily Operations — incident response participant        | Incident & Problem (2), Backup & Recovery (12), Capacity & Performance (4)         | "Is this alert worth paging over?" "Do I roll back or fix forward?" "When does this service need more capacity?"       |
-| **On-Call Engineer**                       | Rotating responsibility for incident response during assigned shifts (where 24/7 rotation applies)                                | Daily Operations — shift execution                      | Incident & Problem (2), Knowledge & Documentation (5)                             | "Is this a P1 or P2?" "Do we need to wake up the Service Owner?" "Is the runbook correct?"                             |
-| **Incident Commander (ICS)**               | Coordination during major incidents — does NOT debug, keeps the response organised                                                | Daily Operations — activated per incident               | Incident & Problem (2)                                                             | "Who is on the bridge?" "Do we escalate to the director?" "What do we tell customers?"                                 |
-| **SRE / Ops Engineer**                     | Automation, monitoring reliability, reducing toil across the platform                                                             | Weekly Improvement — implements automation projects     | Release Management (8), Service Request (10), Change & Configuration (3)           | "Which manual step do I automate next?" "Is this change safe to standardise?"                                          |
+| **Principal Engineer**                     | Technical vision and architecture decisions that affect reliability, cost, and scalability                                        | Monthly Strategy - sets technical direction             | Capacity & Performance (4), Financial Management (11)                              | "Which cloud region should we expand to?" "Monolith or microservices?" "When do we migrate off this vendor?"           |
+| **Architect**                              | System design, integration patterns, technology selection within the vision                                                       | Monthly Strategy - reviews and proposes                 | Change & Configuration (3), Release Management (8), Asset Management (9)           | "Which monitoring stack fits our topology?" "How do we design for multi-region failover?" "What's the migration path?" |
+| **Team Leader (Functional & Operational)** | People management, prioritisation, stakeholder communication, removing blockers                                                   | Weekly Improvement - runs the retro and priority review | Team & Skill Development (6), Knowledge & Documentation (5), Vendor & Contract (7) | "Who is on-call next week?" "What improvement do we fund this quarter?" "Can the team absorb this new service?"        |
+| **Platform Manager**                       | Infrastructure platform health, cost control, vendor relationships, SLO negotiation                                               | Daily Operations - owns the dashboard and alert triage  | Service Level Management (1), Financial Management (11), Vendor & Contract (7)     | "Do we accept this SLO?" "Is the platform bill within budget?" "Which alert gets a runbook?"                           |
+| **Service Owner**                          | Day-to-day health of a specific service (e.g., Azure, Kubernetes, a database cluster); first responder for incidents affecting it | Daily Operations - incident response participant        | Incident & Problem (2), Backup & Recovery (12), Capacity & Performance (4)         | "Is this alert worth paging over?" "Do I roll back or fix forward?" "When does this service need more capacity?"       |
+| **On-Call Engineer**                       | Rotating responsibility for incident response during assigned shifts (where 24/7 rotation applies)                                | Daily Operations - shift execution                      | Incident & Problem (2), Knowledge & Documentation (5)                              | "Is this a P1 or P2?" "Do we need to wake up the Service Owner?" "Is the runbook correct?"                             |
+| **Incident Commander (ICS)**               | Coordination during major incidents - does NOT debug, keeps the response organised                                                | Daily Operations - activated per incident               | Incident & Problem (2)                                                             | "Who is on the bridge?" "Do we escalate to the director?" "What do we tell customers?"                                 |
+| **SRE / Ops Engineer**                     | Automation, monitoring reliability, reducing toil across the platform                                                             | Weekly Improvement - implements automation projects     | Release Management (8), Service Request (10), Change & Configuration (3)           | "Which manual step do I automate next?" "Is this change safe to standardise?"                                          |
 
-> **Roles are not people.** One person may wear multiple hats (especially in small teams). The Principal Engineer may also be the Team Leader. The point of the table is to make sure _every hat has a head_ — not to prescribe headcount. If a responsibility has no owner, it will be neglected; if two people think they own it, you have a future conflict. Use this table to check: for each practice in Chapter 6, can you name who drives it?
+> **Roles are not people.** One person may wear multiple hats (especially in small teams). The Principal Engineer may also be the Team Leader. The point of the table is to make sure _every hat has a head_ - not to prescribe headcount. If a responsibility has no owner, it will be neglected; if two people think they own it, you have a future conflict. Use this table to check: for each practice in Chapter 6, can you name who drives it?
 
 **How roles map to the three operational cycles**:
 
-| Cycle                          | Who Leads                                                          | Who Participates                                             |
-| ------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------ |
-| **Daily** (15-min ops review)  | Platform Manager or senior engineer rotates as facilitator       | All Service Owners, on-call engineer (where rotation exists) |
-| **Weekly** (improvement retro) | Team Leader                                                        | Principal Engineer, Platform Manager, rotating Service Owner |
-| **Monthly** (strategy)         | Principal Engineer or Team Leader                                  | Architect, Platform Manager, invited Service Owners          |
+| Cycle                          | Who Leads                                                  | Who Participates                                             |
+| ------------------------------ | ---------------------------------------------------------- | ------------------------------------------------------------ |
+| **Daily** (15-min ops review)  | Platform Manager or senior engineer rotates as facilitator | All Service Owners, on-call engineer (where rotation exists) |
+| **Weekly** (improvement retro) | Team Leader                                                | Principal Engineer, Platform Manager, rotating Service Owner |
+| **Monthly** (strategy)         | Principal Engineer or Team Leader                          | Architect, Platform Manager, invited Service Owners          |
 
 ## 🔄 Change Management Strategies
 
@@ -219,26 +219,26 @@ The most useful career ladder is one that tells an engineer exactly what "the ne
 | Level | Title                  | Scope                            | Key Signals                                                                                                                                                                   | Promotion Criteria                                                                                                             |
 | ----- | ---------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | L1    | Associate Ops Engineer | Single systems, supervised       | Follows runbooks correctly; escalates when stuck; documents what they learned                                                                                                 | Consistently handles tier-2 systems without supervision                                                                        |
-| L2    | Ops Engineer           | Multiple systems, independent    | Participates in on-call rotation where applicable; contributes runbook improvements; identifies repetitive manual work                                                          | Led at least one process improvement; on-call health metrics green (where rotation exists)                                   |
-| L3    | Senior Ops Engineer    | Critical systems, mentors others | Designs runbooks for new systems; mentors L1/L2 engineers; leads incident response as IC; drives automation projects                                                          | Two+ automation projects deployed; mentored 2 juniors through their first on-call rotation (if team runs one)                   |
+| L2    | Ops Engineer           | Multiple systems, independent    | Participates in on-call rotation where applicable; contributes runbook improvements; identifies repetitive manual work                                                        | Led at least one process improvement; on-call health metrics green (where rotation exists)                                     |
+| L3    | Senior Ops Engineer    | Critical systems, mentors others | Designs runbooks for new systems; mentors L1/L2 engineers; leads incident response as IC; drives automation projects                                                          | Two+ automation projects deployed; mentored 2 juniors through their first on-call rotation (if team runs one)                  |
 | L4    | Staff Ops Engineer     | Cross-team, architectural        | Defines operational standards adopted by multiple teams; designs DR plans; influences platform architecture; publishes post-incident analyses that change team practice       | Standards adopted by 2+ teams; DR plan tested to target RTO; recognised as subject-matter expert in at least one domain        |
 | L5    | Principal Ops Engineer | Organisation-wide, strategic     | Sets multi-year operational strategy; designs organisational reliability practices; represents operations in executive decision-making; published external thought leadership | Organisation-wide reliability improvements attributable to their work; external recognition (conference talk, published paper) |
 
-> **Note.** Levels are not years. An engineer who demonstrates L3 signals at year 2 should be L3; an engineer who plateaus at L2 signals for 10 years should stay L2. Time-in-grade promotions produce titled engineers who are not ready for the scope — which is worse for team morale than no promotion at all.
+> **Note.** Levels are not years. An engineer who demonstrates L3 signals at year 2 should be L3; an engineer who plateaus at L2 signals for 10 years should stay L2. Time-in-grade promotions produce titled engineers who are not ready for the scope - which is worse for team morale than no promotion at all.
 
 ### On-Call Rotation Design
 
-**Not every team needs a 24/7 on-call rotation.** If you have fewer than five people, or your systems have enough automation and self-healing capacity to survive unattended hours, a formal on-call rotation may be more harmful than helpful. In small teams, the burden of being "always on" falls on the same few people every time, accelerating burnout and driving attrition. The alternative: invest in automated incident response, keep alert quality high enough that any overnight page is genuinely critical, and rely on a shared response pool — not a dedicated primary.
+**Not every team needs a 24/7 on-call rotation.** If you have fewer than five people, or your systems have enough automation and self-healing capacity to survive unattended hours, a formal on-call rotation may be more harmful than helpful. In small teams, the burden of being "always on" falls on the same few people every time, accelerating burnout and driving attrition. The alternative: invest in automated incident response, keep alert quality high enough that any overnight page is genuinely critical, and rely on a shared response pool - not a dedicated primary.
 
 **If your team is large enough to sustain one** (typically 5+ people) and your service criticality justifies it, a well-designed rotation spreads load fairly, builds resilience, and respects engineers' personal time. The guidance below assumes you've already decided that formal on-call makes sense for your context.
 
 #### Rotation Principles
 
 - **Fair load distribution**: Every eligible team member participates; no individual should be on-call more than one week in four (aim for one in five or better)
-- **Follow-the-sun where possible**: If your team spans time zones, distribute primary on-call so overnight hours are covered by someone for whom it is daytime — but don't invent geographic distribution just to justify 24/7 coverage
+- **Follow-the-sun where possible**: If your team spans time zones, distribute primary on-call so overnight hours are covered by someone for whom it is daytime - but don't invent geographic distribution just to justify 24/7 coverage
 - **Shadowing before solo**: New team members shadow an experienced responder for at least two full on-call rotations before taking primary responsibility
 - **On-call should not interrupt sleep more than twice per week on average**: if it does, the alert volume is a bug, not an on-call problem
-- **Compensate fairly**: On-call allowances, time off in lieu, or explicit recognition — make the policy visible and consistent
+- **Compensate fairly**: On-call allowances, time off in lieu, or explicit recognition - make the policy visible and consistent
 
 #### Rotation Structures
 
@@ -254,7 +254,7 @@ The most useful career ladder is one that tells an engineer exactly what "the ne
 
 Every on-call rotation should have a **handoff document** updated at the start of each shift containing:
 
-1. **Active incidents or known issues** — anything the incoming responder needs to be aware of
+1. **Active incidents or known issues** - anything the incoming responder needs to be aware of
 2. **Scheduled maintenance windows** during the shift period
 3. **Recent deployments** that may be unstable (link to relevant change records)
 4. **Known noisy alerts** to expect and how to handle them
@@ -265,7 +265,7 @@ Every on-call rotation should have a **handoff document** updated at the start o
 
 On-call fatigue is driven by low-quality alerts. Apply these standards before routing anything to a pager:
 
-- **Every alert must be actionable**: if the engineer cannot do something meaningful in response, it is not an alert — it is a log entry
+- **Every alert must be actionable**: if the engineer cannot do something meaningful in response, it is not an alert - it is a log entry
 - **Every alert must have a runbook link**: the alert message includes a URL to the relevant diagnostic steps
 - **Alert severity must match business impact**: use P1–P4 consistently; P1 wakes someone up, P4 goes to a ticket queue
 - **Review alert fatigue monthly**: track alerts-per-shift; more than 5 actionable pages per 12-hour shift indicates a tuning problem
@@ -296,9 +296,19 @@ graph LR
 
 Document this path in the incident management runbook (Chapter 6, Practice 2) and validate it during DR simulations.
 
+#### Template Links for On-Call Design
+
+Use the templates as operating artifacts, not paperwork:
+
+- [`templates/on-call-policy-template.md`](../../templates/on-call-policy-template.md) - rotation rules, escalation, handoff, compensation assumptions, health checks.
+- [`templates/incident-commander-checklist.md`](../../templates/incident-commander-checklist.md) - live incident role clarity.
+- [`templates/post-incident-review.md`](../../templates/post-incident-review.md) - learning loop after significant incidents.
+
+The policy should define healthy boundaries before the first serious incident tests them.
+
 #### On-Call Policy Blueprint
 
-Every team needs a written on-call policy — not a wiki page someone filled in once, but a living document reviewed quarterly. Below is a template you can adapt.
+Every team needs a written on-call policy - not a wiki page someone filled in once, but a living document reviewed quarterly. Below is a template you can adapt.
 
 ```yaml
 policy_name: "On-Call Operations Policy"
@@ -348,7 +358,7 @@ failure_modes:
   - scenario: "Shift > 6 hours without a break during active incident"
     action: "Incident Commander MUST rotate responder out; mandatory handoff"
   - scenario: "Engineer on-call more than 1 week in 4 for 2 consecutive quarters"
-    action: "Team composition review — team is understaffed for its reliability targets"
+    action: "Team composition review - team is understaffed for its reliability targets"
 ```
 
 > **Keep it short.** The policy above is deliberately ~40 lines. An on-call policy nobody reads because it's 12 pages of legal language is an on-call policy that doesn't exist. Start here and add organisational specifics (pay bands, exact escalation contacts) without bloating the document.
@@ -449,7 +459,7 @@ failure_modes:
 - Continuous adaptation and refinement of practices
 - Cultural changes become self-sustaining
 
-> **Reality check.** Culture change doesn't happen because someone printed the values on a mug or added a slide to the onboarding deck. It happens when the first person who says "no, we're not shipping that on a Friday afternoon" gets backed up instead of overruled — and when the engineer who spent a sprint on prevention work nobody noticed still gets a good review. People watch what gets rewarded, not what gets laminated.
+> **Reality check.** Culture change doesn't happen because someone printed the values on a mug or added a slide to the onboarding deck. It happens when the first person who says "no, we're not shipping that on a Friday afternoon" gets backed up instead of overruled - and when the engineer who spent a sprint on prevention work nobody noticed still gets a good review. People watch what gets rewarded, not what gets laminated.
 
 ## 🎯 Leadership Strategies for Operations Teams
 
@@ -457,12 +467,12 @@ failure_modes:
 
 #### Practical Manager Toolkit
 
-A set of concrete actions ops managers can take that require no budget approval and no reorganisation — just intention.
+A set of concrete actions ops managers can take that require no budget approval and no reorganisation - just intention.
 
 | When This Happens                                | Do This Instead of                                                                                                                                              |
 | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | A P1 incident is declared                        | Stay out of the technical response. Your job is to handle stakeholder communication, clear blockers, and arrange food/caffeine for the responders.              |
-| An engineer proposes automation                  | Ask "what toil will this eliminate?" and "how will we measure the time saved?" — not "how long will this take?"                                                 |
+| An engineer proposes automation                  | Ask "what toil will this eliminate?" and "how will we measure the time saved?" - not "how long will this take?"                                                 |
 | A post-incident review identifies a systemic gap | Assign an owner and a deadline before the meeting ends. Follow up at the next weekly cycle. A finding without an owner is a complaint, not a fix.               |
 | A cross-training opportunity arises              | Approve the time and explicitly protect the schedule. Cross-training is the first thing to slip when things get busy, and that's exactly when it's most needed. |
 | A stakeholder demands a new service be supported | Ask three questions: what's the business justification? what's the SLO? what gets deprioritised to make room?                                                   |
@@ -519,13 +529,13 @@ Generic performance criteria ("meets expectations") are meaningless for operatio
 | **Communication**         | Incident updates are vague or late                                       | Stakeholders know status without chasing; post-incident summaries are clear             | Translates technical incidents into business impact naturally; trusted by stakeholders to communicate during crises |
 | **Mentoring**             | Works alone; doesn't share context                                       | Answers questions from juniors; reviews runbook PRs                                     | Rotates with juniors during on-call shadow shifts; creates training materials used by others                        |
 
-> **What not to rate.** Hours worked, tickets closed per week, uptime of systems they don't control, or individual response time (see Chapter 7 — this metric is actively harmful). Rate contribution to team resilience, not individual heroics.
+> **What not to rate.** Hours worked, tickets closed per week, uptime of systems they don't control, or individual response time (see Chapter 7 - this metric is actively harmful). Rate contribution to team resilience, not individual heroics.
 
 ### Stakeholder Expectation Reset
 
-The single most impactful conversation an ops manager can have is resetting what stakeholders expect from the operations team. Use this script as a starting point — adapt the numbers to your context.
+The single most impactful conversation an ops manager can have is resetting what stakeholders expect from the operations team. Use this script as a starting point - adapt the numbers to your context.
 
-**The conversation** ("Living with Ops — a frank talk for stakeholders"):
+**The conversation** ("Living with Ops - a frank talk for stakeholders"):
 
 ```
 1. What we guarantee:
@@ -550,7 +560,7 @@ The single most impactful conversation an ops manager can have is resetting what
    - 48-hour notice for planned feature releases that affect production systems
      (exceptions: security patches, which get 4-hour notice if they follow emergency change process).
    - An honest capacity forecast each quarter: "our user base is growing / flat / shrinking."
-   - Backing when we say "no" — including to your own team's feature requests that
+   - Backing when we say "no" - including to your own team's feature requests that
      would degrade reliability.
 
 4. How we'll measure success (and how you'll see it):
@@ -561,15 +571,15 @@ The single most impactful conversation an ops manager can have is resetting what
    - Real-time: status page for service health; Slack channel for incident updates.
 ```
 
-> **Pro tip.** Send this reset in writing before the meeting. The meeting is for questions and negotiation, not for the first read. If a stakeholder pushes back on every point, that is valuable information — it tells you this person expects the ops team to absorb unlimited risk without corresponding support, and you need your own manager in the next conversation.
+> **Pro tip.** Send this reset in writing before the meeting. The meeting is for questions and negotiation, not for the first read. If a stakeholder pushes back on every point, that is valuable information - it tells you this person expects the ops team to absorb unlimited risk without corresponding support, and you need your own manager in the next conversation.
 
 ## 🌟 Real-World Case Studies and Cultural Models
 
 > The following are documented, publicly verifiable industry cases, included to illustrate the cultural principles in this chapter. Each draws on the organisation's own primary-source material rather than a hypothetical scenario.
 
-### Case Study: GitLab — Blameless Transparency After a Catastrophic Outage
+### Case Study: GitLab - Blameless Transparency After a Catastrophic Outage
 
-On 31 January 2017, a GitLab engineer working to restore database replication accidentally ran a destructive command against the **primary** production database instead of the secondary, removing roughly 300 GB of live data. The recovery then exposed a deeper problem: of five separate backup and replication mechanisms, **none worked as intended** — `pg_dump` was silently failing due to a version mismatch, and the failure-notification emails were being rejected. The team recovered from a six-hour-old staging snapshot, permanently losing data created in that window (an estimated 5,000 projects, 5,000 comments, and 700 users), with an outage lasting roughly 18 hours ([GitLab postmortem](https://about.gitlab.com/blog/2017/02/10/postmortem-of-database-outage-of-january-31/)).
+On 31 January 2017, a GitLab engineer working to restore database replication accidentally ran a destructive command against the **primary** production database instead of the secondary, removing roughly 300 GB of live data. The recovery then exposed a deeper problem: of five separate backup and replication mechanisms, **none worked as intended** - `pg_dump` was silently failing due to a version mismatch, and the failure-notification emails were being rejected. The team recovered from a six-hour-old staging snapshot, permanently losing data created in that window (an estimated 5,000 projects, 5,000 comments, and 700 users), with an outage lasting roughly 18 hours ([GitLab postmortem](https://about.gitlab.com/blog/2017/02/10/postmortem-of-database-outage-of-january-31/)).
 
 **The cultural response is what makes this a model**:
 
@@ -580,17 +590,17 @@ On 31 January 2017, a GitLab engineer working to restore database replication ac
 
 **Why it matters for SysOps**: This case demonstrates the blameless post-incident review (see [Chapter 6](chapter-06-practices.md)) and backup-and-recovery testing (Chapter 6, Practice 12) advocated throughout this framework. The lesson is cultural before it is technical: psychological safety and transparency turn even a severe failure into durable organisational learning. ([Google's SRE practice makes the same argument for blameless postmortems](https://sre.google/sre-book/postmortem-culture/).)
 
-### Case Study: Netflix — "Reliability Enables Speed" and Chaos Engineering
+### Case Study: Netflix - "Reliability Enables Speed" and Chaos Engineering
 
 As Netflix re-architected onto cloud infrastructure at global scale, it adopted a counter-intuitive cultural stance: rather than avoiding failure, teams should **deliberately and continuously inject failure** into production to build confidence that the system withstands real-world turbulence. This discipline, formalised as Chaos Engineering and popularised by tools like Chaos Monkey and the Simian Army, defines experiments that introduce real-world failure variables while minimising "blast radius" to customers ([Principles of Chaos Engineering](https://principlesofchaos.org/)).
 
 **The cultural foundations**:
 
-- **Shared responsibility for resilience** — reliability is everyone's concern, not a separate operations silo's burden.
-- **Freedom paired with responsibility** — engineers are trusted to run experiments against production, with the explicit obligation to contain customer impact.
-- **Automation as a cultural default** — experiments run continuously and automatically, reflecting an organisation that designs operations in rather than bolting them on.
+- **Shared responsibility for resilience** - reliability is everyone's concern, not a separate operations silo's burden.
+- **Freedom paired with responsibility** - engineers are trusted to run experiments against production, with the explicit obligation to contain customer impact.
+- **Automation as a cultural default** - experiments run continuously and automatically, reflecting an organisation that designs operations in rather than bolting them on.
 
-**Why it matters for SysOps**: Netflix shows in practice that strong operational discipline is an _enabler_ of velocity, not a brake on it — the Principles of Chaos explicitly aim to "provide confidence to innovate quickly at massive scales." This is the same "reliability enables speed" culture the SysOps Framework seeks to build, and it connects directly to the resilience and disaster-recovery testing practices in [Chapter 10](chapter-10-risk.md).
+**Why it matters for SysOps**: Netflix shows in practice that strong operational discipline is an _enabler_ of velocity, not a brake on it - the Principles of Chaos explicitly aim to "provide confidence to innovate quickly at massive scales." This is the same "reliability enables speed" culture the SysOps Framework seeks to build, and it connects directly to the resilience and disaster-recovery testing practices in [Chapter 10](chapter-10-risk.md).
 
 ## 🎯 Chapter Summary
 

@@ -15,26 +15,36 @@ By the end of this chapter, you will understand:
 - When to adapt the framework vs. when to change the environment
 - How to troubleshoot framework adoption issues
 
-> **Principles in play.** When the framework misbehaves, the principles are your debugging guide. Most adoption failures trace back to a quietly abandoned principle — usually _Automation and Efficiency_ or _Knowledge Sharing_ ([Chapter 2](chapter-02-principles.md)).
+> **Principles in play.** When the framework misbehaves, the principles are your debugging guide. Most adoption failures trace back to a quietly abandoned principle - usually _Automation and Efficiency_ or _Knowledge Sharing_ ([Chapter 2](chapter-02-principles.md)).
 
 ## 🚧 Common Implementation Challenges
 
-Here's the part of the book where we admit the framework is not magic. Adopting it will, at various points, be awkward, politically inconvenient, and quietly resisted by at least one person who liked things the old way. That's normal. A methodology that promised a frictionless rollout would be lying to you, and you've met enough vendors to know the smell. What follows are the failure modes we see most often, and what actually helps — not "secure executive buy-in and synergize" platitudes, but the unglamorous moves that work.
+Here's the part of the book where we admit the framework is not magic. Adopting it will, at various points, be awkward, politically inconvenient, and quietly resisted by at least one person who liked things the old way. That's normal. A methodology that promised a frictionless rollout would be lying to you, and you've met enough vendors to know the smell. What follows are the failure modes we see most often, and what actually helps - not "secure executive buy-in and synergize" platitudes, but the unglamorous moves that work.
 
-### Symptom-Driven Troubleshooting
+### First Triage: Is This a Framework Problem or a Context Problem?
+
+Before changing the framework, classify the failure.
+
+| Symptom                                           | Likely cause                        | First move                                                         |
+| ------------------------------------------------- | ----------------------------------- | ------------------------------------------------------------------ |
+| Daily cycle feels like useless status reporting   | Ceremony replaced triage            | Shorten meeting, move detail to queue, keep only blockers and risk |
+| Weekly improvements never happen                  | Interrupt load exceeds capacity     | Drop to daily-only mode and make capacity visible                  |
+| Monthly strategy produces slides but no decisions | Leadership is not making trade-offs | Convert strategy review into decision log with owners              |
+| Metrics cause defensiveness                       | Numbers are being used for blame    | Pause metric escalation and clarify interpretation rules           |
+| Templates are filled but not used                 | Paperwork detached from work        | Remove or simplify artifacts until they affect decisions           |
 
 Before diving into each challenge in detail, use this quick-reference table. Find what you're seeing, identify the probable cause, and jump to the corrective action.
 
 | If You See This                                                          | Probable Cause                                                                                         | Corrective Action                                                                                                                                                                  | Reference                              |
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| Team fills out framework templates but nothing changes                   | Framework theater — process compliance without outcome focus                                           | Audit whether action items from PIRs are actually completed. If completion rate < 60%, you have theater, not adoption.                                                             | See "False Adoption Signals" below     |
-| Management asks "what have we gotten for this investment?" after 4 weeks | Unrealistic timeline expectations — framework benefits compound slowly                                 | Publish a "what to expect when" timeline at adoption start. Show early indicators (documentation coverage, runbook adoption) rather than outcome metrics.                          | See Challenge 5                        |
-| Team says "we don't have time for this"                                  | Two possibilities: (a) genuine overload — the team is underwater; (b) resistance disguised as busyness | Distinguish by watching whether they accept _any_ new initiative or only reject framework activities. For (a): reduce scope. For (b): uncover the specific objection.              | See Challenge 1 + Challenge 3          |
-| SLOs are green but customers are unhappy                                 | Wrong SLOs — you're measuring what's easy, not what matters                                            | Re-run the SLI selection exercise from Practice 1. Ask: "what does the user actually feel?"                                                                                        | See Chapter 6, Practice 1              |
-| On-call team ignores alerts                                              | Alert fatigue — too many false positives or low-severity pages                                         | Apply the alert quality standards from Chapter 9. Every alert that has not triggered a meaningful action in 30 days gets silenced or retired.                                      | See Chapter 9, On-Call Rotation Design |
+| Team fills out framework templates but nothing changes                   | Framework theater - process compliance without outcome focus                                           | Audit whether action items from PIRs are actually completed. If completion rate < 60%, you have theater, not adoption.                                                             | See "False Adoption Signals" below     |
+| Management asks "what have we gotten for this investment?" after 4 weeks | Unrealistic timeline expectations - framework benefits compound slowly                                 | Publish a "what to expect when" timeline at adoption start. Show early indicators (documentation coverage, runbook adoption) rather than outcome metrics.                          | See Challenge 5                        |
+| Team says "we don't have time for this"                                  | Two possibilities: (a) genuine overload - the team is underwater; (b) resistance disguised as busyness | Distinguish by watching whether they accept _any_ new initiative or only reject framework activities. For (a): reduce scope. For (b): uncover the specific objection.              | See Challenge 1 + Challenge 3          |
+| SLOs are green but customers are unhappy                                 | Wrong SLOs - you're measuring what's easy, not what matters                                            | Re-run the SLI selection exercise from Practice 1. Ask: "what does the user actually feel?"                                                                                        | See Chapter 6, Practice 1              |
+| On-call team ignores alerts                                              | Alert fatigue - too many false positives or low-severity pages                                         | Apply the alert quality standards from Chapter 9. Every alert that has not triggered a meaningful action in 30 days gets silenced or retired.                                      | See Chapter 9, On-Call Rotation Design |
 | Post-incident reviews produce no action items                            | Blameless culture is being interpreted as "nothing is anyone's fault"                                  | Blameless does not mean actionless. Every PIR must produce at least one owner-assigned, deadline-tracked action item. If no action is needed, the review should say so explicitly. | See Chapter 6, Practice 2              |
-| Adoption stalls after Month 2                                            | The "honeymoon is over" — initial enthusiasm faded when real work began                                | Revisit the adoption playbook from Chapter 5. Identify which practice is causing the most friction and reduce its scope. Better to do one practice well than six poorly.           | See Chapter 5                          |
-| Teams cherry-pick easy practices and skip hard ones                      | No adoption governance — nobody is accountable for completeness                                        | Assign an adoption lead who has authority to say "this practice is not optional." Publish a practice-implementation order with dependencies.                                       | See Chapter 5                          |
+| Adoption stalls after Month 2                                            | The "honeymoon is over" - initial enthusiasm faded when real work began                                | Revisit the adoption playbook from Chapter 5. Identify which practice is causing the most friction and reduce its scope. Better to do one practice well than six poorly.           | See Chapter 5                          |
+| Teams cherry-pick easy practices and skip hard ones                      | No adoption governance - nobody is accountable for completeness                                        | Assign an adoption lead who has authority to say "this practice is not optional." Publish a practice-implementation order with dependencies.                                       | See Chapter 5                          |
 | Every incident is still a "first time"                                   | Runbooks not being written or not being used                                                           | Audit runbook usage during the last 5 incidents. If runbooks were consulted in < 50% of cases, the problem is habit, not content.                                                  | See Chapter 6, Practice 5              |
 
 ### Challenge 1: Resource Constraints and Competing Priorities
@@ -378,7 +388,7 @@ Are you collecting metrics?
 | Perfectionism paralysis | Waiting for perfect conditions before starting framework implementation | Endless planning without action or pilot implementations          | Start with imperfect implementations and improve iteratively   |
 | One-size-fits-all       | Rigidly applying framework without considering context                  | Framework practices that don't fit team or organizational reality | Thoughtfully adapt framework while maintaining core principles |
 
-> **Reality check.** Framework theater is the most seductive of these, because it photographs so well. The dashboards are green, the runbooks are immaculate, the retro produced thirty action items — and the same outage happens again next month. If your process produces beautiful artifacts and no fewer incidents, you don't have a framework, you have a hobby. Measure outcomes, not paperwork.
+> **Reality check.** Framework theater is the most seductive of these, because it photographs so well. The dashboards are green, the runbooks are immaculate, the retro produced thirty action items - and the same outage happens again next month. If your process produces beautiful artifacts and no fewer incidents, you don't have a framework, you have a hobby. Measure outcomes, not paperwork.
 
 ### Rescue Playbooks
 
@@ -392,11 +402,11 @@ Each playbook below is a specific, step-by-step recovery plan for a common failu
 
 **Recovery steps**:
 
-1. **Call a timeout** (not a blame session). Schedule 30 minutes. Agenda: "The framework experiment — what's working, what's not, what would make it work?" No management above team lead.
+1. **Call a timeout** (not a blame session). Schedule 30 minutes. Agenda: "The framework experiment - what's working, what's not, what would make it work?" No management above team lead.
 2. **Identify the blocker**. Ask three questions: (a) is it time? (b) is it complexity? (c) is it belief that it won't help? One of these is the real answer.
-3. **Reduce scope dramatically**. Pick exactly _one_ practice the team is willing to try for 2 weeks. Make it the one that addresses their biggest current pain. If they don't know, pick Practice 1 (SLOs) — it exposes problems fastest.
+3. **Reduce scope dramatically**. Pick exactly _one_ practice the team is willing to try for 2 weeks. Make it the one that addresses their biggest current pain. If they don't know, pick Practice 1 (SLOs) - it exposes problems fastest.
 4. **Remove all non-essential process overhead**. Cancel the monthly cycle. Drop documentation requirements to "one sentence per runbook step." The only meeting that survives is the daily 15-minute ops review.
-5. **Renegotiate with management**. Get explicit permission to spend 2 hours per week on framework activities for 1 month. If they won't grant that, the framework is not the problem — the organisation is, and no playbook fixes that.
+5. **Renegotiate with management**. Get explicit permission to spend 2 hours per week on framework activities for 1 month. If they won't grant that, the framework is not the problem - the organisation is, and no playbook fixes that.
 
 **Success signal**: Someone resumes a practice activity without being asked. This means the blocker is removed.
 
@@ -414,20 +424,20 @@ Each playbook below is a specific, step-by-step recovery plan for a common failu
 4. **Ask for a specific, small renewal**. "We'd like to continue these three practices for another quarter. No budget required. If you want us to expand, we need 2 hours per week team-wide. Here's a one-paragraph proposal."
 5. **If support is still withdrawn, preserve the seed**. Document everything you learned. Keep the practices alive informally. When the next crisis hits (and it will), you have a proven solution ready.
 
-**Success signal**: Leadership asks a question about the framework unprompted — "how's the SLO tracking going?" — which means they are paying attention again.
+**Success signal**: Leadership asks a question about the framework unprompted - "how's the SLO tracking going?" - which means they are paying attention again.
 
 #### Playbook C: Team Burnout Is Fueling Resistance
 
 **Symptoms**: High on-call fatigue; people skip meetings; cynicism about "yet another process"; low energy in framework activities.
 
-**Root cause likely**: The team is exhausted. The framework feels like more work, not less — because it hasn't yet reduced their incident load.
+**Root cause likely**: The team is exhausted. The framework feels like more work, not less - because it hasn't yet reduced their incident load.
 
 **Recovery steps**:
 
-1. **Stop all framework activities for 1 week**. Explicitly. "Framework pause until next Monday — catch up on sleep, close old tickets, clean up your workspace."
-2. **Use the pause to fix one thing that visibly reduces toil**. Pick the most painful manual process — the one that makes everyone groan. Automate it, or at minimum, document it and reduce its steps. Do not tell anyone; just fix it.
+1. **Stop all framework activities for 1 week**. Explicitly. "Framework pause until next Monday - catch up on sleep, close old tickets, clean up your workspace."
+2. **Use the pause to fix one thing that visibly reduces toil**. Pick the most painful manual process - the one that makes everyone groan. Automate it, or at minimum, document it and reduce its steps. Do not tell anyone; just fix it.
 3. **Restart with only the Daily Operations Cycle**. Drop weekly and monthly cycles until the daily cycle is comfortable. A team that can't do the 15-minute daily ops review consistently has no business in the weekly cycle.
-4. **Reduce on-call load aggressively**. If possible, shorten shifts or add a secondary. On-call fatigue is the #1 cause of ops team cynicism — fix this before anything else.
+4. **Reduce on-call load aggressively**. If possible, shorten shifts or add a secondary. On-call fatigue is the #1 cause of ops team cynicism - fix this before anything else.
 5. **Celebrate the fix from step 2 publicly**. Show the before/after. "This used to take 45 minutes. Now it takes 5. The framework didn't do this; we did. But the framework gave us permission to notice the problem."
 
 **Success signal**: Someone voluntarily suggests a process improvement. When a burned-out team starts proposing ideas again, recovery is underway.
@@ -527,11 +537,11 @@ The most dangerous failure mode is the one that looks like success. Here are the
 | **Weekly cycle**          | Standups are conversational; people report blockers and ask for help; action items from previous week get checked | Standup is a round-robin status readout; nobody questions what their teammate said                    |
 | **Automation**            | Team measures toil reduction; automation backlog has items ranked by expected time saved                          | Team has automated everything they could in week 1 and hasn't measured whether any of it saved time   |
 | **Cross-training**        | Someone other than Dave has operated Dave's system in the last month                                              | Training plan exists, sessions are scheduled, but they keep getting cancelled for "real work"         |
-| **Metrics**               | Metrics drive decisions — a red number causes someone to change what they do                                      | Dashboard has 47 metrics, all green, and nobody looks at it between monthly reports                   |
+| **Metrics**               | Metrics drive decisions - a red number causes someone to change what they do                                      | Dashboard has 47 metrics, all green, and nobody looks at it between monthly reports                   |
 
 **The two-question audit**: Walk past any team member's desk mid-morning and ask (a) "what practice are you working on right now?" and (b) "why does it matter?" If the answer to (b) is something other than "because it reduces [pain]" or "because it prevents [failure]," you have theater, not adoption. Good answers: "because we kept losing this data" or "because the last time this broke, it took 4 hours to fix." Bad answers: "because the process says so" or blank stare.
 
-> **Honesty is not theater.** If the answer to (a) is "I'm not working on any practice right now, I'm fighting a fire," that is fine — it's honest, and it tells you the team is still in survival mode. Framework theater starts when the team knows the right answer to give and gives it without conviction. Watch for the polished answer that doesn't match reality.
+> **Honesty is not theater.** If the answer to (a) is "I'm not working on any practice right now, I'm fighting a fire," that is fine - it's honest, and it tells you the team is still in survival mode. Framework theater starts when the team knows the right answer to give and gives it without conviction. Watch for the polished answer that doesn't match reality.
 
 ## 🎯 Chapter Summary
 

@@ -83,7 +83,7 @@
 - [x] **Chapter 8: Modernize tools section** — Added OpenTelemetry subsection (OTel Collector, OTLP, vendor-neutral observability), GitOps section (ArgoCD + Flux with feature comparison), Service Mesh section (Istio/Linkerd/Cilium comparison table), ChatOps section (example workflow + governance note), and "Modern Platform Engineering Patterns" top-level section covering IDP/Backstage, Policy-as-Code (OPA, Kyverno, Conftest with example), and GitOps multi-environment repo structure. Tool categories updated from 6 to 9. Chapter summary updated. _Verified._
 - [x] **Chapter 10: Expand Security & Compliance** — Three new subsections added under Security Integration: "Supply Chain Security" (SBOM formats CycloneDX/SPDX, Syft/Grype tooling, SLSA levels 1–4 table, Sigstore/Cosign, regulatory context); "Breach Response Timelines" (0–30 day timeline table, regulatory clock rules, GDPR Art. 33/34 obligations, tabletop rehearsal); "Penetration Testing Frequency and Scope" (frequency table by asset type, engagement process, remediation tracking). Learning objectives and chapter summary updated. _Verified._
 - [x] **Chapter 12: Add modern emerging topics** — Added "FinOps as a Discipline" section (three phases: Inform/Optimize/Operate, tagging enforcement, FinOps tooling, SysOps cycle integration), "Multi-Cloud Operations Strategy" section (pattern table, tooling/observability/identity/cost mitigations, quarterly strategy review), and "Carbon-Aware and Sustainable Infrastructure" section (temporal/spatial shifting, WattTime/Electricity Maps APIs, PUE, SCI score, SysOps integration with Chapter 6/7 practices). Learning objectives and chapter summary updated. _Verified._
-- [x] **All chapters: Align ITIL references to ITIL 4 / watch for ITIL 5** — All ITIL references updated to explicitly say "ITIL 4" in `chapter-02-principles.md` (Note on ITIL section fully rewritten: SVS model, 34 practices, 7 guiding principles, per-principle ITIL 4 practice mapping) and `glossary.md` (entry updated; framework comparison list updated). ITIL 5 awareness note added in chapter-02 with a monitor note. No other ITIL references found in remaining chapters. _Verified._
+- [x] **All chapters: keep ITIL/ITSM references version-stable** — ITIL references moved away from version-specific claims in core narrative; Chapter 2 now frames SysOps as an operationalisation layer and glossary points contributors to keep version-specific alignment refreshed. _Verified._
 
 ### P1 — Missing Practices (add to Chapter 6 or as standalone pages)
 
@@ -174,7 +174,7 @@
 | Domain                                       | Trusted Source                           | Base URL                                                                                            |
 | -------------------------------------------- | ---------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | **ITIL 4**                                   | PeopleCert / Axelos official ITIL site   | https://www.axelos.com/certifications/itil-service-management                                       |
-| **ITIL 5**                                   | PeopleCert ITIL 5 announcement           | https://www.peoplecert.org/news-and-announcements/itil-version-5-explained                          |
+| **ITIL / ITSM version-specific claims**        | official ITIL/ITSM source check           | https://www.axelos.com/certifications/itil-service-management                                      |
 | **DORA metrics**                             | DORA (DevOps Research and Assessment)    | https://dora.dev/research/2023/dora-report/                                                         |
 | **SLSA framework**                           | OpenSSF SLSA specification               | https://slsa.dev/spec/v1.0/                                                                         |
 | **SBOM — CycloneDX**                         | OWASP CycloneDX specification            | https://cyclonedx.org/specification/overview/                                                       |
@@ -215,7 +215,7 @@ Each item below lists the specific claims that need a source link added inline i
 #### Chapter 2 — Principles (`chapter-02-principles.md`)
 
 - [x] ITIL 4 release date (February 2019), 34 practices, 7 guiding principles, SVS model → [Axelos ITIL 4](https://www.axelos.com/certifications/itil-service-management)
-- [x] ITIL 5 announcement (January 2026) → [PeopleCert ITIL 5](https://www.peoplecert.org/news-and-announcements/itil-version-5-explained)
+- [x] ITIL version-specific alignment → [official ITIL/ITSM sources](https://www.axelos.com/certifications/itil-service-management)
 
 #### Chapter 6 — Practices (`chapter-06-practices.md`)
 
@@ -394,3 +394,15 @@ Each item below lists the specific claims that need a source link added inline i
 ---
 
 _Last verified: 2026-06-13 (editorial audit incorporated). Re-verify completion status by grepping file content — do not infer from filenames or headings alone._
+
+
+## Editorial first wave
+
+- [x] Front-load Chapter 1 problem statement.
+- [x] Add fit / skip matrix to the docs landing page.
+- [x] Add manager brief and stop conditions to Getting Started.
+- [x] Add minimum viable adoption modes to Chapter 3.
+- [x] Make Chapter 4 comparison fairer to Scrum and Kanban.
+- [x] Mark tool names as perishable and replace deprecated Opsgenie-oriented guidance.
+- [x] Refresh SLSA/SBOM wording to avoid stale version-specific claims.
+- [x] Surface template usage in culture, appendices, and landing pages.

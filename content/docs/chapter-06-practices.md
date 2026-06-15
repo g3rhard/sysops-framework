@@ -15,13 +15,36 @@ By the end of this chapter, you will understand:
 - Integration points between practices and operational cycles
 - Maturity models for continuous practice improvement
 
-> **Principles in play.** If [Chapter 2](chapter-02-principles.md) is the constitution, this chapter is the case law. All six principles — _Service Reliability First_, _Continuous Availability_, _Rapid Response_, _Automation and Efficiency_, _Knowledge Sharing_, and _Risk Management_ — turn up here wearing work clothes.
+> **Principles in play.** If [Chapter 2](chapter-02-principles.md) is the constitution, this chapter is the case law. All six principles - _Service Reliability First_, _Continuous Availability_, _Rapid Response_, _Automation and Efficiency_, _Knowledge Sharing_, and _Risk Management_ - turn up here wearing work clothes.
 
 ## 🎯 The Twelve Core Management Practices
 
+### How to Use This Chapter Without Drowning
+
+This chapter is a reference, not a checklist to implement in one pass. The practices are deliberately broad because operations work is broad. Start from the pain you actually have, not from practice number one.
+
+| If your pain is...                           | Start with these practices                               | First artifact to create                             |
+| -------------------------------------------- | -------------------------------------------------------- | ---------------------------------------------------- |
+| Incidents repeat and nobody learns from them | Incident & Problem, Knowledge, Metrics                   | Post-incident review template                        |
+| Changes are risky or invisible               | Change & Configuration, Release, Asset                   | Change-control form                                  |
+| The team is overloaded by manual work        | Service Request, Automation through practices, Knowledge | Request classification and automation candidate list |
+| Stakeholders do not understand ops value     | Service Level, Metrics, Reporting                        | SLA / service review summary                         |
+| Audit or compliance evidence is painful      | Risk, Change, Asset, Knowledge                           | Evidence map and control-to-practice table           |
+| On-call burns people out                     | Incident & Problem, Team Development, Metrics            | On-call policy and alert quality rules               |
+
+### Suggested Dependency Order
+
+1. **Make services and ownership visible** - Service Level Management, Asset Management.
+2. **Stabilize response** - Incident & Problem Management, Change Management.
+3. **Reduce recurrence** - Knowledge Management, Metrics, Automation candidates.
+4. **Protect sustainability** - Team Development, Vendor Management, On-call policy.
+5. **Scale governance** - Release, Risk, Backup & Recovery, Reporting.
+
+Do not treat later practices as less important. The order simply reflects what usually unlocks the next improvement.
+
 The SysOps Framework incorporates twelve essential management practices tailored specifically for operations teams. Unlike generic IT management approaches, these practices acknowledge the unique constraints and requirements of system administration work.
 
-Twelve practices is a lot to swallow in one sitting, so don't try. Nobody implements all twelve on a Monday and emerges enlightened by Friday. Most teams already do half of these badly and the other half by accident — the goal here is to do them on purpose. Read for recognition first ("oh, _that's_ what we've been failing at"), then pick the one that's currently costing you the most sleep and start there.
+Twelve practices is a lot to swallow in one sitting, so don't try. Nobody implements all twelve on a Monday and emerges enlightened by Friday. Most teams already do half of these badly and the other half by accident - the goal here is to do them on purpose. Read for recognition first ("oh, _that's_ what we've been failing at"), then pick the one that's currently costing you the most sleep and start there.
 
 ### Practice Index
 
@@ -42,7 +65,7 @@ Twelve practices is a lot to swallow in one sitting, so don't try. Nobody implem
 
 ### 1. 📊 Service Level Management
 
-**Why it exists**: Without explicit SLOs, "is the service healthy?" is a matter of opinion — and opinions escalate. This practice replaces guesswork with measurable guardrails so the team knows when to ship features and when to stop and fix.
+**Why it exists**: Without explicit SLOs, "is the service healthy?" is a matter of opinion - and opinions escalate. This practice replaces guesswork with measurable guardrails so the team knows when to ship features and when to stop and fix.
 
 **Minimal version**: Define one SLI and one SLO for your most critical service. Track it on a dashboard. Publish error budget remaining.
 
@@ -81,7 +104,7 @@ Twelve practices is a lot to swallow in one sitting, so don't try. Nobody implem
 - Policies for when error budget is exhausted
 - Balance between reliability and feature velocity
 
-> Beware the stakeholder who demands "100% uptime." That last fraction of a nine costs more than all the others combined, and the honest answer is that you can't deliver it anyway — not while DNS, certificates, upstream providers, and physics all get a vote. An error budget reframes the conversation from "never fail" (a promise) to "here's exactly how much we can afford to fail, and we'll spend it deliberately" (a plan). One of those you can keep.
+> Beware the stakeholder who demands "100% uptime." That last fraction of a nine costs more than all the others combined, and the honest answer is that you can't deliver it anyway - not while DNS, certificates, upstream providers, and physics all get a vote. An error budget reframes the conversation from "never fail" (a promise) to "here's exactly how much we can afford to fail, and we'll spend it deliberately" (a plan). One of those you can keep.
 
 #### Implementation Steps
 
@@ -105,7 +128,7 @@ Twelve practices is a lot to swallow in one sitting, so don't try. Nobody implem
 
 ### 2. 🚨 Incident and Problem Management
 
-**Why it exists**: Incidents are inevitable. Without a practiced response, each incident is chaos — different people guessing, no coordination, no communication. This practice makes the team predictable in a crisis: everyone knows their role, the customer gets updates, and the post-incident review turns failures into improvements.
+**Why it exists**: Incidents are inevitable. Without a practiced response, each incident is chaos - different people guessing, no coordination, no communication. This practice makes the team predictable in a crisis: everyone knows their role, the customer gets updates, and the post-incident review turns failures into improvements.
 
 **Minimal version**: Document one incident response procedure. Pick an Incident Commander for every significant incident. Conduct blameless post-incident reviews for Severity 1 and 2.
 
@@ -115,7 +138,7 @@ Twelve practices is a lot to swallow in one sitting, so don't try. Nobody implem
 
 **Dependencies**: Monitoring and alerting (to detect), Communication tools (Slack, PagerDuty, status page), CMDB (to understand affected services).
 
-**Typical anti-patterns**: Skipping post-incident reviews because "we're too busy" (you can't afford not to); blame disguised as "learning" (blameless means blameless — including vendors and users); treating every alert as an incident (alert fatigue destroys the practice before it starts).
+**Typical anti-patterns**: Skipping post-incident reviews because "we're too busy" (you can't afford not to); blame disguised as "learning" (blameless means blameless - including vendors and users); treating every alert as an incident (alert fatigue destroys the practice before it starts).
 
 **Purpose**: Develop comprehensive incident response procedures with clear escalation paths and communication protocols. Implement blameless post-incident reviews to capture lessons learned and prevent recurrence.
 
@@ -272,7 +295,7 @@ For significant incidents, establish clear role assignments:
 
 ### 3. 🔄 Change and Configuration Management
 
-**Why it exists**: The root cause of most outages is "someone changed something." This practice ensures changes are intentional, risk-assessed, and reversible — and that the team always knows what the current configuration actually is.
+**Why it exists**: The root cause of most outages is "someone changed something." This practice ensures changes are intentional, risk-assessed, and reversible - and that the team always knows what the current configuration actually is.
 
 **Minimal version**: Categorise changes (standard / normal / emergency). Require approval for normal and emergency changes. Maintain a list of Configuration Items (CIs).
 
@@ -282,7 +305,7 @@ For significant incidents, establish clear role assignments:
 
 **Dependencies**: CMDB (asset inventory), Approval workflow tool (ticketing system), Testing environment (for change validation), Knowledge base (runbooks for standard changes).
 
-**Typical anti-patterns**: Using change management as a bureaucratic gate to slow things down (speed is a goal, not a threat); emergency changes becoming the default path (emergency should be exceptional); CMDB that nobody trusts (accuracy beats completeness — start with what you know).
+**Typical anti-patterns**: Using change management as a bureaucratic gate to slow things down (speed is a goal, not a threat); emergency changes becoming the default path (emergency should be exceptional); CMDB that nobody trusts (accuracy beats completeness - start with what you know).
 
 **Purpose**: Establish risk-assessed change management processes that can accommodate both routine changes and emergency fixes while maintaining accurate configuration management databases (CMDBs).
 
@@ -348,7 +371,7 @@ For significant incidents, establish clear role assignments:
 
 ### 4. 📈 Capacity and Performance Management
 
-**Why it exists**: Systems don't fail at the average load — they fail at the peak. Without capacity planning, the ops team discovers limits the hard way (during an outage). Performance management ensures the user experience stays acceptable even as usage grows.
+**Why it exists**: Systems don't fail at the average load - they fail at the peak. Without capacity planning, the ops team discovers limits the hard way (during an outage). Performance management ensures the user experience stays acceptable even as usage grows.
 
 **Minimal version**: Track utilisation trends (CPU, memory, disk, network) for your top 5 most critical systems. Set alert thresholds at 80% utilisation.
 
@@ -403,7 +426,7 @@ For significant incidents, establish clear role assignments:
 
 ### 5. 📚 Knowledge and Documentation Management
 
-**Why it exists**: When the person who knows how the system works is on holiday — or has left — the team is flying blind. This practice captures operational knowledge so it survives vacations, promotions, and resignations.
+**Why it exists**: When the person who knows how the system works is on holiday - or has left - the team is flying blind. This practice captures operational knowledge so it survives vacations, promotions, and resignations.
 
 **Minimal version**: Write a runbook for your most critical service's top 3 incident scenarios. Store it somewhere searchable. Update it after each incident.
 
@@ -413,9 +436,9 @@ For significant incidents, establish clear role assignments:
 
 **Dependencies**: Knowledge base platform (wiki, docs-as-code, or runbook tool), Incident management (post-incident reviews feed documentation updates), Time allocation (writing docs is real work).
 
-**Typical anti-patterns**: Writing documentation once and never updating it (outdated docs are worse than none — they actively mislead); treating documentation as a "side project" (it's infrastructure); over-documenting nothing (a single great runbook beats 50 empty templates).
+**Typical anti-patterns**: Writing documentation once and never updating it (outdated docs are worse than none - they actively mislead); treating documentation as a "side project" (it's infrastructure); over-documenting nothing (a single great runbook beats 50 empty templates).
 
-> This practice is the canonical home for the **runbook** concept — what a runbook is and what it must contain. Tooling that stores and executes runbooks (Rundeck, StackStorm, Ansible Tower, wikis) is catalogued in [Chapter 8](chapter-08-tools.md); runbooks are _used_ in the daily cycle ([Chapter 3](chapter-03-structure.md)) and on-call handoffs ([Chapter 9](chapter-09-culture.md)).
+> This practice is the canonical home for the **runbook** concept - what a runbook is and what it must contain. Tooling that stores and executes runbooks (Rundeck, StackStorm, Ansible Tower, wikis) is catalogued in [Chapter 8](chapter-08-tools.md); runbooks are _used_ in the daily cycle ([Chapter 3](chapter-03-structure.md)) and on-call handoffs ([Chapter 9](chapter-09-culture.md)).
 
 #### Documentation Categories
 
@@ -458,7 +481,7 @@ For significant incidents, establish clear role assignments:
 
 ### 6. 👥 Team and Skill Development
 
-**Why it exists**: A team where only one person knows each system is not a team — it's a collection of bus factors. Cross-training turns fragile individuals into a resilient team and gives people a reason to stay (career growth).
+**Why it exists**: A team where only one person knows each system is not a team - it's a collection of bus factors. Cross-training turns fragile individuals into a resilient team and gives people a reason to stay (career growth).
 
 **Minimal version**: Identify your top 3 single points of failure (systems that only one person can operate). Shadow that person to at least one other team member.
 
@@ -497,7 +520,7 @@ For significant incidents, establish clear role assignments:
 
 #### Cross-Training Program
 
-> **Reality check.** The real test of cross-training is brutally simple: can the person who knows the most about your scariest system take a two-week holiday with their phone off? If the honest answer is "no, we'd pray nothing breaks," you don't have a team — you have a single point of failure who occasionally sleeps. Cross-training isn't a nice-to-have; it's how you stop one resignation from becoming a crisis.
+> **Reality check.** The real test of cross-training is brutally simple: can the person who knows the most about your scariest system take a two-week holiday with their phone off? If the honest answer is "no, we'd pray nothing breaks," you don't have a team - you have a single point of failure who occasionally sleeps. Cross-training isn't a nice-to-have; it's how you stop one resignation from becoming a crisis.
 
 **Skill Matrix Development**:
 
@@ -522,7 +545,7 @@ For significant incidents, establish clear role assignments:
 
 ### 7. 🤝 Vendor and Contract Management
 
-**Why it exists**: Every ops team depends on vendors — cloud providers, SaaS tools, hardware suppliers, support contractors. When a vendor fails, the ops team takes the blame. This practice ensures vendors are held to their promises and the team has leverage when they aren't.
+**Why it exists**: Every ops team depends on vendors - cloud providers, SaaS tools, hardware suppliers, support contractors. When a vendor fails, the ops team takes the blame. This practice ensures vendors are held to their promises and the team has leverage when they aren't.
 
 **Minimal version**: Create a vendor inventory (who we pay, what they provide, when the contract renews). Verify that each vendor's SLA meets your internal SLOs.
 
@@ -592,7 +615,7 @@ For significant incidents, establish clear role assignments:
 
 ### 8. 🚀 Release Management
 
-**Why it exists**: The most dangerous moment in any system's life is the moment after a deploy. Release management tames that danger by making deployments repeatable, verifiable, and reversible — turning the scariest operation on the calendar into a routine procedure.
+**Why it exists**: The most dangerous moment in any system's life is the moment after a deploy. Release management tames that danger by making deployments repeatable, verifiable, and reversible - turning the scariest operation on the calendar into a routine procedure.
 
 **Minimal version**: Every production deployment uses a CI/CD pipeline (no manual SSH + copy). Every deployment has a documented rollback plan. Track deployment frequency and change failure rate.
 
@@ -604,7 +627,7 @@ For significant incidents, establish clear role assignments:
 
 **Typical anti-patterns**: Deploying on Friday afternoon (the weekend is not your rollback window); skipping the rollback test because "it's a small change" (small changes can have big failures); treating a successful deploy as a successful release (deploy is the technical step; release is when users actually benefit).
 
-**Purpose**: Govern the end-to-end lifecycle of software and infrastructure releases — from build through deployment to production — using CI/CD pipelines, deployment gates, and well-defined rollback criteria to reduce release risk and increase delivery velocity.
+**Purpose**: Govern the end-to-end lifecycle of software and infrastructure releases - from build through deployment to production - using CI/CD pipelines, deployment gates, and well-defined rollback criteria to reduce release risk and increase delivery velocity.
 
 #### Release Management Components
 
@@ -662,11 +685,11 @@ Track these metrics per team and review during the Weekly Improvement Cycle.
 
 #### Example Release Gate Configuration
 
-**Service**: Payment Processing API — Release v2.4.1
+**Service**: Payment Processing API - Release v2.4.1
 
 - **Gate 1 (Build)**: Compiled successfully, all 847 unit tests passed (98.6% coverage) ✅
-- **Gate 2 (Security)**: SAST scan — 0 critical, 2 medium (accepted with risk sign-off) ✅
-- **Gate 3 (Performance)**: Load test — p95 latency 142 ms vs. baseline 148 ms ✅
+- **Gate 2 (Security)**: SAST scan - 0 critical, 2 medium (accepted with risk sign-off) ✅
+- **Gate 3 (Performance)**: Load test - p95 latency 142 ms vs. baseline 148 ms ✅
 - **Gate 4 (Staging smoke)**: 12/12 smoke tests passed ✅
 - **Gate 5 (Approval)**: Sign-off from Payment Platform lead ✅
 - **Deployment strategy**: 10% canary → 100% over 30 minutes, automatic rollback if error rate > 0.5%
@@ -675,7 +698,7 @@ Track these metrics per team and review during the Weekly Improvement Cycle.
 
 ### 9. 🗄️ Asset Management
 
-**Why it exists**: If you don't know what you have, you can't secure it, patch it, upgrade it, or retire it — and when a vendor audit arrives, the compliance team won't accept "we lost track." Asset management turns unknown sprawl into a known, manageable inventory.
+**Why it exists**: If you don't know what you have, you can't secure it, patch it, upgrade it, or retire it - and when a vendor audit arrives, the compliance team won't accept "we lost track." Asset management turns unknown sprawl into a known, manageable inventory.
 
 **Minimal version**: Inventory your top 20 most critical assets (servers, databases, network gear, key licenses). Tag each with owner, environment, and service.
 
@@ -687,7 +710,7 @@ Track these metrics per team and review during the Weekly Improvement Cycle.
 
 **Typical anti-patterns**: Treating the CMDB as a one-time project (it rots in weeks without ongoing reconciliation); splitting asset data across spreadsheets, wikis, and tools (a fragmented view is no view at all); recording assets without linking them to services and owners (an unowned asset is an abandoned asset).
 
-**Purpose**: Maintain an accurate, up-to-date inventory of all infrastructure assets — hardware, software, and cloud resources — throughout their entire lifecycle, and ensure license compliance to control risk and cost.
+**Purpose**: Maintain an accurate, up-to-date inventory of all infrastructure assets - hardware, software, and cloud resources - throughout their entire lifecycle, and ensure license compliance to control risk and cost.
 
 #### Asset Management Components
 
@@ -722,7 +745,7 @@ Track these metrics per team and review during the Weekly Improvement Cycle.
 - Schedule automated reports: untagged resources, unused Elastic IPs, idle instances, orphaned storage volumes
 - Set budget alerts per account/project to catch runaway provisioning early (connects to Financial Management, Practice 11)
 
-#### Example: CMDB Record — Production Web Server
+#### Example: CMDB Record - Production Web Server
 
 | Attribute    | Value                               |
 | ------------ | ----------------------------------- |
@@ -734,13 +757,13 @@ Track these metrics per team and review during the Weekly Improvement Cycle.
 | OS           | Ubuntu 24.04 LTS (EOL: 2029)        |
 | Last patched | 2026-05-28                          |
 | Related CIs  | prod-db-01, prod-lb-01, prod-web-02 |
-| Last change  | CHG-2341 — kernel update 2026-05-28 |
+| Last change  | CHG-2341 - kernel update 2026-05-28 |
 
 ---
 
 ### 10. 🎫 Service Request Management
 
-**Why it exists**: Without a defined request channel, every request is an interruption — and the ops team becomes the IT helpdesk by default. Service Request Management creates a predictable, self-service path that frees the team for higher-value work.
+**Why it exists**: Without a defined request channel, every request is an interruption - and the ops team becomes the IT helpdesk by default. Service Request Management creates a predictable, self-service path that frees the team for higher-value work.
 
 **Minimal version**: List your top 5 most common requests. Document fulfillment steps for each. Create a single submission channel (ticketing system or form).
 
@@ -750,16 +773,16 @@ Track these metrics per team and review during the Weekly Improvement Cycle.
 
 **Dependencies**: Ticketing system, Automation tools (Ansible, Terraform, scripts triggered by requests), Service catalog platform, Approval workflow (for requests requiring authorisation).
 
-**Typical anti-patterns**: Letting requests drown out incident and project work (they will — they're easy and satisfying); building a catalog that covers everything on day one (start with the top 5 and iterate); designing forms that ask for more information than you actually need (every extra field is a friction point).
+**Typical anti-patterns**: Letting requests drown out incident and project work (they will - they're easy and satisfying); building a catalog that covers everything on day one (start with the top 5 and iterate); designing forms that ask for more information than you actually need (every extra field is a friction point).
 
-**Purpose**: Provide a standardised, user-friendly channel through which staff and customers can request pre-approved IT services — keeping request fulfillment separate from incident response and enabling consistent, measurable delivery.
+**Purpose**: Provide a standardised, user-friendly channel through which staff and customers can request pre-approved IT services - keeping request fulfillment separate from incident response and enabling consistent, measurable delivery.
 
 #### Service Request vs. Incident
 
 | Aspect   | Service Request                                       | Incident                         |
 | -------- | ----------------------------------------------------- | -------------------------------- |
 | Nature   | Planned, expected, pre-approved                       | Unplanned, unexpected disruption |
-| Urgency  | Normal (days) or expedited (same-day)                 | High — restore service ASAP      |
+| Urgency  | Normal (days) or expedited (same-day)                 | High - restore service ASAP      |
 | Process  | Fulfillment workflow                                  | Incident response process        |
 | Examples | New user access, hardware provision, SSL cert renewal | Database outage, network failure |
 
@@ -800,7 +823,7 @@ For each catalog item document:
 
 ### 11. 💰 Financial Management
 
-**Why it exists**: When ops costs are invisible, the team is treated as a cost centre rather than a business partner — and the inevitable budget conversation happens during a crisis. Financial management makes cost visible, predictable, and defensible.
+**Why it exists**: When ops costs are invisible, the team is treated as a cost centre rather than a business partner - and the inevitable budget conversation happens during a crisis. Financial management makes cost visible, predictable, and defensible.
 
 **Minimal version**: Track total monthly ops spend (infrastructure + licenses + vendors). Identify your top 3 cost drivers. Report spend to stakeholders monthly.
 
@@ -812,7 +835,7 @@ For each catalog item document:
 
 **Typical anti-patterns**: Hiding costs because "it's complicated" (invisibility breeds distrust); treating FinOps as a finance function (it's an ops practice that uses finance data); cutting costs without understanding value (saving $100/mo on monitoring that prevents a $10K outage is not a win).
 
-**Purpose**: Give the operations team full visibility of its costs, link every spending decision to business value, and provide stakeholders with transparent, accurate forecasts — moving ops from an opaque cost centre to an accountable business partner.
+**Purpose**: Give the operations team full visibility of its costs, link every spending decision to business value, and provide stakeholders with transparent, accurate forecasts - moving ops from an opaque cost centre to an accountable business partner.
 
 #### Budget Planning and Forecasting
 
@@ -868,7 +891,7 @@ Financial Management is the governance layer; FinOps (Chapter 12) provides the t
 
 ### 12. 🔒 Backup & Recovery Operations
 
-**Why it exists**: Backups are a promise — "if this fails, we can recover." An untested backup is a lie. This practice turns recovery from a prayer into a procedure with known RTO and RPO, tested regularly, so the team answers "yes" when asked whether data is safe.
+**Why it exists**: Backups are a promise - "if this fails, we can recover." An untested backup is a lie. This practice turns recovery from a prayer into a procedure with known RTO and RPO, tested regularly, so the team answers "yes" when asked whether data is safe.
 
 **Minimal version**: Identify your top 3 most critical data assets. Ensure they are backed up. Test a restore for one of them this month.
 
@@ -878,7 +901,7 @@ Financial Management is the governance layer; FinOps (Chapter 12) provides the t
 
 **Dependencies**: Backup infrastructure (software + storage + offsite target), Monitoring (to alert on backup failures), CMDB (to identify what needs backing up), Documentation (recovery runbooks per system).
 
-**Typical anti-patterns**: Backing up everything equally (the 80/20 rule applies — 80% of business value lives in 20% of data); never testing restores (the most expensive backup in the world is worthless on the day you need it); assuming "the cloud provider handles backups" (shared responsibility model — check the fine print).
+**Typical anti-patterns**: Backing up everything equally (the 80/20 rule applies - 80% of business value lives in 20% of data); never testing restores (the most expensive backup in the world is worthless on the day you need it); assuming "the cloud provider handles backups" (shared responsibility model - check the fine print).
 
 **Purpose**: Ensure that every critical system and data asset can be restored within defined Recovery Time Objectives (RTO) and Recovery Point Objectives (RPO) through regular, tested backup procedures and documented recovery runbooks.
 
@@ -891,12 +914,12 @@ Financial Management is the governance layer; FinOps (Chapter 12) provides the t
 
 | Tier                       | Example Systems                                | RPO      | RTO     | Backup Frequency       |
 | -------------------------- | ---------------------------------------------- | -------- | ------- | ---------------------- |
-| Tier 1 — Mission Critical  | Payment API, auth service, core DB             | ≤ 15 min | ≤ 1 hr  | Continuous replication |
-| Tier 2 — Business Critical | CRM, internal portals, monitoring stack        | ≤ 1 hr   | ≤ 4 hr  | Hourly incremental     |
-| Tier 3 — Important         | Dev/staging environments, reporting DBs        | ≤ 4 hr   | ≤ 8 hr  | Every 4 hours          |
-| Tier 4 — Standard          | Logs archive, internal wikis, low-traffic apps | ≤ 24 hr  | ≤ 24 hr | Daily full             |
+| Tier 1 - Mission Critical  | Payment API, auth service, core DB             | ≤ 15 min | ≤ 1 hr  | Continuous replication |
+| Tier 2 - Business Critical | CRM, internal portals, monitoring stack        | ≤ 1 hr   | ≤ 4 hr  | Hourly incremental     |
+| Tier 3 - Important         | Dev/staging environments, reporting DBs        | ≤ 4 hr   | ≤ 8 hr  | Every 4 hours          |
+| Tier 4 - Standard          | Logs archive, internal wikis, low-traffic apps | ≤ 24 hr  | ≤ 24 hr | Daily full             |
 
-#### Backup Strategy — The 3-2-1-1 Rule
+#### Backup Strategy - The 3-2-1-1 Rule
 
 > The 3-2-1-1 rule extends the classic 3-2-1 strategy with an additional offline or immutable copy, a practice widely adopted to defend against ransomware. See [CISA Ransomware Guide](https://www.cisa.gov/topics/cyber-threats-and-advisories/ransomware) for backup guidance and the immutable-copy requirement.
 
@@ -907,7 +930,7 @@ Financial Management is the governance layer; FinOps (Chapter 12) provides the t
 
 #### Testing Cadence
 
-Backups that are never tested are not backups — they are hopes.
+Backups that are never tested are not backups - they are hopes.
 
 | Test Type                          | Frequency                         | What It Validates                                         |
 | ---------------------------------- | --------------------------------- | --------------------------------------------------------- |
@@ -1000,7 +1023,7 @@ Every Tier 1 and Tier 2 system must have a documented recovery runbook containin
 | 4     | Managed    | Practices are measured and continuously improved   |
 | 5     | Optimizing | Practices are continuously evolving and innovative |
 
-> **Note.** Maturity is per-practice, not a single team-wide grade. It's completely normal — healthy, even — to be Level 4 at Incident Management and Level 1 at Financial Management. Resist the urge to average them into one flattering number; the whole point is to see clearly where the next bit of effort actually pays off.
+> **Note.** Maturity is per-practice, not a single team-wide grade. It's completely normal - healthy, even - to be Level 4 at Incident Management and Level 1 at Financial Management. Resist the urge to average them into one flattering number; the whole point is to see clearly where the next bit of effort actually pays off.
 
 ### Assessment Questions by Practice
 

@@ -14,17 +14,17 @@ By the end of this chapter, you will understand:
 - Compliance requirements and their impact on operations frameworks
 - Risk assessment methodologies for operational decisions
 - Building security and compliance into the SysOps Framework
-- Supply chain security using SBOMs and the SLSA framework
+- Supply chain security using SBOMs, provenance, and current SLSA guidance
 - Breach response timelines and regulatory notification obligations
 - Penetration testing frequency, scope, and integration into the risk lifecycle
 
-> **Principles in play.** This whole chapter is _Risk Management_ ([Chapter 2](chapter-02-principles.md)) given room to breathe, in constant tension with _Service Reliability First_ — because the riskiest control of all is the one so heavy that nobody actually follows it.
+> **Principles in play.** This whole chapter is _Risk Management_ ([Chapter 2](chapter-02-principles.md)) given room to breathe, in constant tension with _Service Reliability First_ - because the riskiest control of all is the one so heavy that nobody actually follows it.
 
 ## ⚖️ Risk Management in Operations
 
 ### Understanding Operational Risk
 
-Risk management has an image problem. Say the words out loud and half the room pictures a binder nobody has opened since the audit, full of heat maps in three shades of traffic-light. Real operational risk management is the opposite of a binder: it's the quiet voice that asks "what happens if _this_ disappears at the worst possible moment?" — and then does something cheap about it today instead of something expensive about it during the outage. The goal of this chapter is the voice, not the binder.
+Risk management has an image problem. Say the words out loud and half the room pictures a binder nobody has opened since the audit, full of heat maps in three shades of traffic-light. Real operational risk management is the opposite of a binder: it's the quiet voice that asks "what happens if _this_ disappears at the worst possible moment?" - and then does something cheap about it today instead of something expensive about it during the outage. The goal of this chapter is the voice, not the binder.
 
 **Types of Operational Risk**:
 
@@ -63,7 +63,7 @@ Risk management has an image problem. Say the words out loud and half the room p
 - **Recovery Complexity**: Difficulty and time required to recover from risk events
 - **Cascading Effects**: Potential for risks to trigger additional problems
 
-> **Note.** Impact × probability scoring is a _prioritisation_ tool, not a measurement. The numbers are deliberately coarse — their job is to force a conversation about which risks to fund first, not to pretend three-times-four is a scientifically precise 12. Treat a 20 and a 19 as "both urgent," not as a ranking.
+> **Note.** Impact × probability scoring is a _prioritisation_ tool, not a measurement. The numbers are deliberately coarse - their job is to force a conversation about which risks to fund first, not to pretend three-times-four is a scientifically precise 12. Treat a 20 and a 19 as "both urgent," not as a ranking.
 
 ### 🎮 Interactive Risk Assessment Exercise
 
@@ -123,7 +123,7 @@ Risk Assessment Results:
 - **Access Management**: Automated provisioning and deprovisioning
 - **Compliance Checking**: Continuous compliance monitoring and reporting
 
-> **In practice.** "Default deny" reads beautifully on a slide and ruins your week the first time you turn it on. Roll it out in audit-only mode first, watch what legitimate traffic it _would_ have blocked for a couple of weeks, then enforce. Flipping straight to enforce is how you discover which critical batch job nobody documented — at 3 a.m., during the run that matters.
+> **In practice.** "Default deny" reads beautifully on a slide and ruins your week the first time you turn it on. Roll it out in audit-only mode first, watch what legitimate traffic it _would_ have blocked for a couple of weeks, then enforce. Flipping straight to enforce is how you discover which critical batch job nobody documented - at 3 a.m., during the run that matters.
 
 **Security Integration with Operational Cycles**:
 
@@ -179,23 +179,35 @@ Modern software delivery depends on hundreds of open-source packages, container 
 - **Consume SBOMs** in CI with tools like Grype, OWASP Dependency-Check, or Snyk to detect CVEs before deployment.
 - **Regulatory context**: [US Executive Order 14028 (2021)](https://www.whitehouse.gov/briefing-room/presidential-actions/2021/05/12/executive-order-on-improving-the-nations-cybersecurity/) and [EU Cyber Resilience Act (2024)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R2847) mandate SBOM provision for software sold to government and critical infrastructure sectors.
 
-**[SLSA](https://slsa.dev/spec/v1.0/) (Supply-chain Levels for Software Artifacts)**:
+**[SLSA](https://slsa.dev/) (Supply-chain Levels for Software Artifacts)**:
 
 - A security framework by Google/OpenSSF that defines build integrity requirements across four levels.
 
-| SLSA Level | Requirements                                   | What it Prevents                                       |
-| ---------- | ---------------------------------------------- | ------------------------------------------------------ |
-| SLSA 1     | Build process documented; provenance generated | Accidental build errors                                |
-| SLSA 2     | Build service used; provenance signed          | Tampering with build outputs                           |
-| SLSA 3     | Source verified; build service isolated        | Compromise of the build service itself                 |
-| SLSA 4     | Two-party source review; hermetic builds       | Insider threats and sophisticated supply chain attacks |
+SLSA evolves, so avoid pinning policy to a retired version of the specification. Use the current SLSA documentation for exact requirements and keep your internal control text focused on durable outcomes:
 
-- **Implementation path**: Start at SLSA 2 using GitHub Actions or Tekton Chains (auto-provenance); target SLSA 3 for critical services within 12 months.
+| Control outcome                        | Practical implementation                                      | What it prevents                      |
+| -------------------------------------- | ------------------------------------------------------------- | ------------------------------------- |
+| Build process is documented            | CI configuration and build scripts are versioned              | Accidental or unexplained build drift |
+| Provenance is generated                | Build metadata records source, builder, and artifact identity | Unknown artifact origin               |
+| Provenance is protected and verifiable | Signed provenance or trusted build attestations               | Tampering with build outputs          |
+| Critical builds use hardened builders  | Isolated runners, controlled dependencies, reviewed pipelines | Build infrastructure compromise       |
+
+- **Implementation path**: start by generating SBOMs and provenance for critical services; then move toward verified provenance and hardened build environments for high-risk systems.
 - Use **[Sigstore](https://docs.sigstore.dev/)** (Cosign, Rekor) to sign and verify container images and build provenance; integrate verification into OPA/Kyverno admission policies so only signed, policy-compliant images can deploy.
 
-> **In practice.** Don't gate deployments on _every_ CVE the scanner reports — you'll train the team to click "override" on reflex within a week. Gate on critical/high severity with a known fix available, and route the rest to the backlog. A policy nobody can satisfy is a policy everybody learns to bypass.
+> **In practice.** Don't gate deployments on _every_ CVE the scanner reports - you'll train the team to click "override" on reflex within a week. Gate on critical/high severity with a known fix available, and route the rest to the backlog. A policy nobody can satisfy is a policy everybody learns to bypass.
 
 **SysOps Integration**: Embed SBOM generation into the CI/CD pipeline (Release Management, Practice 8); block deployment on critical CVEs via Policy-as-Code gates; store SBOMs in an artifact repository (e.g., OCI-attached attestation) for audit evidence in Compliance Management.
+
+### Regulatory Context Without Overclaiming
+
+Regulatory language must be precise. SBOMs and provenance are increasingly important in procurement, secure development, and product cybersecurity discussions, but requirements differ by jurisdiction, sector, and product type.
+
+Use this wording in policies:
+
+> We maintain component inventory and build provenance for critical services to improve vulnerability response, software supply-chain transparency, and audit readiness. Where specific regulation or customer contracts require stronger evidence, those requirements are mapped to concrete build, release, and asset-management controls.
+
+This keeps the framework useful without pretending that one global SBOM rule applies to every team.
 
 ### Breach Response Timelines
 
@@ -211,7 +223,7 @@ A well-defined breach response timeline prevents ad-hoc decisions under pressure
 | 72 hr – 30 days | Notify affected individuals ([GDPR Art. 34](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679) if high risk); coordinate with law enforcement if required                                                                          | Legal / Communications |
 | Ongoing         | Root cause analysis; control remediation; post-breach audit; lessons learned                                                                                                                                                                            | All teams              |
 
-> **Warning.** The regulatory clock starts on _awareness_, not on discovery. If an automated alert fires at 02:00 but nobody reviews it until 08:00, you have already burned six hours of your 72-hour GDPR window — and "we hadn't looked yet" is not a defence a regulator accepts.
+> **Warning.** The regulatory clock starts on _awareness_, not on discovery. If an automated alert fires at 02:00 but nobody reviews it until 08:00, you have already burned six hours of your 72-hour GDPR window - and "we hadn't looked yet" is not a defence a regulator accepts.
 
 **Key principles**:
 
@@ -239,13 +251,13 @@ Penetration testing proactively identifies exploitable vulnerabilities before at
 4. **Remediation tracking**: All critical and high findings must have remediation due dates; retest critical findings within 30 days.
 5. **Evidence retention**: Retain pentest reports for 3 years minimum for compliance purposes.
 
-> **Warning.** Never point a pentest at cloud-hosted assets without checking your provider's rules of engagement first. AWS, GCP, and Azure each publish what's allowed and what needs prior notice; unauthorized testing can trip abuse detection, get your account suspended, and — depending on jurisdiction — cross the line into an actual offence.
+> **Warning.** Never point a pentest at cloud-hosted assets without checking your provider's rules of engagement first. AWS, GCP, and Azure each publish what's allowed and what needs prior notice; unauthorized testing can trip abuse detection, get your account suspended, and - depending on jurisdiction - cross the line into an actual offence.
 
 **SysOps Integration**: Pentest findings feed directly into the risk register; critical findings trigger an emergency change (Practice 3, emergency change category); remediated controls are validated through Policy-as-Code and SBOM scanning to confirm fix persistence.
 
 ## 📋 Compliance Management
 
-### Policy, Procedure, and Evidence — The Three Layers
+### Policy, Procedure, and Evidence - The Three Layers
 
 Before mapping controls, it's essential to distinguish the three layers of compliance. Mixing them up is the most common source of audit findings.
 
@@ -259,24 +271,24 @@ Before mapping controls, it's essential to distinguish the three layers of compl
 
 ### Control-Mapping Table: Practices to Frameworks
 
-The SysOps Framework is not a compliance framework — but its practices implement controls that satisfy compliance requirements. Use this table to map which SysOps practice produces the evidence for which control in SOC 2, ISO 27001, and GDPR. This is your audit readiness blueprint: for every control, you can point to a practice, the procedure under that practice, and the evidence it generates.
+The SysOps Framework is not a compliance framework - but its practices implement controls that satisfy compliance requirements. Use this table to map which SysOps practice produces the evidence for which control in SOC 2, ISO 27001, and GDPR. This is your audit readiness blueprint: for every control, you can point to a practice, the procedure under that practice, and the evidence it generates.
 
 | SysOps Practice                             | SOC 2 (Trust Services Criteria)              | ISO 27001 (Annex A)                                                  | GDPR (Articles)                  | Evidence Produced                                           |
 | ------------------------------------------- | -------------------------------------------- | -------------------------------------------------------------------- | -------------------------------- | ----------------------------------------------------------- |
 | **1. Service Level Management**             | Availability (A1.1, A1.2)                    | A.12.1 (Operational planning)                                        | Art. 32 (Security of processing) | SLO attainment reports, error budget logs                   |
 | **2. Incident & Problem Management**        | Security (CC7.3, CC7.4), Availability (A1.3) | A.16.1 (Incident management)                                         | Art. 33/34 (Breach notification) | Incident timeline, PIR, action items                        |
 | **3. Change & Configuration Management**    | Change management (CC8.1)                    | A.12.1 (Change management), A.12.5 (Control of operational software) | Art. 32                          | Change tickets, approval records, CMDB audit trail          |
-| **4. Capacity & Performance Management**    | Availability (A1.2)                          | A.12.1 (Capacity management)                                         | —                                | Capacity trend reports, performance baselines               |
-| **5. Knowledge & Documentation Management** | —                                            | A.7.5 (Documentation)                                                | Art. 5 (Accountability)          | Runbooks, SOPs, system documentation                        |
-| **6. Team & Skill Development**             | —                                            | A.7.2 (Competence)                                                   | —                                | Training records, skill matrix                              |
+| **4. Capacity & Performance Management**    | Availability (A1.2)                          | A.12.1 (Capacity management)                                         | -                                | Capacity trend reports, performance baselines               |
+| **5. Knowledge & Documentation Management** | -                                            | A.7.5 (Documentation)                                                | Art. 5 (Accountability)          | Runbooks, SOPs, system documentation                        |
+| **6. Team & Skill Development**             | -                                            | A.7.2 (Competence)                                                   | -                                | Training records, skill matrix                              |
 | **7. Vendor & Contract Management**         | Vendor management (CC9.1, CC9.2)             | A.15.1 (Supplier relationships)                                      | Art. 28 (Processor)              | SLA compliance reports, vendor risk assessments             |
 | **8. Release Management**                   | Change management (CC8.1)                    | A.12.1, A.12.6 (Technical vulnerability management)                  | Art. 32                          | CI/CD pipeline logs, deployment approvals, rollback records |
-| **9. Asset Management**                     | Physical security (A1.4 — if hardware)       | A.8.1 (Asset inventory)                                              | Art. 32                          | CMDB, asset register, license records                       |
-| **10. Service Request Management**          | —                                            | A.12.1                                                               | —                                | Request tickets, fulfillment SLA reports                    |
-| **11. Financial Management**                | —                                            | —                                                                    | —                                | Budget reports, cost allocation records                     |
+| **9. Asset Management**                     | Physical security (A1.4 - if hardware)       | A.8.1 (Asset inventory)                                              | Art. 32                          | CMDB, asset register, license records                       |
+| **10. Service Request Management**          | -                                            | A.12.1                                                               | -                                | Request tickets, fulfillment SLA reports                    |
+| **11. Financial Management**                | -                                            | -                                                                    | -                                | Budget reports, cost allocation records                     |
 | **12. Backup & Recovery Operations**        | Availability (A1.3)                          | A.12.3 (Backup), A.17.1 (Business continuity)                        | Art. 32                          | Backup success logs, restore test results, DR test reports  |
 
-> **How to read this table.** If your SOC 2 auditor asks for change management evidence (CC8.1), point them to Practice 3 (Change & Configuration Management), whose procedure produces change tickets, approval records, and CMDB audit trails as evidence. If they find a gap in evidence collection, strengthen the procedure — not the tool.
+> **How to read this table.** If your SOC 2 auditor asks for change management evidence (CC8.1), point them to Practice 3 (Change & Configuration Management), whose procedure produces change tickets, approval records, and CMDB audit trails as evidence. If they find a gap in evidence collection, strengthen the procedure - not the tool.
 
 ### Policy-as-Code for Compliance
 
@@ -299,12 +311,12 @@ package ingress_tls
 violation[{"msg": msg}] {
   ingress := input.review.object
   not ingress.spec.tls
-  msg := sprintf("Ingress %v must have TLS configured — encryption in transit is required", [ingress.metadata.name])
+  msg := sprintf("Ingress %v must have TLS configured - encryption in transit is required", [ingress.metadata.name])
 }
 ```
 
 ```yaml
-# Kyverno: Require resource limits (ISO 27001 A.12.1 — capacity management)
+# Kyverno: Require resource limits (ISO 27001 A.12.1 - capacity management)
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
@@ -329,7 +341,7 @@ spec:
                     cpu: "?*"
 ```
 
-> **Start with the highest-risk controls first.** Do not attempt to encode every policy before the audit — you never will. Instead, pick the three controls that scare you most (e.g., "no unapproved image registries," "TLS required on all ingress," "backup retention ≥ 30 days"), build policies for those, validate they work, and expand incrementally. Three enforced policies beat thirty written policies that nobody checks.
+> **Start with the highest-risk controls first.** Do not attempt to encode every policy before the audit - you never will. Instead, pick the three controls that scare you most (e.g., "no unapproved image registries," "TLS required on all ingress," "backup retention ≥ 30 days"), build policies for those, validate they work, and expand incrementally. Three enforced policies beat thirty written policies that nobody checks.
 
 ### Compliance Integration Strategies
 
@@ -338,7 +350,7 @@ spec:
 - **Continuous Monitoring**: Real-time compliance status tracking and alerting
 - **Audit Readiness**: Maintain audit trails and documentation continuously
 
-> **In practice.** The cheapest audit is the one you never prepared for — because the evidence collected itself all year. If you find the team doing a frantic "audit sprint" the month before the assessor arrives, that's a signal your controls produce paperwork on demand instead of as a by-product of normal work. Aim for the latter; the binder-stuffing season is a smell, not a tradition.
+> **In practice.** The cheapest audit is the one you never prepared for - because the evidence collected itself all year. If you find the team doing a frantic "audit sprint" the month before the assessor arrives, that's a signal your controls produce paperwork on demand instead of as a by-product of normal work. Aim for the latter; the binder-stuffing season is a smell, not a tradition.
 
 ### Audit Trail and Documentation
 
@@ -440,7 +452,7 @@ spec:
 - **Weekly Improvements**: Regular testing and improvement of continuity procedures
 - **Monthly Strategy**: Business continuity planning and capability development
 
-> **Warning.** An untested backup is not a backup — it's a hope with a cron job. The only thing that proves you can recover is a restore you actually performed, end to end, into a usable state. Plenty of teams have discovered mid-incident that their backups were silently corrupt, missing a critical table, or encrypted with a key nobody still has. Test the restore, not the backup.
+> **Warning.** An untested backup is not a backup - it's a hope with a cron job. The only thing that proves you can recover is a restore you actually performed, end to end, into a usable state. Plenty of teams have discovered mid-incident that their backups were silently corrupt, missing a critical table, or encrypted with a key nobody still has. Test the restore, not the backup.
 
 ### Disaster Recovery Implementation
 
@@ -474,7 +486,7 @@ A DR plan that has never been tested is a hypothesis, not a capability. Testing 
 | 3    | **Component restore test** | Restore individual system components (a single database, a specific service) from backup to an isolated environment           | Monthly                          | None (isolated env)              |
 | 4    | **Parallel failover test** | Activate the DR environment in parallel with production; validate that traffic _could_ be switched without actually switching | Semi-annually                    | Low                              |
 | 5    | **Partial cut-over test**  | Route a subset of traffic (e.g., 5–10% canary or a non-critical tenant) to the DR environment; validate end-to-end            | Annually                         | Low                              |
-| 6    | **Full failover test**     | Cut all traffic to the DR environment; run production from the DR site for a defined period; then fail back                   | Annually (or as maturity allows) | Medium — plan maintenance window |
+| 6    | **Full failover test**     | Cut all traffic to the DR environment; run production from the DR site for a defined period; then fail back                   | Annually (or as maturity allows) | Medium - plan maintenance window |
 
 Start at Tier 1–2 and progress upward annually. Do not attempt a full failover test without first passing Tiers 3–5.
 
@@ -561,7 +573,7 @@ Store all DR test logs in the knowledge management system (Chapter 6, Practice 5
 - **Mitigation Status**: Progress on risk mitigation initiatives
 - **Compliance Status**: Current compliance posture and any deficiencies
 
-> **Reality check.** A heat map glowing reassuringly green is the easiest artifact in this entire chapter to fake — just be optimistic about every probability. Executives trust the colours, so the colours have to be honest. If nothing on the board has been amber in six months, the question isn't "why are we so safe?" — it's "who's grading their own homework?"
+> **Reality check.** A heat map glowing reassuringly green is the easiest artifact in this entire chapter to fake - just be optimistic about every probability. Executives trust the colours, so the colours have to be honest. If nothing on the board has been amber in six months, the question isn't "why are we so safe?" - it's "who's grading their own homework?"
 
 **Reporting Frequency**:
 
@@ -582,7 +594,7 @@ Store all DR test logs in the knowledge management system (Chapter 6, Practice 5
 | 4     | Quantitative | Quantitative assessment and modeling; predictive analytics and forecasting; cost-benefit analysis of mitigations; risk metrics tied to business metrics |
 | 5     | Optimizing   | Continuous process optimization; ML-driven risk prediction; risk management drives strategy; industry leadership in practice                            |
 
-> **Reality check.** Most teams don't need Level 5, and several reach for the machine-learning bullet long before they can reliably do the Level 2 basics. Be honestly Level 2 before you cosplay Level 5 — a tidy risk register that people actually keep up to date beats a predictive model nobody trusts.
+> **Reality check.** Most teams don't need Level 5, and several reach for the machine-learning bullet long before they can reliably do the Level 2 basics. Be honestly Level 2 before you cosplay Level 5 - a tidy risk register that people actually keep up to date beats a predictive model nobody trusts.
 
 ### Continuous Improvement
 
@@ -604,9 +616,9 @@ Store all DR test logs in the knowledge management system (Chapter 6, Practice 5
 
 ## 🎯 Chapter Summary
 
-Risk management and compliance are not separate activities from operations—they must be integrated into every aspect of the SysOps Framework. Success requires embedding risk considerations into all operational cycles, automating compliance evidence collection, and building a culture where risk awareness drives decision-making.
+Risk management and compliance are not separate activities from operations-they must be integrated into every aspect of the SysOps Framework. Success requires embedding risk considerations into all operational cycles, automating compliance evidence collection, and building a culture where risk awareness drives decision-making.
 
-Modern operations teams must also address the expanding attack surface of the software supply chain: generating SBOMs at build time, enforcing SLSA build integrity, and validating provenance before every production deployment. Breach response timelines must be pre-agreed and rehearsed — regulatory clocks start on awareness, not on planned action. Penetration testing must be frequent, scoped correctly, and its findings tracked to confirmed remediation rather than filed and forgotten.
+Modern operations teams must also address the expanding attack surface of the software supply chain: generating SBOMs at build time, enforcing SLSA build integrity, and validating provenance before every production deployment. Breach response timelines must be pre-agreed and rehearsed - regulatory clocks start on awareness, not on planned action. Penetration testing must be frequent, scoped correctly, and its findings tracked to confirmed remediation rather than filed and forgotten.
 
 The key is to make risk management and compliance enablers of operational excellence rather than barriers to efficiency. This requires thoughtful integration of controls and processes, automation of routine compliance activities, and continuous improvement based on risk events and changing threat landscapes.
 

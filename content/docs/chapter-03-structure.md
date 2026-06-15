@@ -82,6 +82,27 @@ flowchart TD
 
 **Handoff rule**: No output from a faster cycle disappears into a slower one without explicit acceptance. If the daily cycle identifies a recurring pattern that merits a weekly improvement, the daily owner must write it up just well enough for the weekly owner to pick up. One paragraph, one link to the incident log. Done is better than perfect.
 
+## 🧭 Minimum Viable Adoption Modes
+
+Do not start all three cycles on day one just to look mature. Match the adoption mode to the team’s current load.
+
+| Mode                       | Use when                                                                        | What you run                                                      | What you explicitly postpone                                  |
+| -------------------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------- |
+| **Daily-only**             | Interrupt load consumes most capacity, incidents/support dominate, trust is low | Daily triage, incident visibility, basic documentation, one queue | Weekly improvement commitments and monthly strategy workshops |
+| **Daily + Weekly**         | Daily work is visible and the team can protect 10–20% capacity                  | Daily response plus one weekly improvement target                 | Full strategic planning and broad practice rollout            |
+| **Full three-cycle model** | Daily and weekly cycles are stable without constant rescue                      | Daily operations, weekly improvements, monthly strategy           | Nothing — but scope still stays limited by capacity           |
+
+> **Adoption rule.** You do not earn maturity points for running more ceremonies. You earn them when the team can protect reliability, reduce toil, and explain trade-offs without hiding work.
+
+### Entry Criteria by Team Context
+
+| Team context                              | Recommended starting mode | First success signal                                          |
+| ----------------------------------------- | ------------------------- | ------------------------------------------------------------- |
+| 1–2 people, broad internal IT ownership   | Daily-only                | Work is visible and nothing critical is forgotten             |
+| 3–5 person infrastructure / sysadmin team | Daily + Weekly            | At least one improvement ships every week or two              |
+| 6–10 person platform/SRE team             | Full three-cycle model    | Daily interrupts no longer erase strategic work               |
+| Regulated or audited environment          | Daily + Weekly, then full | Evidence is captured as work happens, not reconstructed later |
+
 ## ⚡ Daily Operations Cycle (24-48 hours)
 
 ### Purpose

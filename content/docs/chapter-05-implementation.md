@@ -23,6 +23,17 @@ By the end of this chapter, you will understand:
 
 Implementing the SysOps Framework requires a systematic, phased approach that minimizes disruption to ongoing operations while building new capabilities. The roadmap above shows six parallel tracks running over six months, each contributing to successful framework adoption.
 
+### Pilot-First Summary
+
+The shortest safe implementation is not “install the whole framework.” It is:
+
+1. Make daily work visible.
+2. Reserve a small amount of improvement capacity.
+3. Complete one improvement that reduces future operational load.
+4. Review whether the model helped the team make better decisions.
+
+Everything else in this chapter expands that path. If the team is already overloaded, use the 30-day pilot from Getting Started before attempting the six-month rollout.
+
 ### Two Tracks: Pilot vs Full Rollout
 
 There is no single adoption path. Choose based on your team's readiness:
@@ -259,6 +270,15 @@ Before implementing changes, establish baseline measurements:
 - Team satisfaction and engagement high
 - Stakeholder confidence in operations capabilities
 - Framework practices becoming organizational standards
+
+### Maturity Targets Are Heuristics
+
+The milestone tables below are guidance, not a maturity contest. A two-person internal IT team and a regulated infrastructure platform should not move at the same speed. Use the targets to ask better questions:
+
+- Is daily work visible?
+- Is at least one improvement protected?
+- Are stakeholders receiving clearer signals than before?
+- Is the team less surprised by recurring operational work?
 
 ## 🎯 Success Criteria and Milestones
 

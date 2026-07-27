@@ -133,7 +133,7 @@ Before submitting a PR, verify:
 1. **Fork the repository** and create a feature branch
 2. **Follow the style guide** above
 3. **Include citations** for any research or external sources
-4. **Test your changes** — run `hugo server` and verify the build is clean
+4. **Test your changes** — run `npm run serve` and verify the build is clean
 5. **Submit a pull request** with a clear description of changes
 
 ### Branch naming

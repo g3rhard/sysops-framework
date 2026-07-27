@@ -1,0 +1,9 @@
+// Bridge Docsy 0.12's two legacy Font Awesome references to the v7 API.
+@use "../vendor/Font-Awesome/scss/fa" as fa;
+
+$fa-var-search: fa.$var-search;
+$fa-var-times: fa.$var-times;
+
+@function fa-content($var) {
+  @return fa.fa-content($var);
+}

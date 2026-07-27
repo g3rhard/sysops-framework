@@ -1,15 +1,20 @@
 {
   "name": "sysops-framework-site",
   "private": true,
+  "scripts": {
+    "build": "hugo --minify --environment production",
+    "serve": "hugo server"
+  },
   "devDependencies": {
     "autoprefixer": "10.5.4",
     "cross-env": "10.1.0",
     "hugo-extended": "0.164.0",
     "postcss-cli": "11.0.1",
-    "rtlcss": "4.3.0"
+    "rtlcss": "4.3.0",
+    "sass-embedded": "^1.100.0"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.7.2",
+    "@fortawesome/fontawesome-free": "^7.3.1",
     "bootstrap": "^5.3.8"
   }
 }

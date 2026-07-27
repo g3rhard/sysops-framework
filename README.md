@@ -40,7 +40,7 @@ git submodule update --init --recursive
 npm install
 
 # Start the dev server
-hugo server
+npm run serve
 ```
 
 Open http://localhost:1313/sysops-framework/.

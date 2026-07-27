@@ -29,6 +29,8 @@ module:
   imports:
     - path: github.com/gohugoio/hugo-mod-bootstrap-scss/v5
   mounts:
+    - source: assets
+      target: assets
     # Docsy expects @fortawesome/fontawesome-free in themes/docsy/node_modules/
     # but we keep deps in the project root. Mount it so Docsy's SCSS resolves.
     - source: node_modules/@fortawesome/fontawesome-free

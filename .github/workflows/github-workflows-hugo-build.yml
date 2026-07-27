@@ -49,7 +49,7 @@ jobs:
           hugo mod get -u
 
       - name: Build Hugo site
-        run: hugo --minify --environment production
+        run: npm run build
 
       - name: Upload Hugo build artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7

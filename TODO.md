@@ -11,28 +11,38 @@
 
 ---
 
-## Status Summary (as of 2026-06-12)
+## Status Summary (re-verified 2026-07-27)
 
 | Area                            | Done | Partial | Remaining |
 | ------------------------------- | ---- | ------- | --------- |
 | Chapter content gaps            | 14   | 0       | 0         |
 | Missing practices               | 5    | 0       | 0         |
 | Cross-references & data         | 6    | 0       | 0         |
-| Appendices & glossary           | 2    | 0       | 0         |
-| Medium-priority content         | 6    | 0       | 1         |
+| Appendices & glossary           | 2    | 0       | 1         |
+| Medium-priority content         | 5    | 1       | 0         |
 | Diagrams (matplotlib PNGs)      | 4    | 0       | 0         |
-| Mermaid conversion for PDF/EPUB | 0    | 0       | 3         |
-| Foundation & consistency (P0)   | 11   | 0       | 0         |
+| Mermaid conversion for PDF/EPUB | 0    | 1       | 2         |
+| Foundation & consistency (P0)   | 10   | 1       | 0         |
 | Chapter restructuring (P1)      | 10   | 0       | 0         |
-| Quality & infrastructure (P1)   | 2    | 0       | 2         |
-| Product & repo (P1/P2)          | 2    | 0       | 3         |
-| Gamification elements           | 0    | 0       | all       |
+| Quality & infrastructure        | 1    | 3       | 1         |
+| Product & repo                  | 3    | 0       | 2         |
+| Gamification & interactive      | 0    | 9       | 37        |
+
+### Verification Notes
+
+- The main editorial work was implemented incrementally between 2026-06-12 and 2026-06-15, not merely checked off in this file. Re-verification found the chapter structure, 12 practices, cross-references, templates, canonical YAML data, and four generated diagrams in the source.
+- A clean production Hugo build passes. The existing `public/webfonts/` directory can make an in-place local build fail because it has stale `0644` directory permissions; building to a clean destination succeeds.
+- All four matplotlib diagrams regenerate successfully. The PDF/EPUB pipeline also produces artifacts, but the combined 257-page PDF and EPUB still contain raw Mermaid source, confirming that Mermaid conversion remains P1 work.
+- Documentation quality is not currently a CI gate. The workflow has Markdown lint with `continue-on-error: true`, no Lychee step, and no standalone `docs-quality.yml`. A focused lint run reports 9 issues in 4 authored files.
+- Link re-checking found three genuine external 404s in authored content: the CISA ransomware link, the White House EO 14028 link, and the SCI article link. The approved registry already contains usable replacements for all three.
+- A US English scan flags 60 likely British spellings across 18 authored files. Direct quotations still need manual exclusion, but the convention is not yet consistently enforced.
+- `build-book-local.sh` and the chapter badge image set currently exist only as untracked workspace files. They are useful drafts, but do not count as completed repository work until reviewed, linked from content where appropriate, and committed.
 
 ---
 
 ## 🏗️ P0 — Foundation & Consistency
 
-> **Status**: None started. These are the most critical items from the editorial audit — they fix the book's entry funnel, resolve internal contradictions, and establish the operating model.
+> **Status**: Substantially complete. The 2026-07-27 audit reopened the diagram-conversion/caption claim as partial.
 
 ### Entry Funnel Rewrites
 
@@ -46,7 +56,7 @@
 
 - [x] **Fix practice count everywhere (6/7/12 → 12)** — Audit and correct every mention of the practice count across all files: `chapter-04-comparison.md` (says "six"), `data-relationships.md` (says "seven"), `glossary.md` (says "seven"), `_index.md` and `chapter-01-challenge.md` and any other page that references the count. The canonical number is **12 core management practices** as defined in Chapter 6. _Verified — grep confirms zero remaining instances._
 - [x] **Create `data/framework.yaml` as single source of truth** — 236-line canonical YAML with cycles, principles, practices (all 12), metric categories (all 4), and relationships. _Verified._
-- [x] **Convert ASCII / list schemas to Mermaid diagrams** — Converted escalation path (Ch9), 5 Whys (Ch6), and GitOps repo structure (Ch8) from ASCII to Mermaid. Added descriptive alt-text captions to all 17 existing Mermaid diagrams across all files. _Verified._
+- [~] **Convert ASCII / list schemas to Mermaid diagrams** — The escalation path (Ch9) and 5 Whys (Ch6) are Mermaid, but the GitOps repository structure in Ch8 remains a fenced text tree. The repository has 16 Mermaid blocks; three lack a nearby `> **Diagram**:` caption (Ch1, Ch6, and Ch9). _Partial — previous completion claim was too broad._
 - [x] **Fix `baseURL` in `hugo.yaml`** — Changed to `https://g3rhard.cc/sysops-framework/`. _Verified._
 - [x] **Update `data-relationships.md` to 12-practice model + Mermaid** — All ASCII diagrams replaced with Mermaid (pillars, practice flows, feedback loops, dependency map). All 12 practices in cycle tables. Tied to `data/framework.yaml`. _Verified._
 - [x] **Update `glossary.md` to 12-practice model** — All references fixed to twelve. Per-term cross-references added ("see also", "related practice", "related metric", "related chapter"). Canonical terminology policy table added at top. New terms added (Canary Deployment, Problem, PIR). _Verified._
@@ -112,7 +122,7 @@
 
 ## 📝 Medium Priority Content
 
-- [x] **Official citations & source links** — P2. All key claims, standards, metrics, and tool recommendations must be backed by a link to an authoritative primary source. See the **Citation Standards** section below for the approved source registry and per-chapter checklist. _Verified — inline citations added to chapters 2, 6, 7, 8, 10, 12, and the glossary._
+- [~] **Official citations & source links** — P2. Inline citations exist in chapters 2, 6, 7, 8, 10, 12, and the glossary, but the 2026-07-27 link audit found three external 404s in content (CISA ransomware guidance, White House EO 14028, and the SCI article). Replace them with the working primary-source URLs already listed in the registry below, then rerun the checker. _Partial — broad coverage exists, but verification is not clean._
 - [x] **Real case studies** — P2. The four fictional case studies were replaced with documented, publicly verifiable industry cases, each carrying a primary-source citation and a note that they _illustrate_ (not endorse, and are not direct accounts of) the framework. `chapter-04-comparison.md`: Google SRE & error budgets ([SRE Book](https://sre.google/sre-book/embracing-risk/)) and Knight Capital's 2012 trading incident ([SEC order 34-70694](https://www.sec.gov/litigation/admin/2013/34-70694.pdf)). `chapter-09-culture.md`: the GitLab 2017 database outage ([GitLab postmortem](https://about.gitlab.com/blog/2017/02/10/postmortem-of-database-outage-of-january-31/)) and Netflix Chaos Engineering ([Principles of Chaos](https://principlesofchaos.org/)). _Verified._
 - [x] **Deduplication pass** — P2. Canonical homes established and cross-linked instead of re-explaining: automation _principle_ → Ch.2 (added a "Where automation lives in this framework" reference map), cycle _activity_ → Ch.3, roadmap _milestones_ → Ch.5, runbook _concept_ → Ch.6, all _tooling_ → Ch.8 (marked as the canonical catalogue), _metrics_ → Ch.7, _future/self-healing_ → Ch.12. Thin restatements in Ch.3/5/6/8 converted to forward/backward cross-references. _Verified._
 - [x] **On-call rotation design** — "On-Call Rotation Design" section added in `chapter-09-culture.md` (under Team Development): rotation principles, five rotation structure patterns (table), on-call handoff checklist (6 items), alert quality standards, five on-call health metrics with targets, escalation path diagram (0–60 min timeline). _Verified._
@@ -130,32 +140,30 @@
 > **Critical finding**: Hugo renders Mermaid via client-side JavaScript (browser only). The Pandoc + lualatex PDF/EPUB pipeline has **no Mermaid handling** — `mermaid` code blocks would appear as raw verbatim text in the printed output.
 
 - [ ] **Add Mermaid CLI to CI pipeline** — P1. Deferred — removed from pipeline because the rendering approach (pre-render to PNG before Pandoc) needs more thought to integrate cleanly with the PDF/EPUB build. Mermaid diagrams currently render only in the browser-based Hugo site; PDF/EPUB output will show raw code blocks until this is resolved.
-- [x] **Add Mermaid alt-text and caption standard** — Already done (P0). Captions present on all 20+ diagrams. Enforced via review checklist in CONTRIBUTING.md.
+- [~] **Add Mermaid alt-text and caption standard** — The standard and review checklist exist, and the four PNG diagrams have descriptive Markdown alt text. Three of 16 Mermaid blocks still lack a nearby `> **Diagram**:` caption (Ch1, Ch6, and Ch9), and no automated check enforces the rule. _Partial._
 - [ ] **Vendor Mermaid JS for offline/reliable web rendering** — P3. Currently the Docsy theme fetches Mermaid JS from a CDN. For deterministic rendering (including offline use), vendor the JS bundle in `static/` or `assets/` and reference it locally.
 
 ---
 
 ## 🔧 Quality & Infrastructure
 
-> **Status**: P1 (CI gates) done, P2 (style guide merged into CONTRIBUTING.md, accessibility).
+> **Status**: Style guide done; CI gates, accessibility, SEO, and language enforcement need work.
 
 - [x] **Create `docs/style-guide.md`** — P2. Created and then merged into `CONTRIBUTING.md` (removed as standalone file). Covers US English conventions, voice/tone, heading hierarchy, safe/unsafe emoji table, callout taxonomy (8 types with usage), table rules, code block conventions, citation format, file naming, diagram alt-text requirement, and review checklist. _Verified._
-- [x] **Add docs quality CI (`docs-quality.yml`)** — P1. Two mandatory jobs:
-  - **Markdown lint**: `markdownlint-cli2` with existing `.trunk/configs/.markdownlint.yaml` config.
-  - **Link check**: `lychee` to verify all internal and external links in Markdown files (with sensible exclusions for raw assets, localhost, LinkedIn).
-    _Note: Vale (prose lint) deferred — no existing config or custom style to build on. Pa11y deferred — requires built Hugo site as target._
-- [ ] **Adopt accessibility-by-default requirements** — P2. Document and enforce: descriptive headings with one meaningful hierarchy per page, alt text on every contentful image, correct data-table markup, and WCAG AA contrast. Reference W3C guidance. This is critical because new Mermaid diagrams and the existing matplotlib assets both need proper alt-text.
-- [ ] **Add SEO and social-card metadata** — P2. Fix `baseURL` in `hugo.yaml` (already in **P0 — Foundation & Consistency**). Verify canonical URLs, sitemap behaviour, Open Graph titles/descriptions/images. Create a dedicated book cover/social share image (not just a repurposed asset screenshot).
+- [~] **Add docs quality CI (`docs-quality.yml`)** — P1. A `quality-check` job exists in the main Hugo workflow, but Markdown lint, spell check, and the Hugo check all use `continue-on-error: true`; there is no Lychee step and no standalone `docs-quality.yml`. A focused local run currently reports 9 Markdown issues in 4 authored files. Make lint and link checking mandatory after fixing the baseline. _Partial._
+- [~] **Adopt accessibility-by-default requirements** — P2. Descriptive image alt text and a contributor checklist exist, but three Mermaid captions are missing and there is no automated heading, table, contrast, or built-site accessibility check. Reference W3C guidance and enforce the documented rules. _Partial._
+- [~] **Add SEO and social-card metadata** — P2. `baseURL`, sitemap generation, and page descriptions exist, but canonical behavior and rendered Open Graph/Twitter metadata have not been audited, and there is no dedicated book cover/social share image. _Partial._
+- [ ] **Enforce US English consistently** — P1. The convention is documented, but a 2026-07-27 scan flags 60 likely British spellings across 18 authored files. Review direct-quote exceptions, normalize the remaining prose, and add an automated check or dictionary policy.
 
 ## 📗 Product & Repo
 
-> **Status**: Not started. P1 (README), P2 (CONTRIBUTING, positioning).
+> **Status**: README, contributing guide, and product positioning are complete. Optional promotion/support items remain.
 
 - [x] **Update README** — P1. Rewritten as a repo-oriented landing page: local preview instructions, releases/auto-generation table, quick links to key content, "EPUB coming soon" fixed (now "PDF and EPUB built from tagged releases"), training materials removed (no live offering). _Verified._
 - [x] **Update CONTRIBUTING.md** — P2. Rewritten from 227 lines of generic text to concise practical guide with full style guide embedded: US English, voice/tone, headings, emoji policy, callout taxonomy, tables, code blocks, citations, file naming, diagrams, appendices, review checklist, branch naming, PR checklist, what's welcome vs deferred. _Verified._
-- [ ] **Clarify product positioning** — P2. The project currently speaks as open framework + practical book + proto-service (training, support, certification). Decide whether the commercial layer is "planned" or "active" and reflect that consistently on the home page, getting-started page, and README. Remove or clearly label any training/support sections that don't have live offerings.
+- [x] **Clarify product positioning** — P2. README presents an open book, methodology, and template kit; the docs landing page and Getting Started explicitly state that professional training, support, and certification are not available. No active commercial offer remains. _Verified 2026-07-27._
 - [ ] **Add Buy Me a Coffee placement** — P3. Add a soft support ask at the end of the appendices (after value is delivered) and in README after downloads.
-- [ ] **Add LinkedIn announcement drafts** — P3. The `Analysis.md` contains ready-to-use announcement text in both English and Russian. Polish and publish when the P0/P1 work is complete.
+- [ ] **Add LinkedIn announcement drafts** — P3. The previously referenced `Analysis.md` is not present in the repository. Recover the source drafts or write new English and Russian announcements after the remaining P1 work is complete.
 
 ## 📎 Citation Standards
 
@@ -174,7 +182,7 @@
 | Domain                                       | Trusted Source                           | Base URL                                                                                            |
 | -------------------------------------------- | ---------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | **ITIL 4**                                   | PeopleCert / Axelos official ITIL site   | https://www.axelos.com/certifications/itil-service-management                                       |
-| **ITIL / ITSM version-specific claims**        | official ITIL/ITSM source check           | https://www.axelos.com/certifications/itil-service-management                                      |
+| **ITIL / ITSM version-specific claims**      | official ITIL/ITSM source check          | https://www.axelos.com/certifications/itil-service-management                                       |
 | **DORA metrics**                             | DORA (DevOps Research and Assessment)    | https://dora.dev/research/2023/dora-report/                                                         |
 | **SLSA framework**                           | OpenSSF SLSA specification               | https://slsa.dev/spec/v1.0/                                                                         |
 | **SBOM — CycloneDX**                         | OWASP CycloneDX specification            | https://cyclonedx.org/specification/overview/                                                       |
@@ -214,7 +222,7 @@ Each item below lists the specific claims that need a source link added inline i
 
 #### Chapter 2 — Principles (`chapter-02-principles.md`)
 
-- [x] ITIL 4 release date (February 2019), 34 practices, 7 guiding principles, SVS model → [Axelos ITIL 4](https://www.axelos.com/certifications/itil-service-management)
+- [x] Version-specific ITIL release-date, practice-count, and model claims were removed from the core narrative; Chapter 2 now uses version-stable service-management framing.
 - [x] ITIL version-specific alignment → [official ITIL/ITSM sources](https://www.axelos.com/certifications/itil-service-management)
 
 #### Chapter 6 — Practices (`chapter-06-practices.md`)
@@ -222,7 +230,7 @@ Each item below lists the specific claims that need a source link added inline i
 - [x] DORA four-key metrics (deployment frequency, lead time, change failure rate, MTTR) → [dora.dev](https://dora.dev/research/2023/dora-report/)
 - [x] DORA elite thresholds (deployment frequency on-demand, lead time < 1 hr, CFR < 5%, MTTR < 1 hr) → same DORA source
 - [x] NIST SP 800-88 (media sanitisation at decommission) → [NIST 800-88r1](https://doi.org/10.6028/NIST.SP.800-88r1)
-- [x] 3-2-1-1 backup rule (immutable/WORM copy) → [CISA Ransomware Guide](https://www.cisa.gov/resources-tools/resources/stopransomware-guide) (added explanatory callout)
+- [~] 3-2-1-1 backup rule (immutable/WORM copy) → replace the current 404 with the registry's [CISA Ransomware Guide](https://www.cisa.gov/resources-tools/resources/stopransomware-guide), then recheck.
 
 #### Chapter 7 — Metrics (`chapter-07-metrics.md`)
 
@@ -243,8 +251,8 @@ Each item below lists the specific claims that need a source link added inline i
 
 - [x] SBOM CycloneDX format (OWASP standard) → [cyclonedx.org](https://cyclonedx.org/specification/overview/)
 - [x] SBOM SPDX (ISO/IEC 5962:2021) → [spdx.dev](https://spdx.dev/specifications/)
-- [x] SLSA levels 1–4 → [slsa.dev/spec/v1.0](https://slsa.dev/spec/v1.0/)
-- [x] US EO 14028 SBOM mandate → [Federal Register EO 14028](https://www.govinfo.gov/content/pkg/FR-2021-05-17/html/2021-10460.htm)
+- [x] Retired SLSA level-table wording was replaced with durable, current-guidance language → [slsa.dev](https://slsa.dev/)
+- [~] US EO 14028 SBOM context → replace the current 404 White House URL with [Federal Register EO 14028](https://www.govinfo.gov/content/pkg/FR-2021-05-17/html/2021-10460.htm), then recheck.
 - [x] EU Cyber Resilience Act (2024) → [EUR-Lex CRA](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R2847)
 - [x] GDPR Art. 33 (72-hour notification) and Art. 34 (individual notification) → [EUR-Lex GDPR](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679)
 - [x] NIST SP 800-88 at decommission step → [NIST 800-88r1](https://doi.org/10.6028/NIST.SP.800-88r1) — cited in chapter-06-practices.md; also present in chapter-10 context
@@ -254,7 +262,7 @@ Each item below lists the specific claims that need a source link added inline i
 #### Chapter 12 — Future (`chapter-12-future.md`)
 
 - [x] FinOps Foundation definition and three phases → [finops.org](https://www.finops.org/introduction/what-is-finops/)
-- [x] Software Carbon Intensity (SCI) score → [GSF SCI spec](https://greensoftware.foundation/standards/sci/)
+- [~] Software Carbon Intensity (SCI) score → replace the current 404 article URL with the [GSF SCI specification](https://greensoftware.foundation/standards/sci/), then recheck.
 - [x] Carbon Aware SDK → [GitHub GSF](https://github.com/Green-Software-Foundation/carbon-aware-sdk)
 - [x] WattTime API → [watttime.org](https://www.watttime.org/api-documentation/)
 - [x] Electricity Maps API → [electricitymaps.com](https://www.electricitymaps.com/free-tier-api)
@@ -270,16 +278,16 @@ Each item below lists the specific claims that need a source link added inline i
 
 ## 🎮 Gamification & Interactive Elements
 
-> **Status**: None implemented. All P3 unless noted.
+> **Status**: Static exercises and badge-earning text exist in several chapters; simulations, quizzes, progress tracking, and award mechanics are not implemented. All P3 unless noted.
 
 ### Chapter-Specific Exercises
 
-- [ ] **Chapter 1** — "Sprint Breaker" scenario simulation; "Agile vs Reality" quiz; "Challenge Identifier" badge
-- [ ] **Chapter 2** — "Principle Navigator" decision tree; "Values Conflict Resolution" game; badge
-- [ ] **Chapter 3** — "Cycle Master" planning game; "Multi-Cycle Juggling" simulation; badge
-- [ ] **Chapter 4** — "Framework Detective" analysis; "Methodology Matcher" game; badge
-- [ ] **Chapter 5** — "Implementation Architect" planning tool; "Change Champion" simulation; badge
-- [ ] **Chapter 6** — "Practice Master" maturity assessment tool; "Process Integration" puzzle; badge
+- [~] **Chapter 1** — A static “Sprint vs. Reality” exercise and Challenge Identifier badge text exist; the requested scenario simulation, quiz, and award/progress mechanism do not.
+- [~] **Chapter 2** — A static principle-application exercise and Principle Navigator badge text exist; the decision tree, conflict-resolution game, and award/progress mechanism do not.
+- [~] **Chapter 3** — A daily-cycle planning exercise and Cycle Master badge text exist; the multi-cycle game/simulation and award/progress mechanism do not.
+- [~] **Chapter 4** — A comparison exercise and Framework Analyst badge text exist; the requested detective/matcher game and award/progress mechanism do not.
+- [~] **Chapter 5** — A process-integration exercise and Implementation Planner badge text exist; the requested planning tool/simulation and award/progress mechanism do not.
+- [~] **Chapter 6** — The maturity assessment and Practice Master badge text exist; the process-integration puzzle and award/progress mechanism do not.
 
 ### Cross-Chapter Progress System
 
@@ -320,11 +328,11 @@ Each item below lists the specific claims that need a source link added inline i
 
 ## 🏆 Achievement System
 
-> **Status**: Design only — no implementation. P3.
+> **Status**: Static badge labels exist, but there is no committed, linked badge set or achievement mechanism. P3.
 
-- [ ] **Foundation badges**: Challenge Identifier, Principle Navigator, Cycle Master
-- [ ] **Implementation badges**: Framework Analyst, Implementation Planner, Practice Master
-- [ ] **Advanced badges**: Metrics Guru, Tool Integrator, Culture Champion
+- [~] **Foundation badges**: Challenge Identifier, Principle Navigator, Cycle Master — static earning statements exist, but there is no linked, committed badge set or award/progress system.
+- [~] **Implementation badges**: Framework Analyst, Implementation Planner, Practice Master — static earning statements exist, but there is no linked, committed badge set or award/progress system.
+- [~] **Advanced badges**: Metrics Guru, Tool Integrator, Culture Champion — chapters contain related badge text (with inconsistent names), but there is no linked, committed badge set or award/progress system.
 - [ ] **Master badges**: SysOps Architect, Framework Evangelist, Innovation Leader
 - [ ] **Leaderboards**: Implementation Speed, Team Improvement, Community Contribution, Innovation Index
 
@@ -393,7 +401,7 @@ Each item below lists the specific claims that need a source link added inline i
 
 ---
 
-_Last verified: 2026-06-13 (editorial audit incorporated). Re-verify completion status by grepping file content — do not infer from filenames or headings alone._
+_Last verified: 2026-07-27 (source, history, clean Hugo build, diagram generation, PDF/EPUB output, Markdown lint, and external links checked). Re-verify completion status from content and executable checks — do not infer from filenames or headings alone._
 
 
 ## Editorial first wave

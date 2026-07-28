@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Cycle Master — Chapter 3 badge</title>
+  <desc id="desc">Three interlocking circular arrows represent daily, weekly, and monthly operational cycles.</desc>
+  <defs>
+    <radialGradient id="field" cx="38%" cy="28%" r="82%"><stop offset="0" stop-color="#F4A03A"/><stop offset=".58" stop-color="#E86B30"/><stop offset="1" stop-color="#B43A3D"/></radialGradient>
+    <linearGradient id="cream" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF7E9"/><stop offset=".55" stop-color="#FCE1C7"/><stop offset="1" stop-color="#E9BD94"/></linearGradient>
+    <linearGradient id="ribbon" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF7E9"/><stop offset=".48" stop-color="#FCE1C7"/><stop offset="1" stop-color="#E8B98D"/></linearGradient>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#24102E" flood-opacity=".34"/><feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#24102E" flood-opacity=".45"/></filter>
+    <filter id="iconShadow" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#24102E" flood-opacity=".3"/></filter>
+    <marker id="arrowYellow" markerWidth="7" markerHeight="7" refX="5.4" refY="3.5" orient="auto"><path d="M0 0l7 3.5L0 7Z" fill="#E8BD3B"/></marker>
+    <marker id="arrowCoral" markerWidth="7" markerHeight="7" refX="5.4" refY="3.5" orient="auto"><path d="M0 0l7 3.5L0 7Z" fill="#DB4C46"/></marker>
+    <marker id="arrowPurple" markerWidth="7" markerHeight="7" refX="5.4" refY="3.5" orient="auto"><path d="M0 0l7 3.5L0 7Z" fill="#4F318B"/></marker>
+  </defs>
+
+  <g filter="url(#shadow)"><circle cx="256" cy="226" r="202" fill="#2B1538"/><circle cx="256" cy="226" r="193" fill="#4F318B"/><circle cx="256" cy="226" r="186" fill="none" stroke="#FCE1C7" stroke-width="5"/><circle cx="256" cy="226" r="178" fill="url(#field)" stroke="#3D1C49" stroke-width="4"/><circle cx="256" cy="226" r="168" fill="none" stroke="#E8BD3B" stroke-width="2.5"/></g>
+  <path d="M96 142A178 178 0 0 1 356 68" fill="none" stroke="#FFF7E9" stroke-width="7" stroke-linecap="round" opacity=".2"/>
+  <g fill="none" stroke="#3D1C49" stroke-width="10" stroke-linecap="round">
+    <path d="M126 199c15-76 86-126 163-107 29 7 54 23 73 44" stroke="#E8BD3B" marker-end="url(#arrowYellow)"/>
+    <path d="M379 181c27 71-8 153-79 181-29 11-60 11-87 3" stroke="#4F318B" marker-end="url(#arrowPurple)"/>
+    <path d="M174 351c-68-35-96-118-61-187 13-26 34-47 57-61" stroke="#DB4C46" marker-end="url(#arrowCoral)"/>
+  </g>
+
+  <g filter="url(#iconShadow)" stroke="#3D1C49" stroke-width="7" stroke-linejoin="round">
+    <circle cx="256" cy="226" r="102" fill="url(#cream)"/>
+    <circle cx="256" cy="226" r="82" fill="#FFF7E9" stroke-width="4"/>
+    <path d="M198 178a82 82 0 0 1 88-27" fill="none" stroke="#FFF" stroke-width="6" stroke-linecap="round" opacity=".5"/>
+    <path d="M256 226V166M256 226l49 31" fill="none" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="256" cy="226" r="13" fill="#E87927"/>
+    <path d="M194 226h-12M318 226h12M256 164v-12M256 288v12" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g fill="#3D1C49" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="800" text-anchor="middle">
+    <text x="256" y="202">DAILY</text><text x="256" y="270">WEEKLY · MONTHLY</text>
+  </g>
+  <g fill="#E8BD3B" stroke="#3D1C49" stroke-width="3"><circle cx="109" cy="226" r="7"/><circle cx="381" cy="274" r="7"/><circle cx="274" cy="78" r="7"/></g>
+
+  <g filter="url(#shadow)" stroke="#3D1C49" stroke-width="8" stroke-linejoin="round"><path d="M104 384L48 374l25 30-22 34 62-5z" fill="#4F318B"/><path d="M408 384l56-10-25 30 22 34-62-5z" fill="#4F318B"/><path d="M104 384l33 17-24 32 2-43ZM408 384l-33 17 24 32-2-43Z" fill="#2B1538"/><path d="M91 373Q256 406 421 373v76Q256 482 91 449Z" fill="url(#ribbon)"/><path d="M105 390Q256 417 407 390" fill="none" stroke="#FFF7E9" stroke-width="3" opacity=".8"/></g>
+  <text x="256" y="431" fill="#3D1C49" font-family="DejaVu Sans Condensed,Arial Narrow,sans-serif" font-size="28" font-weight="900" text-anchor="middle" textLength="205" lengthAdjust="spacingAndGlyphs">CYCLE MASTER</text>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Practice Master — Chapter 6 badge</title>
+  <desc id="desc">Five rising practice bars lead to a gear inside a purple retro achievement badge.</desc>
+  <defs>
+    <radialGradient id="field" cx="38%" cy="28%" r="82%"><stop offset="0" stop-color="#8A61B5"/><stop offset=".58" stop-color="#68439C"/><stop offset="1" stop-color="#452779"/></radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F8D05C"/><stop offset="1" stop-color="#E49B2F"/></linearGradient>
+    <linearGradient id="ribbon" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF7E9"/><stop offset=".48" stop-color="#FCE1C7"/><stop offset="1" stop-color="#E8B98D"/></linearGradient>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#24102E" flood-opacity=".34"/><feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#24102E" flood-opacity=".45"/></filter>
+    <filter id="iconShadow" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#24102E" flood-opacity=".3"/></filter>
+    <marker id="arrow" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto"><path d="M0 0l7 3.5L0 7Z" fill="#FCE1C7"/></marker>
+  </defs>
+  <g filter="url(#shadow)"><circle cx="256" cy="226" r="202" fill="#2B1538"/><circle cx="256" cy="226" r="193" fill="#4F318B"/><circle cx="256" cy="226" r="186" fill="none" stroke="#FCE1C7" stroke-width="5"/><circle cx="256" cy="226" r="178" fill="url(#field)" stroke="#3D1C49" stroke-width="4"/><circle cx="256" cy="226" r="168" fill="none" stroke="#E8BD3B" stroke-width="2.5"/></g>
+  <path d="M96 142A178 178 0 0 1 356 68" fill="none" stroke="#FFF7E9" stroke-width="7" stroke-linecap="round" opacity=".2"/>
+
+  <g filter="url(#iconShadow)" stroke="#3D1C49" stroke-width="7" stroke-linejoin="round">
+    <rect x="104" y="283" width="48" height="57" rx="6" fill="url(#gold)"/>
+    <rect x="160" y="251" width="48" height="89" rx="6" fill="url(#gold)"/>
+    <rect x="216" y="215" width="48" height="125" rx="6" fill="url(#gold)"/>
+    <rect x="272" y="176" width="48" height="164" rx="6" fill="url(#gold)"/>
+    <rect x="328" y="137" width="48" height="203" rx="6" fill="url(#gold)"/>
+    <path d="M92 340h302" fill="none" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <path d="M112 264Q207 243 271 181t93-73" fill="none" stroke="#FCE1C7" stroke-width="8" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <g filter="url(#iconShadow)" transform="translate(333 92)" fill="#E87927" stroke="#3D1C49" stroke-width="7" stroke-linejoin="round">
+    <path d="M-11-42h22l5 16 15-7 15 15-7 15 16 5v22l-16 5 7 15-15 15-15-7-5 16h-22l-5-16-15 7-15-15 7-15-16-5V2l16-5-7-15 15-15 15 7Z"/>
+    <circle r="22" fill="#FCE1C7"/>
+  </g>
+  <g fill="#3D1C49" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" font-weight="800" text-anchor="middle"><text x="128" y="316">1</text><text x="184" y="286">2</text><text x="240" y="251">3</text><text x="296" y="211">4</text><text x="352" y="173">5</text></g>
+
+  <g filter="url(#shadow)" stroke="#3D1C49" stroke-width="8" stroke-linejoin="round"><path d="M104 384L48 374l25 30-22 34 62-5z" fill="#E87927"/><path d="M408 384l56-10-25 30 22 34-62-5z" fill="#E87927"/><path d="M104 384l33 17-24 32 2-43ZM408 384l-33 17 24 32-2-43Z" fill="#B9532A"/><path d="M91 373Q256 406 421 373v76Q256 482 91 449Z" fill="url(#ribbon)"/><path d="M105 390Q256 417 407 390" fill="none" stroke="#FFF7E9" stroke-width="3" opacity=".8"/></g>
+  <text x="256" y="431" fill="#3D1C49" font-family="DejaVu Sans Condensed,Arial Narrow,sans-serif" font-size="28" font-weight="900" text-anchor="middle" textLength="225" lengthAdjust="spacingAndGlyphs">PRACTICE MASTER</text>
+</svg>

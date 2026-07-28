@@ -386,6 +386,8 @@ In the next chapter, we will define the core principles of SysOps Framework: the
 
 **🎮 Gamification Element - Chapter 1 Badge**
 
+![Challenge Identifier badge](../../assets/badges/chapter-01.svg)
+
 Complete the “Sprint vs. Reality” exercise and identify three ways your current planning method hides or distorts operational work to earn the **Challenge Identifier** badge.
 
 **📚 Additional Resources**

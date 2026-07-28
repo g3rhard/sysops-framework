@@ -7,3 +7,35 @@ $fa-var-times: fa.$var-times;
 @function fa-content($var) {
   @return fa.fa-content($var);
 }
+
+// Keep chapter achievements compact: badge in the first column, earning
+// description in the second. The source remains ordinary Markdown so Pandoc
+// can include the same content in PDF and EPUB builds.
+.td-content {
+  > p:has(> img.achievement-badge) {
+    float: left;
+    width: 96px;
+    margin: 0 1rem 0 0;
+    line-height: 0;
+  }
+
+  img.achievement-badge {
+    display: block;
+    width: 96px !important;
+    height: 96px;
+    object-fit: contain;
+  }
+
+  > p:has(> img.achievement-badge) + p {
+    display: flex;
+    align-items: center;
+    width: auto;
+    max-width: none;
+    min-height: 96px;
+    margin-top: 0;
+  }
+
+  > p:has(> img.achievement-badge) + p + hr {
+    clear: both;
+  }
+}

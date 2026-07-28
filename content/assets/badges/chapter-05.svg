@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Implementation Planner — Chapter 5 badge</title>
+  <desc id="desc">A five-step roadmap climbs toward a flag inside an orange retro achievement badge.</desc>
+  <defs>
+    <radialGradient id="field" cx="38%" cy="28%" r="82%"><stop offset="0" stop-color="#F7B445"/><stop offset=".58" stop-color="#F08A31"/><stop offset="1" stop-color="#D55A2D"/></radialGradient>
+    <linearGradient id="cream" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF7E9"/><stop offset="1" stop-color="#E9BD94"/></linearGradient>
+    <linearGradient id="ribbon" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF7E9"/><stop offset=".48" stop-color="#FCE1C7"/><stop offset="1" stop-color="#E8B98D"/></linearGradient>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#24102E" flood-opacity=".34"/><feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#24102E" flood-opacity=".45"/></filter>
+    <filter id="iconShadow" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#24102E" flood-opacity=".3"/></filter>
+    <marker id="arrow" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto"><path d="M0 0l7 3.5L0 7Z" fill="#3D1C49"/></marker>
+  </defs>
+  <g filter="url(#shadow)"><circle cx="256" cy="226" r="202" fill="#2B1538"/><circle cx="256" cy="226" r="193" fill="#4F318B"/><circle cx="256" cy="226" r="186" fill="none" stroke="#FCE1C7" stroke-width="5"/><circle cx="256" cy="226" r="178" fill="url(#field)" stroke="#3D1C49" stroke-width="4"/><circle cx="256" cy="226" r="168" fill="none" stroke="#4F318B" stroke-width="2.5"/></g>
+  <path d="M96 142A178 178 0 0 1 356 68" fill="none" stroke="#FFF7E9" stroke-width="7" stroke-linecap="round" opacity=".22"/>
+
+  <path d="M110 321C160 288 171 266 202 252c36-16 42-47 72-62 31-16 46-29 86-73" fill="none" stroke="#3D1C49" stroke-width="10" stroke-linecap="round" stroke-dasharray="13 13" marker-end="url(#arrow)"/>
+  <g filter="url(#iconShadow)" stroke="#3D1C49" stroke-width="7" stroke-linejoin="round">
+    <rect x="100" y="285" width="61" height="53" rx="7" fill="#E8BD3B"/>
+    <rect x="161" y="249" width="61" height="89" rx="7" fill="url(#cream)"/>
+    <rect x="222" y="211" width="61" height="127" rx="7" fill="#DB4C46"/>
+    <rect x="283" y="171" width="61" height="167" rx="7" fill="#4F318B"/>
+    <path d="M344 338V109" fill="none" stroke-width="10"/>
+    <path d="M349 119h74l-19 29 19 29h-74Z" fill="#DB4C46"/>
+  </g>
+  <g fill="#3D1C49" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" font-weight="800" text-anchor="middle">
+    <text x="130" y="317">1</text><text x="191" y="286">2</text><text x="252" y="252" fill="#FCE1C7">3</text><text x="313" y="214" fill="#FCE1C7">4</text>
+  </g>
+  <g fill="none" stroke="#F8D9BD" stroke-width="5" stroke-linecap="round"><path d="M99 145h31M106 126l17 17M397 244h29M402 221l15 16"/></g>
+
+  <g filter="url(#shadow)" stroke="#3D1C49" stroke-width="8" stroke-linejoin="round"><path d="M104 384L48 374l25 30-22 34 62-5z" fill="#DB4C46"/><path d="M408 384l56-10-25 30 22 34-62-5z" fill="#DB4C46"/><path d="M104 384l33 17-24 32 2-43ZM408 384l-33 17 24 32-2-43Z" fill="#8F2B3B"/><path d="M91 373Q256 406 421 373v76Q256 482 91 449Z" fill="url(#ribbon)"/><path d="M105 390Q256 417 407 390" fill="none" stroke="#FFF7E9" stroke-width="3" opacity=".8"/></g>
+  <text x="256" y="431" fill="#3D1C49" font-family="DejaVu Sans Condensed,Arial Narrow,sans-serif" font-size="22" font-weight="900" letter-spacing=".3" text-anchor="middle" textLength="270" lengthAdjust="spacingAndGlyphs">IMPLEMENTATION PLANNER</text>
+</svg>

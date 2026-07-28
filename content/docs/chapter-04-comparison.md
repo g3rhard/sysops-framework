@@ -479,6 +479,9 @@ In the next chapter, we'll dive into the practical aspects of implementing the S
 ---
 
 **🎮 Gamification Element - Chapter 4 Badge**
+
+![Framework Analyst badge](../../assets/badges/chapter-04.svg)
+
 _Complete the work type analysis for your team and create a framework selection recommendation to earn the "Framework Analyst" badge._
 
 ---

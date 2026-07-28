@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Challenge Navigator — Chapter 11 badge</title>
+  <desc id="desc">A ship wheel charts a safe route between rocks toward a lighthouse inside a purple retro achievement badge.</desc>
+  <defs>
+    <radialGradient id="field" cx="38%" cy="28%" r="82%"><stop offset="0" stop-color="#8960B4"/><stop offset=".58" stop-color="#5F3D8F"/><stop offset="1" stop-color="#30163D"/></radialGradient>
+    <linearGradient id="route" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E8BD3B"/><stop offset="1" stop-color="#E87927"/></linearGradient>
+    <linearGradient id="cream" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF7E9"/><stop offset=".55" stop-color="#FCE1C7"/><stop offset="1" stop-color="#E9BD94"/></linearGradient>
+    <linearGradient id="ribbon" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF7E9"/><stop offset=".48" stop-color="#FCE1C7"/><stop offset="1" stop-color="#E8B98D"/></linearGradient>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#24102E" flood-opacity=".34"/><feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#24102E" flood-opacity=".45"/></filter>
+    <filter id="iconShadow" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#24102E" flood-opacity=".3"/></filter>
+  </defs>
+  <g filter="url(#shadow)"><circle cx="256" cy="226" r="202" fill="#2B1538"/><circle cx="256" cy="226" r="193" fill="#4F318B"/><circle cx="256" cy="226" r="186" fill="none" stroke="#FCE1C7" stroke-width="5"/><circle cx="256" cy="226" r="178" fill="url(#field)" stroke="#3D1C49" stroke-width="4"/><circle cx="256" cy="226" r="168" fill="none" stroke="#E87927" stroke-width="2.5"/></g>
+  <path d="M96 142A178 178 0 0 1 356 68" fill="none" stroke="#FFF7E9" stroke-width="7" stroke-linecap="round" opacity=".2"/>
+
+  <g fill="#2D1638" stroke="#3D1C49" stroke-width="5" stroke-linejoin="round"><path d="M80 330l53-67 29 23 34-15 34 59Z"/><path d="M306 330l38-57 25 12 28-50 39 95Z"/></g>
+  <path filter="url(#iconShadow)" d="M121 340c67-31 102-9 128-42 31-40-33-54-5-91 19-25 62-16 95-40" fill="none" stroke="url(#route)" stroke-width="24" stroke-linecap="round"/>
+  <g filter="url(#iconShadow)" stroke="#3D1C49" stroke-width="7" stroke-linejoin="round">
+    <path d="M348 190l11-85h36l11 85Z" fill="url(#cream)"/><path d="M355 105l22-25 22 25Z" fill="#DB4C46"/><rect x="369" y="120" width="17" height="28" fill="#E8BD3B"/>
+    <path d="M348 190h58" fill="none" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(218 191)" fill="none" stroke="#FCE1C7" stroke-width="9" stroke-linecap="round">
+    <circle r="66"/><circle r="20"/><path d="M0-87v42M0 45v42M-87 0h42M45 0h42M-61-61l30 30M31 31l30 30M61-61L31-31M-31 31l-30 30"/>
+  </g>
+  <g fill="none" stroke="#E8BD3B" stroke-width="5" stroke-linecap="round"><path d="M416 114l20-9M416 130h23M337 114l-20-9"/></g>
+
+  <g filter="url(#shadow)" stroke="#3D1C49" stroke-width="8" stroke-linejoin="round"><path d="M104 384L48 374l25 30-22 34 62-5z" fill="#E87927"/><path d="M408 384l56-10-25 30 22 34-62-5z" fill="#E87927"/><path d="M104 384l33 17-24 32 2-43ZM408 384l-33 17 24 32-2-43Z" fill="#B9532A"/><path d="M91 373Q256 406 421 373v76Q256 482 91 449Z" fill="url(#ribbon)"/><path d="M105 390Q256 417 407 390" fill="none" stroke="#FFF7E9" stroke-width="3" opacity=".8"/></g>
+  <text x="256" y="431" fill="#3D1C49" font-family="DejaVu Sans Condensed,Arial Narrow,sans-serif" font-size="24" font-weight="900" letter-spacing=".3" text-anchor="middle" textLength="260" lengthAdjust="spacingAndGlyphs">CHALLENGE NAVIGATOR</text>
+</svg>

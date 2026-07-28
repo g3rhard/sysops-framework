@@ -513,6 +513,9 @@ In the next chapter, we'll explore the tools and technologies that support effec
 ---
 
 **🎮 Gamification Element - Chapter 7 Badge**
+
+![Metrics Master badge](../../assets/badges/chapter-07.svg)
+
 _Design a comprehensive metrics dashboard for your team including all four categories and earn the "Metrics Master" badge._
 
 ---

@@ -621,6 +621,9 @@ In the next chapter, we'll explore risk management and compliance considerations
 ---
 
 **🎮 Gamification Element - Chapter 9 Badge**
+
+![Culture Champion badge](../../assets/badges/chapter-09.svg)
+
 _Complete a cultural assessment for your organization and create a change management plan to earn the "Culture Champion" badge._
 
 ---

@@ -635,6 +635,9 @@ In the next chapter, we'll explore common challenges and limitations of the SysO
 ---
 
 **🎮 Gamification Element - Chapter 10 Badge**
+
+![Risk Guardian badge](../../assets/badges/chapter-10.svg)
+
 _Complete a comprehensive risk assessment for your environment and earn the "Risk Guardian" badge._
 
 ---

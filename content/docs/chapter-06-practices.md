@@ -1144,6 +1144,9 @@ In the next chapter, we'll explore the metrics and measurement approaches that h
 ---
 
 **🎮 Gamification Element - Chapter 6 Badge**
+
+![Practice Master badge](../../assets/badges/chapter-06.svg)
+
 _Assess your team's maturity level for each practice and create an improvement plan to earn the "Practice Master" badge._
 
 ---

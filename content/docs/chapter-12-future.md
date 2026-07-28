@@ -493,6 +493,9 @@ The journey toward operational excellence is ongoing, and the framework provides
 ---
 
 **🎮 Gamification Element - Chapter 12 Badge**
+
+![Framework Visionary badge](../../assets/badges/chapter-12.svg)
+
 _Complete your framework implementation journey and commit to ongoing contribution to earn the "Framework Visionary" badge._
 
 ---

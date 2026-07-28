@@ -679,6 +679,9 @@ In the next chapter, we'll explore the cultural and organizational consideration
 ---
 
 **🎮 Gamification Element - Chapter 8 Badge**
+
+![Tool Architect badge](../../assets/badges/chapter-08.svg)
+
 _Create a comprehensive tool evaluation matrix for your environment and earn the "Tool Architect" badge._
 
 ---

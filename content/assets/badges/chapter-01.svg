@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Challenge Identifier — Chapter 1 badge</title>
+  <desc id="desc">A magnifying glass reveals a broken workflow board inside a retro sunset achievement badge.</desc>
+  <defs>
+    <radialGradient id="field" cx="38%" cy="28%" r="82%">
+      <stop offset="0" stop-color="#F87561"/>
+      <stop offset=".58" stop-color="#EB554D"/>
+      <stop offset="1" stop-color="#AF3736"/>
+    </radialGradient>
+    <linearGradient id="cream" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFF7E9"/><stop offset=".52" stop-color="#FCE1C7"/><stop offset="1" stop-color="#E9BD94"/>
+    </linearGradient>
+    <linearGradient id="ribbon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF7E9"/><stop offset=".48" stop-color="#FCE1C7"/><stop offset="1" stop-color="#E8B98D"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFF7E9" stop-opacity=".48"/><stop offset="1" stop-color="#E8BD3B" stop-opacity=".18"/>
+    </linearGradient>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#24102E" flood-opacity=".34"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#24102E" flood-opacity=".45"/>
+    </filter>
+    <filter id="iconShadow" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#24102E" flood-opacity=".3"/>
+    </filter>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="11" result="noise"/>
+      <feComposite in="noise" in2="SourceGraphic" operator="in" result="texture"/>
+      <feBlend in="SourceGraphic" in2="texture" mode="soft-light"/>
+    </filter>
+    <clipPath id="disc"><circle cx="256" cy="225" r="176"/></clipPath>
+  </defs>
+
+  <g filter="url(#shadow)">
+    <circle cx="256" cy="225" r="202" fill="#2B1538"/>
+    <circle cx="256" cy="225" r="193" fill="#4F318B"/>
+    <circle cx="256" cy="225" r="186" fill="none" stroke="#FCE1C7" stroke-width="5"/>
+    <circle cx="256" cy="225" r="178" fill="url(#field)" stroke="#3D1C49" stroke-width="4"/>
+    <circle cx="256" cy="225" r="168" fill="none" stroke="#FCE1C7" stroke-width="2.5" opacity=".9"/>
+  </g>
+
+  <g clip-path="url(#disc)">
+    <circle cx="256" cy="225" r="176" fill="url(#field)" filter="url(#grain)" opacity=".2"/>
+    <path d="M94 113A176 176 0 0 1 367 76" fill="none" stroke="#FFF7E9" stroke-width="7" stroke-linecap="round" opacity=".18"/>
+    <path d="M68 328Q156 299 247 319t197-9v92H68Z" fill="#9A3040" opacity=".28"/>
+    <g fill="none" stroke="#3D1C49" stroke-width="5" stroke-linecap="round" opacity=".9">
+      <path d="M105 121l21 18M387 121l-21 18M84 244h31M397 244h31M121 311l21-12M370 299l21 12"/>
+    </g>
+    <g fill="#E8BD3B" opacity=".95"><circle cx="103" cy="190" r="5"/><circle cx="405" cy="190" r="5"/><path d="M105 276l5 11 12 5-12 5-5 12-5-12-12-5 12-5Z"/></g>
+  </g>
+
+  <g filter="url(#iconShadow)" stroke="#3D1C49" stroke-linejoin="round">
+    <rect x="116" y="132" width="280" height="190" rx="14" fill="url(#cream)" stroke-width="9"/>
+    <path d="M116 177h280M186 132v190M256 132v190M326 132v190" fill="none" stroke-width="5"/>
+    <g fill="#3D1C49" stroke="none" font-family="'DejaVu Sans Condensed','Arial Narrow',sans-serif" font-size="10" font-weight="800" text-anchor="middle">
+      <text x="151" y="160">TO DO</text><text x="221" y="160" font-size="8.5">IN PROGRESS</text><text x="291" y="160">TESTING</text><text x="361" y="160">DONE</text>
+    </g>
+    <g fill="#4F318B" stroke-width="2.5">
+      <rect x="132" y="197" width="42" height="30" rx="4"/><rect x="132" y="246" width="42" height="30" rx="4"/>
+      <rect x="202" y="199" width="42" height="30" rx="4"/><rect x="272" y="243" width="42" height="30" rx="4"/>
+      <rect x="342" y="198" width="42" height="30" rx="4"/><rect x="342" y="247" width="42" height="30" rx="4"/>
+    </g>
+    <g stroke="#FCE1C7" stroke-width="3" stroke-linecap="round"><path d="M141 209h23M141 217h17M211 211h22M281 255h22M351 210h23M351 259h20"/></g>
+    <path d="M259 133l-14 29 17 21-22 26 23 26-21 27 17 22-18 38" fill="none" stroke="#DB4C46" stroke-width="13"/>
+    <path d="M259 133l-5 29 15 21-21 26 22 26-21 27 15 22-12 38" fill="none" stroke="#FCE1C7" stroke-width="3" opacity=".9"/>
+  </g>
+
+  <g filter="url(#iconShadow)" stroke="#3D1C49">
+    <circle cx="263" cy="238" r="68" fill="url(#glass)" stroke-width="11"/>
+    <circle cx="263" cy="238" r="56" fill="none" stroke="#FFF7E9" stroke-width="4" opacity=".92"/>
+    <path d="M310 287l66 63" fill="none" stroke-width="24" stroke-linecap="round"/>
+    <path d="M315 292l58 55" fill="none" stroke="#4F318B" stroke-width="10" stroke-linecap="round"/>
+    <path d="M222 201A56 56 0 0 1 246 185" fill="none" stroke="#FFF" stroke-width="7" stroke-linecap="round" opacity=".55"/>
+  </g>
+  <g filter="url(#iconShadow)" stroke="#3D1C49" stroke-width="6" stroke-linejoin="round">
+    <path d="M345 309c11-12 24-10 32 0l28 34c8 10 7 24-3 32-10 8-23 7-32-2l-33-34c-8-9-5-22 8-30Z" fill="#EB5A50"/>
+    <path d="M377 310l18 17M366 320l19 18M357 331l17 17" fill="none" stroke="#FCE1C7" stroke-width="4" stroke-linecap="round"/>
+    <path d="M393 367l23 20 18-24-25-17Z" fill="#FCE1C7"/>
+  </g>
+
+  <g filter="url(#shadow)" stroke="#3D1C49" stroke-width="8" stroke-linejoin="round">
+    <path d="M105 383L45 372l28 32-23 38 70-10-2-43Z" fill="url(#ribbon)"/>
+    <path d="M407 383l60-11-28 32 23 38-70-10 2-43Z" fill="url(#ribbon)"/>
+    <path d="M105 383l32 18-19 31 1-43ZM407 383l-32 18 19 31-1-43Z" fill="#C78D72"/>
+    <path d="M91 372Q256 405 421 372v79Q256 486 91 451Z" fill="url(#ribbon)"/>
+    <path d="M104 389Q256 417 408 389" fill="none" stroke="#FFF7E9" stroke-width="3" opacity=".8"/>
+  </g>
+  <text x="256" y="434" fill="#3D1C49" font-family="'DejaVu Sans Condensed','Liberation Sans Narrow','Arial Narrow',sans-serif" font-size="27" font-weight="900" letter-spacing=".4" text-anchor="middle" textLength="245" lengthAdjust="spacingAndGlyphs">CHALLENGE IDENTIFIER</text>
+</svg>

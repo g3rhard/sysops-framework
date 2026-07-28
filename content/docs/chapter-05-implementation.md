@@ -462,6 +462,9 @@ In the next chapter, we'll explore the essential management practices that suppo
 ---
 
 **🎮 Gamification Element - Chapter 5 Badge**
+
+![Implementation Planner badge](../../assets/badges/chapter-05.svg)
+
 _Create a detailed implementation plan for your team, including timeline, resources, and success criteria, to earn the "Implementation Planner" badge._
 
 ---

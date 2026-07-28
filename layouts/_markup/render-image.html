@@ -1,0 +1,5 @@
+{{- $isBadge := strings.Contains .Destination "/badges/chapter-" -}}
+<img src="{{ .Destination | safeURL }}"
+     alt="{{ .Text }}"
+     {{- with .Title }} title="{{ . }}"{{ end -}}
+     {{- if $isBadge }} class="achievement-badge" width="96" height="96"{{ end -}}>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Metrics Master — Chapter 7 badge</title>
+  <desc id="desc">A four-part operations dashboard surrounds a service pulse inside a golden retro achievement badge.</desc>
+  <defs>
+    <radialGradient id="field" cx="38%" cy="28%" r="82%"><stop offset="0" stop-color="#F9D765"/><stop offset=".58" stop-color="#F0B83A"/><stop offset="1" stop-color="#DB6B28"/></radialGradient>
+    <linearGradient id="cream" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF7E9"/><stop offset=".55" stop-color="#FCE1C7"/><stop offset="1" stop-color="#E9BD94"/></linearGradient>
+    <linearGradient id="ribbon" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF7E9"/><stop offset=".48" stop-color="#FCE1C7"/><stop offset="1" stop-color="#E8B98D"/></linearGradient>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#24102E" flood-opacity=".34"/><feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#24102E" flood-opacity=".45"/></filter>
+    <filter id="iconShadow" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#24102E" flood-opacity=".3"/></filter>
+  </defs>
+  <g filter="url(#shadow)"><circle cx="256" cy="226" r="202" fill="#2B1538"/><circle cx="256" cy="226" r="193" fill="#4F318B"/><circle cx="256" cy="226" r="186" fill="none" stroke="#FCE1C7" stroke-width="5"/><circle cx="256" cy="226" r="178" fill="url(#field)" stroke="#3D1C49" stroke-width="4"/><circle cx="256" cy="226" r="168" fill="none" stroke="#4F318B" stroke-width="2.5"/></g>
+  <path d="M96 142A178 178 0 0 1 356 68" fill="none" stroke="#FFF7E9" stroke-width="7" stroke-linecap="round" opacity=".24"/>
+
+  <g filter="url(#iconShadow)" stroke="#3D1C49" stroke-width="7" stroke-linejoin="round">
+    <rect x="112" y="101" width="288" height="253" rx="22" fill="url(#cream)"/>
+    <path d="M135 122h205" fill="none" stroke="#FFF" stroke-width="6" stroke-linecap="round" opacity=".45"/>
+    <path d="M256 101v253M112 227h288" fill="none" stroke-width="6"/>
+    <g fill="#DB4C46"><rect x="143" y="175" width="24" height="31" rx="3"/><rect x="177" y="146" width="24" height="60" rx="3"/><rect x="211" y="123" width="24" height="83" rx="3"/></g>
+    <path d="M286 187l31-31 28 18 28-47" fill="none" stroke="#E87927" stroke-width="9" stroke-linecap="round"/>
+    <g fill="#E87927"><circle cx="286" cy="187" r="7"/><circle cx="317" cy="156" r="7"/><circle cx="345" cy="174" r="7"/><circle cx="373" cy="127" r="7"/></g>
+    <path d="M179 249a50 50 0 1 0 50 50h-50Z" fill="#4F318B"/>
+    <path d="M190 239a50 50 0 0 1 50 50h-50Z" fill="#DB4C46"/>
+    <g fill="#4F318B" stroke="none"><circle cx="294" cy="265" r="8"/><circle cx="294" cy="299" r="8"/><circle cx="294" cy="333" r="8"/><rect x="314" y="258" width="57" height="12" rx="6"/><rect x="314" y="292" width="46" height="12" rx="6"/><rect x="314" y="326" width="64" height="12" rx="6"/></g>
+    <circle cx="256" cy="227" r="48" fill="#FFF7E9" stroke-width="7"/>
+    <path d="M220 228h17l9-25 17 50 13-35 9 10h14" fill="none" stroke="#3D1C49" stroke-width="8" stroke-linecap="round"/>
+  </g>
+
+  <g filter="url(#shadow)" stroke="#3D1C49" stroke-width="8" stroke-linejoin="round"><path d="M104 384L48 374l25 30-22 34 62-5z" fill="#DB4C46"/><path d="M408 384l56-10-25 30 22 34-62-5z" fill="#DB4C46"/><path d="M104 384l33 17-24 32 2-43ZM408 384l-33 17 24 32-2-43Z" fill="#8F2B3B"/><path d="M91 373Q256 406 421 373v76Q256 482 91 449Z" fill="url(#ribbon)"/><path d="M105 390Q256 417 407 390" fill="none" stroke="#FFF7E9" stroke-width="3" opacity=".8"/></g>
+  <text x="256" y="431" fill="#3D1C49" font-family="DejaVu Sans Condensed,Arial Narrow,sans-serif" font-size="29" font-weight="900" text-anchor="middle" textLength="220" lengthAdjust="spacingAndGlyphs">METRICS MASTER</text>
+</svg>

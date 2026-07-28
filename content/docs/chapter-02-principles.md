@@ -361,6 +361,9 @@ In the next chapter, we'll lay out the daily, weekly, and monthly cycles in deta
 ---
 
 **🎮 Gamification Element - Chapter 2 Badge**
+
+![Principle Navigator badge](../../assets/badges/chapter-02.svg)
+
 _Complete the principle application exercise and identify how each principle would apply in your own work environment to earn the "Principle Navigator" badge._
 
 ---

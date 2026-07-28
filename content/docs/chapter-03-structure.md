@@ -571,6 +571,9 @@ In the next chapter, we'll compare how this multi-cycle approach differs from tr
 ---
 
 **🎮 Gamification Element - Chapter 3 Badge**
+
+![Cycle Master badge](../../assets/badges/chapter-03.svg)
+
 _Plan a complete set of activities for each cycle for your team environment to earn the "Cycle Master" badge._
 
 ---

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Principle Navigator — Chapter 2 badge</title>
+  <desc id="desc">A compass points toward three guiding stars inside a purple retro achievement badge.</desc>
+  <defs>
+    <radialGradient id="field" cx="38%" cy="28%" r="82%">
+      <stop offset="0" stop-color="#8A61B5"/><stop offset=".58" stop-color="#5E3C8E"/><stop offset="1" stop-color="#32173F"/>
+    </radialGradient>
+    <linearGradient id="cream" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF7E9"/><stop offset=".55" stop-color="#FCE1C7"/><stop offset="1" stop-color="#E9BD94"/></linearGradient>
+    <linearGradient id="ribbon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF7E9"/><stop offset=".48" stop-color="#FCE1C7"/><stop offset="1" stop-color="#E8B98D"/>
+    </linearGradient>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#24102E" flood-opacity=".34"/><feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#24102E" flood-opacity=".45"/></filter>
+    <filter id="iconShadow" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#24102E" flood-opacity=".3"/></filter>
+  </defs>
+
+  <g filter="url(#shadow)">
+    <circle cx="256" cy="226" r="202" fill="#2B1538"/>
+    <circle cx="256" cy="226" r="193" fill="#4F318B"/>
+    <circle cx="256" cy="226" r="186" fill="none" stroke="#FCE1C7" stroke-width="5"/>
+    <circle cx="256" cy="226" r="178" fill="url(#field)" stroke="#3D1C49" stroke-width="4"/>
+    <circle cx="256" cy="226" r="168" fill="none" stroke="#E8BD3B" stroke-width="2.5" opacity=".95"/>
+  </g>
+  <path d="M96 142A178 178 0 0 1 356 68" fill="none" stroke="#FFF7E9" stroke-width="7" stroke-linecap="round" opacity=".2"/>
+
+  <g fill="none" stroke="#F8D9BD" stroke-width="5" stroke-linecap="round" opacity=".75">
+    <path d="M102 146l18 12M392 146l-18 12M90 264h25M397 264h25"/>
+  </g>
+
+  <g filter="url(#iconShadow)" stroke="#3D1C49" stroke-linejoin="round">
+    <circle cx="238" cy="239" r="112" fill="url(#cream)" stroke-width="11"/>
+    <circle cx="238" cy="239" r="94" fill="none" stroke="#4F318B" stroke-width="5"/>
+    <path d="M169 177a94 94 0 0 1 101-27" fill="none" stroke="#FFF" stroke-width="7" stroke-linecap="round" opacity=".45"/>
+    <path d="M238 132v20M238 326v20M131 239h20M325 239h20" stroke-width="8" stroke-linecap="round"/>
+    <path d="M238 164l24 51 51 24-51 24-24 51-24-51-51-24 51-24Z" fill="#4F318B" stroke-width="5"/>
+    <path d="M238 239L321 143l-42 116Z" fill="#E8BD3B" stroke-width="6"/>
+    <path d="M238 239l-83 96 42-116Z" fill="#DB4C46" stroke-width="6"/>
+    <circle cx="238" cy="239" r="16" fill="#FCE1C7" stroke-width="7"/>
+  </g>
+
+  <g fill="#E8BD3B" stroke="#3D1C49" stroke-width="4" stroke-linejoin="round">
+    <path d="M365 117l8 19 20 7-20 8-8 20-8-20-20-8 20-7Z"/>
+    <path d="M405 196l5 12 13 5-13 5-5 13-5-13-13-5 13-5Z"/>
+    <circle cx="330" cy="105" r="5" stroke="none"/>
+  </g>
+  <path d="M274 188Q310 139 351 128" fill="none" stroke="#F8D9BD" stroke-width="5" stroke-dasharray="8 10" stroke-linecap="round"/>
+
+  <g filter="url(#shadow)" stroke="#3D1C49" stroke-width="8" stroke-linejoin="round">
+    <path d="M104 384L48 374l25 30-22 34 62-5z" fill="#DB4C46"/>
+    <path d="M408 384l56-10-25 30 22 34-62-5z" fill="#DB4C46"/>
+    <path d="M104 384l33 17-24 32 2-43ZM408 384l-33 17 24 32-2-43Z" fill="#8F2B3B"/>
+    <path d="M91 373Q256 406 421 373v76Q256 482 91 449Z" fill="url(#ribbon)"/>
+    <path d="M105 390Q256 417 407 390" fill="none" stroke="#FFF7E9" stroke-width="3" opacity=".8"/>
+  </g>
+  <text x="256" y="431" fill="#3D1C49" font-family="DejaVu Sans Condensed,Arial Narrow,sans-serif" font-size="25" font-weight="900" letter-spacing=".4" text-anchor="middle" textLength="255" lengthAdjust="spacingAndGlyphs">PRINCIPLE NAVIGATOR</text>
+</svg>

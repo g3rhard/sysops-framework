@@ -564,6 +564,9 @@ In the final chapter, we'll explore the future evolution of the SysOps Framework
 ---
 
 **🎮 Gamification Element - Chapter 11 Badge**
+
+![Challenge Navigator badge](../../assets/badges/chapter-11.svg)
+
 _Identify potential implementation challenges for your environment and create mitigation strategies to earn the "Challenge Navigator" badge._
 
 ---

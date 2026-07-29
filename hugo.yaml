@@ -96,15 +96,12 @@ services:
 # Navigation
 menu:
   main:
-    - name: "Documentation"
+    - name: "Book"
       url: "/docs/"
       weight: 10
     - name: "Quick Start"
       url: "/docs/getting-started/"
       weight: 20
-    - name: "Community"
-      url: "/community/"
-      weight: 30
 
 # Markdown configuration
 markup:

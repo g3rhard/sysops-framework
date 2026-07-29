@@ -67,10 +67,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Pandoc and LaTeX
+      - name: Setup Pandoc, LaTeX, and SVG support
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -yqq pandoc texlive-latex-base texlive-fonts-recommended texlive-extra-utils texlive-latex-extra texlive-science
+          sudo apt-get install -yqq librsvg2-bin pandoc texlive-latex-base texlive-fonts-recommended texlive-extra-utils texlive-latex-extra texlive-science
 
       - name: Create output directories
         run: |

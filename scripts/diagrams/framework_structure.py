@@ -1,258 +1,363 @@
-"""
-SysOps Framework Structure Diagram for Chapter 3
-
-Portrait A4 layout: the three operational cycles (Daily / Weekly / Monthly) are
-stacked as full-width cards, linked by escalate / aggregate flow arrows and a
-monthly feedback loop.  A supporting-practices panel underpins all cycles.
-"""
+"""Generate the Chapter 3 multi-cycle operating model diagram."""
 
 import os
 import sys
 
-sys.path.insert(0, os.path.dirname(__file__))
-from _design_system import (
-    COLORS, FONTS, setup_figure, set_lims,
-    draw_card, _rounded_rect, label_badge, arrow_curved, arrow_dashed,
-)
 import matplotlib.patches as mpatches
 
+sys.path.insert(0, os.path.dirname(__file__))
+from _design_system import COLORS, FONTS, _rounded_rect, arrow_curved, setup_figure, set_lims
 
-# ── Layout constants (A4 portrait) ────────────────────────────────────────────
-
-_FIG_W, _FIG_H = 8.5, 11.0
-_XLIM = (0.0, 8.5)
-_YLIM = (0.0, 11.0)
-
-# Three cycle cards, stacked
-_CARD_X      = 0.35
-_CARD_W      = 7.10
-_CARD_TOP    = 10.00     # top edge of first card
-_CARD_H      = 1.66
-_CARD_GAP    = 0.56      # vertical gap between cards (room for flow arrows)
-_HEADER_H    = 0.46
-_RADIUS      = 0.15
-
-_FB_X        = 7.95      # x of the feedback loop / right channel
-
-# Supporting-practices panel
-_SUP_X   = 0.35
-_SUP_W   = 7.10
-_SUP_TOP = 3.40
-_SUP_BOT = 0.40
-_SUP_HEADER_H = 0.50
-
-
-def _card_top(i):
-    return _CARD_TOP - i * (_CARD_H + _CARD_GAP)
-
-
-# ── Cycle data ────────────────────────────────────────────────────────────────
 
 _CYCLES = [
     {
-        "name":    "Daily Operations Cycle",
-        "cadence": "24 hours",
-        "color":   COLORS["daily"],
-        "items": [
-            "Incident response & triage",
-            "Urgent maintenance tasks",
-            "Service health monitoring",
-            "Team handoffs & briefings",
-        ],
+        "name": "DAILY OPERATIONS",
+        "cadence": "24-48 HOURS",
+        "owner": "Owner: on-call engineer / team",
+        "color": COLORS["daily"],
+        "input": "Health signals, incidents, urgent requests",
+        "phases": ["Monitor", "Respond", "Document", "Review"],
+        "outcome": "Stable services and usable evidence",
+        "rule": "Act now when service or safety is at risk.",
     },
     {
-        "name":    "Weekly Improvement Cycle",
-        "cadence": "7 days",
-        "color":   COLORS["weekly"],
-        "items": [
-            "Process improvement tasks",
-            "Automation & tooling work",
-            "Knowledge sharing sessions",
-            "Root cause analysis reviews",
-        ],
+        "name": "WEEKLY IMPROVEMENT",
+        "cadence": "7 DAYS",
+        "owner": "Owner: rotating improvement lead",
+        "color": COLORS["weekly"],
+        "input": "Recurring pain, toil, and action items",
+        "phases": ["Plan", "Execute", "Measure", "Improve"],
+        "outcome": "Less toil and fewer repeated failures",
+        "rule": "Protect one improvement that can finish this week.",
     },
     {
-        "name":    "Monthly Strategy Cycle",
-        "cadence": "30 days",
-        "color":   COLORS["monthly"],
-        "items": [
-            "Capacity & resource planning",
-            "Architecture review board",
-            "Performance trend analysis",
-            "Goal-setting & OKR reviews",
-        ],
-    },
-]
-
-# Pre-wrapped text so no auto-splitting causes crowding
-_SUPPORT_ITEMS = [
-    {
-        "name":  "Documentation\n& Runbooks",
-        "line1": "Living docs & runbooks",
-        "line2": "for all key procedures",
-    },
-    {
-        "name":  "Metrics &\nMonitoring",
-        "line1": "SLI / SLO data collection",
-        "line2": "feeding cycle dashboards",
-    },
-    {
-        "name":  "Training &\nDevelopment",
-        "line1": "Skills matrix & certifications",
-        "line2": "cross-training plans",
-    },
-    {
-        "name":  "Feedback\nLoops",
-        "line1": "Retros & post-mortems",
-        "line2": "fed back into all cycles",
+        "name": "MONTHLY STRATEGY",
+        "cadence": "4 WEEKS",
+        "owner": "Owner: team lead / manager",
+        "color": COLORS["monthly"],
+        "input": "Risk, demand, capacity, and business priorities",
+        "phases": ["Assess", "Design", "Implement", "Evaluate"],
+        "outcome": "Decisions, investment, and clear trade-offs",
+        "rule": "Fund work too large or cross-cutting for one week.",
     },
 ]
 
 
-# ── Diagram builder ───────────────────────────────────────────────────────────
+def _draw_cycle_card(ax, x, cycle):
+    y, w, h = 1.8, 4.35, 5.25
+    color = cycle["color"]
+
+    _rounded_rect(
+        ax,
+        x,
+        y,
+        w,
+        h,
+        color=COLORS["surface"],
+        edge_color=color,
+        lw=1.8,
+        radius=0.18,
+        zorder=2,
+    )
+    _rounded_rect(
+        ax,
+        x,
+        y + h - 0.72,
+        w,
+        0.72,
+        color=color,
+        edge_color="none",
+        lw=0,
+        radius=0.18,
+        zorder=3,
+    )
+    ax.add_patch(
+        mpatches.Rectangle(
+            (x, y + h - 0.36),
+            w,
+            0.36,
+            facecolor=color,
+            edgecolor="none",
+            zorder=3,
+        )
+    )
+    ax.text(
+        x + 0.24,
+        y + h - 0.36,
+        cycle["name"],
+        ha="left",
+        va="center",
+        fontsize=12,
+        fontweight="bold",
+        color=COLORS["white"],
+        zorder=4,
+    )
+
+    _rounded_rect(
+        ax,
+        x + 0.25,
+        y + h - 1.25,
+        1.35,
+        0.36,
+        color=color,
+        alpha=0.14,
+        edge_color="none",
+        lw=0,
+        radius=0.16,
+        zorder=3,
+    )
+    ax.text(
+        x + 0.925,
+        y + h - 1.07,
+        cycle["cadence"],
+        ha="center",
+        va="center",
+        fontsize=8.5,
+        fontweight="bold",
+        color=color,
+        zorder=4,
+    )
+    ax.text(
+        x + 1.82,
+        y + h - 1.07,
+        cycle["owner"],
+        ha="left",
+        va="center",
+        fontsize=8.5,
+        color=COLORS["mid"],
+        zorder=4,
+    )
+
+    ax.text(
+        x + 0.25,
+        y + h - 1.72,
+        "INPUT",
+        ha="left",
+        va="center",
+        fontsize=8,
+        fontweight="bold",
+        color=color,
+    )
+    ax.text(
+        x + 0.25,
+        y + h - 2.02,
+        cycle["input"],
+        ha="left",
+        va="center",
+        fontsize=9,
+        color=COLORS["dark"],
+    )
+
+    phase_y = y + h - 2.85
+    phase_gap = 0.10
+    phase_w = (w - 0.5 - 3 * phase_gap) / 4
+    for index, phase in enumerate(cycle["phases"]):
+        phase_x = x + 0.25 + index * (phase_w + phase_gap)
+        _rounded_rect(
+            ax,
+            phase_x,
+            phase_y,
+            phase_w,
+            0.58,
+            color=color,
+            alpha=0.12,
+            edge_color=color,
+            lw=0.8,
+            radius=0.10,
+            zorder=3,
+        )
+        ax.text(
+            phase_x + phase_w / 2,
+            phase_y + 0.29,
+            phase,
+            ha="center",
+            va="center",
+            fontsize=8.2,
+            fontweight="bold",
+            color=color,
+            zorder=4,
+        )
+        if index < 3:
+            ax.text(
+                phase_x + phase_w + phase_gap / 2,
+                phase_y + 0.29,
+                ">",
+                ha="center",
+                va="center",
+                fontsize=9,
+                color=COLORS["muted"],
+                zorder=4,
+            )
+
+    ax.text(
+        x + 0.25,
+        y + 1.62,
+        "OUTCOME",
+        ha="left",
+        va="center",
+        fontsize=8,
+        fontweight="bold",
+        color=color,
+    )
+    ax.text(
+        x + 0.25,
+        y + 1.32,
+        cycle["outcome"],
+        ha="left",
+        va="center",
+        fontsize=9,
+        color=COLORS["dark"],
+    )
+
+    ax.plot(
+        [x + 0.25, x + w - 0.25],
+        [y + 0.92, y + 0.92],
+        color=COLORS["divider"],
+        lw=0.8,
+        zorder=3,
+    )
+    ax.text(
+        x + 0.25,
+        y + 0.55,
+        cycle["rule"],
+        ha="left",
+        va="center",
+        fontsize=8.3,
+        color=COLORS["mid"],
+        style="italic",
+    )
+
 
 def create_diagram():
-    """Create the SysOps framework structure diagram for Chapter 3."""
+    """Create the three-cycle operating model."""
     fig, ax = setup_figure(
-        figsize=(_FIG_W, _FIG_H),
-        title="SysOps Framework: Multi-Cycle Operating Model",
-        title_y=0.975,
+        figsize=(15, 8.5),
+        title="SysOps Framework: Three Cycles, One Operating Model",
+        title_y=0.965,
     )
-    set_lims(ax, _XLIM, _YLIM)
+    set_lims(ax, (0, 15), (0, 8.5))
 
-    card_mid_x = _CARD_X + _CARD_W / 2
+    ax.text(
+        7.5,
+        7.78,
+        "Run simultaneously. Evidence moves upward; priorities flow back into daily work.",
+        ha="center",
+        va="center",
+        fontsize=FONTS["body"],
+        color=COLORS["mid"],
+    )
 
-    # ── Cycle cards (stacked) ────────────────────────────────────────────────
-    for idx, cycle in enumerate(_CYCLES):
-        color  = cycle["color"]
-        top    = _card_top(idx)
-        bottom = top - _CARD_H
+    card_x = [0.55, 5.325, 10.10]
+    for x, cycle in zip(card_x, _CYCLES):
+        _draw_cycle_card(ax, x, cycle)
 
-        draw_card(ax, _CARD_X, bottom, _CARD_W, _CARD_H, color,
-                  title=None, radius=_RADIUS)
+    ax.annotate(
+        "",
+        xy=(5.22, 4.45),
+        xytext=(4.92, 4.45),
+        arrowprops=dict(
+            arrowstyle="-|>",
+            color=COLORS["weekly"],
+            lw=2.2,
+            mutation_scale=17,
+        ),
+        zorder=6,
+    )
+    ax.text(
+        5.07,
+        4.78,
+        "patterns",
+        ha="center",
+        va="center",
+        fontsize=8,
+        color=COLORS["weekly"],
+        rotation=90,
+    )
 
-        # Custom header: cycle name (left) + cadence (right)
-        hb_y = top - _HEADER_H
-        _rounded_rect(ax, _CARD_X, hb_y, _CARD_W, _HEADER_H, color,
-                      edge_color="none", lw=0, radius=_RADIUS, zorder=3)
-        ax.add_patch(mpatches.Rectangle(
-            (_CARD_X, hb_y), _CARD_W, _HEADER_H / 2,
-            facecolor=color, edgecolor="none", zorder=3,
-        ))
-        ax.text(_CARD_X + 0.30, hb_y + _HEADER_H / 2, cycle["name"],
-                ha="left", va="center",
-                fontsize=12.5, fontweight="bold", color=COLORS["white"], zorder=4)
-        ax.text(_CARD_X + _CARD_W - 0.30, hb_y + _HEADER_H / 2,
-                cycle["cadence"], ha="right", va="center",
-                fontsize=9.5, fontweight="bold", color=COLORS["white"],
-                alpha=0.95, zorder=4)
+    ax.annotate(
+        "",
+        xy=(10.00, 4.45),
+        xytext=(9.70, 4.45),
+        arrowprops=dict(
+            arrowstyle="-|>",
+            color=COLORS["monthly"],
+            lw=2.2,
+            mutation_scale=17,
+        ),
+        zorder=6,
+    )
+    ax.text(
+        9.85,
+        4.78,
+        "evidence",
+        ha="center",
+        va="center",
+        fontsize=8,
+        color=COLORS["monthly"],
+        rotation=90,
+    )
 
-        # Four activity bullets in two columns (2 + 2)
-        items = cycle["items"]
-        col_x = [_CARD_X + 0.30, _CARD_X + _CARD_W / 2 + 0.10]
-        row_y = [hb_y - 0.36, hb_y - 0.78]
-        for k, item in enumerate(items):
-            cx = col_x[k % 2]
-            cy = row_y[k // 2]
-            ax.text(cx, cy, f"\u2022  {item}",
-                    ha="left", va="center",
-                    fontsize=9.5, color=COLORS["mid"], zorder=5)
+    arrow_curved(
+        ax,
+        card_x[2] + 2.18,
+        1.72,
+        card_x[0] + 2.18,
+        1.72,
+        color=COLORS["monthly"],
+        rad=-0.18,
+        lw=2.0,
+        mutation_scale=16,
+        zorder=5,
+    )
+    ax.text(
+        7.5,
+        1.15,
+        "monthly priorities and capacity decisions return to daily work",
+        ha="center",
+        va="center",
+        fontsize=8.5,
+        color=COLORS["monthly"],
+        style="italic",
+    )
 
-    # ── Flow arrows between stacked cards ────────────────────────────────────
-    def _down_arrow(y_from, y_to, color, label):
-        ax.annotate(
-            "", xy=(card_mid_x, y_to), xytext=(card_mid_x, y_from),
-            arrowprops=dict(arrowstyle="-|>", color=color, lw=2.4,
-                            mutation_scale=18),
-            zorder=6,
+    foundations = [
+        "Service ownership",
+        "Shared severity",
+        "Living runbooks",
+        "Metrics & evidence",
+    ]
+    strip_y = 0.30
+    for index, label in enumerate(foundations):
+        x = 1.10 + index * 3.45
+        _rounded_rect(
+            ax,
+            x,
+            strip_y,
+            2.80,
+            0.48,
+            color=COLORS["support"],
+            alpha=0.14,
+            edge_color=COLORS["support"],
+            lw=0.8,
+            radius=0.18,
+            zorder=3,
         )
-        ax.text(card_mid_x + 0.25, (y_from + y_to) / 2, label,
-                ha="left", va="center",
-                fontsize=FONTS["small"], color=color, style="italic", zorder=6)
-
-    gap1_top = _card_top(0) - _CARD_H
-    gap1_bot = _card_top(1)
-    _down_arrow(gap1_top - 0.04, gap1_bot + 0.04, COLORS["daily"], "escalate")
-
-    gap2_top = _card_top(1) - _CARD_H
-    gap2_bot = _card_top(2)
-    _down_arrow(gap2_top - 0.04, gap2_bot + 0.04, COLORS["weekly"], "aggregate")
-
-    # ── Monthly feedback loop (right channel, bottom → top) ──────────────────
-    y_bottom_mid = _card_top(2) - _CARD_H / 2
-    y_top_mid    = _card_top(0) - _CARD_H / 2
-    arrow_curved(ax,
-                 _CARD_X + _CARD_W + 0.02, y_bottom_mid,
-                 _CARD_X + _CARD_W + 0.02, y_top_mid,
-                 color=COLORS["monthly"], rad=-0.32, lw=2.2)
-    ax.text(_FB_X + 0.18, (y_bottom_mid + y_top_mid) / 2,
-            "strategic priorities & feedback",
-            ha="center", va="center", rotation=90,
-            fontsize=FONTS["small"], color=COLORS["monthly"], style="italic")
-
-    # ── Supporting practices panel ───────────────────────────────────────────
-    draw_card(ax, _SUP_X, _SUP_BOT, _SUP_W, _SUP_TOP - _SUP_BOT,
-              accent=COLORS["support"], title=None, radius=_RADIUS)
-
-    hb_y = _SUP_TOP - _SUP_HEADER_H
-    _rounded_rect(ax, _SUP_X, hb_y, _SUP_W, _SUP_HEADER_H, COLORS["support"],
-                  edge_color="none", lw=0, radius=_RADIUS, zorder=3)
-    ax.add_patch(mpatches.Rectangle(
-        (_SUP_X, hb_y), _SUP_W, _SUP_HEADER_H / 2,
-        facecolor=COLORS["support"], edgecolor="none", zorder=3,
-    ))
-    ax.text(_SUP_X + _SUP_W / 2, hb_y + _SUP_HEADER_H / 2,
-            "Supporting Practices  —  Underpin All Cycles",
-            ha="center", va="center",
-            fontsize=12, fontweight="bold", color=COLORS["white"], zorder=4)
-
-    # 2 × 2 grid of supporting practices
-    cell_w = _SUP_W / 2
-    content_top = hb_y
-    content_bot = _SUP_BOT
-    row_cy = [content_top - 0.62, content_top - 1.92]
-    for i, sp in enumerate(_SUPPORT_ITEMS):
-        c = i % 2
-        r = i // 2
-        cell_cx = _SUP_X + (c + 0.5) * cell_w
-        cy = row_cy[r]
-
-        # column divider
-        if c == 1:
-            ax.plot([_SUP_X + cell_w, _SUP_X + cell_w],
-                    [content_bot + 0.25, content_top - 0.20],
-                    color=COLORS["border"], lw=0.9, zorder=3)
-
-        ax.text(cell_cx, cy + 0.30, sp["name"].replace("\n", " "),
-                ha="center", va="center",
-                fontsize=11, fontweight="bold",
-                color=COLORS["support"], zorder=5)
-        ax.text(cell_cx, cy - 0.18, sp["line1"],
-                ha="center", va="center",
-                fontsize=8.5, color=COLORS["mid"], zorder=5)
-        ax.text(cell_cx, cy - 0.48, sp["line2"],
-                ha="center", va="center",
-                fontsize=8.5, color=COLORS["mid"], zorder=5)
-
-    # horizontal divider between the two rows
-    ax.plot([_SUP_X + 0.30, _SUP_X + _SUP_W - 0.30],
-            [(row_cy[0] + row_cy[1]) / 2 - 0.18] * 2,
-            color=COLORS["divider"], lw=0.7, zorder=3)
-
-    # ── Dashed connectors: support panel → cycle stack ───────────────────────
-    for fx in (_SUP_X + _SUP_W * 0.25, _SUP_X + _SUP_W * 0.5,
-               _SUP_X + _SUP_W * 0.75):
-        arrow_dashed(ax, fx, _SUP_TOP + 0.04,
-                     fx, _card_top(2) - _CARD_H - 0.04,
-                     color=COLORS["support"], lw=1.4)
+        ax.text(
+            x + 1.40,
+            strip_y + 0.24,
+            label,
+            ha="center",
+            va="center",
+            fontsize=8.8,
+            fontweight="bold",
+            color=COLORS["support"],
+        )
 
     return fig
 
 
-# ── Diagram metadata ──────────────────────────────────────────────────────────
-
 DIAGRAM_INFO = {
-    "filename":    "sysops-framework-diagram.png",
-    "description": "Framework Structure Diagram",
-    "chapter":     3,
+    "filename": "sysops-framework-diagram.png",
+    "description": "Three-Cycle Operating Model",
+    "chapter": 3,
 }

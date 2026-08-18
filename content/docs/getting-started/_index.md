@@ -14,14 +14,14 @@ The SysOps Framework works best when you start small, prove the model, then expa
 
 Answer yes/no to each signal, not aspiration:
 
-| Signal                                                                            | Yes | No  |
-| --------------------------------------------------------------------------------- | --- | --- |
-| Your team spends more time firefighting than improving                            | ☐   | ☐   |
-| Sprint commitments get disrupted by operational emergencies at least once a month | ☐   | ☐   |
-| You have basic monitoring and incident tracking in place                          | ☐   | ☐   |
-| At least one person on the team is willing to try a different approach            | ☐   | ☐   |
-| Your manager knows operations work doesn't fit sprints                            | ☐   | ☐   |
-| You can protect 20% of team time for improvements                                 | ☐   | ☐   |
+| Signal                                                                                                                        | Yes | No  |
+| ----------------------------------------------------------------------------------------------------------------------------- | --- | --- |
+| Your team spends more time firefighting than improving                                                                        | ☐   | ☐   |
+| Sprint commitments get disrupted by operational emergencies at least once a month                                             | ☐   | ☐   |
+| You have basic monitoring and incident tracking in place                                                                      | ☐   | ☐   |
+| At least one person on the team is willing to try a different approach                                                        | ☐   | ☐   |
+| Your manager knows operations work doesn't fit sprints                                                                        | ☐   | ☐   |
+| You can protect the team-agreed weekly improvement allocation (see [Chapter 3](../chapter-03-structure/#resource-allocation)) | ☐   | ☐   |
 
 **4+ "Yes"** → You are ready to pilot. Start the **[30-day pilot track](#track-a-30-day-pilot)**.
 
@@ -67,11 +67,11 @@ Run this in one team. Do not attempt to roll out to multiple teams until the pil
 **Goal**: Know where you stand before you change anything.
 
 - [ ] Document every incident and interruption for 5 days. Use a simple log — no fancy tools needed.
-- [ ] Measure: how much time goes to reactive vs proactive work?
+- [ ] Measure: how much time goes to reactive vs proactive work? Classify each entry using the reactive/proactive rule in the baseline template — reactive work is anything triggered by an alert, report, or interrupt; proactive work is anything chosen in advance.
 - [ ] Read [Chapter 1](../chapter-01-challenge/) and [Chapter 2](../chapter-02-principles/). Discuss with the team: "Do we see ourselves here?"
-- [ ] Establish three baseline metrics: incident frequency, MTTR (if you can calculate it), and a rough team satisfaction score (1-10 survey).
+- [ ] Establish three baseline metrics: incident frequency, MTTR (if you can calculate it), and a rough team satisfaction score (1-10 survey). If your team has no historical data, use the 5-day fallback window and mark every number's confidence explicitly (measured, estimated, or unknown) — don't invent a precise figure to fill the gap.
 
-**Artifact**: `baseline-metrics.csv` — the simplest spreadsheet with daily counts. You will compare against this in week 4.
+**Artifact**: `baseline-metrics.csv` — use the [Baseline Metrics Template](../../../templates/baseline-metrics.md) for the minimum fields, the observation window (and its fallback), and the confidence fields. You will compare against this in week 4.
 
 ### Week 2 — Daily Cycle
 
@@ -102,9 +102,9 @@ Run this in one team. Do not attempt to roll out to multiple teams until the pil
 - [ ] Compare incident frequency and MTTR against baseline.
 - [ ] Survey the team: "Is the daily cycle helping? What is worse?"
 - [ ] Write a one-page pilot retrospective covering: what worked, what didn't, what to change.
-- [ ] Decide: **Go** (start full rollout), **Adapt** (adjust cycles and re-run pilot), or **Stop** (SysOps is not a fit).
+- [ ] Decide: **Go** (start full rollout), **Adapt** (adjust cycles and re-run pilot), or **Stop** (SysOps is not a fit). Use the decision criteria in the [Pilot Retrospective Template](../../../templates/pilot-retrospective.md), which combines this comparison, the readiness signals from the Quick Assessment, and the Stop Conditions below.
 
-**Artifact**: `pilot-retrospective.md` — one page, three sections: what worked, what didn't, what we would change.
+**Artifact**: `pilot-retrospective.md` — use the [Pilot Retrospective Template](../../../templates/pilot-retrospective.md): one page covering the baseline comparison, what worked, what didn't, what you would change, and the Go/Adapt/Stop decision with its rationale.
 
 ### Sample Weekly Calendar (Pilot)
 
@@ -130,7 +130,7 @@ Only start this once the 30-day pilot shows clear value. Do not skip the pilot.
 - Set up a basic metrics dashboard (see [Chapter 7](../chapter-07-metrics/))
 - Begin stakeholder reporting: send a monthly one-page status update
 
-**Artifact**: `stakeholder-update.md` — single page with three numbers (incidents, improvements completed, MTTR trend) and one ask.
+**Artifact**: `stakeholder-update.md` — single page with three numbers (incidents, improvements completed, MTTR trend) and one ask. Build it from the [Reporting Template](../../../templates/reporting-template.md); don't start a new format from scratch.
 
 ### Months 3-4 — Integration
 
@@ -171,7 +171,7 @@ If you scored 2-3 "Yes" on the assessment, address these before or during the pi
 | No monitoring or incident tracking | Set up basic monitoring (Prometheus + AlertManager or equivalent) and a shared incident log before week 1                                                                            |
 | No management awareness            | Have the team lead read Chapter 1 and share the key points with their manager                                                                                                        |
 | No time for improvements           | Start by measuring how much time is lost to firefighting, then negotiate for 10% improvement time                                                                                    |
-| Team is too overwhelmed to try     | Address the most painful operational issue first (use Chapter 6's priority guidance). If there is literally no capacity, SysOps cannot help until the immediate crisis is stabilised |
+| Team is too overwhelmed to try     | Address the most painful operational issue first (use Chapter 6's priority guidance). If there is literally no capacity, SysOps cannot help until the immediate crisis is stabilized |
 
 ---
 
@@ -194,10 +194,8 @@ If you scored 2-3 "Yes" on the assessment, address these before or during the pi
 ## Getting Help
 
 - **[Chapter 11](../chapter-11-challenges/)** — Symptom-driven troubleshooting when implementation hits problems
-- **GitHub Discussions** — Connect with other practitioners
-- **Case Studies** — Learn from other implementations
 
-> Professional support and training programmes are not yet available. If your organisation needs help implementing at scale, open a GitHub discussion.
+> Professional support, training programs, and community discussion channels are not yet available. If your organization needs help implementing at scale, open a GitHub issue.
 
 ---
 

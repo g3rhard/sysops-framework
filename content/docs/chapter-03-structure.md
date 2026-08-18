@@ -6,18 +6,9 @@ description: >
   "Operations teams don't need sprints; they need cycles that match the rhythm of their work."
 ---
 
-## 🎯 Learning Objectives
+> **Principles in play.** The multi-cycle structure exists to honor three principles from [Chapter 2](chapter-02-principles.md) at once: _Continuous Availability_ (the daily cycle never stops), _Rapid Response_ (interrupts are designed in, not apologized for), and _Automation and Efficiency_ (the weekly cycle is where toil goes to die).
 
-By the end of this chapter, you will understand:
-
-- The three operational cycles that replace traditional sprints
-- How multiple cycles run simultaneously without conflict
-- The specific activities and outcomes of each cycle
-- How to adapt the cycles to your team's needs
-
-> **Principles in play.** The multi-cycle structure exists to honour three principles from [Chapter 2](chapter-02-principles.md) at once: _Continuous Availability_ (the daily cycle never stops), _Rapid Response_ (interrupts are designed in, not apologised for), and _Automation and Efficiency_ (the weekly cycle is where toil goes to die).
-
-## 🔄 The Multi-Cycle Approach
+## The Multi-Cycle Approach
 
 Traditional agile frameworks use a single cycle (sprint) to organize all work. This creates artificial constraints for operations teams who handle different types of work with different time horizons and urgency levels. The SysOps Framework uses three interconnected cycles that run simultaneously:
 
@@ -27,7 +18,9 @@ Traditional agile frameworks use a single cycle (sprint) to organize all work. T
 | Weekly Improvement Cycle | 7 days      | Process improvements and systematic issues |
 | Monthly Strategy Cycle   | 4 weeks     | Strategic initiatives and major projects   |
 
-![Framework Structure Diagram](../assets/sysops-framework-diagram.png)
+> **Diagram:** Daily work produces patterns for weekly improvement; weekly evidence informs monthly strategy; monthly priorities and capacity decisions flow back into daily operations.
+
+![Three-cycle operating model showing cadence, ownership, phases, outcomes, and feedback](../../assets/sysops-framework-diagram.png)
 
 This multi-cycle approach acknowledges that operations teams simultaneously:
 
@@ -36,41 +29,6 @@ This multi-cycle approach acknowledges that operations teams simultaneously:
 - Plan and execute strategic changes (monthly)
 
 Think of it less like a sprint and more like a hospital. The emergency room (daily) never closes and can't schedule its patients. The ward rounds (weekly) review what keeps coming through the door and adjust treatment. And the board (monthly) decides whether to build a new wing. Nobody sane asks the ER to stop accepting patients because it's "mid-sprint" — yet that is precisely what we ask of operations teams every time we hand them a single cadence and wish them luck.
-
-### Operating Model in One Page
-
-> **Diagram**: Three-cycle operating model — Daily Operations (24-48h), Weekly Improvement (7d), Monthly Strategy (30d) — showing inputs, outputs, and owners for each cycle
-
-```mermaid
-flowchart TD
-    subgraph daily["Daily Operations Cycle (24-48h) — Owned by On-Call / All Team"]
-        D1[Monitor: dashboards, alerts, health checks]
-        D2[Respond: incidents, emergencies, urgent requests]
-        D3[Document: incident logs, change records, handoff notes]
-        D4[Review: daily patterns, priorities for tomorrow]
-        D1 --> D2 --> D3 --> D4
-    end
-
-    subgraph weekly["Weekly Improvement Cycle (7d) — Owned by Team Lead / Rotating Engineer"]
-        W1[Plan: pick improvement from daily patterns]
-        W2[Execute: automation, documentation, process fixes]
-        W3[Measure: did the improvement work?]
-        W4[Improve: update backlog, plan next week]
-        W1 --> W2 --> W3 --> W4
-    end
-
-    subgraph monthly["Monthly Strategy Cycle (4wk) — Owned by Team Lead / Manager"]
-        M1[Assess: capacity planning, risk analysis, goal setting]
-        M2[Design: architecture, project plan, resource allocation]
-        M3[Implement: strategic initiative execution]
-        M4[Evaluate: results, lessons learned, next month priorities]
-        M1 --> M2 --> M3 --> M4
-    end
-
-    D4 -- recurring pain points --> W1
-    W4 -- successful patterns --> M1
-    M3 -- new operational needs --> D1
-```
 
 ### Cycle Ownership and Handoffs
 
@@ -82,7 +40,96 @@ flowchart TD
 
 **Handoff rule**: No output from a faster cycle disappears into a slower one without explicit acceptance. If the daily cycle identifies a recurring pattern that merits a weekly improvement, the daily owner must write it up just well enough for the weekly owner to pick up. One paragraph, one link to the incident log. Done is better than perfect.
 
-## 🧭 Minimum Viable Adoption Modes
+## Work Intake and Triage
+
+Before any of the three cycles can run smoothly, work has to get into the right one. This section names what typically arrives, how it gets routed, and who is allowed to say "actually, that's not what this is."
+
+### A Taxonomy for What Arrives
+
+| Work type            | What it is                                                                                       | Default cycle                                  | Full definition                                   |
+| -------------------- | ------------------------------------------------------------------------------------------------ | ---------------------------------------------- | ------------------------------------------------- |
+| **Incident**         | Unplanned disruption or degradation to a live service                                            | Daily                                          | [Chapter 6, Practice 2](chapter-06-practices.md)  |
+| **Service request**  | Pre-approved, catalog-eligible ask (access, provisioning, standard support)                      | Daily (fulfillment queue)                      | [Chapter 6, Practice 10](chapter-06-practices.md) |
+| **Standard change**  | Pre-approved, low-risk, repeatable change                                                        | Daily                                          | [Chapter 6, Practice 3](chapter-06-practices.md)  |
+| **Normal change**    | Medium-risk change requiring review and a scheduled window                                       | Weekly (Monthly if it needs multi-week design) | [Chapter 6, Practice 3](chapter-06-practices.md)  |
+| **Emergency change** | Urgent change made to restore or protect a live service                                          | Daily                                          | [Chapter 6, Practice 3](chapter-06-practices.md)  |
+| **Improvement work** | Automation, documentation, or process fixes that remove recurring toil                           | Weekly                                         | This chapter                                      |
+| **Strategic work**   | Multi-week initiatives: architecture, capacity, tooling, major migrations                        | Monthly                                        | This chapter                                      |
+| **Interruption**     | Anything ad hoc that hasn't been classified yet — a ping, a hallway question, an unscheduled ask | Daily (triage first)                           | See "In-Flight and Unclassified Work" below       |
+
+> Chapter 6 owns the long-form definitions and maturity model for each practice. This chapter only answers one question for each type: which cycle does it belong to, right now? For incidents specifically, Chapter 6's [Incident Severity Classification](chapter-06-practices.md) (SEV1-SEV4) is the one severity vocabulary used everywhere in the framework — triage records here should carry that same SEV1-SEV4 rating rather than inventing a second scale.
+
+### Routing: Which Cycle Does This Go To?
+
+Ask, in order, and stop at the first "yes":
+
+1. **Is a live service down, degraded, or at risk right now, or does it need to happen today regardless of type** (incident, emergency change, urgent service request)? → Daily queue.
+2. **Can it be scoped, executed, and measured inside roughly one week without an architecture decision or multi-team coordination** (standard/normal change, automation, doc fix)? → Weekly queue.
+3. **Does it span multiple weeks, require capacity/architecture decisions, or touch more than one team** (major migration, new platform, disaster-recovery build-out)? → Monthly queue.
+4. **None of the above are obviously true yet?** → Daily intake queue by default, reclassify within one daily cycle (see below).
+
+Interruptions are not a fourth cycle — they are unclassified work that must resolve to one of the three above before the current cycle's owner treats it as committed.
+
+### Who Classifies, Who Owns the Queue
+
+Classification authority follows the same ownership as the cycles themselves (see [Cycle Ownership and Handoffs](#cycle-ownership-and-handoffs) above):
+
+| Queue   | Owner                                  | First classification                                       | Reclassification                                                   |
+| ------- | -------------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------ |
+| Daily   | On-call engineer (rotating)            | Whoever receives the item first (on-call, helpdesk, alert) | Any team member can propose; the daily owner or team lead confirms |
+| Weekly  | Team lead or rotating improvement lead | Weekly owner, during Plan                                  | Team lead                                                          |
+| Monthly | Team lead or manager                   | Monthly owner, during Assess                               | Team lead or manager                                               |
+
+Anyone can flag a misclassified item. Only the owner of the queue an item is moving into can accept it — the same handoff rule above applies to reclassification, not just to normal cycle-to-cycle flow.
+
+### In-Flight and Unclassified Work
+
+- Every item is classified within one daily cycle of arriving. If nobody has looked at it by the next daily review, it escalates to the team lead — being unclassified for more than a day is itself a signal something is broken.
+- Work already in flight when new information arrives (for example, a normal change turns out to need emergency treatment) is not silently reassigned. The current owner logs a one-line handoff note and the receiving owner explicitly accepts before priority shifts.
+- Nothing sits in a generic "misc" backlog. If it doesn't fit the taxonomy above, that gap is escalated to the team lead as a taxonomy problem, not parked indefinitely.
+
+### WIP: Scale the Limit, Not the Rule
+
+Don't copy a fixed number like "three items per queue" from a book that has never met your team. Instead, size WIP to who is actually resourced to the queue this cycle:
+
+- **Daily queue**: WIP is roughly the number of people on shift, minus whoever is needed to hold on-call coverage. A one-person daily rotation runs one thing at a time by definition; a five-person team can run several incidents or requests in parallel because different people own them.
+- **Weekly queue**: WIP is roughly the number of people the team lead has actually freed from daily duty this week, not the whole roster. Most teams under ten people should default to one improvement item in flight per rotating improvement lead — running more than that in parallel usually means nobody has clear ownership.
+- **Monthly queue**: WIP is roughly one strategic initiative in active implementation per month, regardless of team size, because sustained multi-week focus is the scarce resource. Larger teams (6-10+ people) may run two only if they have different leads and neither lead is also carrying on-call load that month.
+
+The rule, not the number, is what scales: **WIP per queue is bounded by the people who can work it without abandoning daily coverage** — recount it every time team size or on-call load changes.
+
+### Escalation and Reclassification
+
+| Trigger                                                                                            | Action                                                                                 |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Service request breaches its SLA or reveals live service impact                                    | Reclassify to Incident, move to Daily queue, assign a SEV1-SEV4 severity per Chapter 6 |
+| Normal change is needed to stop an active incident                                                 | Reclassify to Emergency change, Daily queue, expedited approval                        |
+| Weekly improvement grows beyond one week, needs an architecture decision, or spans teams           | Reclassify to Strategic work, Monthly queue                                            |
+| Monthly initiative turns out to be a same-day fix once scoped                                      | Reclassify to Standard/Normal change or Improvement work, hand down a cycle            |
+| Daily cycle consistently exceeds 80% capacity ([see below](#what-to-do-when-daily-work-dominates)) | Do not add new Weekly/Monthly commitments until it's addressed                         |
+
+Reclassification is always logged: what changed, who accepted it, why. Not for process's own sake — "it got reclassified" is exactly the kind of thing a post-incident review needs to reconstruct later.
+
+### Minimum Intake Fields
+
+Whatever ticketing system or spreadsheet the team uses, capture at least:
+
+1. **ID / reference** — ticket number or link
+2. **Title** — one line
+3. **Requester** — who raised it
+4. **Date/time raised**
+5. **Affected service or system**
+6. **Initial type guess** — incident / service request / standard, normal, or emergency change / improvement / strategic / unclassified
+7. **Severity (incidents)** — SEV1-SEV4 per Chapter 6's [Incident Severity Classification](chapter-06-practices.md); the canonical scale for every incident record, not a locally invented one. Non-incident items leave this blank or mark N/A.
+8. **Impact note** — free-text detail beyond the severity rating (which service, which customers, what's actually broken); useful context for non-incident items too, but never a substitute for the SEV1-SEV4 field on an incident
+9. **Confirmed classification and queue** — filled in at triage
+10. **Owner** — the person or role accountable for the next step
+11. **Status** — open / in progress / blocked / done
+12. **Related items** — linked incident, change, or improvement record
+
+> **Template:** a copy-ready intake and triage log covering these fields is provided in [`templates/work-intake-triage.md`](../../templates/work-intake-triage.md).
+
+## Minimum Viable Adoption Modes
 
 Do not start all three cycles on day one just to look mature. Match the adoption mode to the team’s current load.
 
@@ -103,7 +150,7 @@ Do not start all three cycles on day one just to look mature. Match the adoption
 | 6–10 person platform/SRE team             | Full three-cycle model    | Daily interrupts no longer erase strategic work               |
 | Regulated or audited environment          | Daily + Weekly, then full | Evidence is captured as work happens, not reconstructed later |
 
-## ⚡ Daily Operations Cycle (24-48 hours)
+## Daily Operations Cycle (24-48 hours)
 
 ### Purpose
 
@@ -205,7 +252,7 @@ Handle immediate operational needs: system monitoring, incident response, routin
 - Clear handoff procedures
 - Integration with weekly improvement planning
 
-### 🎮 Interactive Exercise: Daily Cycle Planning
+### Scenario: Daily Cycle Planning
 
 **Scenario**: You're starting a Tuesday morning shift. Yesterday's handoff notes include:
 
@@ -221,7 +268,7 @@ Handle immediate operational needs: system monitoring, incident response, routin
 3. **Document**: What needs recording or updating?
 4. **Review**: What patterns should you look for?
 
-## 🔧 Weekly Improvement Cycle (7 days)
+## Weekly Improvement Cycle (7 days)
 
 ### Purpose
 
@@ -251,7 +298,6 @@ Focus on process improvements, automation initiatives, and addressing systemic i
 
 - Data-driven prioritization based on daily cycle insights
 - Capacity allocation (typically 20-30% of team time)
-- Clear success criteria for improvements
 - Risk assessment and mitigation planning
 
 #### 2. Execute (Throughout the week)
@@ -319,7 +365,6 @@ Focus on process improvements, automation initiatives, and addressing systemic i
 **Key Practices**:
 
 - Honest assessment of what worked and what didn't
-- Documentation of lessons learned
 - Celebration of successful improvements
 - Planning for continuous improvement
 
@@ -331,7 +376,7 @@ Focus on process improvements, automation initiatives, and addressing systemic i
 - Creating or updating system documentation
 - Cross-training team members on new technologies
 
-## 🚀 Monthly Strategy Cycle (4 weeks)
+## Monthly Strategy Cycle (4 weeks)
 
 ### Purpose
 
@@ -427,7 +472,6 @@ Handle larger projects, strategic initiatives, capacity planning, and technology
 **Key Practices**:
 
 - Honest evaluation of project success and failures
-- Documentation of lessons learned for future projects
 - Stakeholder communication about results and next steps
 - Planning integration with ongoing operations
 
@@ -439,7 +483,7 @@ Handle larger projects, strategic initiatives, capacity planning, and technology
 - Security framework implementation
 - Team skill development and certification programs
 
-## 🔗 How the Cycles Interact
+## How the Cycles Interact
 
 The three cycles are designed to work together without conflict:
 
@@ -451,24 +495,26 @@ The three cycles are designed to work together without conflict:
 
 ### Resource Allocation
 
-| Cycle               | Typical Capacity | Notes                                |
-| ------------------- | ---------------- | ------------------------------------ |
-| Daily Operations    | 60–70%           | Varies by team and environment       |
-| Weekly Improvements | 20–30%           | The cycle where toil goes to die     |
-| Monthly Strategy    | 10–20%           | Concentrated in implementation weeks |
+| Cycle               | Planning Range | Notes                                |
+| ------------------- | -------------- | ------------------------------------ |
+| Daily Operations    | 60–70%         | Varies by team and environment       |
+| Weekly Improvements | 20–30%         | The cycle where toil goes to die     |
+| Monthly Strategy    | 10–20%         | Concentrated in implementation weeks |
+
+> **These are ranges within one 100% pool, not three independent budgets.** The three ranges overlap on purpose — no team lands at the top of all three at once, because daily plus weekly plus monthly must add up to 100% of capacity, not up to 120%. Pick one point in each range that sums to 100% for your team: for example, 65% daily + 25% weekly + 10% monthly, or 70% daily + 20% weekly + 10% monthly. If daily work is running high, weekly and monthly have to come down to match; they are not separate pools someone can protect regardless of what daily is doing.
 
 > **Reality check.** These percentages are a starting hypothesis, not a budget handed down from on high. If your daily operations are eating 90%, that's not a planning failure to paper over — it's the single most important number in this book telling you the team is underwater. Fix the drowning before you fret about hitting a tidy 20% improvement target.
 
 ### Sample Schedule: Small Ops Team (3-4 People)
 
-| Time            | Mon                                          | Tue                            | Wed                                 | Thu                         | Fri                                                    |
-| --------------- | -------------------------------------------- | ------------------------------ | ----------------------------------- | --------------------------- | ------------------------------------------------------ |
-| **Daily**       | Standalone (15min), review weekend incidents | Standalone, check alert health | Standalone, mid-week capacity check | Standalone, knowledge share | Standalone, weekly review prep                         |
-| **On-call**     | Engineer A primary                           | Engineer A                     | Engineer B primary                  | Engineer B                  | Engineer A                                             |
-| **Improvement** | 2h — plan weekly improvement                 | —                              | 2h — execute improvement            | —                           | 1h — measure, document results                         |
-| **Monthly**     | —                                            | —                              | —                                   | —                           | Month 1-2: Assess; Month 3: Design; Month 4: Implement |
+| Time            | Mon                                          | Tue                            | Wed                                 | Thu                         | Fri                                                                                         |
+| --------------- | -------------------------------------------- | ------------------------------ | ----------------------------------- | --------------------------- | ------------------------------------------------------------------------------------------- |
+| **Daily**       | Standalone (15min), review weekend incidents | Standalone, check alert health | Standalone, mid-week capacity check | Standalone, knowledge share | Standalone, weekly review prep                                                              |
+| **On-call**     | Engineer A primary                           | Engineer A                     | Engineer B primary                  | Engineer B                  | Engineer A                                                                                  |
+| **Improvement** | 2h — plan weekly improvement                 | —                              | 2h — execute improvement            | —                           | 1h — measure, document results                                                              |
+| **Monthly**     | —                                            | —                              | —                                   | —                           | 1-2h — rotates across the 4-week cycle: Wk1 Assess, Wk2 Design, Wk3 Implement, Wk4 Evaluate |
 
-**Key constraint**: With 3-4 people, the weekly improvement time is only 4-5 hours total. Pick one small improvement per week, not three.
+**Key constraint**: With 3-4 people, the weekly improvement time is only 4-5 hours total. Pick one small improvement per week, not three. The Monthly Strategy Cycle is 4 weeks long, not 4 months — each week of the cycle maps to one phase (Assess → Design → Implement → Evaluate), and this Friday slot is where that week's phase gets its dedicated time.
 
 ### Sample Schedule: Platform/SRE Team (6-8 People)
 
@@ -501,7 +547,7 @@ When cycles conflict (which should be rare with proper planning):
 2. **Improvement work**: Can be paused for significant operational needs
 3. **Strategic projects**: Can be rescheduled if necessary
 
-## 🎯 Adapting Cycles to Your Environment
+## Adapting Cycles to Your Environment
 
 > **Note.** The cadences below are defaults, not commandments. The framework cares that you _have_ three distinct horizons of work, not that the daily cycle is exactly 24 hours. Adjust the numbers to your reality; keep the separation of concerns.
 
@@ -529,7 +575,7 @@ When cycles conflict (which should be rare with proper planning):
 - Coordination mechanisms between cycle teams
 - Standardized cycle templates and procedures
 
-## 📊 Measuring Cycle Effectiveness
+## Measuring Cycle Effectiveness
 
 ### Daily Operations Metrics
 
@@ -551,30 +597,6 @@ When cycles conflict (which should be rare with proper planning):
 - Technology evaluation and adoption effectiveness
 - Capacity planning accuracy
 - Stakeholder satisfaction with strategic initiatives
-
-## 🎯 Chapter Summary
-
-The SysOps Framework's multi-cycle structure acknowledges that operations teams handle different types of work requiring different time horizons and planning approaches. By running three interconnected cycles simultaneously, teams can maintain operational excellence while continuously improving their capabilities and implementing strategic initiatives.
-
-This structure eliminates the artificial constraints of single-cycle methodologies while maintaining the benefits of structured, organized work. The cycles provide natural boundaries for different types of activities while ensuring that immediate operational needs never compromise long-term strategic goals.
-
-## 🔮 Looking Ahead
-
-In the next chapter, we'll compare how this multi-cycle approach differs from traditional agile methodologies and explore the specific advantages it provides for operations teams.
-
-## 💭 Reflection Questions
-
-1. **Cycle Fit**: Which cycle matches most of your current work? Where do you see gaps?
-2. **Resource Allocation**: How would you need to adjust your current time allocation to support all three cycles?
-3. **Integration**: How would these cycles integrate with your organization's existing planning processes?
-
----
-
-**🎮 Gamification Element - Chapter 3 Badge**
-
-![Cycle Master badge](../../assets/badges/chapter-03.svg)
-
-_Plan a complete set of activities for each cycle for your team environment to earn the "Cycle Master" badge._
 
 ---
 

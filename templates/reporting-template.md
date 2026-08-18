@@ -16,7 +16,7 @@ Distribution:          <team lead, platform manager, exec sponsor>
 
 2. INCIDENT SUMMARY
    - Total incidents:          <count>  (<change> vs last month)
-   - SEV1 / SEV2:              <count>
+   - SEV1 / SEV2 / SEV3 / SEV4: <count by severity>
    - Mean time to resolve:     <value>  (<change> vs last month)
    - Mean time to detect:      <value>  (<change> vs last month)
    - Top 3 by duration:        <service>, <service>, <service>

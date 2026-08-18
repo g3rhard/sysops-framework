@@ -17,7 +17,7 @@
 
 ### Voice & Tone
 
-- **Audience**: Interrupt-driven ops teams — highly skilled, sceptical of process, tired of agile cargo-cults
+- **Audience**: Interrupt-driven ops teams — highly skilled, skeptical of process, tired of agile cargo-cults
 - **Voice**: Direct, opinionated, human. Mix dense reference with jokes, stories, and wry asides
 - **What to avoid**: Passive voice, weasel words ("synergize", "leverage", "robust"), corporate blandness
 - **Rule of thumb**: If a sentence would sound wrong spoken aloud in a team standup, rewrite it

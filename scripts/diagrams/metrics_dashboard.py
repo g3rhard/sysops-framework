@@ -1,191 +1,216 @@
-"""
-Metrics Dashboard for Chapter 7
+"""Generate the Chapter 7 observability-style metrics dashboard."""
 
-Portrait A4 layout: four KPI panels (Service Reliability, Operational Efficiency,
-Team Performance, Business Value) stacked vertically as full-width cards with
-health-status colour coding.
-"""
-
-import os
-import sys
-
-sys.path.insert(0, os.path.dirname(__file__))
-from _design_system import (
-    COLORS, FONTS, setup_figure, set_lims, draw_card,
-)
 import matplotlib.patches as mpatches
+import matplotlib.pyplot as plt
 
 
-# ── Layout constants (A4 portrait) ────────────────────────────────────────────
-
-_FIG_W, _FIG_H = 8.5, 11.0
-_XLIM = (0.0, 8.5)
-_YLIM = (0.0, 11.0)
-
-_CARD_X   = 0.35
-_CARD_W   = 7.80
-_CARD_TOP = 10.00
-_CARD_H   = 2.14
-_CARD_GAP = 0.18
-_HEADER_H = 0.46
-_RADIUS   = 0.14
+BG = "#111217"
+PANEL = "#181B1F"
+GRID = "#2B3038"
+TEXT = "#D8D9DA"
+MUTED = "#8E9299"
+GREEN = "#73BF69"
+YELLOW = "#F2CC0C"
+ORANGE = "#FF9830"
+RED = "#F2495C"
+BLUE = "#5794F2"
+PURPLE = "#B877D9"
 
 
-def _card_top(i):
-    return _CARD_TOP - i * (_CARD_H + _CARD_GAP)
+def _panel(fig, rect, title):
+    ax = fig.add_axes(rect, facecolor=PANEL)
+    for spine in ax.spines.values():
+        spine.set_color(GRID)
+        spine.set_linewidth(1)
+    ax.tick_params(colors=MUTED, labelsize=8)
+    ax.grid(color=GRID, linewidth=0.7, alpha=0.8)
+    ax.set_axisbelow(True)
+    ax.text(
+        0.025,
+        0.95,
+        title,
+        transform=ax.transAxes,
+        ha="left",
+        va="top",
+        fontsize=10,
+        fontweight="bold",
+        color=TEXT,
+    )
+    return ax
 
 
-# ── Metric data ───────────────────────────────────────────────────────────────
-
-_PANELS = [
-    {
-        "title":   "Service Reliability",
-        "color":   COLORS["coral"],
-        "metrics": [
-            ("Uptime (SLA target 99.9 %)",        "99.97 %",  "healthy"),
-            ("Mean Time to Recover (MTTR)",        "23 min",   "healthy"),
-            ("Mean Time Between Failures (MTBF)",  "850 hrs",  "healthy"),
-            ("SLO Compliance",                     "98.5 %",   "warning"),
-        ],
-    },
-    {
-        "title":   "Operational Efficiency",
-        "color":   COLORS["orange"],
-        "metrics": [
-            ("Automation Coverage",                "75 %",     "healthy"),
-            ("Avg Incident Response Time",         "12 min",   "healthy"),
-            ("Change Success Rate",                "94.2 %",   "healthy"),
-            ("Toil Reduction (vs baseline)",       "68 %",     "warning"),
-        ],
-    },
-    {
-        "title":   "Team Performance",
-        "color":   COLORS["purple"],
-        "metrics": [
-            ("Knowledge Sharing Sessions / mo",   "8.2",      "healthy"),
-            ("Skills Development Completion",      "85 %",     "healthy"),
-            ("On-Call Load (avg hrs / week)",      "3.2 hrs",  "healthy"),
-            ("Team Satisfaction Score",            "8.4 / 10", "healthy"),
-        ],
-    },
-    {
-        "title":   "Business Value",
-        "color":   COLORS["red"],
-        "metrics": [
-            ("Customer-Facing Availability",       "99.95 %",  "healthy"),
-            ("Infrastructure Cost Reduction",      "23 %",     "healthy"),
-            ("Security Incidents (month)",         "0",        "healthy"),
-            ("Customer Impact Rate",               "0.02 %",   "healthy"),
-        ],
-    },
-]
-
-_STATUS_COLOR = {
-    "healthy":  COLORS["healthy"],
-    "warning":  COLORS["warning"],
-    "critical": COLORS["critical"],
-}
+def _stat(fig, x, title, value, color, detail):
+    ax = _panel(fig, [x, 0.745, 0.215, 0.145], title)
+    ax.set_xticks([])
+    ax.set_yticks([])
+    ax.grid(False)
+    ax.text(
+        0.05,
+        0.46,
+        value,
+        transform=ax.transAxes,
+        ha="left",
+        va="center",
+        fontsize=27,
+        fontweight="bold",
+        color=color,
+    )
+    ax.text(
+        0.05,
+        0.14,
+        detail,
+        transform=ax.transAxes,
+        ha="left",
+        va="center",
+        fontsize=8.5,
+        color=MUTED,
+    )
+    ax.add_patch(
+        mpatches.Circle(
+            (0.91, 0.48),
+            0.035,
+            transform=ax.transAxes,
+            facecolor=color,
+            edgecolor="none",
+        )
+    )
 
 
-# ── Drawing helper ────────────────────────────────────────────────────────────
+def _style_timeseries(ax, y_ticks=None, y_labels=None):
+    ax.set_xlim(1, 30)
+    ax.set_xticks([1, 5, 10, 15, 20, 25, 30])
+    ax.set_xticklabels(["Jul 1", "5", "10", "15", "20", "25", "30"])
+    if y_ticks is not None:
+        ax.set_yticks(y_ticks)
+    if y_labels is not None:
+        ax.set_yticklabels(y_labels)
 
-def _draw_panel(ax, panel, top):
-    """Render a single full-width metric panel on the shared canvas."""
-    color  = panel["color"]
-    bottom = top - _CARD_H
-
-    # Card body + coloured header (centred title)
-    draw_card(ax, _CARD_X, bottom, _CARD_W, _CARD_H, color,
-              title=panel["title"], header_h=_HEADER_H, radius=_RADIUS)
-
-    metrics     = panel["metrics"]
-    n           = len(metrics)
-    interior_top = top - _HEADER_H
-    row_h        = (interior_top - bottom - 0.12) / n
-
-    for i, (name, value, status) in enumerate(metrics):
-        ry = interior_top - (i + 0.5) * row_h
-        sc = _STATUS_COLOR[status]
-
-        # Alternating row tint
-        if i % 2 == 0:
-            ax.add_patch(mpatches.Rectangle(
-                (_CARD_X + 0.12, ry - row_h * 0.46),
-                _CARD_W - 0.24, row_h * 0.92,
-                facecolor=color, alpha=0.06, edgecolor="none", zorder=2,
-            ))
-
-        # Status dot
-        ax.add_patch(mpatches.Circle(
-            (_CARD_X + 0.42, ry), 0.075,
-            facecolor=sc, edgecolor="none", zorder=5,
-        ))
-
-        # Metric name
-        ax.text(_CARD_X + 0.66, ry, name,
-                ha="left", va="center",
-                fontsize=9.5, color=COLORS["mid"], zorder=5)
-
-        # Value pill (right aligned)
-        ax.text(_CARD_X + _CARD_W - 0.30, ry, value,
-                ha="right", va="center",
-                fontsize=10, fontweight="bold", color=sc, zorder=5,
-                bbox=dict(
-                    boxstyle="round,pad=0.30",
-                    facecolor=sc, alpha=0.16,
-                    edgecolor=sc, linewidth=0.8,
-                ))
-
-        # Row divider
-        if i < n - 1:
-            sep_y = ry - row_h * 0.5
-            ax.plot([_CARD_X + 0.30, _CARD_X + _CARD_W - 0.30],
-                    [sep_y, sep_y],
-                    color=COLORS["divider"], lw=0.7, zorder=3)
-
-
-# ── Diagram builder ───────────────────────────────────────────────────────────
 
 def create_diagram():
-    """Create the metrics dashboard for Chapter 7."""
-    fig, ax = setup_figure(
-        figsize=(_FIG_W, _FIG_H),
-        title="SysOps Framework: Metrics Dashboard",
-        title_y=0.975,
+    """Create an illustrative operations dashboard."""
+    fig = plt.figure(figsize=(16, 9), facecolor=BG)
+
+    fig.text(
+        0.035,
+        0.955,
+        "SysOps / Operations Overview",
+        ha="left",
+        va="top",
+        fontsize=20,
+        fontweight="bold",
+        color=TEXT,
     )
-    set_lims(ax, _XLIM, _YLIM)
+    fig.text(
+        0.035,
+        0.918,
+        "production  |  last 30 days  |  illustrative data - replace with your baseline",
+        ha="left",
+        va="top",
+        fontsize=9,
+        color=MUTED,
+    )
+    fig.text(
+        0.965,
+        0.947,
+        "refreshed 5m ago",
+        ha="right",
+        va="top",
+        fontsize=8.5,
+        color=MUTED,
+    )
 
-    for i, panel in enumerate(_PANELS):
-        _draw_panel(ax, panel, _card_top(i))
+    _stat(fig, 0.035, "Availability", "99.97%", GREEN, "SLO 99.90%  |  +0.03% vs baseline")
+    _stat(fig, 0.275, "Error budget remaining", "72%", GREEN, "30-day window  |  8h 38m available")
+    _stat(fig, 0.515, "Median time to recover", "23m", YELLOW, "target < 30m  |  n=7 incidents")
+    _stat(fig, 0.755, "Open incidents", "1", ORANGE, "SEV1 0  |  SEV2 1  |  SEV3/4 0")
 
-    # ── Health-status legend ─────────────────────────────────────────────────
-    statuses = [
-        ("Healthy — Target Met",       _STATUS_COLOR["healthy"]),
-        ("Warning — Near Threshold",   _STATUS_COLOR["warning"]),
-        ("Critical — Action Required", _STATUS_COLOR["critical"]),
+    days = list(range(1, 31))
+    availability = [
+        99.97, 99.98, 99.96, 99.99, 99.97, 99.95, 99.94, 99.97, 99.98, 99.99,
+        99.98, 99.96, 99.91, 99.86, 99.93, 99.97, 99.98, 99.99, 99.98, 99.96,
+        99.95, 99.97, 99.98, 99.99, 99.97, 99.96, 99.94, 99.98, 99.99, 99.97,
     ]
-    ax.text(_XLIM[1] / 2, 0.62, "Health Status Key",
-            ha="center", va="center",
-            fontsize=10.5, fontweight="bold", color=COLORS["dark"])
+    burn = [
+        0.12, 0.10, 0.18, 0.08, 0.15, 0.22, 0.25, 0.14, 0.09, 0.07,
+        0.11, 0.16, 0.38, 1.18, 0.52, 0.20, 0.13, 0.08, 0.10, 0.17,
+        0.22, 0.14, 0.11, 0.09, 0.16, 0.19, 0.28, 0.12, 0.08, 0.14,
+    ]
 
-    span_x0 = 0.95
-    step    = 2.30
-    for i, (label, sc) in enumerate(statuses):
-        lx = span_x0 + i * step
-        ax.add_patch(mpatches.Circle(
-            (lx, 0.28), 0.075, facecolor=sc, edgecolor="none", zorder=5,
-        ))
-        ax.text(lx + 0.16, 0.28, label,
-                ha="left", va="center",
-                fontsize=8.5, color=COLORS["mid"], zorder=5)
+    ax = _panel(fig, [0.035, 0.425, 0.57, 0.275], "Service reliability")
+    _style_timeseries(ax, [99.8, 99.9, 100.0], ["99.80%", "99.90%", "100%"])
+    ax.set_ylim(99.78, 100.02)
+    ax.plot(days, availability, color=GREEN, linewidth=2.2, label="Availability")
+    ax.fill_between(days, availability, 99.78, color=GREEN, alpha=0.10)
+    ax.axhline(99.90, color=YELLOW, linewidth=1.2, linestyle="--", label="SLO threshold")
+    ax.axvline(14, color=RED, linewidth=1, alpha=0.75)
+    ax.text(14.25, 99.805, "SEV2", color=RED, fontsize=8, va="bottom")
+    legend = ax.legend(
+        loc="lower left",
+        ncol=2,
+        frameon=False,
+        fontsize=8,
+        labelcolor=TEXT,
+    )
+    for line in legend.get_lines():
+        line.set_linewidth(2)
+
+    ax = _panel(fig, [0.63, 0.425, 0.335, 0.275], "Error budget burn rate")
+    _style_timeseries(ax, [0, 0.5, 1.0, 1.5], ["0x", "0.5x", "1x", "1.5x"])
+    ax.set_ylim(0, 1.5)
+    ax.plot(days, burn, color=BLUE, linewidth=2)
+    ax.fill_between(days, burn, color=BLUE, alpha=0.12)
+    ax.axhline(1.0, color=RED, linewidth=1.2, linestyle="--")
+    ax.text(29.5, 1.04, "budget consumed faster than window", color=RED, fontsize=7.5, ha="right")
+
+    reactive = [42, 39, 45, 44, 41, 38, 36, 35]
+    improvement = [8, 10, 9, 12, 14, 15, 17, 18]
+    weeks = list(range(1, 9))
+    ax = _panel(fig, [0.035, 0.085, 0.37, 0.285], "Operational load - hours per week")
+    ax.set_xlim(1, 8)
+    ax.set_xticks(weeks)
+    ax.set_xticklabels([f"W{i}" for i in weeks])
+    ax.set_ylim(0, 50)
+    ax.plot(weeks, reactive, color=ORANGE, marker="o", linewidth=2, label="Reactive")
+    ax.plot(weeks, improvement, color=BLUE, marker="o", linewidth=2, label="Improvement")
+    ax.legend(loc="upper right", frameon=False, fontsize=8, labelcolor=TEXT)
+
+    change_rate = [91, 93, 95, 92, 96, 97, 94, 96]
+    ax = _panel(fig, [0.43, 0.085, 0.255, 0.285], "Change success rate")
+    ax.set_xlim(1, 8)
+    ax.set_xticks(weeks)
+    ax.set_xticklabels([f"W{i}" for i in weeks])
+    ax.set_ylim(85, 100)
+    ax.set_yticks([85, 90, 95, 100])
+    ax.set_yticklabels(["85%", "90%", "95%", "100%"])
+    ax.plot(weeks, change_rate, color=PURPLE, marker="o", linewidth=2)
+    ax.axhline(95, color=GREEN, linewidth=1.2, linestyle="--")
+    ax.text(8, 95.4, "target", color=GREEN, fontsize=8, ha="right")
+
+    ax = _panel(fig, [0.71, 0.085, 0.255, 0.285], "Incident volume")
+    severities = ["SEV1", "SEV2", "SEV3", "SEV4"]
+    counts = [0, 2, 5, 11]
+    colors = [RED, ORANGE, YELLOW, BLUE]
+    bars = ax.barh(severities, counts, color=colors, height=0.55)
+    ax.set_xlim(0, 12)
+    ax.set_xticks([0, 3, 6, 9, 12])
+    ax.invert_yaxis()
+    for bar, count in zip(bars, counts):
+        ax.text(
+            count + 0.25,
+            bar.get_y() + bar.get_height() / 2,
+            str(count),
+            ha="left",
+            va="center",
+            fontsize=9,
+            fontweight="bold",
+            color=TEXT,
+        )
 
     return fig
 
 
-# ── Diagram metadata ──────────────────────────────────────────────────────────
-
 DIAGRAM_INFO = {
-    "filename":    "sysops-dashboard.png",
-    "description": "Metrics Dashboard",
-    "chapter":     7,
+    "filename": "sysops-dashboard.png",
+    "description": "Observability-Style Metrics Dashboard",
+    "chapter": 7,
 }

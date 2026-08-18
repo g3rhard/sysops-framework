@@ -56,9 +56,7 @@ params:
     navbar_logo: true
     footer_about_enable: true
     feedback:
-      enable: true
-      yes: 'Glad to hear it! Please <a href="https://github.com/g3rhard/sysops-framework/issues/new">tell us how we can improve</a>.'
-      no: 'Sorry to hear that. Please <a href="https://github.com/g3rhard/sysops-framework/issues/new">tell us how we can improve</a>.'
+      enable: false
     readingtime:
       enable: false
   links:

@@ -6,21 +6,9 @@ description: >
   "In operations, every decision is a risk decision, whether you realize it or not."
 ---
 
-## 🎯 Learning Objectives
-
-By the end of this chapter, you will understand:
-
-- How to integrate risk management into operational cycles
-- Compliance requirements and their impact on operations frameworks
-- Risk assessment methodologies for operational decisions
-- Building security and compliance into the SysOps Framework
-- Supply chain security using SBOMs, provenance, and current SLSA guidance
-- Breach response timelines and regulatory notification obligations
-- Penetration testing frequency, scope, and integration into the risk lifecycle
-
 > **Principles in play.** This whole chapter is _Risk Management_ ([Chapter 2](chapter-02-principles.md)) given room to breathe, in constant tension with _Service Reliability First_ - because the riskiest control of all is the one so heavy that nobody actually follows it.
 
-## ⚖️ Risk Management in Operations
+## Risk Management in Operations
 
 ### Understanding Operational Risk
 
@@ -63,9 +51,9 @@ Risk management has an image problem. Say the words out loud and half the room p
 - **Recovery Complexity**: Difficulty and time required to recover from risk events
 - **Cascading Effects**: Potential for risks to trigger additional problems
 
-> **Note.** Impact × probability scoring is a _prioritisation_ tool, not a measurement. The numbers are deliberately coarse - their job is to force a conversation about which risks to fund first, not to pretend three-times-four is a scientifically precise 12. Treat a 20 and a 19 as "both urgent," not as a ranking.
+> **Note.** Impact × probability scoring is a _prioritization_ tool, not a measurement. The numbers are deliberately coarse - their job is to force a conversation about which risks to fund first, not to pretend three-times-four is a scientifically precise 12. Treat a 20 and a 19 as "both urgent," not as a ranking.
 
-### 🎮 Interactive Risk Assessment Exercise
+### Scenario: Risk Assessment
 
 **Scenario**: Your team manages a critical customer database with the following characteristics:
 
@@ -105,7 +93,15 @@ Risk Assessment Results:
     Mitigation: Automated backup testing and verification
 ```
 
-## 🛡️ Security Integration
+### The Risk Register
+
+A risk register is the single record of every identified operational risk, its assessment, and its treatment decision - the difference between "we talked about that risk once" and "we can show an auditor exactly how we manage it." At minimum, log for each risk: description, risk type (from the table above), impact, probability, score, owner, treatment decision (accept / mitigate / transfer / avoid), mitigation actions with due dates, and next review date.
+
+Review open, high-priority risks during the Weekly Improvement Cycle; review the full register during the Monthly Strategy Cycle. A risk register nobody has opened since the last audit is a Level 1 practice wearing a Level 3 costume.
+
+> **Template:** track risks, owners, and treatment decisions using [`templates/risk-register.md`](../../templates/risk-register.md).
+
+## Security Integration
 
 ### Security as Code in Operations
 
@@ -152,12 +148,14 @@ Risk Assessment Results:
 
 **Security Incident Classification**:
 
-| Category   | Definition                                          |
-| ---------- | --------------------------------------------------- |
-| Category 1 | Confirmed data breach or system compromise          |
-| Category 2 | Suspected security incident requiring investigation |
-| Category 3 | Security policy violation or configuration drift    |
-| Category 4 | Security monitoring alert requiring review          |
+Security incidents also get a type (what happened) in addition to the severity assigned under the framework's [SEV1-SEV4 model](chapter-06-practices.md) (how bad it is). Keep the two axes separate: type describes the nature of the event, severity drives response and communication.
+
+| Type   | Definition                                          | Typically Rated |
+| ------ | --------------------------------------------------- | --------------- |
+| Type 1 | Confirmed data breach or system compromise          | SEV1            |
+| Type 2 | Suspected security incident requiring investigation | SEV2            |
+| Type 3 | Security policy violation or configuration drift    | SEV3            |
+| Type 4 | Security monitoring alert requiring review          | SEV4            |
 
 **Integrated Response Process**:
 
@@ -174,10 +172,10 @@ Modern software delivery depends on hundreds of open-source packages, container 
 **Software Bill of Materials (SBOM)**:
 
 - An SBOM is a machine-readable inventory of every component in a software artifact (libraries, versions, licenses, checksums).
-- Formats: **[SPDX](https://spdx.dev/specifications/)** (ISO/IEC 5962:2021) and **[CycloneDX](https://cyclonedx.org/specification/overview/)** (OWASP standard) are the two dominant formats; prefer CycloneDX for container and application SBOMs.
+- Formats: **[SPDX](https://spdx.dev/use/specifications/)** (ISO/IEC 5962:2021) and **[CycloneDX](https://cyclonedx.org/specification/overview/)** (OWASP standard) are widely used formats. Choose the format supported by your producers, consumers, and contractual requirements.
 - **Generate SBOMs at build time** using tools like Syft, Trivy, or Microsoft SBOM Tool; attach them to container image attestations or release artefacts.
 - **Consume SBOMs** in CI with tools like Grype, OWASP Dependency-Check, or Snyk to detect CVEs before deployment.
-- **Regulatory context**: [US Executive Order 14028 (2021)](https://www.whitehouse.gov/briefing-room/presidential-actions/2021/05/12/executive-order-on-improving-the-nations-cybersecurity/) and [EU Cyber Resilience Act (2024)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R2847) mandate SBOM provision for software sold to government and critical infrastructure sectors.
+- **Regulatory context**: [US Executive Order 14028 (2021)](https://www.govinfo.gov/content/pkg/FR-2021-05-17/html/2021-10460.htm) directed US federal agencies toward software supply-chain transparency, including SBOM-related guidance. The [EU Cyber Resilience Act (2024)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R2847) establishes cybersecurity and vulnerability-handling obligations for products with digital elements. Map the exact obligation to the product, contract, and jurisdiction rather than assuming one global SBOM rule.
 
 **[SLSA](https://slsa.dev/) (Supply-chain Levels for Software Artifacts)**:
 
@@ -213,17 +211,17 @@ This keeps the framework useful without pretending that one global SBOM rule app
 
 A well-defined breach response timeline prevents ad-hoc decisions under pressure and ensures regulatory obligations are met. The following timelines should be documented in the incident response runbook:
 
-| Window          | Action                                                                                                                                                                                                                                                  | Owner                  |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
-| 0–15 min        | Detect and classify: confirm breach vs. false positive; escalate to Incident Commander                                                                                                                                                                  | On-call engineer       |
-| 0–1 hr          | Contain: isolate affected systems; revoke compromised credentials; block exfiltration paths                                                                                                                                                             | IC + Security lead     |
-| 1–4 hr          | Assess scope: identify affected data, systems, and users; preserve forensic evidence (memory dumps, logs)                                                                                                                                               | Security + Ops         |
-| 4–24 hr         | Notify internally: executive team, legal, DPO; begin regulatory clock assessment                                                                                                                                                                        | CISO / DPO             |
-| 24–72 hr        | **Regulatory notification**: [GDPR Art. 33](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679) requires supervisory authority notification within 72 hours of becoming aware; US state breach laws vary (24–72 hr for some states) | Legal / DPO            |
-| 72 hr – 30 days | Notify affected individuals ([GDPR Art. 34](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679) if high risk); coordinate with law enforcement if required                                                                          | Legal / Communications |
-| Ongoing         | Root cause analysis; control remediation; post-breach audit; lessons learned                                                                                                                                                                            | All teams              |
+| Window           | Action                                                                                                                                                                                                                                                                                                               | Owner                  |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| 0–15 min         | Detect and classify: confirm breach vs. false positive; escalate to Incident Commander                                                                                                                                                                                                                               | On-call engineer       |
+| 0–1 hr           | Contain: isolate affected systems; revoke compromised credentials; block exfiltration paths                                                                                                                                                                                                                          | IC + Security lead     |
+| 1–4 hr           | Assess scope: identify affected data, systems, and users; preserve forensic evidence (memory dumps, logs)                                                                                                                                                                                                            | Security + Ops         |
+| 4–24 hr          | Notify internally: executive team, legal, DPO; begin regulatory clock assessment                                                                                                                                                                                                                                     | CISO / DPO             |
+| 24–72 hr         | **Regulatory assessment and notification**: [GDPR Art. 33](https://eur-lex.europa.eu/eli/reg/2016/679/art_33/oj) requires supervisory authority notification without undue delay and, where feasible, within 72 hours after awareness unless the breach is unlikely to create a risk to people's rights and freedoms | Legal / DPO            |
+| After assessment | Notify affected individuals without undue delay when the breach is likely to create a high risk ([GDPR Art. 34](https://eur-lex.europa.eu/eli/reg/2016/679/art_34/oj)); coordinate with law enforcement if required                                                                                                  | Legal / Communications |
+| Ongoing          | Root cause analysis; control remediation; post-breach audit; lessons learned                                                                                                                                                                                                                                         | All teams              |
 
-> **Warning.** The regulatory clock starts on _awareness_, not on discovery. If an automated alert fires at 02:00 but nobody reviews it until 08:00, you have already burned six hours of your 72-hour GDPR window - and "we hadn't looked yet" is not a defence a regulator accepts.
+> **Warning.** GDPR Art. 33 measures the notification period from when the organization becomes aware of the breach. Legal counsel or the DPO should determine what constitutes awareness for the organization; operations must ensure potential breach alerts are reviewed and escalated promptly rather than left in an unattended queue.
 
 **Key principles**:
 
@@ -245,7 +243,7 @@ Penetration testing proactively identifies exploitable vulnerabilities before at
 
 **Pentest engagement process**:
 
-1. **Scoping**: Define in-scope systems, test types (black/grey/white box), rules of engagement, and emergency stop conditions.
+1. **Scoping**: Define in-scope systems, test types (black/gray/white box), rules of engagement, and emergency stop conditions.
 2. **Authorization**: Obtain written sign-off from system owner, legal, and cloud provider (AWS/GCP/Azure each have pentest policies; notify before testing cloud assets).
 3. **Execution**: Use certified testers (OSCP, CHECK, CREST); require daily finding briefs for critical issues found mid-test.
 4. **Remediation tracking**: All critical and high findings must have remediation due dates; retest critical findings within 30 days.
@@ -255,7 +253,7 @@ Penetration testing proactively identifies exploitable vulnerabilities before at
 
 **SysOps Integration**: Pentest findings feed directly into the risk register; critical findings trigger an emergency change (Practice 3, emergency change category); remediated controls are validated through Policy-as-Code and SBOM scanning to confirm fix persistence.
 
-## 📋 Compliance Management
+## Compliance Management
 
 ### Policy, Procedure, and Evidence - The Three Layers
 
@@ -369,7 +367,7 @@ spec:
 - **Retention**: Maintained for required retention periods
 - **Security**: Protected from unauthorized modification or access
 
-### 🎮 Compliance Scenario Challenge
+### Scenario: Compliance Decision
 
 **Scenario**: Your organization is implementing SOC 2 Type II compliance for your SaaS platform. The audit requirements include:
 
@@ -392,7 +390,7 @@ spec:
 3. **Monthly Cycle**: Compliance status reporting and audit preparation
 4. **Documentation**: Automated audit trail generation with manual review processes
 
-## 🔒 Data Protection and Privacy
+## Data Protection and Privacy
 
 ### Data Lifecycle Management
 
@@ -434,7 +432,7 @@ spec:
 - **Monitoring**: Comprehensive audit trails for data access and processing
 - **Breach Response**: Rapid detection and response to data breaches
 
-## 🏗️ Business Continuity and Disaster Recovery
+## Business Continuity and Disaster Recovery
 
 ### Business Continuity Planning
 
@@ -531,7 +529,7 @@ Issues found:       3 (see action log)
 Test result:        PASS
 ```
 
-Store all DR test logs in the knowledge management system (Chapter 6, Practice 5); retain for 3 years minimum for audit and compliance evidence.
+Store all DR test logs in the knowledge management system ([Chapter 6, Practice 5](chapter-06-practices.md#5-knowledge-and-documentation-management)); retain for 3 years minimum for audit and compliance evidence.
 
 #### DR Testing Integration with SysOps Cycles
 
@@ -539,7 +537,7 @@ Store all DR test logs in the knowledge management system (Chapter 6, Practice 5
 - **Weekly Improvement Cycle**: close DR test action items; update runbooks with findings
 - **After every major infrastructure change**: re-validate DR assumptions that may have been invalidated by the change (new database, region expansion, service mesh addition)
 
-## 📊 Risk Metrics and Reporting
+## Risk Metrics and Reporting
 
 ### Risk Assessment Metrics
 
@@ -573,7 +571,7 @@ Store all DR test logs in the knowledge management system (Chapter 6, Practice 5
 - **Mitigation Status**: Progress on risk mitigation initiatives
 - **Compliance Status**: Current compliance posture and any deficiencies
 
-> **Reality check.** A heat map glowing reassuringly green is the easiest artifact in this entire chapter to fake - just be optimistic about every probability. Executives trust the colours, so the colours have to be honest. If nothing on the board has been amber in six months, the question isn't "why are we so safe?" - it's "who's grading their own homework?"
+> **Reality check.** A heat map glowing reassuringly green is the easiest artifact in this entire chapter to fake - just be optimistic about every probability. Executives trust the colors, so the colors have to be honest. If nothing on the board has been amber in six months, the question isn't "why are we so safe?" - it's "who's grading their own homework?"
 
 **Reporting Frequency**:
 
@@ -582,17 +580,19 @@ Store all DR test logs in the knowledge management system (Chapter 6, Practice 5
 - **Monthly**: Comprehensive risk assessment and compliance status
 - **Quarterly**: Strategic risk review and annual planning updates
 
-## 🔄 Continuous Risk Management
+## Continuous Risk Management
 
 ### Risk Management Maturity
 
-| Level | Stage        | What It Looks Like                                                                                                                                      |
-| ----- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1     | Reactive     | Risk managed after incidents; limited documentation and tracking; manual assessment; inconsistent mitigation                                            |
-| 2     | Managed      | Regular assessments and reviews; documented processes; basic tracking and reporting; some automated controls                                            |
-| 3     | Defined      | Risk management integrated across operations; standardized methodologies; comprehensive monitoring and alerting; risk-based decisions                   |
-| 4     | Quantitative | Quantitative assessment and modeling; predictive analytics and forecasting; cost-benefit analysis of mitigations; risk metrics tied to business metrics |
-| 5     | Optimizing   | Continuous process optimization; ML-driven risk prediction; risk management drives strategy; industry leadership in practice                            |
+This chapter uses the same five-level maturity vocabulary as [Chapter 6](chapter-06-practices.md): Initial, Repeatable, Defined, Managed, Optimizing.
+
+| Level | Stage      | What It Looks Like                                                                                                                                      |
+| ----- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1     | Initial    | Risk managed after incidents; limited documentation and tracking; manual assessment; inconsistent mitigation                                            |
+| 2     | Repeatable | Regular assessments and reviews; documented processes; basic tracking and reporting; some automated controls                                            |
+| 3     | Defined    | Risk management integrated across operations; standardized methodologies; comprehensive monitoring and alerting; risk-based decisions                   |
+| 4     | Managed    | Quantitative assessment and modeling; predictive analytics and forecasting; cost-benefit analysis of mitigations; risk metrics tied to business metrics |
+| 5     | Optimizing | Continuous process optimization; ML-driven risk prediction; risk management drives strategy; industry leadership in practice                            |
 
 > **Reality check.** Most teams don't need Level 5, and several reach for the machine-learning bullet long before they can reliably do the Level 2 basics. Be honestly Level 2 before you cosplay Level 5 - a tidy risk register that people actually keep up to date beats a predictive model nobody trusts.
 
@@ -606,39 +606,7 @@ Store all DR test logs in the knowledge management system (Chapter 6, Practice 5
 4. **Control Enhancement**: Strengthening of risk controls and mitigation strategies
 5. **Culture Development**: Building risk awareness and management capabilities
 
-**Risk Management Evolution**:
-
-- **Baseline Establishment**: Initial risk assessment and control implementation
-- **Process Maturation**: Refinement of risk management processes and capabilities
-- **Integration**: Full integration of risk management with operational processes
-- **Optimization**: Continuous optimization and improvement of risk management
-- **Innovation**: Leading-edge risk management practices and technologies
-
-## 🎯 Chapter Summary
-
-Risk management and compliance are not separate activities from operations-they must be integrated into every aspect of the SysOps Framework. Success requires embedding risk considerations into all operational cycles, automating compliance evidence collection, and building a culture where risk awareness drives decision-making.
-
-Modern operations teams must also address the expanding attack surface of the software supply chain: generating SBOMs at build time, enforcing SLSA build integrity, and validating provenance before every production deployment. Breach response timelines must be pre-agreed and rehearsed - regulatory clocks start on awareness, not on planned action. Penetration testing must be frequent, scoped correctly, and its findings tracked to confirmed remediation rather than filed and forgotten.
-
-The key is to make risk management and compliance enablers of operational excellence rather than barriers to efficiency. This requires thoughtful integration of controls and processes, automation of routine compliance activities, and continuous improvement based on risk events and changing threat landscapes.
-
-## 🔮 Looking Ahead
-
-In the next chapter, we'll explore common challenges and limitations of the SysOps Framework, along with practical solutions and workarounds for difficult implementation scenarios.
-
-## 💭 Reflection Questions
-
-1. **Risk Assessment**: What are the top operational risks in your current environment?
-2. **Compliance Integration**: How could you better integrate compliance requirements into your operational processes?
-3. **Risk Culture**: How would you build a culture of risk awareness without creating analysis paralysis?
-
----
-
-**🎮 Gamification Element - Chapter 10 Badge**
-
-![Risk Guardian badge](../../assets/badges/chapter-10.svg)
-
-_Complete a comprehensive risk assessment for your environment and earn the "Risk Guardian" badge._
+**Risk Management Evolution**: Progress mirrors the maturity levels above - teams move from Initial/Repeatable basics toward Defined, Managed, and eventually Optimizing as processes, integration, and tooling mature. Track where each risk domain sits rather than chasing a single organization-wide score.
 
 ---
 

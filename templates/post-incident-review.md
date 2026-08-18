@@ -7,7 +7,7 @@ POST-INCIDENT REVIEW
 
 Title:               <short, human-readable summary>
 Incident ID:         <tracker reference>
-Severity:            <SEV1 / SEV2 / SEV3>
+Severity:            <SEV1 / SEV2 / SEV3 / SEV4>
 Date of incident:    <YYYY-MM-DD>
 Authors:             <names>
 Status:              <Draft / In review / Final>

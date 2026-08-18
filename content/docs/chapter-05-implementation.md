@@ -6,20 +6,11 @@ description: >
   "A journey of a thousand miles begins with a single step, but you still need a map."
 ---
 
-## 🎯 Learning Objectives
-
-By the end of this chapter, you will understand:
-
-- The six-month implementation roadmap for the SysOps Framework
-- How to manage change without disrupting ongoing operations
-- Key milestones and success criteria for each phase
-- Common implementation challenges and how to overcome them
-
 > **Principles in play.** A rollout that burns out the team betrays the very principles it's meant to install. Watch especially for _Automation and Efficiency_ and _Knowledge Sharing_ ([Chapter 2](chapter-02-principles.md)) — they're the two that make adoption stick rather than snap back the moment you stop pushing.
 
-## 🗺️ The Implementation Roadmap
+## The Implementation Roadmap
 
-![SysOps Implementation Roadmap](../assets/sysops-roadmap.png)
+![SysOps Implementation Roadmap](../../assets/sysops-roadmap.png)
 
 Implementing the SysOps Framework requires a systematic, phased approach that minimizes disruption to ongoing operations while building new capabilities. The roadmap above shows six parallel tracks running over six months, each contributing to successful framework adoption.
 
@@ -34,6 +25,30 @@ The shortest safe implementation is not “install the whole framework.” It is
 
 Everything else in this chapter expands that path. If the team is already overloaded, use the 30-day pilot from Getting Started before attempting the six-month rollout.
 
+### Moving from Sprints to SysOps
+
+Do not run two planning systems indefinitely. Before the pilot starts, make one explicit cutover decision with the team and its stakeholders.
+
+| Existing element          | During the pilot                                                                  | After a go decision                                                                                                           |
+| ------------------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Sprint board              | Keep only development work that still benefits from a sprint commitment           | Move operational work to the daily, weekly, or monthly queues; retain a sprint board only for genuine product development     |
+| In-flight stories         | Finish, split, or reclassify them; do not silently abandon commitments            | Route unfinished operational work through the intake rules in [Chapter 3](chapter-03-structure.md)                            |
+| Story points and velocity | Preserve historical data but stop using it to judge operational work              | Report service health, operational load, completed improvements, and strategic outcomes                                       |
+| Sprint planning           | Keep it only for work that remains in Scrum                                       | Replace operational planning with daily triage, weekly improvement planning, and monthly strategy decisions                   |
+| Daily stand-up            | Do not add another meeting; adapt the existing one to the daily operations agenda | Keep a short operational review focused on service state, interrupts, ownership, and blockers                                 |
+| Retrospective             | Use the existing slot for the pilot retrospective                                 | Review incidents and improvements in their owning cycles; retain a team retrospective only when it changes how the team works |
+| Sprint review or demo     | Explain the pilot and the temporary reporting change                              | Use the monthly stakeholder report; demonstrate automation or reliability improvements when a demonstration is useful         |
+
+Before cutover:
+
+1. Export or snapshot the old board and baseline reports.
+2. Classify every open item as development, incident, request, change, improvement, or strategic work.
+3. Give every retained item one owner and one destination queue.
+4. Publish which ceremonies stop, which change, and which remain.
+5. Tell stakeholders that velocity will no longer represent operational performance and show the replacement report.
+
+If product development remains a substantial part of the team's work, keep Scrum for that stream. SysOps replaces the operating model for operational work; it does not require every type of work to use one method.
+
 ### Two Tracks: Pilot vs Full Rollout
 
 There is no single adoption path. Choose based on your team's readiness:
@@ -42,7 +57,7 @@ There is no single adoption path. Choose based on your team's readiness:
 | ---------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
 | **Who**          | One team, testing the framework                                                      | Team(s) committed to full adoption                                   |
 | **Prerequisite** | 4+ yes signals on the readiness assessment in [Getting Started](../getting-started/) | Successful 30-day pilot completed                                    |
-| **Goal**         | Prove the daily cycle works, measure improvement, decide                             | Institutionalise all three cycles + all 12 practices                 |
+| **Goal**         | Prove the daily cycle works, measure improvement, decide                             | Institutionalize all three cycles + all 12 practices                 |
 | **Owners**       | Team lead (drives), on-call engineer (daily cycle), one stakeholder sponsor          | Team lead + manager (joint), rotating improvement lead, exec sponsor |
 | **Months**       | 1 month                                                                              | 6 months                                                             |
 
@@ -55,9 +70,21 @@ There is no single adoption path. Choose based on your team's readiness:
 | **Team lead**         | Drives the daily cycle, runs standalones, unblocks the team          | Runs weekly improvement cycle, reports to manager, coordinates with other teams |
 | **On-call engineer**  | Owns the daily cycle's respond phase, logs incidents                 | Rotates as improvement lead, trains new team members                            |
 | **Manager**           | Provides air cover, protects improvement time, reviews pilot results | Owns monthly strategy cycle, secures budget, enforces framework adherence       |
-| **Executive sponsor** | Reviews pilot results, approves continuation                         | Champions cross-team adoption, removes organisational blockers                  |
+| **Executive sponsor** | Reviews pilot results, approves continuation                         | Champions cross-team adoption, removes organizational blockers                  |
 
-## 🔍 Phase 1: Foundation and Assessment (Month 1)
+### Decision Rights
+
+The pilot needs explicit authority, not a committee:
+
+- The **pilot lead** changes pilot scope and facilitates Go / Adapt / Stop.
+- The **daily queue owner** classifies and reclassifies incoming work.
+- The **service owner** accepts service risk and approves SLO or recovery-target changes.
+- The **manager** protects capacity and resolves priority conflicts the team cannot settle.
+- The **executive sponsor** decides whether to fund or scale the model beyond the team.
+
+Anyone may escalate an immediate safety or reliability concern. No role may override incident response merely to protect a plan.
+
+## Phase 1: Foundation and Assessment (Month 1)
 
 ### Foundation Track
 
@@ -75,14 +102,27 @@ There is no single adoption path. Choose based on your team's readiness:
 - Current state assessment report
 - Implementation plan and timeline
 - Stakeholder communication materials
-- Team training schedule
+- Team training schedule and completed kickoff
 
 **Success Criteria**:
 
-- 100% of team members understand framework basics
+- Every team member can classify work, explain the three cycles, and identify the pilot's stop conditions
 - Leadership commitment secured
 - Implementation plan approved
 - Baseline metrics established
+
+#### Framework Basics Kickoff
+
+“Team trained” means the team can operate the pilot, not that everyone watched a slide deck. Run one 90-minute working session:
+
+1. **15 minutes:** why sprint-shaped planning is failing this team.
+2. **20 minutes:** daily, weekly, and monthly cycles and their owners.
+3. **20 minutes:** classify real open work using the intake rules from Chapter 3.
+4. **15 minutes:** review severity, escalation, and handoff expectations.
+5. **10 minutes:** review the baseline and the Go / Adapt / Stop decision.
+6. **10 minutes:** confirm who owns the pilot, each queue, and stakeholder reporting.
+
+Use current tickets and incidents in the exercise. The kickoff is complete when the team can route its own work without consulting the slides.
 
 ### Assessment Deep Dive
 
@@ -121,7 +161,7 @@ Before implementing changes, establish baseline measurements:
 - Monitoring effectiveness and false positive rates
 - Stakeholder satisfaction with IT services
 
-## 🏗️ Phase 2: Core Process Setup (Months 2-3)
+## Phase 2: Core Process Setup (Months 2-3)
 
 ### Month 2: Daily Operations Foundation
 
@@ -129,7 +169,7 @@ Before implementing changes, establish baseline measurements:
 
 - Implement daily operations cycle (Monitor → Respond → Document → Review)
 - Establish incident response procedures and escalation paths
-- Create service catalog and critical service definitions
+- Create the service inventory using [`templates/service-inventory.md`](../../templates/service-inventory.md) and identify critical services
 - Set up basic communication and handoff procedures
 
 **Tools Track**:
@@ -183,7 +223,7 @@ Before implementing changes, establish baseline measurements:
 - Implement trend analysis for improvement impact
 - Set up team satisfaction and engagement measurement
 
-### 🎮 Interactive Exercise: Process Integration Challenge
+### Scenario: Process Integration
 
 **Scenario**: Your team currently handles incidents reactively and struggles to find time for improvements. You're implementing the SysOps Framework.
 
@@ -205,7 +245,7 @@ Before implementing changes, establish baseline measurements:
 - **Weekly Cycle**: Identify patterns (database monitoring gaps, patch testing improvements, network redundancy needs)
 - **Team Support**: Celebrate successful incident responses while planning improvements to prevent recurrence
 
-## 🚀 Phase 3: Development and Maturity (Months 4-6)
+## Phase 3: Development and Maturity (Months 4-6)
 
 ### Month 4: Strategic Integration
 
@@ -227,7 +267,7 @@ Before implementing changes, establish baseline measurements:
 
 - Develop specialized expertise and leadership roles
 - Create mentorship and knowledge transfer programs
-- Establish career development and certification paths
+- Establish career development and skill-growth paths
 - Build cross-functional collaboration capabilities
 
 **Metrics Track**:
@@ -246,30 +286,30 @@ Before implementing changes, establish baseline measurements:
 - Strategic technology evaluation and adoption
 - Team expertise development and specialization
 
-> These roadmap milestones describe _when_ automation maturity is reached. The concrete tooling to get there (IaC, orchestration, GitOps, runbook automation, self-service platforms) is catalogued in [Chapter 8](chapter-08-tools.md); automation _coverage_ targets are measured per [Chapter 7](chapter-07-metrics.md); self-healing and AI-driven automation are explored in [Chapter 12](chapter-12-future.md).
+> These roadmap milestones describe _when_ automation maturity is reached. [Chapter 8](chapter-08-tools.md) explains the minimum capabilities and when additional tooling earns its place; automation _coverage_ is measured in [Chapter 7](chapter-07-metrics.md); emerging automation is discussed in [Chapter 12](chapter-12-future.md).
 
 **Key Milestones**:
 
-- 80% of routine tasks automated
-- Proactive issue detection preventing 50% of potential incidents
+- The highest-cost recurring task automated or materially shortened
+- Detection or response improved for one recurring failure mode
 - Strategic technology roadmap established
-- Team members achieving advanced certifications
+- Skill gaps and development plans documented
 
-### Month 6: Full Framework Adoption
+### Month 6: Review and Stabilization
 
 **Achievement Targets**:
 
-- All three operational cycles running smoothly
-- Framework integrated with organizational processes
-- Team operating with high autonomy and expertise
-- Continuous improvement culture fully established
+- All three cycles have named owners and produce useful decisions or evidence
+- Priority practices are repeatable without constant rollout-team prompting
+- Remaining maturity gaps have owners and next-quarter actions
+- The team has recorded a Go / Adapt / Stop decision for continued adoption
 
 **Success Indicators**:
 
-- Service reliability targets consistently met
-- Team satisfaction and engagement high
-- Stakeholder confidence in operations capabilities
-- Framework practices becoming organizational standards
+- Service, workload, and team signals are compared with the baseline
+- Stakeholder reporting is established and prompts decisions
+- The team can explain which practices help, which need adaptation, and why
+- Priority practices show evidence of Level 3 (Defined); Level 4 remains later work
 
 ### Maturity Targets Are Heuristics
 
@@ -280,7 +320,7 @@ The milestone tables below are guidance, not a maturity contest. A two-person in
 - Are stakeholders receiving clearer signals than before?
 - Is the team less surprised by recurring operational work?
 
-## 🎯 Success Criteria and Milestones
+## Success Criteria and Milestones
 
 The roadmap boils down to a simple shape: **build the daily heartbeat first, layer improvement on top, then add strategy — and only then chase the advanced toys.** Teams that invert this order (buying the shiny self-healing automation platform in week one, before they can reliably handle a 3 a.m. page) tend to end up with an expensive dashboard nobody trusts.
 
@@ -291,11 +331,11 @@ At a glance, here's what "done" looks like for each phase:
 - **Month 4 — Strategy:** the monthly strategy cycle appears and all three cycles run in parallel.
 - **Months 5–6 — Maturity:** advanced capabilities prove their value, culture shifts, and the framework becomes "just how we work" — ready to scale or replicate.
 
-Each phase maps to the maturity levels in [Chapter 6](chapter-06-practices.md): expect practices to sit around Level 1–2 in Month 1, reach Level 3 (Defined) by Month 4, and stabilise at Level 4 (Managed) by Month 6, with a credible path to Level 5 (Optimizing).
+Each phase maps to the maturity levels in [Chapter 6](chapter-06-practices.md): expect priority practices to begin around Level 1–2, with evidence of Level 3 (Defined) by Month 6. Level 4 (Managed) requires sustained measurement and usually extends beyond the rollout; Level 5 is not a six-month target.
 
 > **The detailed, month-by-month milestone tracker** — the printable checklist with every box to tick — lives in **[Appendix B](chapter-13-appendices.md)**, alongside the maturity targets for each month. Keep the narrative here; keep the tick-boxes there.
 
-## ⛔ Go/No-Go Decision Points
+## Go/No-Go Decision Points
 
 Check these at each phase boundary. If the criteria are not met, do not advance — adapt or pause.
 
@@ -307,7 +347,65 @@ Check these at each phase boundary. If the criteria are not met, do not advance 
 | **End of Month 4**                     | Monthly strategy cycle launched, first strategic initiative complete or in progress, stakeholder reporting is happening                                       | Extend the monthly cycle pilot by one month with adjusted scope                                                                                      |
 | **End of Month 6**                     | All three cycles running without active management, maturity Level 3+ on priority practices, team can articulate framework value without referencing the book | Accept Level 2 on some practices and plan targeted improvement for next quarter. Full maturity takes 12-18 months                                    |
 
-## ↩️ Rollback Plan
+## Worked Example: Northstar Platform Team
+
+Northstar is a fictional five-person platform team responsible for identity, CI runners, shared Kubernetes clusters, and database backups. It uses two-week Scrum, but incidents and access requests repeatedly invalidate the sprint plan.
+
+### Before the Pilot
+
+The team spends two weeks collecting a rough baseline rather than pretending its data is precise:
+
+| Signal               | Baseline                                                       | Confidence                                                         |
+| -------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Reactive work        | 38% of recorded team hours                                     | Medium; two engineers did not log short interruptions consistently |
+| Incidents            | 9, including 2 repeat backup failures                          | High                                                               |
+| Median recovery time | 74 minutes across 6 incidents with complete timestamps         | Medium                                                             |
+| Improvement work     | 1 of 5 planned items completed                                 | High                                                               |
+| Team pulse           | 4/10 for “I can finish planned work without hidden interrupts” | High                                                               |
+
+The team snapshots its sprint board and classifies every open item. Product-facing CI features remain in Scrum. Incidents, requests, operational changes, and reliability improvements move to the SysOps queues. Velocity remains available as historical data but is removed from the operations report.
+
+### The 30-Day Pilot
+
+**Week 1:** The team starts daily triage and records every interruption. It discovers that access requests are being handled through direct messages and creates one intake route.
+
+**Week 2:** Daily work is stable enough to identify a recurring backup verification failure. The team routes that problem to the weekly queue instead of treating each alert as unrelated.
+
+**Week 3:** The protected improvement block produces a backup verification script and a runbook correction. One planned feature slips by two days; the team records the trade-off rather than hiding it.
+
+**Week 4:** The evidence is mixed:
+
+- reactive work is 34%, but logging is more complete than during the baseline;
+- no backup verification incident recurred after the change;
+- median recovery time is inconclusive because only three comparable incidents occurred;
+- the team pulse rises from 4/10 to 6/10;
+- stakeholders received the first one-page service report.
+
+### Decision: Adapt
+
+The team does not claim a 4-point reduction in reactive work; the measurement methods were not equivalent. It records an **Adapt** decision:
+
+1. Continue the daily and weekly cycles for another month.
+2. Keep one intake route and require an owner for every item.
+3. Delay the monthly strategy cycle until the weekly improvement block runs reliably for four consecutive weeks.
+4. Preserve Scrum only for the development stream.
+5. Compare the next review with the improved baseline rather than the original incomplete timesheets.
+
+This is a successful pilot because it produced a better operating decision, not because every number turned green.
+
+## After Month 6
+
+The framework does not become self-maintaining when the rollout calendar ends.
+
+1. Name one **framework owner** for the next quarter. This is a stewardship role, not a permanent process office.
+2. Review queue health, cycle usefulness, priority-practice maturity, and abandoned artifacts quarterly.
+3. Retire meetings, metrics, and templates that no longer change a decision.
+4. Keep service ownership, severity rules, intake taxonomy, and reporting definitions versioned and discoverable.
+5. Put remaining maturity gaps into the normal monthly strategy process rather than extending the rollout forever.
+
+For multiple teams, scale the shared language before the ceremonies: use common service identifiers, severity definitions, and evidence fields, while allowing each team to run its own queues and calendar. Add a cross-team review only for dependencies or risks that no single team can resolve.
+
+## Rollback Plan
 
 If the framework is not working after a genuine attempt, here is how to exit cleanly — without losing the improvements you have already made.
 
@@ -339,59 +437,7 @@ Even in a rollback, the following are permanent improvements that no methodology
 - Cross-training completed
 - Baseline metrics (they are valuable regardless of what comes next)
 
-## 🚧 Common Implementation Challenges
-
-> **Reality check.** Every one of the challenges below is really a people problem wearing a process costume. You can have a flawless roadmap and still stall because one influential skeptic decided this is "the latest thing management read about." Win the people and the process follows; win the process and ignore the people, and you'll be relaunching this in eighteen months.
-
-### Challenge 1: Resistance to Change
-
-**Symptoms**: Team members preferring old processes, skepticism about framework benefits, reluctance to invest time in new approaches
-
-**Solutions**:
-
-- Start with willing team members as champions
-- Demonstrate quick wins and immediate benefits
-- Address concerns directly and honestly
-- Provide adequate training and support
-- Celebrate successes and learn from setbacks
-
-### Challenge 2: Resource Constraints
-
-**Symptoms**: No time for implementation activities, competing priorities, limited budget for tools or training
-
-**Solutions**:
-
-- Phase implementation to spread resource needs
-- Start with low-cost, high-impact improvements
-- Use framework implementation to identify resource optimization opportunities
-- Demonstrate ROI to secure additional resources
-- Leverage existing tools and capabilities where possible
-
-### Challenge 3: Organizational Resistance
-
-**Symptoms**: Leadership skepticism, conflicting priorities from other teams, resistance to changing metrics or reporting
-
-**Solutions**:
-
-- Build strong business case with clear benefits
-- Start with pilot implementation to prove value
-- Align framework benefits with organizational goals
-- Engage stakeholders in framework design and implementation
-- Communicate progress and results regularly
-
-### Challenge 4: Technical Limitations
-
-**Symptoms**: Inadequate monitoring tools, legacy systems that resist automation, integration challenges
-
-**Solutions**:
-
-- Prioritize tool improvements based on framework needs
-- Implement gradual technical improvements alongside framework adoption
-- Use framework implementation to justify technical investments
-- Find creative workarounds for legacy system limitations
-- Plan technical improvements as strategic initiatives
-
-## 📊 Measuring Implementation Success
+## Measuring Implementation Success
 
 ### Leading Indicators (Early Signs of Success)
 
@@ -419,7 +465,7 @@ Even in a rollback, the following are permanent improvements that no methodology
 | Team capability  | Skills and expertise development progress                              |
 | Cultural change  | Evidence of cultural transformation and continuous improvement mindset |
 
-## 🔄 Adaptation and Customization
+## Adaptation and Customization
 
 ### Framework Customization Guidelines
 
@@ -440,32 +486,6 @@ Even in a rollback, the following are permanent improvements that no methodology
 | Manufacturing      | Integration with production planning and quality systems |
 | Technology         | Alignment with development and product release cycles    |
 | Government         | Compliance with procurement and security regulations     |
-
-## 🎯 Chapter Summary
-
-Implementing the SysOps Framework requires careful planning, phased execution, and continuous adjustment based on results and feedback. The six-month roadmap provides a structured approach while maintaining flexibility for customization and adaptation.
-
-Success depends on strong leadership support, team engagement, adequate resources, and a commitment to continuous improvement. The parallel tracks ensure that technical, process, and cultural changes happen simultaneously, creating a comprehensive transformation that addresses all aspects of operations work.
-
-The key to successful implementation is starting with solid foundations, building capabilities gradually, and maintaining focus on the ultimate goal: creating sustainable, effective operations practices that serve both the team and the organization.
-
-## 🔮 Looking Ahead
-
-In the next chapter, we'll explore the essential management practices that support the SysOps Framework, including service level management, incident and problem management, and the other key practices that make the framework effective.
-
-## 💭 Reflection Questions
-
-1. **Readiness Assessment**: How ready is your team and organization for this level of change?
-2. **Resource Planning**: What resources would you need to secure for successful implementation?
-3. **Success Definition**: How would you measure success for your specific environment?
-
----
-
-**🎮 Gamification Element - Chapter 5 Badge**
-
-![Implementation Planner badge](../../assets/badges/chapter-05.svg)
-
-_Create a detailed implementation plan for your team, including timeline, resources, and success criteria, to earn the "Implementation Planner" badge._
 
 ---
 

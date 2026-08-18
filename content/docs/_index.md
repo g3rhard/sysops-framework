@@ -36,17 +36,17 @@ Use this matrix before you read the whole book. SysOps is useful when the shape 
 | Team has support, incidents, patching, compliance, and project work at the same time  | **Strong fit**       | Use the 30-day pilot and template pack                            |
 | Product team with one backlog, rare production interrupts, and stable sprint goals    | **Weak fit**         | Keep Scrum/Kanban and borrow only metrics or templates            |
 | Team has no service ownership and only receives tickets from another operations group | **Partial fit**      | Clarify ownership before adopting cycles                          |
-| Organisation needs formal audit certification                                         | **Not enough alone** | Use ITSM/compliance frameworks; use SysOps as the operating layer |
+| Organization needs formal audit certification                                         | **Not enough alone** | Use ITSM/compliance frameworks; use SysOps as the operating layer |
 
 > **Start small.** If the matrix says “strong fit,” do not adopt the whole framework at once. Start with the daily cycle and one visible improvement target.
 
 ## What You Can Expect — and When
 
-| Timeframe    | What changes                                                                                                  |
-| ------------ | ------------------------------------------------------------------------------------------------------------- |
-| **30 days**  | Daily operations cycle running, baseline metrics established, first improvement identified and completed      |
-| **90 days**  | All three cycles operational, firefighting measured and measurably down, stakeholder communication rhythm set |
-| **180 days** | Framework practices institutionalised, toil burden reduced, team resilience measurably improved               |
+| Timeframe    | What changes                                                                                                   |
+| ------------ | -------------------------------------------------------------------------------------------------------------- |
+| **30 days**  | Daily operations cycle tested, baseline recorded, first improvement completed, Go / Adapt / Stop decision made |
+| **90 days**  | Daily and weekly cycles stable; monthly strategy cycle being tested; stakeholder reporting established         |
+| **180 days** | Priority practices repeatable and evidence-driven; remaining maturity work planned for subsequent quarters     |
 
 ## The Narrative Arc
 
@@ -78,7 +78,7 @@ flowchart LR
 
 **Already convinced?** Start at Chapter 5 (implementation roadmap) and reference Chapter 6 (practices) and Chapter 7 (metrics) as you go.
 
-**Sceptical?** Read Chapter 1 and Chapter 4. If neither the problem nor the comparison lands, this framework isn't for you — and that is genuinely fine.
+**Skeptical?** Read Chapter 1 and Chapter 4. If neither the problem nor the comparison lands, this framework isn't for you — and that is genuinely fine.
 
 ## Chapter Overview
 
@@ -89,7 +89,7 @@ flowchart LR
 - **[Chapter 5: Implementation](chapter-05-implementation/)** — 30-day pilot and 180-day full rollout roadmap.
 - **[Chapter 6: Management Practices](chapter-06-practices/)** — The twelve core practices that support operational excellence.
 - **[Chapter 7: Metrics & Measurement](chapter-07-metrics/)** — Operations-focused KPIs that demonstrate business value.
-- **[Chapter 8: Tools & Technology](chapter-08-tools/)** — The technology stack: observability, automation, GitOps, platform engineering.
+- **[Chapter 8: Tools & Technology](chapter-08-tools/)** — Minimum capabilities, selection rules, and signals that justify additional tooling.
 - **[Chapter 9: Culture & Organization](chapter-09-culture/)** — Building operations culture without hero worship.
 - **[Chapter 10: Risk & Compliance](chapter-10-risk/)** — Integrating risk management, security, and compliance into operational cycles.
 - **[Chapter 11: Challenges & Solutions](chapter-11-challenges/)** — Symptom-driven troubleshooting and rescue playbooks.
@@ -101,14 +101,14 @@ flowchart LR
 ### For Operations Teams
 
 - Work with operational reality instead of against it — no more explaining firefighting as a "sprint defect"
-- Sustainable on-call and improvement practices that prevent burnout
-- Clear development paths and recognised expertise
+- Explicit on-call health and protected improvement practices
+- Clear development paths and recognized expertise
 - Reduced single points of failure through knowledge sharing
 
-### For Organisations
+### For Organizations
 
-- Better service availability and fewer incidents
-- Lower costs through prevention and automation
+- Service availability and recurring incidents made visible
+- Cost, toil, and automation opportunities made explicit
 - Operations work connected to business value
 - Operational excellence as a strategic capability
 
@@ -128,6 +128,9 @@ The framework is not only explanatory text. The most reusable parts are the arti
 - SLA template
 - on-call policy template
 - reporting template
+- work-intake and triage template
+- baseline and pilot retrospective templates
+- service inventory, risk register, and shift-handoff templates
 - data relationship map and glossary
 
 Use the book to understand the operating model, then use the templates to make the model visible in daily work.
@@ -137,15 +140,11 @@ Use the book to understand the operating model, then use the templates to make t
 - **[Glossary](glossary/)** — Terminology, acronyms, and canonical definitions for all framework concepts.
 - **[Framework Data Relationships](data-relationships/)** — How cycles, practices, and metrics interconnect.
 - **[Getting Started Guide](getting-started/)** — 30-day quick-start implementation plan with two adoption paths.
-- **[Appendices: Templates & Checklists](chapter-13-appendices/)** — Post-mortem template, incident commander checklist, change control form, SLA template, milestone tracker.
+- **[Appendices: Templates & Checklists](chapter-13-appendices/)** — Readiness and milestone checklists plus links to the maintained template pack.
 
-## Community
+## Contributing
 
-- **GitHub Repository** — Contribute to framework development, open issues, share your adaptation stories.
-- **Community Discussions** — Connect with other practitioners.
-- **Case Studies** — Real-world implementations and lessons learned.
-
-> Training programmes, professional support, and certification pathways are under exploration and not yet available. If you have specific needs or want to collaborate, open a GitHub discussion.
+Development and feedback happen in the [GitHub repository](https://github.com/g3rhard/sysops-framework). Training programs, professional support, and certification are not currently offered.
 
 ---
 

@@ -6,20 +6,13 @@ description: >
   "What gets measured gets managed, but what gets measured wrong gets mismanaged."
 ---
 
-## 🎯 Learning Objectives
-
-By the end of this chapter, you will understand:
-
-- The four categories of SysOps Framework metrics
-- How to design effective dashboards for different audiences
-- Key performance indicators that align with operational goals
-- How to measure framework implementation success
-
 > **Principles in play.** Metrics are how _Service Reliability First_ stops being a slogan and becomes a number, and how _Risk Management_ ([Chapter 2](chapter-02-principles.md)) turns into something you can see coming rather than explain afterward.
 
-## 📊 The SysOps Metrics Framework
+## The SysOps Metrics Framework
 
-![SysOps Metrics Dashboard](../assets/sysops-dashboard.png)
+> **Dashboard example:** A production-oriented view combining service health, error-budget burn, incident annotations, operational load, change success, and severity distribution.
+
+![Dark observability dashboard with stat panels, reliability trends, error-budget burn, workload trends, change success, and incident volume](../../assets/sysops-dashboard.png)
 
 Traditional agile metrics like velocity and story points don't capture the value that operations teams provide. The SysOps Framework requires different metrics that reflect operational realities and demonstrate business value. Our metrics framework organizes measurements into four key categories, each serving different stakeholders and decision-making needs.
 
@@ -51,7 +44,7 @@ Every dashboard should separate **leading indicators** from **lagging indicators
 
 A good SysOps dashboard gives the team enough leading signal to act before the monthly report becomes a post-mortem.
 
-## 🛡️ Service Reliability Metrics
+## Service Reliability Metrics
 
 > **Linked practices ([Chapter 6](chapter-06-practices.md)):** these metrics are the scoreboard for _Service Level Management_ (Practice 1), _Incident and Problem Management_ (Practice 2), and _Backup & Recovery Operations_ (Practice 12). If a number here is unhealthy, the corresponding practice is where you go to fix it.
 
@@ -93,7 +86,7 @@ Error Budget:
 
 > **Audience**: On-call engineers watch burn rate and MTTR in real time. Team leads review SLO attainment weekly. Executives see only the monthly summary - unless a service is burning its error budget faster than planned, in which case everyone sees it.
 
-## ⚡ Operational Efficiency Metrics
+## Operational Efficiency Metrics
 
 > **Linked practices ([Chapter 6](chapter-06-practices.md)):** these track the health of _Change and Configuration Management_ (Practice 3), _Capacity and Performance Management_ (Practice 4), _Release Management_ (Practice 8), and _Service Request Management_ (Practice 10).
 
@@ -107,7 +100,7 @@ Error Budget:
 | Capacity Utilization     | Optimal resource usage without performance degradation      | 60–80% utilization for most resources             | Resource monitoring with performance correlation     | Maximizes infrastructure investment while maintaining performance |
 | Tool Effectiveness Score | Team satisfaction and productivity with operational tools   | 8/10 average satisfaction score                   | Regular surveys and productivity analysis            | Ensures tool investments support team effectiveness               |
 
-### 🎮 Interactive Exercise: Efficiency Optimization
+### Scenario: Efficiency Optimization
 
 **Scenario**: Your team currently handles 200 tasks per month. Analysis shows:
 
@@ -132,7 +125,7 @@ Error Budget:
 
 > **Audience**: Team leads own these metrics - they're the operational health scorecard. Platform managers watch change success rate and capacity utilization as proxy measures for process maturity. On-call engineers contribute data but shouldn't need to track the aggregate numbers.
 
-## 👥 Team Performance Metrics
+## Team Performance Metrics
 
 > **Linked practices ([Chapter 6](chapter-06-practices.md)):** these measure the payoff from _Knowledge and Documentation Management_ (Practice 5) and _Team and Skill Development_ (Practice 6) - the practices that decide whether your team is resilient or just a bus-factor of one.
 
@@ -158,28 +151,30 @@ Error Budget:
 
 > **Audience**: Team leads review cross-training coverage and skill development monthly. Managers watch documentation coverage and problem resolution time as indicators of team maturity. Individual team members see only their own development progress - comparing cross-training stats across the team undermines the practice.
 
-## 💰 Business Value Metrics
+## Business Value Metrics
 
 > **Linked practices ([Chapter 6](chapter-06-practices.md)):** these connect operations to the balance sheet, drawing on _Vendor and Contract Management_ (Practice 7), _Asset Management_ (Practice 9), and _Financial Management_ (Practice 11). The FinOps metrics below are the operational expression of Practice 11.
 
 ### Strategic Impact Measurements
 
-| Metric                        | Definition                                                  | Target Range                              | Measurement                                        | Business Value                                            |
-| ----------------------------- | ----------------------------------------------------------- | ----------------------------------------- | -------------------------------------------------- | --------------------------------------------------------- |
-| Customer Satisfaction Score   | Internal customer satisfaction with IT services and support | 4.5/5 average satisfaction rating         | Regular surveys and feedback collection            | Demonstrates service quality and stakeholder alignment    |
-| Business Service Availability | Uptime of business-critical services during business hours  | 99.5%+ availability during business hours | Business-hour focused availability tracking        | Direct impact on business operations and revenue          |
-| Cost Per Service Unit         | Total cost of operations divided by service units delivered | Decreasing trend year-over-year           | Financial analysis with service volume correlation | Demonstrates operational efficiency and cost optimization |
+| Metric                        | Definition                                                   | Target Range                                          | Measurement                                        | Business Value                                            |
+| ----------------------------- | ------------------------------------------------------------ | ----------------------------------------------------- | -------------------------------------------------- | --------------------------------------------------------- |
+| Customer Satisfaction Score   | Internal customer satisfaction with IT services and support  | 4.5/5 average satisfaction rating                     | Regular surveys and feedback collection            | Demonstrates service quality and stakeholder alignment    |
+| Business Service Availability | Uptime of business-critical services during business hours   | 99.5%+ availability during business hours             | Business-hour focused availability tracking        | Direct impact on business operations and revenue          |
+| Cost Per Service Unit         | Total cost of operations divided by service units delivered  | Decreasing trend year-over-year                       | Financial analysis with service volume correlation | Demonstrates operational efficiency and cost optimization |
+| Innovation Time Percentage    | Time spent on improvements and innovation vs. maintenance    | 20%+ of time dedicated to improvements and innovation | Time tracking with activity categorization         | Shows focus on continuous improvement and strategic value |
+| Risk Mitigation Effectiveness | Success rate in identifying and preventing operational risks | "High" effectiveness with proactive issue prevention  | Risk assessment tracking with outcome analysis     | Demonstrates proactive management and business protection |
 
 ### FinOps (Financial Operations) Metrics ([FinOps Foundation](https://www.finops.org/introduction/what-is-finops/))
 
-| Metric                                    | Definition                                                                       | Target Range                                                      | Measurement                                                               | Business Value                                              |
-| ----------------------------------------- | -------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| Cloud Cost Allocation                     | Accurate attribution of cloud costs to services, teams, or departments           | 100% allocation with <5% unallocated "shared" costs               | Cloud billing analysis with tagging compliance tracking                   | Enables cost accountability and chargeback models           |
-| Cloud Waste Ratio                         | Percentage of cloud spending on idle or underutilized resources                  | <15% waste (industry average is 30%)                              | Instance utilization analysis, reserved instance coverage, storage audits | Direct opportunity for cost reduction                       |
-| Unit Economics                            | Cost per key business metric (e.g., per transaction, per user, per GB processed) | Decreasing trend month-over-month                                 | Cloud costs divided by application metrics                                | Demonstrates how cost relates to business outcomes          |
-| Reserved Instance and Commitment Coverage | Percentage of workloads using reserved capacity vs. on-demand pricing            | 60%+ for predictable workloads, 20%+ for variable workloads       | Commitment utilization tracking and forecast comparison                   | Demonstrates cost optimization through commitment planning  |
-| Right-Sizing Efficiency                   | Percentage of instances operating within optimal sizing parameters               | 85%+ of instances properly sized (not over- or under-provisioned) | CPU/memory utilization analysis with instance type cost efficiency        | Identifies quick wins for cost reduction                    |
-| Cost Anomaly Detection                    | Ability to identify unusual spending patterns quickly                            | Detect anomalies within 24–48 hours of occurrence                 | Automated cost trending and deviation analysis                            | Prevents runaway costs and identifies infrastructure issues |
+| Metric                                    | Definition                                                                       | Target Range                                                                              | Measurement                                                               | Business Value                                              |
+| ----------------------------------------- | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Cloud Cost Allocation                     | Accurate attribution of cloud costs to services, teams, or departments           | 100% allocation with <5% unallocated "shared" costs                                       | Cloud billing analysis with tagging compliance tracking                   | Enables cost accountability and chargeback models           |
+| Cloud Waste Ratio                         | Percentage of cloud spending on idle or underutilized resources                  | Set from your own measured baseline; treat <15% as a starting aspiration, not a benchmark | Instance utilization analysis, reserved instance coverage, storage audits | Direct opportunity for cost reduction                       |
+| Unit Economics                            | Cost per key business metric (e.g., per transaction, per user, per GB processed) | Decreasing trend month-over-month                                                         | Cloud costs divided by application metrics                                | Demonstrates how cost relates to business outcomes          |
+| Reserved Instance and Commitment Coverage | Percentage of workloads using reserved capacity vs. on-demand pricing            | 60%+ for predictable workloads, 20%+ for variable workloads                               | Commitment utilization tracking and forecast comparison                   | Demonstrates cost optimization through commitment planning  |
+| Right-Sizing Efficiency                   | Percentage of instances operating within optimal sizing parameters               | 85%+ of instances properly sized (not over- or under-provisioned)                         | CPU/memory utilization analysis with instance type cost efficiency        | Identifies quick wins for cost reduction                    |
+| Cost Anomaly Detection                    | Ability to identify unusual spending patterns quickly                            | Detect anomalies within 24–48 hours of occurrence                                         | Automated cost trending and deviation analysis                            | Prevents runaway costs and identifies infrastructure issues |
 
 #### Example: Cloud Cost Management Dashboard
 
@@ -204,14 +199,7 @@ Cloud Cost Metrics:
 
 > **Audience**: Platform managers and FinOps practitioners track cost allocation and waste ratio weekly. Executives see the unit economics trend and budget variance monthly - not the raw numbers. Showing an executive a dashboard full of FinOps line items is how you get eye contact with their coffee mug. Show them cost per transaction and whether it's going down.
 
----
-
-| Metric                        | Definition                                                   | Target Range                                          | Measurement                                    | Business Value                                            |
-| ----------------------------- | ------------------------------------------------------------ | ----------------------------------------------------- | ---------------------------------------------- | --------------------------------------------------------- |
-| Innovation Time Percentage    | Time spent on improvements and innovation vs. maintenance    | 20%+ of time dedicated to improvements and innovation | Time tracking with activity categorization     | Shows focus on continuous improvement and strategic value |
-| Risk Mitigation Effectiveness | Success rate in identifying and preventing operational risks | "High" effectiveness with proactive issue prevention  | Risk assessment tracking with outcome analysis | Demonstrates proactive management and business protection |
-
-## 📈 Dashboard Design and Implementation
+## Dashboard Design and Implementation
 
 > **Reality check.** A dashboard nobody opens is just an expensive screensaver. Before adding a metric, ask who will act on it and what decision it changes - if the honest answer is "it's nice to see," it belongs in a report, not on the wall. The best operational dashboards are slightly boring and frequently glanced at; the worst are beautiful, comprehensive, and ignored.
 
@@ -336,7 +324,7 @@ mitigation: "SLO targets locked behind change management; quarterly SLO review r
 
 Apply this template to every metric on your dashboard. The `gaming_risk` field is the most important - if you can't think of how someone might game it, you haven't thought hard enough.
 
-## 🔄 Continuous Improvement Through Metrics
+## Continuous Improvement Through Metrics
 
 ### Metrics-Driven Improvement Process
 
@@ -346,6 +334,18 @@ Apply this template to every metric on your dashboard. The `gaming_risk` field i
 - Identify areas of strength and improvement opportunities
 - Set realistic but challenging improvement targets
 - Establish measurement methodologies and data collection processes
+- Use a concrete method, not a guess: define what to measure, the minimum fields to record, and an observation window before collecting a single data point — see [Baseline Method](#baseline-method-for-a-real-team) below and the copy-ready [`templates/baseline-metrics.md`](../../templates/baseline-metrics.md).
+
+#### Baseline Method for a Real Team
+
+A baseline is only useful if a team without existing tooling can produce one in days, not quarters. Four decisions make or break it:
+
+- **What to measure and the minimum fields.** For every incident, interrupt, and unit of planned work, record at minimum: date, category, reactive-or-proactive classification, duration (if known), and a confidence flag. Roll these up into the three numbers Getting Started asks a pilot team to establish: incident frequency, MTTR (if calculable), and a team satisfaction score (1-10).
+- **A sensible observation window, with a fallback.** Default to 5 consecutive working days - long enough to see a pattern, short enough that a pilot doesn't stall waiting for data. Teams with existing incident/ticket history should instead pull a 4-week retroactive window for a sturdier number. Teams with no history and no time to wait should run the 5-day window anyway, but mark the result low-confidence and re-baseline on a rolling 4-week window at Day 30 and Day 90.
+- **Distinguish reactive from proactive work.** Classify every entry with one question: would this work have happened today without an external trigger (an alert, a report, an interrupt)? If yes, it's reactive. If it was chosen in advance from a backlog or plan, it's proactive. A fix made during an incident is reactive; the same fix scheduled and executed later as a backlog item is proactive.
+- **Record uncertainty instead of fabricating precision.** Tag every rolled-up number `measured`, `estimated`, or `unknown`, and carry the sample size alongside it. A range ("MTTR ~45-90 min, estimated, n=3") is more honest, and more useful, than a single invented decimal.
+
+The [`templates/baseline-metrics.md`](../../templates/baseline-metrics.md) template gives you the full field list, the fallback window logic, and a copy-ready CSV header and example row for this — use it directly rather than building a bespoke spreadsheet for Week 1 of the pilot.
 
 **2. Regular Review Cycles**
 
@@ -368,7 +368,7 @@ Apply this template to every metric on your dashboard. The `gaming_risk` field i
 - Demonstrate value delivery through metric improvements
 - Build confidence through consistent performance reporting
 
-## 🎯 Measuring Framework Implementation Success
+## Measuring Framework Implementation Success
 
 ### Implementation Maturity Indicators
 
@@ -382,7 +382,7 @@ Apply this template to every metric on your dashboard. The `gaming_risk` field i
 **Month 3-4: Process Integration Metrics**
 
 - Operational cycle adherence: >80% consistency
-- Incident response improvement: 20% reduction in MTTR
+- Incident response improvement: measurable reduction in MTTR relative to your own baseline (see Baseline Establishment above) — treat any fixed percentage as a target to calibrate per team, not a guaranteed outcome
 - Documentation coverage increase: +15% from baseline
 - Team satisfaction with new processes: >7/10
 
@@ -409,7 +409,7 @@ Apply this template to every metric on your dashboard. The `gaming_risk` field i
 - Influence on other team methodology adoption
 - Innovation and best practice sharing
 
-## 🛠️ Tools and Technologies for Metrics
+## Tools and Technologies for Metrics
 
 ### Monitoring and Data Collection
 
@@ -432,7 +432,7 @@ Apply this template to every metric on your dashboard. The `gaming_risk` field i
 - **Correlation Analysis**: Identifying relationships between metrics and outcomes
 - **Anomaly Detection**: Automated identification of unusual patterns
 
-## 🧹 Metric Governance and the Metric Graveyard
+## Metric Governance and the Metric Graveyard
 
 Metrics should expire unless they keep proving their value. Once per month, review the dashboard and ask:
 
@@ -444,7 +444,7 @@ Metrics should expire unless they keep proving their value. Once per month, revi
 
 Create a **metric graveyard** for retired metrics. Keep the reason for retirement visible. This prevents old numbers from returning later as management folklore.
 
-## 💡 Common Metrics Pitfalls and Solutions
+## Common Metrics Pitfalls and Solutions
 
 ### The Big Four
 
@@ -488,35 +488,11 @@ Every metric worth tracking can be manipulated. The trick is knowing how so you 
 
 3. **Automation coverage gaming**: Count every tiny script as "automation" to inflate the percentage. _Defense:_ Define "automation" as "eliminates a manual step that previously required a human decision." A cron job that existed before the metrics started doesn't count as new automation.
 
-4. **Cost per service unit gaming**: Include only direct infrastructure costs and exclude the labor, support, and overhead that make up 60% of the real cost. _Defense:_ Use total cost of ownership (TCO) as the denominator. If a cost can't be attributed, publish it as "unattributed" rather than hiding it.
+4. **Cost per service unit gaming**: Include only direct infrastructure costs and exclude labor, support, and overhead — costs that are real but easy to leave out of the denominator. _Defense:_ Use total cost of ownership (TCO) as the denominator. If a cost can't be attributed, publish it as "unattributed" rather than hiding it.
 
 5. **Ticket closure gaming**: Split a single problem into five tickets to show five "resolved" items. _Defense:_ Require problem-to-ticket linkage. If five tickets share the same root cause, they count as one.
 
 > **Litmus test.** Ask yourself: "If this metric was the only thing my bonus depended on, what would I do differently?" If the honest answer is something that makes the system worse, you need to redesign the metric - or add a counter-metric that catches the bad behavior.
-
-## 🎯 Chapter Summary
-
-Effective measurement is crucial for demonstrating the value of the SysOps Framework and driving continuous improvement. The four-category metrics approach ensures comprehensive coverage of service reliability, operational efficiency, team performance, and business value.
-
-Success depends on choosing the right metrics for each audience, implementing effective dashboards and reporting, and using metrics data to drive decision-making and improvement efforts. The key is balancing comprehensive measurement with actionable insights that support both operational excellence and strategic business objectives.
-
-## 🔮 Looking Ahead
-
-In the next chapter, we'll explore the tools and technologies that support effective implementation of the SysOps Framework, including automation platforms, monitoring systems, and collaboration tools that enable the metrics and practices we've discussed.
-
-## 💭 Reflection Questions
-
-1. **Current Metrics**: What metrics does your team currently track, and how well do they align with the SysOps categories?
-2. **Value Demonstration**: How could better metrics help you demonstrate your team's value to stakeholders?
-3. **Improvement Focus**: Which metric category would provide the most immediate benefit for your team?
-
----
-
-**🎮 Gamification Element - Chapter 7 Badge**
-
-![Metrics Master badge](../../assets/badges/chapter-07.svg)
-
-_Design a comprehensive metrics dashboard for your team including all four categories and earn the "Metrics Master" badge._
 
 ---
 

@@ -6,20 +6,11 @@ description: >
   "The right methodology is the one that matches how the work actually gets done."
 ---
 
-## 🎯 Learning Objectives
-
-By the end of this chapter, you will understand:
-
-- Key differences between Scrum, SAFe, and SysOps frameworks
-- Why traditional metrics don't work for operations teams
-- How to communicate framework benefits to stakeholders
-- When to use which approach for different types of work
-
 > **Principles in play.** Every comparison in this chapter is judged against the same yardstick: does the methodology respect _Service Reliability First_ and _Continuous Availability_ ([Chapter 2](chapter-02-principles.md))? That's the lens here — not feature-counting.
 
-## 📊 Framework Comparison Overview
+## Framework Comparison Overview
 
-![Framework Comparison Chart](../assets/agile-frameworks-comparison.png)
+![Framework Comparison Chart](../../assets/agile-frameworks-comparison.png)
 
 The comparison above illustrates fundamental differences between traditional agile approaches and the SysOps Framework. While each methodology has its place, understanding when and how to apply them is crucial for team success.
 
@@ -29,15 +20,15 @@ A quick disclaimer before the knives come out: this chapter is not a hit piece o
 
 Not sure whether SysOps is right for you? Use this decision table:
 
-| Your team looks like...                                         | Start with...                                             |
-| --------------------------------------------------------------- | --------------------------------------------------------- |
-| Feature-factory squad, clean 2-week sprints, rare interruptions | Scrum — SysOps is not for you                             |
-| Ops team drowning in interrupts, no time for improvements       | SysOps — daily cycle first, then pilot                    |
-| Platform/SRE team with mixed planned/unplanned work             | SysOps — all three cycles                                 |
-| Small team (2-3 people), everything is on fire                  | Stabilise first, then SysOps daily cycle only             |
-| Enterprise ops with regulated compliance requirements           | SysOps + compliance overlay (Chapter 10)                  |
-| Kanban team, happy with flow, strategic work is protected       | Stay with Kanban — monitor for when it breaks             |
-| Hybrid: dev team uses Scrum, ops team supports them             | Scrum for dev, SysOps for ops — see hybrid patterns below |
+| Your team looks like...                                         | Start with...                                              |
+| --------------------------------------------------------------- | ---------------------------------------------------------- |
+| Feature-factory squad, clean 2-week sprints, rare interruptions | Scrum — SysOps is not for you                              |
+| Ops team drowning in interrupts, no time for improvements       | SysOps — daily cycle first, then pilot                     |
+| Platform/SRE team with mixed planned/unplanned work             | SysOps — all three cycles                                  |
+| Small team (2-3 people), everything is on fire                  | Stabilize first, then SysOps daily cycle only              |
+| Enterprise ops with regulated compliance requirements           | SysOps + [risk and compliance overlay](chapter-10-risk.md) |
+| Kanban team, happy with flow, strategic work is protected       | Stay with Kanban — monitor for when it breaks              |
+| Hybrid: dev team uses Scrum, ops team supports them             | Scrum for dev, SysOps for ops — see hybrid patterns below  |
 
 > **Diagram**: Methodology selection flowchart — team answers 3 questions to determine whether SysOps, Scrum, Kanban, or a hybrid fits best
 
@@ -47,18 +38,18 @@ flowchart TD
     Q -->|Feature dev, rare interrupts| A[Stick with Scrum]
     Q -->|Ops + interrupts, need improvement time| B[SysOps daily → weekly → monthly]
     Q -->|Happy with Kanban, strategy is protected| C[Stay with Kanban]
-    Q -->|Small team, constantly on fire| D[Stabilise first, then daily cycle only]
+    Q -->|Small team, constantly on fire| D[Stabilize first, then daily cycle only]
     Q -->|Regulated enterprise| E[SysOps + compliance overlay]
     B --> F{Team size?}
     F -->|3-4 people| G[Pilot daily + weekly, skip monthly]
     F -->|6+ people| H[All three cycles from month 2]
 ```
 
-## 🏃‍♂️ Scrum vs SysOps Framework
+## Scrum vs SysOps Framework
 
 ### Work Structure
 
-**Scrum**: Fixed sprints (1-4 weeks) with defined start and end points. All work must fit into these containers, regardless of type or urgency.
+**Scrum**: Work is organized into fixed-length Sprints of one month or less ([The Scrum Guide](https://scrumguides.org/scrum-guide.html)). The Sprint creates one planning container for the team's product work.
 
 **SysOps**: Continuous flow with three overlapping cycles (daily, weekly, monthly). Work flows naturally into the appropriate cycle based on its characteristics.
 
@@ -82,11 +73,11 @@ flowchart TD
 
 > There's a particular sound a Scrum team makes when production breaks mid-sprint. It's the sound of a burndown chart being quietly redrawn while everyone agrees not to mention velocity at the retro. SysOps simply removes the theatre: the incident was always going to happen, so we built a place for it to go.
 
-## 🏢 SAFe vs SysOps Framework
+## SAFe vs SysOps Framework
 
 ### Scale and Coordination
 
-**SAFe**: Designed for large-scale development efforts with multiple teams working on related products. Uses Program Increments (8-12 weeks) to coordinate work.
+**SAFe**: Designed for large-scale development efforts with multiple teams working on related products. It uses an 8–12 week Planning Interval (historically called a Program Increment) to coordinate work ([Scaled Agile Framework — Planning Interval](https://framework.scaledagile.com/planning-interval/)).
 
 **SysOps**: Designed for operations teams of any size. Can scale up or down but maintains focus on operational realities rather than development coordination.
 
@@ -98,11 +89,11 @@ flowchart TD
 
 **When SAFe Makes Sense for Ops**: Large organizations with multiple operations teams supporting related services may benefit from SAFe's coordination mechanisms, but individual teams should still use SysOps practices for their daily work.
 
-## 🌊 Kanban vs SysOps Framework
+## Kanban vs SysOps Framework
 
 ### Why Kanban Alone May Not Be Sufficient
 
-**Kanban**: Visualizes workflow with a continuous pull system (To Do → In Progress → Done). Handles interruptions natively by managing WIP (Work In Progress) limits and doesn't force scope boundaries.
+**Kanban**: Defines and visualizes a workflow, actively manages items in that workflow, and improves the workflow over time ([The Kanban Guide](https://kanbanguides.org/the-kanban-guide/2025.5/)). In practice, explicit work-in-progress controls make interrupt-driven flow visible without imposing a Sprint boundary.
 
 **SysOps**: Adds multi-horizon planning (daily, weekly, monthly) and structured strategic focus beyond reactive work management.
 
@@ -148,7 +139,7 @@ This protects strategic work from being consumed by daily urgencies.
 
 ---
 
-## 🔴 Site Reliability Engineering (SRE) vs SysOps Framework
+## Site Reliability Engineering (SRE) vs SysOps Framework
 
 ### Important Relationship Note
 
@@ -165,14 +156,14 @@ SysOps Framework and SRE are **not competing approaches** — SRE practices shou
 
 ### How SysOps Incorporates SRE
 
-| SRE Practice                    | SysOps Integration                                      |
-| ------------------------------- | ------------------------------------------------------- |
-| **Error budgets**               | Chapter 7: Service reliability metrics & SLO compliance |
-| **Toil measurement**            | Chapter 3: Automation targets in daily/weekly cycles    |
-| **Production readiness**        | Chapter 6: Service level management practice            |
-| **Blameless post-mortems**      | Chapter 6: Incident management practice process         |
-| **Automated incident response** | Chapter 3: Daily cycle automation                       |
-| **Service maturity levels**     | Chapter 6: Practice maturity model                      |
+| SRE Practice                    | SysOps Integration                                                                                             |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| **Error budgets**               | [Chapter 7: Service reliability metrics and SLO compliance](chapter-07-metrics.md#service-reliability-metrics) |
+| **Toil measurement**            | [Chapter 3: Weekly improvement cycle](chapter-03-structure.md#weekly-improvement-cycle-7-days)                 |
+| **Production readiness**        | [Chapter 6: Service Level Management](chapter-06-practices.md#1-service-level-management)                      |
+| **Blameless post-mortems**      | [Chapter 6: Incident and Problem Management](chapter-06-practices.md#2--incident-and-problem-management)       |
+| **Automated incident response** | [Chapter 3: Daily Operations Cycle](chapter-03-structure.md#daily-operations-cycle-24-48-hours)                |
+| **Service maturity levels**     | [Chapter 6: Practice Maturity Assessment](chapter-06-practices.md#practice-maturity-assessment)                |
 
 ### Key Difference
 
@@ -189,7 +180,7 @@ Most organizations successful with SRE are actually practicing a hybrid: SRE's e
 
 ---
 
-## 📈 Success Metrics: Why Traditional Metrics Fail Operations Teams
+## Success Metrics: Why Traditional Metrics Fail Operations Teams
 
 ### The Velocity Problem
 
@@ -215,9 +206,9 @@ Most organizations successful with SRE are actually practicing a hybrid: SRE's e
 
 **SysOps Alternative**: Service health trends (availability over time, performance improvements) combined with capacity utilization metrics.
 
-> **Warning.** Don't quietly keep reporting velocity "just for continuity" while you transition. Metrics are incentives in disguise — whatever you put on the executive slide is what the team will optimise for. Keep velocity alive and you'll keep getting velocity behaviour, no matter what the new framework says on the cover.
+> **Warning.** Don't quietly keep reporting velocity "just for continuity" while you transition. Metrics are incentives in disguise — whatever you put on the executive slide is what the team will optimize for. Keep velocity alive and you'll keep getting velocity behavior, no matter what the new framework says on the cover.
 
-## 🎮 Interactive Comparison Exercise
+## Scenario: Choosing a Framework
 
 **Scenario**: Your operations team supports a critical customer service application. This week, you face:
 
@@ -250,7 +241,7 @@ Most organizations successful with SRE are actually practicing a hybrid: SRE's e
 2. Which provides better stakeholder communication?
 3. Which enables faster recovery and learning?
 
-## 🔄 When to Use Each Approach
+## When to Use Each Approach
 
 ### Use Traditional Agile When:
 
@@ -274,7 +265,7 @@ SysOps is not a universal replacement. It is wrong for some teams, and honest ab
 | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
 | **Pure product development** — one product, one backlog, rare production interrupts | SysOps cycles add unnecessary structure to work that already fits a sprint cadence                                           | Scrum, Kanban                                               |
 | **Individual contributor without a team**                                           | The framework assumes team handoffs and shared responsibility. A solo operator needs lighter structure.                      | Personal kanban, Getting Things Done                        |
-| **Team in active crisis** — ongoing outage, security breach, or restructuring       | Implementing a new framework during a crisis splits attention. Stabilise first, then adopt.                                  | Incident response procedures, then revisit SysOps           |
+| **Team in active crisis** — ongoing outage, security breach, or restructuring       | Implementing a new framework during a crisis splits attention. Stabilize first, then adopt.                                  | Incident response procedures, then revisit SysOps           |
 | **No management support at all**                                                    | Without leadership buy-in for protected improvement time, the weekly and monthly cycles will fail                            | Start with daily cycle only, build evidence, then negotiate |
 | **Fully outsourced operations** with no internal team                               | The framework is designed for teams that own their services. Managed service providers need different coordination patterns. | ITIL 4, vendor governance frameworks                        |
 
@@ -327,7 +318,7 @@ A single team owns both development and operations. They use a 2-week iteration 
 
 **Pattern 3: Platform team as internal provider (product model)**
 
-The infrastructure/platform team treats the development teams as their customers. The platform team runs SysOps internally, with a monthly strategy cycle that aligns to the product roadmap. Development teams interact through a self-service portal (see Chapter 8 — platform engineering) and an SLA rather than through shared sprint planning.
+The infrastructure/platform team treats the development teams as their customers. The platform team runs SysOps internally, with a monthly strategy cycle that aligns to the product roadmap. Development teams interact through a self-service portal (see [Chapter 8 — Modern Platform Patterns](chapter-08-tools.md#modern-platform-patterns)) and an SLA rather than through shared sprint planning.
 
 **Choosing a hybrid pattern**:
 
@@ -337,7 +328,7 @@ The infrastructure/platform team treats the development teams as their customers
 | A single team doing both              | Pattern 2 (dual cadence) — only if team is 5+ people |
 | A platform team serving product teams | Pattern 3 (internal provider)                        |
 
-## 📊 Stakeholder Communication Differences
+## Stakeholder Communication Differences
 
 ### Traditional Agile Stakeholder Updates
 
@@ -365,11 +356,11 @@ Different audiences need different framing. Here is a cheat sheet for explaining
 
 **To your manager**:
 
-> "We are replacing sprint-based planning with a model that has separate tracks for reactive work, improvements, and strategy. This means fewer missed commitments, measurable improvement every week, and a clear story about what the team is doing — instead of a retro where we apologise for production incidents."
+> "We are replacing sprint-based planning with a model that has separate tracks for reactive work, improvements, and strategy. This means fewer missed commitments, measurable improvement every week, and a clear story about what the team is doing — instead of a retro where we apologize for production incidents."
 
 **To an executive**:
 
-> "The framework protects time for improvements instead of letting firefighting consume everything. Teams using it typically reduce incident frequency by addressing root causes systematically. The monthly cycle aligns operations work to business priorities."
+> "The framework protects time for improvements instead of letting firefighting consume everything. We will track whether recurring incidents, recovery time, and operational load improve against our own baseline. The monthly cycle aligns operations work to business priorities."
 
 **To a development team**:
 
@@ -383,9 +374,9 @@ Different audiences need different framing. Here is a cheat sheet for explaining
 
 > "Currently, every incident makes our sprint plan wrong. We spend retros explaining why we missed commitments — the same reason every time. This framework stops pretending incidents are exceptional and gives them a proper place, so our planned work can actually get done."
 
-## 🏆 Real-World Case Studies
+## Real-World Case Studies
 
-> The following are documented, publicly verifiable industry cases. They are included to illustrate the principles discussed in this chapter — not as endorsements, and not as direct accounts of the SysOps Framework, which is a synthesised model. Each draws on the organisation's own primary-source material.
+> The following are documented, publicly verifiable industry cases. They are included to illustrate the principles discussed in this chapter — not as endorsements, and not as direct accounts of the SysOps Framework, which is a synthesized model. Each draws on the organization's own primary-source material.
 
 ### Case Study 1: Google SRE and Error Budgets — Operations Needs Its Own Model
 
@@ -401,13 +392,13 @@ When Google scaled, it found that running large production services could not be
 
 ### Case Study 2: Knight Capital — The Cost of Treating Operations as an Afterthought
 
-On 1 August 2012, the trading firm Knight Capital deployed new code to its automated equity order router in preparation for the NYSE's new Retail Liquidity Program. The deployment reactivated a defective, long-dead code path ("Power Peg") that had been left in the system since 2005. In the **first 45 minutes** after the market opened, the router sent **more than 4 million orders** while attempting to fill just **212 customer orders**, traded over 397 million shares, and produced a loss of **more than $460 million** — nearly destroying the firm, which was acquired shortly afterward ([SEC Press Release 2013-222](https://www.sec.gov/news/press-release/2013-222); [SEC Order 34-70694](https://www.sec.gov/litigation/admin/2013/34-70694.pdf)).
+On 1 August 2012, the trading firm Knight Capital deployed new code to its automated equity order router in preparation for the NYSE's new Retail Liquidity Program. The deployment reactivated a defective, long-dead code path ("Power Peg") that had been left in the system since 2005. In the **first 45 minutes** after the market opened, the router sent **more than 4 million orders** while attempting to fill just **212 customer orders**, traded over 397 million shares, and produced a loss of **more than $460 million** — nearly destroying the firm, which was acquired shortly afterward ([SEC Press Release 2013-222](https://www.sec.gov/news/press-release/2013-222); [SEC Order 34-70694](https://www.sec.gov/files/litigation/admin/2013/34-70694.pdf)).
 
 Critically, the SEC found the firm "did not have adequate controls and procedures for code deployment and testing," and that **97 automated warning emails** generated before the market opened went unheeded.
 
 **Why it matters for SysOps**: Knight Capital is the cautionary inverse of the chapter's thesis. When deployment discipline, change management, and alert follow-through are treated as secondary to shipping, the operational risk does not disappear — it accumulates until it surfaces catastrophically. The SysOps Framework deliberately elevates these activities (release management, monitoring, and change control — see [Chapter 6](chapter-06-practices.md)) to first-class work precisely because the cost of doing otherwise can be existential.
 
-## ⚖️ Framework Selection Criteria
+## Framework Selection Criteria
 
 ### Organizational Factors
 
@@ -434,14 +425,11 @@ Create a simple analysis of your team's work:
 | Incident response   | 25%        | Low            | High    | SysOps Daily   |
 | Strategic projects  | 25%        | Medium         | Low     | SysOps Monthly |
 
-## 🚀 Migration Strategies
+## Migration Strategies
 
 ### From Scrum to SysOps
 
-1. **Start with daily operations cycle** - most teams already do this informally
-2. **Add weekly improvement cycle** - formalize existing improvement efforts
-3. **Introduce monthly strategy cycle** - elevate strategic planning
-4. **Transition metrics gradually** - maintain some familiar measures during transition
+Use the comparison in this chapter to decide whether to migrate. The actual board, backlog, ceremony, and reporting cutover is defined in [Chapter 5](chapter-05-implementation.md#moving-from-sprints-to-sysops).
 
 > **In practice.** Migrate one cycle at a time, not all three on a Monday. Teams that try to switch everything at once usually end up with three half-built cycles and a credibility problem. Get the daily cycle genuinely working — boring, reliable, trusted — before you ask anyone to take the weekly or monthly seriously.
 
@@ -457,32 +445,6 @@ Create a simple analysis of your team's work:
 - **Project teams**: Use Scrum for projects, SysOps for operations
 - **Platform teams**: Use SysOps for platform operations, Scrum for platform development
 - **Cross-functional teams**: Different roles use appropriate frameworks
-
-## 🎯 Chapter Summary
-
-The comparison between traditional agile methodologies and the SysOps Framework highlights fundamental differences in approach, metrics, and stakeholder communication. Understanding these differences helps teams choose the right framework for their work type and organizational context.
-
-The key insight is that there's no one-size-fits-all solution. The best methodology is the one that matches how the work actually gets done, acknowledges the real constraints and requirements of the team, and provides value to both the team and the organization.
-
-For operations teams, this usually means moving away from development-centric frameworks toward approaches designed specifically for operational realities. However, the transition should be thoughtful and gradual, with clear communication about why the change benefits everyone involved.
-
-## 🔮 Looking Ahead
-
-In the next chapter, we'll dive into the practical aspects of implementing the SysOps Framework, including a detailed roadmap, change management strategies, and success metrics for the transition process.
-
-## 💭 Reflection Questions
-
-1. **Current State**: Which framework most closely matches your team's current practices?
-2. **Gap Analysis**: What are the biggest gaps between your current approach and your ideal methodology?
-3. **Stakeholder Impact**: How would changing frameworks affect your relationships with stakeholders and other teams?
-
----
-
-**🎮 Gamification Element - Chapter 4 Badge**
-
-![Framework Analyst badge](../../assets/badges/chapter-04.svg)
-
-_Complete the work type analysis for your team and create a framework selection recommendation to earn the "Framework Analyst" badge._
 
 ---
 

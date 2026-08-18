@@ -16,7 +16,7 @@ purpose: >
 scope:
   applies_to: "All platform and service engineers above L3"
   excludes: "Interns, probationary hires (first 3 months), known medical exceptions"
-  coverage_hours: "24/7 for P1/P2; business hours only for P3/P4"
+  coverage_hours: "24/7 for SEV1/SEV2; business hours only for SEV3/SEV4"
 
 rotation:
   pattern: "Primary + secondary"
@@ -27,7 +27,7 @@ rotation:
 
 compensation:
   base: "Flat weekly on-call allowance: $X per shift week"
-  incident_premium: "Additional $Y per P1 confirmed outside business hours"
+  incident_premium: "Additional $Y per SEV1 confirmed outside business hours"
   time_off_in_lieu: "Day off after any shift where > 3 pages interrupted sleep"
   alternative: "Non-monetary: one 'on-call recovery' day after shift week"
 
@@ -39,7 +39,7 @@ escalation:
   override: "Any responder may invoke escalation at any time if out of their depth"
 
 alert_quality:
-  pager_threshold: "Only P1 and P2 page. P3 -> ticket queue. P4 -> log."
+  pager_threshold: "Only SEV1 and SEV2 page. SEV3 -> ticket queue. SEV4 -> log."
   max_pages_per_shift: "5 actionable pages before post-shift review required"
   runbook_requirement: "Every alerting rule MUST link to a runbook in its annotation"
   quarterly_review: "Alert inventory reviewed every quarter; silence or retire stale rules"

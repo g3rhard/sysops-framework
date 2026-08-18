@@ -43,6 +43,8 @@ npm install
 npm run serve
 ```
 
+Use the npm script rather than calling `hugo server` directly. The site uses the project-local `sass-embedded` binary, which npm adds to `PATH` automatically.
+
 Open http://localhost:1313/sysops-framework/.
 
 ## Read online
@@ -58,10 +60,10 @@ PDF and EPUB versions are built automatically from the latest tagged release:
 
 ## What's auto-generated
 
-| Artifact          | Source                              | Trigger                            |
-| ----------------- | ----------------------------------- | ---------------------------------- |
-| GitHub Pages site | `content/` + Hugo                   | Push to `main`                     |
-| PDF / EPUB        | `content/` → Pandoc + lualatex      | Tagged release (`v*`)              |
+| Artifact          | Source                         | Trigger               |
+| ----------------- | ------------------------------ | --------------------- |
+| GitHub Pages site | `content/` + Hugo              | Push to `main`        |
+| PDF / EPUB        | `content/` → Pandoc + lualatex | Tagged release (`v*`) |
 
 ## Docs architecture and contribution model
 

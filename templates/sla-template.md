@@ -32,6 +32,7 @@ Effective date:      <YYYY-MM-DD>     Review cadence: <e.g., every 6 months>
    | SEV1     |           |                 |                   |
    | SEV2     |           |                 |                   |
    | SEV3     |           |                 |                   |
+   | SEV4     |           |                 |                   |
 
 6. REPORTING
    - What is reported, how often, and to whom:

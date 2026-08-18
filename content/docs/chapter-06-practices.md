@@ -6,18 +6,9 @@ description: >
   "Good practices are the difference between chaos and control in operations."
 ---
 
-## 🎯 Learning Objectives
-
-By the end of this chapter, you will understand:
-
-- The twelve core management practices that support the SysOps Framework
-- How to implement each practice effectively
-- Integration points between practices and operational cycles
-- Maturity models for continuous practice improvement
-
 > **Principles in play.** If [Chapter 2](chapter-02-principles.md) is the constitution, this chapter is the case law. All six principles - _Service Reliability First_, _Continuous Availability_, _Rapid Response_, _Automation and Efficiency_, _Knowledge Sharing_, and _Risk Management_ - turn up here wearing work clothes.
 
-## 🎯 The Twelve Core Management Practices
+## The Twelve Core Management Practices
 
 ### How to Use This Chapter Without Drowning
 
@@ -63,7 +54,7 @@ Twelve practices is a lot to swallow in one sitting, so don't try. Nobody implem
 | 11  | Financial Management                   | Low         | High   | No idea what ops costs per month     |
 | 12  | Backup and Recovery Operations         | High        | Medium | Last backup test was "a while ago"   |
 
-### 1. 📊 Service Level Management
+### 1. Service Level Management
 
 **Why it exists**: Without explicit SLOs, "is the service healthy?" is a matter of opinion - and opinions escalate. This practice replaces guesswork with measurable guardrails so the team knows when to ship features and when to stop and fix.
 
@@ -114,6 +105,8 @@ Twelve practices is a lot to swallow in one sitting, so don't try. Nobody implem
 4. **Monitoring Setup**: Implement automated tracking and alerting
 5. **Error Budget Management**: Create policies for budget consumption and replenishment
 
+> **Template:** catalog every service with its owner, tier, SLO, dependencies, runbook, on-call route, recovery targets, data classification, and vendor in one place using [`templates/service-inventory.md`](../../templates/service-inventory.md). This is the concrete artifact behind Step 1 above.
+
 #### Example Service Level Management
 
 **Service**: Customer Authentication API
@@ -124,13 +117,13 @@ Twelve practices is a lot to swallow in one sitting, so don't try. Nobody implem
 - **Latency SLO**: < 200ms for 95% of requests
 - **Error Budget**: 0.05% = ~22 minutes downtime per month
 
-> **Template:** a fill-in-the-blanks SLA skeleton is provided in **[Appendix F](chapter-13-appendices.md)**.
+> **Template:** a fill-in-the-blanks SLA skeleton is provided in [`templates/sla-template.md`](../../templates/sla-template.md).
 
 ### 2. 🚨 Incident and Problem Management
 
 **Why it exists**: Incidents are inevitable. Without a practiced response, each incident is chaos - different people guessing, no coordination, no communication. This practice makes the team predictable in a crisis: everyone knows their role, the customer gets updates, and the post-incident review turns failures into improvements.
 
-**Minimal version**: Document one incident response procedure. Pick an Incident Commander for every significant incident. Conduct blameless post-incident reviews for Severity 1 and 2.
+**Minimal version**: Document one incident response procedure. Pick an Incident Commander for every significant incident. Conduct blameless post-incident reviews for SEV1 and SEV2.
 
 **Mature version**: Incident Command System is muscle memory. Problem management proactively identifies and eliminates incident root causes. Incident metrics (MTTD, MTTR) drive weekly improvement cycle discussions. Automated incident detection and remediation for known failure modes.
 
@@ -141,6 +134,28 @@ Twelve practices is a lot to swallow in one sitting, so don't try. Nobody implem
 **Typical anti-patterns**: Skipping post-incident reviews because "we're too busy" (you can't afford not to); blame disguised as "learning" (blameless means blameless - including vendors and users); treating every alert as an incident (alert fatigue destroys the practice before it starts).
 
 **Purpose**: Develop comprehensive incident response procedures with clear escalation paths and communication protocols. Implement blameless post-incident reviews to capture lessons learned and prevent recurrence.
+
+#### Incident Severity Classification
+
+Every incident gets exactly one severity, assigned by the first responder and revised as facts change (the Incident Commander owns the final call). Severity combines **impact** (how much of the business or customer base is affected) and **urgency** (how fast that harm compounds) into a single SEV1-SEV4 rating. This is the one severity model used throughout the framework - on-call paging, templates, and reporting all key off these four levels; don't let a second numbering scheme compete with it.
+
+| Severity            | Impact                                                                                           | Urgency               | Typical Trigger                                                          |
+| ------------------- | ------------------------------------------------------------------------------------------------ | --------------------- | ------------------------------------------------------------------------ |
+| **SEV1 - Critical** | Total loss of a critical service; widespread customer impact; safety, legal, or revenue exposure | Immediate             | Payment processing down; confirmed data breach; full regional outage     |
+| **SEV2 - High**     | Major functionality degraded for a large customer segment; no practical workaround               | Immediate or elevated | Login failing for a third of users; primary database unreachable         |
+| **SEV3 - Moderate** | Limited functionality impaired for a small segment; workaround available                         | Elevated or standard  | Non-critical report delayed; degraded performance on a secondary feature |
+| **SEV4 - Low**      | Minimal or no customer-facing impact                                                             | Standard              | Internal dashboard slow to load; a single noisy alert                    |
+
+**Response, paging, communication, and post-incident review expectations by severity**:
+
+| Severity | Initial Response  | Paging                                                              | Stakeholder Communication                              | Post-Incident Review                 |
+| -------- | ----------------- | ------------------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------ |
+| SEV1     | ≤ 5 min, 24/7     | Page primary immediately; page secondary if unacknowledged in 5 min | Update within 15 min, then every 30 min until resolved | Mandatory within 5 business days     |
+| SEV2     | ≤ 15 min, 24/7    | Page primary on-call                                                | Update within 30 min, then hourly                      | Mandatory                            |
+| SEV3     | Same business day | Ticket queue, no page                                               | Update on request or daily digest                      | Recommended, especially if recurring |
+| SEV4     | Next business day | Logged only, no page                                                | Not required                                           | Not required                         |
+
+> **Template:** a copy-ready severity lookup card is provided in [`templates/severity-matrix.md`](../../templates/severity-matrix.md). Some paging tools label these levels P1-P4 instead of SEV1-SEV4 - the levels are identical, just different notation (P1 = SEV1, P2 = SEV2, and so on).
 
 #### Incident Management Process
 
@@ -201,7 +216,7 @@ A core principle of modern incident management is conducting **blameless post-in
 
 Use the "5 Whys" technique or Fishbone diagram:
 
-> Causal chain: Customers experience an outage → Database server ran out of disk space → Log files grew unexpectedly large → New application increased logging volume by 10x → Load testing didn't include realistic logging config → Application team wasn't aware of logging requirements
+> **Diagram:** Causal chain from customer outage through disk exhaustion and excessive logging to the missing load-test requirement.
 
 ```mermaid
 graph LR
@@ -231,7 +246,7 @@ graph LR
 - Follow up on action items until completed
 - Celebrate what the team did well during response
 
-> **Template:** a ready-to-use blameless post-incident review form is provided in **[Appendix C](chapter-13-appendices.md)**.
+> **Template:** a ready-to-use blameless post-incident review form is provided in [`templates/post-incident-review.md`](../../templates/post-incident-review.md).
 
 #### Incident Command System (ICS) Roles
 
@@ -248,7 +263,7 @@ For significant incidents, establish clear role assignments:
 
 **Why ICS Matters**: Prevents confusion, ensures one voice to customers, captures information for post-incident review, scales well for complex incidents.
 
-> **Template:** a pocket checklist for whoever holds the Incident Commander role is provided in **[Appendix D](chapter-13-appendices.md)**.
+> **Template:** a pocket checklist for whoever holds the Incident Commander role is provided in [`templates/incident-commander-checklist.md`](../../templates/incident-commander-checklist.md).
 
 ---
 
@@ -273,7 +288,7 @@ For significant incidents, establish clear role assignments:
 - Workaround documentation and communication
 - Resolution verification and testing
 
-#### 🎮 Interactive Scenario: Incident Response
+#### Interactive Scenario: Incident Response
 
 **Scenario**: At 2:30 AM, monitoring alerts indicate that the customer database is responding slowly. Login times have increased from 200ms to 3000ms. Customer support is starting to receive complaints.
 
@@ -289,15 +304,15 @@ For significant incidents, establish clear role assignments:
 
 1. **Detection**: Check database performance metrics, server resources, network connectivity
 2. **Response**: Page database specialist, notify team lead, prepare stakeholder communication
-3. **Triage**: Severity 2 (significant impact but service functional)
+3. **Triage**: SEV2 (significant impact but service functional - see Incident Severity Classification above)
 4. **Resolution**: Check query performance, examine server resources, review recent changes
 5. **Communication**: Notify stakeholders of investigation within 15 minutes, provide updates every 30 minutes
 
-### 3. 🔄 Change and Configuration Management
+### 3. Change and Configuration Management
 
 **Why it exists**: The root cause of most outages is "someone changed something." This practice ensures changes are intentional, risk-assessed, and reversible - and that the team always knows what the current configuration actually is.
 
-**Minimal version**: Categorise changes (standard / normal / emergency). Require approval for normal and emergency changes. Maintain a list of Configuration Items (CIs).
+**Minimal version**: Categorize changes (standard / normal / emergency). Require approval for normal and emergency changes. Maintain a list of Configuration Items (CIs).
 
 **Mature version**: Standard changes are fully automated. CMDB is auto-discovered and reconciled daily. Change impact analysis shows affected services before approval. Emergency changes are rare because proactive problem management eliminates firefighting.
 
@@ -332,7 +347,7 @@ For significant incidents, establish clear role assignments:
 - Critical system repairs
 - Accelerated approval processes
 
-> **Template:** a change control form (with the all-important rollback section) is provided in **[Appendix E](chapter-13-appendices.md)**.
+> **Template:** a change control form (with the all-important rollback section) is provided in [`templates/change-control-form.md`](../../templates/change-control-form.md).
 
 #### Configuration Management
 
@@ -373,11 +388,11 @@ For significant incidents, establish clear role assignments:
 
 **Why it exists**: Systems don't fail at the average load - they fail at the peak. Without capacity planning, the ops team discovers limits the hard way (during an outage). Performance management ensures the user experience stays acceptable even as usage grows.
 
-**Minimal version**: Track utilisation trends (CPU, memory, disk, network) for your top 5 most critical systems. Set alert thresholds at 80% utilisation.
+**Minimal version**: Track utilization trends (CPU, memory, disk, network) for your top 5 most critical systems. Set alert thresholds at 80% utilization.
 
-**Mature version**: Predictive models forecast capacity needs 6–12 months ahead. Performance budgets prevent releases that degrade latency. Automated scaling handles routine growth. Cost optimisation actively right-sizes resources.
+**Mature version**: Predictive models forecast capacity needs 6–12 months ahead. Performance budgets prevent releases that degrade latency. Automated scaling handles routine growth. Cost optimization actively right-sizes resources.
 
-**Key metrics**: Utilisation % by resource type, p95/p99 latency trends, time at peak capacity, forecast accuracy (predicted vs. actual growth), number of performance regressions caught in staging.
+**Key metrics**: Utilization % by resource type, p95/p99 latency trends, time at peak capacity, forecast accuracy (predicted vs. actual growth), number of performance regressions caught in staging.
 
 **Dependencies**: Monitoring infrastructure, Historical data (at least 3 months of metrics), Business growth forecasts, CMDB (to identify what needs capacity planning).
 
@@ -424,7 +439,7 @@ For significant incidents, establish clear role assignments:
 - Network and storage optimization
 - Application and system configuration tuning
 
-### 5. 📚 Knowledge and Documentation Management
+### 5. Knowledge and Documentation Management
 
 **Why it exists**: When the person who knows how the system works is on holiday - or has left - the team is flying blind. This practice captures operational knowledge so it survives vacations, promotions, and resignations.
 
@@ -438,7 +453,7 @@ For significant incidents, establish clear role assignments:
 
 **Typical anti-patterns**: Writing documentation once and never updating it (outdated docs are worse than none - they actively mislead); treating documentation as a "side project" (it's infrastructure); over-documenting nothing (a single great runbook beats 50 empty templates).
 
-> This practice is the canonical home for the **runbook** concept - what a runbook is and what it must contain. Tooling that stores and executes runbooks (Rundeck, StackStorm, Ansible Tower, wikis) is catalogued in [Chapter 8](chapter-08-tools.md); runbooks are _used_ in the daily cycle ([Chapter 3](chapter-03-structure.md)) and on-call handoffs ([Chapter 9](chapter-09-culture.md)).
+> This practice is the canonical home for the **runbook** concept - what a runbook is and what it must contain. Storage and execution can be as simple as a repository or wiki, or use a runbook-automation tool when repeated demand justifies one; [Chapter 8](chapter-08-tools.md) defines that selection rule. Runbooks are _used_ in the daily cycle ([Chapter 3](chapter-03-structure.md)) and on-call handoffs ([Chapter 9](chapter-09-culture.md)).
 
 #### Documentation Categories
 
@@ -613,7 +628,7 @@ For significant incidents, establish clear role assignments:
 
 ---
 
-### 8. 🚀 Release Management
+### 8. Release Management
 
 **Why it exists**: The most dangerous moment in any system's life is the moment after a deploy. Release management tames that danger by making deployments repeatable, verifiable, and reversible - turning the scariest operation on the calendar into a routine procedure.
 
@@ -654,7 +669,7 @@ For significant incidents, establish clear role assignments:
 
 - **Automatic rollback triggers**: error rate exceeds SLO threshold for > 2 minutes after deploy; health-check failures on ≥ 20% of instances
 - **Manual rollback triggers**: customer-impact report confirmed by on-call engineer; critical bug identified post-deploy
-- **Rollback runbook**: standardised steps documented in the knowledge base; target rollback completion < 10 minutes
+- **Rollback runbook**: standardized steps documented in the knowledge base; target rollback completion < 10 minutes
 - **Blue/green and canary strategies**: route a small traffic percentage to the new version before full promotion; automate promotion or rollback based on SLO signals
 
 **Release Cadence and Planning**:
@@ -662,7 +677,7 @@ For significant incidents, establish clear role assignments:
 - Define release trains (e.g., weekly, bi-weekly, on-demand for hotfixes)
 - Maintain a release calendar visible to all stakeholders
 - Coordinate freeze windows with the Change Management practice (Practice 3)
-- Track release frequency, change failure rate, and mean time to restore (MTTR) per the [DORA four-key metrics](https://dora.dev/research/2023/dora-report/)
+- Track deployment frequency, change lead time, failed deployment recovery time, change fail rate, and deployment rework rate using [DORA's current software delivery performance metrics](https://dora.dev/guides/dora-metrics/)
 
 **Environment Management**:
 
@@ -672,16 +687,17 @@ For significant incidents, establish clear role assignments:
 
 #### DORA Metrics Integration
 
-The four DORA (DevOps Research and Assessment) key metrics directly measure Release Management effectiveness ([DORA State of DevOps Report](https://dora.dev/research/2023/dora-report/)):
+DORA currently documents five software delivery performance metrics, grouped into throughput and instability ([DORA Metrics](https://dora.dev/guides/dora-metrics/)):
 
-| Metric                | Definition                                    | Elite Threshold          |
-| --------------------- | --------------------------------------------- | ------------------------ |
-| Deployment frequency  | How often code is deployed to production      | On-demand (multiple/day) |
-| Lead time for changes | Time from commit to running in production     | < 1 hour                 |
-| Change failure rate   | % of deployments causing a production failure | < 5%                     |
-| Mean time to restore  | Time to recover from a production failure     | < 1 hour                 |
+| Metric                          | Definition                                                                       |
+| ------------------------------- | -------------------------------------------------------------------------------- |
+| Change lead time                | Time from a change being committed to deployment in production                   |
+| Deployment frequency            | Number of deployments over a period, or time between deployments                 |
+| Failed deployment recovery time | Time to recover from a deployment failure requiring immediate intervention       |
+| Change fail rate                | Ratio of deployments requiring rollback, hotfix, or other immediate intervention |
+| Deployment rework rate          | Ratio of unplanned deployments made in response to a production incident         |
 
-Track these metrics per team and review during the Weekly Improvement Cycle.
+Track trends for one service or application at a time and review them during the Weekly Improvement Cycle. Do not copy an external “elite” threshold into a target without considering the service context; DORA explicitly warns against turning one metric into a universal goal.
 
 #### Example Release Gate Configuration
 
@@ -696,7 +712,7 @@ Track these metrics per team and review during the Weekly Improvement Cycle.
 
 ---
 
-### 9. 🗄️ Asset Management
+### 9. Asset Management
 
 **Why it exists**: If you don't know what you have, you can't secure it, patch it, upgrade it, or retire it - and when a vendor audit arrives, the compliance team won't accept "we lost track." Asset management turns unknown sprawl into a known, manageable inventory.
 
@@ -723,13 +739,13 @@ Track these metrics per team and review during the Weekly Improvement Cycle.
 
 **Asset Lifecycle Management**:
 
-| Stage                    | Key Activities                                                                                                                                                           |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Procurement**          | Record asset in CMDB on purchase order; assign owner, cost centre, and depreciation schedule                                                                             |
-| **Deployment**           | Tag with environment, team, and application; record in CMDB; link to service catalog                                                                                     |
-| **In-service**           | Track change history, patch level, and capacity utilisation; review annually                                                                                             |
-| **End-of-life planning** | Identify assets approaching hardware/software EOL; plan replacement or migration                                                                                         |
-| **Decommission**         | Revoke access, sanitise data ([NIST SP 800-88 Rev. 1](https://doi.org/10.6028/NIST.SP.800-88r1)), update CMDB; reclaim licenses; dispose via certified e-waste programme |
+| Stage                    | Key Activities                                                                                                                                                         |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Procurement**          | Record asset in CMDB on purchase order; assign owner, cost center, and depreciation schedule                                                                           |
+| **Deployment**           | Tag with environment, team, and application; record in CMDB; link to service catalog                                                                                   |
+| **In-service**           | Track change history, patch level, and capacity utilization; review annually                                                                                           |
+| **End-of-life planning** | Identify assets approaching hardware/software EOL; plan replacement or migration                                                                                       |
+| **Decommission**         | Revoke access, sanitize data ([NIST SP 800-88 Rev. 1](https://doi.org/10.6028/NIST.SP.800-88r1)), update CMDB; reclaim licenses; dispose via certified e-waste program |
 
 **Software License Management**:
 
@@ -741,7 +757,7 @@ Track these metrics per team and review during the Weekly Improvement Cycle.
 
 **Cloud Asset Management**:
 
-- Use cloud-native tagging policies (enforced via Policy-as-Code, Practice 8) to attribute every cloud resource to a team, cost centre, and environment
+- Use cloud-native tagging policies (enforced via Policy-as-Code; see [Chapter 10, Policy-as-Code for Compliance](chapter-10-risk.md)) to attribute every cloud resource to a team, cost center, and environment
 - Schedule automated reports: untagged resources, unused Elastic IPs, idle instances, orphaned storage volumes
 - Set budget alerts per account/project to catch runaway provisioning early (connects to Financial Management, Practice 11)
 
@@ -771,11 +787,11 @@ Track these metrics per team and review during the Weekly Improvement Cycle.
 
 **Key metrics**: Request fulfillment rate (% within SLA), Mean Time to Fulfillment (MTTF), automation rate, request backlog age, abandon rate.
 
-**Dependencies**: Ticketing system, Automation tools (Ansible, Terraform, scripts triggered by requests), Service catalog platform, Approval workflow (for requests requiring authorisation).
+**Dependencies**: Ticketing system, Automation tools (Ansible, Terraform, scripts triggered by requests), Service catalog platform, Approval workflow (for requests requiring authorization).
 
 **Typical anti-patterns**: Letting requests drown out incident and project work (they will - they're easy and satisfying); building a catalog that covers everything on day one (start with the top 5 and iterate); designing forms that ask for more information than you actually need (every extra field is a friction point).
 
-**Purpose**: Provide a standardised, user-friendly channel through which staff and customers can request pre-approved IT services - keeping request fulfillment separate from incident response and enabling consistent, measurable delivery.
+**Purpose**: Provide a standardized, user-friendly channel through which staff and customers can request pre-approved IT services - keeping request fulfillment separate from incident response and enabling consistent, measurable delivery.
 
 #### Service Request vs. Incident
 
@@ -805,7 +821,7 @@ For each catalog item document:
 
 #### Self-Service Portal
 
-- Provide a self-service interface (ServiceNow, Jira Service Management, or an Internal Developer Platform portal like Backstage) so requesters can submit, track status, and receive fulfilment notifications without emailing the ops team
+- Provide a self-service interface (ServiceNow, Jira Service Management, or an Internal Developer Platform portal like Backstage) so requesters can submit, track status, and receive fulfillment notifications without emailing the ops team
 - Aim for **> 70% of standard requests fulfilled with zero ops-team touch** through automation (e.g., Ansible/Terraform triggered by approved request)
 - Publish live queue metrics on a team dashboard to create accountability and visibility
 
@@ -823,19 +839,19 @@ For each catalog item document:
 
 ### 11. 💰 Financial Management
 
-**Why it exists**: When ops costs are invisible, the team is treated as a cost centre rather than a business partner - and the inevitable budget conversation happens during a crisis. Financial management makes cost visible, predictable, and defensible.
+**Why it exists**: When ops costs are invisible, the team is treated as a cost center rather than a business partner - and the inevitable budget conversation happens during a crisis. Financial management makes cost visible, predictable, and defensible.
 
 **Minimal version**: Track total monthly ops spend (infrastructure + licenses + vendors). Identify your top 3 cost drivers. Report spend to stakeholders monthly.
 
-**Mature version**: Full showback or chargeback model in place. FinOps discipline optimises cloud spend continuously. Budget variance < 10% annually. Cost per service is tracked and trending down. Automation investments are tied to documented ROI.
+**Mature version**: Full showback or chargeback model in place. FinOps discipline optimizes cloud spend continuously. Budget variance < 10% annually. Cost per service is tracked and trending down. Automation investments are tied to documented ROI.
 
-**Key metrics**: Budget variance, cost per service, unattributed spend, license utilisation, ROI on automation, cloud waste % (idle/unused resources).
+**Key metrics**: Budget variance, cost per service, unattributed spend, license utilization, ROI on automation, cloud waste % (idle/unused resources).
 
 **Dependencies**: Cloud cost tools (AWS Cost Explorer, Azure Cost Management, GCP Billing), CMDB with cost attribution (tags, owner fields), Procurement data (to track actual vs. contracted pricing), Finance team relationship.
 
 **Typical anti-patterns**: Hiding costs because "it's complicated" (invisibility breeds distrust); treating FinOps as a finance function (it's an ops practice that uses finance data); cutting costs without understanding value (saving $100/mo on monitoring that prevents a $10K outage is not a win).
 
-**Purpose**: Give the operations team full visibility of its costs, link every spending decision to business value, and provide stakeholders with transparent, accurate forecasts - moving ops from an opaque cost centre to an accountable business partner.
+**Purpose**: Give the operations team full visibility of its costs, link every spending decision to business value, and provide stakeholders with transparent, accurate forecasts - moving ops from an opaque cost center to an accountable business partner.
 
 #### Budget Planning and Forecasting
 
@@ -854,12 +870,12 @@ For each catalog item document:
 
 #### Cost Accountability Models
 
-| Model            | Description                                                      | When to Use                                         |
-| ---------------- | ---------------------------------------------------------------- | --------------------------------------------------- |
-| **Cost centre**  | Ops costs pooled centrally; no allocation to consumers           | Small organisations, shared services                |
-| **Showback**     | Costs calculated per team/service and reported but not charged   | Building cost awareness without billing friction    |
-| **Chargeback**   | Costs billed directly to consuming teams or cost centres         | Mature orgs; drives efficient consumption behaviour |
-| **Unit pricing** | Internal rate card: fixed price per VM, per GB, per CI/CD minute | Platform teams with internal customers              |
+| Model            | Description                                                      | When to Use                                        |
+| ---------------- | ---------------------------------------------------------------- | -------------------------------------------------- |
+| **Cost center**  | Ops costs pooled centrally; no allocation to consumers           | Small organizations, shared services               |
+| **Showback**     | Costs calculated per team/service and reported but not charged   | Building cost awareness without billing friction   |
+| **Chargeback**   | Costs billed directly to consuming teams or cost centers         | Mature orgs; drives efficient consumption behavior |
+| **Unit pricing** | Internal rate card: fixed price per VM, per GB, per CI/CD minute | Platform teams with internal customers             |
 
 **Chargeback implementation steps**:
 
@@ -871,7 +887,7 @@ For each catalog item document:
 
 #### FinOps Integration
 
-Financial Management is the governance layer; FinOps (Chapter 12) provides the technical tooling and discipline:
+Financial Management is the governance layer; [FinOps in Chapter 12](chapter-12-future.md#finops-financial-operations-as-a-discipline) provides the technical tooling and discipline:
 
 - **Inform phase**: CMDB + tagging → cost dashboards → showback reports
 - **Optimize phase**: Rightsizing recommendations → commitment purchases → idle resource removal
@@ -884,7 +900,7 @@ Financial Management is the governance layer; FinOps (Chapter 12) provides the t
 | Budget variance     | Actual vs. budgeted spend                          | ≤ ±10% annually                          |
 | Cost per service    | Monthly ops cost attributed to each service        | Trending down YoY                        |
 | Unattributed spend  | Cloud/SaaS cost without owner tag                  | < 2% of total                            |
-| License utilisation | Used seats / licensed seats                        | 80–95% (avoid waste and over-deployment) |
+| License utilization | Used seats / licensed seats                        | 80–95% (avoid waste and over-deployment) |
 | ROI on automation   | Toil hours eliminated × fully-loaded engineer cost | Document annually                        |
 
 ---
@@ -921,7 +937,7 @@ Financial Management is the governance layer; FinOps (Chapter 12) provides the t
 
 #### Backup Strategy - The 3-2-1-1 Rule
 
-> The 3-2-1-1 rule extends the classic 3-2-1 strategy with an additional offline or immutable copy, a practice widely adopted to defend against ransomware. See [CISA Ransomware Guide](https://www.cisa.gov/topics/cyber-threats-and-advisories/ransomware) for backup guidance and the immutable-copy requirement.
+> The 3-2-1-1 rule extends the classic 3-2-1 strategy with an additional offline or immutable copy, a practice widely adopted to defend against ransomware. See [CISA #StopRansomware Guide](https://www.cisa.gov/resources-tools/resources/stopransomware-guide) for backup guidance and the immutable-copy requirement.
 
 - **3** copies of data
 - **2** different storage media/types (e.g., disk + object storage)
@@ -939,7 +955,7 @@ Backups that are never tested are not backups - they are hopes.
 | **Full service restore test**      | Quarterly (planned)               | Full system can be rebuilt from backup within RTO         |
 | **Disaster recovery simulation**   | Annually (or post-major-incident) | Cross-team failover to secondary site/region end-to-end   |
 
-Log all test outcomes; treat a failed restore test as a Severity 2 incident requiring immediate root cause analysis and remediation.
+Log all test outcomes; treat a failed restore test as a SEV2 incident requiring immediate root cause analysis and remediation.
 
 #### Recovery Procedures
 
@@ -964,7 +980,7 @@ Every Tier 1 and Tier 2 system must have a documented recovery runbook containin
 
 ---
 
-## 🔗 Practice Integration with Operational Cycles
+## Practice Integration with Operational Cycles
 
 ### Daily Operations Cycle Integration
 
@@ -991,7 +1007,7 @@ Every Tier 1 and Tier 2 system must have a documented recovery runbook containin
 - **Team Development**: Skill development planning and cross-training activities
 - **Vendor Management**: Weekly SLA compliance monitoring, vendor performance review
 - **Release Management**: Weekly DORA metrics review; release retrospectives; pipeline health review
-- **Asset Management**: Weekly CMDB reconciliation; review of EOL asset alerts; license utilisation report
+- **Asset Management**: Weekly CMDB reconciliation; review of EOL asset alerts; license utilization report
 - **Service Request Management**: Request queue review; SLA compliance check; automation opportunity identification
 - **Financial Management**: Weekly cloud spend vs. budget review; rightsizing recommendations actioning
 - **Backup & Recovery Operations**: Weekly review of backup success rates; partial restore test results; storage growth trend
@@ -999,6 +1015,7 @@ Every Tier 1 and Tier 2 system must have a documented recovery runbook containin
 ### Monthly Strategy Cycle Integration
 
 - **Service Level Management**: Strategic SLO planning and business alignment
+- **Incident & Problem Management**: Monthly incident trend review across services; systemic themes escalated to leadership; investment case for chronic problem elimination
 - **Change Management**: Major change planning and coordination
 - **Capacity Management**: Long-term capacity planning and architecture decisions
 - **Performance Management**: Strategic performance optimization initiatives
@@ -1011,7 +1028,7 @@ Every Tier 1 and Tier 2 system must have a documented recovery runbook containin
 - **Financial Management**: Monthly cost report to stakeholders; budget vs. actuals variance analysis; quarterly reforecast; chargeback invoicing
 - **Backup & Recovery Operations**: Monthly full restore test review; quarterly DR simulation planning; RTO/RPO target review vs. actuals
 
-## 📊 Practice Maturity Assessment
+## Practice Maturity Assessment
 
 ### Maturity Levels
 
@@ -1113,7 +1130,7 @@ Every Tier 1 and Tier 2 system must have a documented recovery runbook containin
 - Level 2: An annual IT budget exists; actual vs. budget reviewed quarterly; high-level cost categories tracked.
 - Level 3: Costs attributed to services and teams via showback; monthly financial reporting to stakeholders; budget variances investigated.
 - Level 4: Chargeback model in place; FinOps tooling provides per-resource cost visibility; ROI tracked for automation investments.
-- Level 5: Unit economics (cost per transaction, cost per user) drive continuous optimization; financial data integrated into capacity and release decisions; ops is seen as a value generator, not a cost centre.
+- Level 5: Unit economics (cost per transaction, cost per user) drive continuous optimization; financial data integrated into capacity and release decisions; ops is seen as a value generator, not a cost center.
 
 #### Backup & Recovery Operations Maturity
 
@@ -1122,32 +1139,6 @@ Every Tier 1 and Tier 2 system must have a documented recovery runbook containin
 - Level 3: 3-2-1-1 backup strategy implemented for all tiers; monthly restore tests conducted; backup health reported in daily ops dashboard.
 - Level 4: Recovery runbooks are automated or semi-automated; quarterly DR simulations completed; actual RTO/RPO consistently meets targets.
 - Level 5: Continuous replication for Tier 1 assets; fully automated failover with zero-touch recovery tested and proven; RTO/RPO continuously improved through lessons learned.
-
-## 🎯 Chapter Summary
-
-The twelve core management practices provide the operational foundation that makes the SysOps Framework effective. Unlike generic IT management approaches, these practices are specifically designed for the interrupt-driven, high-availability world of operations teams.
-
-Success with the SysOps Framework depends on implementing these practices consistently and improving them continuously. They work together to create a comprehensive operational capability that supports all three operational cycles while building team resilience and capability.
-
-The practices should be implemented gradually, starting with basic capabilities and evolving toward more advanced maturity levels as the team develops experience and confidence with the framework.
-
-## 🔮 Looking Ahead
-
-In the next chapter, we'll explore the metrics and measurement approaches that help operations teams track their success and demonstrate value to stakeholders using the SysOps Framework.
-
-## 💭 Reflection Questions
-
-1. **Current Practices**: Which of these practices does your team already have in place?
-2. **Practice Gaps**: Where are the biggest opportunities for improvement in your management practices?
-3. **Integration Opportunities**: How could these practices be better integrated with your current operational cycles?
-
----
-
-**🎮 Gamification Element - Chapter 6 Badge**
-
-![Practice Master badge](../../assets/badges/chapter-06.svg)
-
-_Assess your team's maturity level for each practice and create an improvement plan to earn the "Practice Master" badge._
 
 ---
 

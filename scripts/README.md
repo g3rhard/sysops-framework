@@ -2,7 +2,7 @@
 
 This directory contains utility scripts for maintaining and generating content for the SysOps Framework documentation.
 
-## 📊 Diagram Generator (`generate_diagrams.py`)
+## Diagram Generator (`generate_diagrams.py`)
 
 Generates high-quality PNG diagrams using matplotlib. Outputs to `content/assets/` at 300 DPI, ready for both web (Hugo) and PDF builds.
 
@@ -27,12 +27,13 @@ Generates high-quality PNG diagrams using matplotlib. Outputs to `content/assets
 | `sysops-framework-diagram.png`    | 3       | Multi-cycle operating model        |
 | `sysops-roadmap.png`              | 5       | 6-month implementation roadmap     |
 | `sysops-dashboard.png`            | 7       | KPI metrics dashboard              |
+| `sysops-capability-radar.png`     | 8       | Capability starting-point radar    |
 
 ### Design System
 
-Shared design tokens live in `diagrams/_design_system.py`. All diagram modules import from there — edit that file to change colours, fonts, or drawing primitives globally.
+Shared design tokens live in `diagrams/_design_system.py`. All diagram modules import from there — edit that file to change colors, fonts, or drawing primitives globally.
 
-## 🔧 Prerequisites
+## Prerequisites
 
 - Python 3.8+
 - `matplotlib` (install via `pip install -r requirements.txt` or the project venv)

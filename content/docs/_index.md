@@ -1,6 +1,7 @@
 ---
 title: "SysOps Framework"
 linkTitle: "SysOps Framework"
+no_list: true
 weight: 20
 ---
 
